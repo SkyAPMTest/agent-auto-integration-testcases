@@ -69,7 +69,14 @@ checkoutSourceCode(){
 buildProject(){
 	PROJECT_DIR=$1;
 	if [ "$SKIP_BUILD" = "false" ]; then
-		cd $PROJECT_DIR && mvn clean package
+		cd $PROJECT_DIR
+		mvn clean package >/dev/null
+		IS_BUILD_SUCCESS=$?
+		if [ "$IS_BUILD_SUCCESS" = "0" ]; then
+			echo "Build project success"
+		else
+			echo "Build project failed"
+		fi
 	fi
 }
 
