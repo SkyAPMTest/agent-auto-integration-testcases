@@ -18,7 +18,7 @@ checkIfCaseProject(){
 	if [ -d "$CASE_PROJECT_DIR/config" ]; then
 		return 0
 	else
-		return -1
+		return 1
 	fi
 }
 
