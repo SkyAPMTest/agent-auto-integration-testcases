@@ -1,0 +1,85 @@
+registryItems:
+  applications:
+  - {jedis-standalone-case: nq 0}
+  instances:
+  - {jedis-standalone-case: 1}
+  operationNames:
+  - jedis-standalone-case: [/jedis-standalone-case/case/jedis-standalone]
+segmentItems:
+- applicationCode: jedis-standalone-case
+  segmentSize: 1
+  segments:
+    - segmentId: not null
+      spans:
+        -
+          operationName: Jedis/set
+          operationId: eq 0
+          parentSpanId: 0
+          spanId: 1
+          tags: 
+          - {key: "db.type", value: "Redis"}
+          - {key: "db.statement", value: "set a"}
+          logs: []
+          startTime: nq 0
+          endTime: nq 0
+          isError: false
+          spanLayer: Database
+          spanType: Exit
+          componentName: null
+          componentId: 7
+          peer: redis-server:6379
+          peerId: eq 0
+        -
+          operationName: Jedis/get
+          operationId: eq 0
+          parentSpanId: 0
+          spanId: 2
+          tags: 
+          - {key: "db.type", value: "Redis"}
+          - {key: "db.statement", value: "get a"}
+          logs: []
+          startTime: nq 0
+          endTime: nq 0
+          isError: false
+          spanLayer: Database
+          spanType: Exit
+          componentName: null
+          componentId: 7
+          peer: redis-server:6379
+          peerId: eq 0
+        -
+          operationName: Jedis/del
+          operationId: eq 0
+          parentSpanId: 0
+          spanId: 3
+          tags: 
+          - {key: "db.type", value: "Redis"}
+          - {key: "db.statement", value: "del a"}
+          logs: []
+          startTime: nq 0
+          endTime: nq 0
+          isError: false
+          spanLayer: Database
+          spanType: Exit
+          componentName: null
+          componentId: 7
+          peer: redis-server:6379
+          peerId: eq 0
+        -
+          operationName: /jedis-standalone-case/case/jedis-standalone
+          operationId: eq 0
+          parentSpanId: -1
+          spanId: 0
+          startTime: nq 0
+          endTime: nq 0
+          spanLayer: Http
+          isError: false
+          spanType: Entry
+          componentName: null
+          componentId: 1
+          tags:
+            - {key: url, value: 'http://localhost:18080/jedis-standalone-case/case/jedis-standalone'}
+            - {key: http.method, value: GET}
+          logs: []
+          peer: null
+          peerId: eq 0
