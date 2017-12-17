@@ -1,5 +1,39 @@
 #!/bin/bash
 
+parse_yaml() {
+    local yaml_file=$1
+    local s
+    local w
+    local fs
+
+    s='[[:space:]]*'
+    w='[a-zA-Z0-9_.-]*'
+    fs="$(echo @|tr @ '\034')"
+
+    (
+        sed -ne '/^--/s|--||g; s|\"|\\\"|g; s/\s*$//g;' \
+            -e "/#.*[\"\']/!s| #.*||g; /^#/s|#.*||g;" \
+            -e  "s|^\($s\)\($w\)$s:$s\"\(.*\)\"$s\$|\1$fs\2$fs\3|p" \
+            -e "s|^\($s\)\($w\)$s[:-]$s\(.*\)$s\$|\1$fs\2$fs\3|p" |
+
+        awk -F"$fs" '{
+            indent = length($1)/2;
+            if (length($2) == 0) { conj[indent]="+";} else {conj[indent]="";}
+            vname[indent] = $2;
+            for (i in vname) {if (i > indent) {delete vname[i]}}
+                if (length($3) > 0) {
+                    vn=""; for (i=0; i<indent; i++) {vn=(vn)(vname[i])("_")}
+                    printf("%s%s%s=(\"%s\")\n", vn, $2, conj[indent-1],$3);
+                }
+            }' |
+            
+        sed -e 's/_=/+=/g' \
+            -e '/\..*=/s|\.|_|' \
+            -e '/\-.*=/s|\-|_|'
+
+    ) < "$yaml_file"
+}
+
 PRG="$0"
 PRGDIR=`dirname "$PRG"`
 [ -z "$AUTOTEST_HOME" ] && AUTOTEST_HOME=`cd "$PRGDIR" >/dev/null; pwd`
@@ -15,18 +49,13 @@ mkdir $TEST_CASES_DIR
 
 checkIfCaseProject(){
 	CASE_PROJECT_DIR=$1
-	if [ -d "$CASE_PROJECT_DIR/config" ]; then
+	if [ -f "$CASE_PROJECT_DIR/testcase.yml" ]; then
 		return 0
 	else
 		return 1
 	fi
 }
 
-function prop {
-	FILE=$1
-	KEY=$2
-    grep "${KEY}" ${FILE}|cut -d'=' -f2
-}
 #
 # Iterate all project in skywalking-autotest-scenario
 #
@@ -38,19 +67,16 @@ for TESTCASE_PROJECT in `ls $AUTOTEST_HOME`
 		if [ "$IS_TESTCASE_PROJECT" = "0" ]; then
 			echo "Begin to deploy ${TESTCASE_PROJECT}"
 			#
-			# source $TESTCASE_PROJECT_DIR/config/testcase.properties
+			# Read config file 
 			#
-			TEST_CASE_DESC=$TESTCASE_PROJECT_DIR/config/testcase.desc
-			OLD_IFS="$IFS"
-			IFS=","
+			TEST_CASE_CONFIG_FILE=$TESTCASE_PROJECT_DIR/testcase.yml
+			eval "$(parse_yaml "$TEST_CASE_CONFIG_FILE")"
 			#
 			# read all support versions
 			#
-			SUPPORT_VERSIONS=($(prop $TEST_CASE_DESC "case.support.versions"))
-			IFS="$OLD_IFS"
-			#
-			#
-			TEST_FRAMEWORK=$(prop $TEST_CASE_DESC "case.test.framework")
+			SUPPORT_VERSIONS=${testcase_support_versions[@]} # Read `testcase.support_versions` value from `testcase.yml`
+			TEST_FRAMEWORK=${testcase_test_framework} # Read `testcase.test_framework` value from `testcase.yml`
+			TEST_CASE_REQUEST_URL=${testcase_request_url} # Read `testcase.request_url` value from `testcase.yml`
 			#
 			# go to TESTCASE_PROJECT_DIR
 			#
@@ -60,15 +86,9 @@ for TESTCASE_PROJECT in `ls $AUTOTEST_HOME`
 			#
 			for SUPPORT_VERSION in ${SUPPORT_VERSIONS[@]}
 			do
-			 echo "execute mvn package docker:build -P${TEST_FRAMEWORK}-${SUPPORT_VERSION}"
-			 mvn clean package docker:build -P${TEST_FRAMEWORK}-${SUPPORT_VERSION} >/dev/null
-			 EXECUTE_RESULT=$?
-			 if [ "$EXECUTE_RESULT" = "0" ]; then
-			 	echo "Build $TESTCASE_PROJECT:$SUPPORT_VERSION success."
-			 else
-			 	echo "Build $TESTCASE_PROJECT:$SUPPORT_VERSION failure."
-			 fi
-
+			 echo "execute mvn package docker:build -P${TESTCASE_PROJECT}-${SUPPORT_VERSION}"
+			 mvn clean package docker:build -P${TESTCASE_PROJECT}-${SUPPORT_VERSION} > /dev/null
+			 
 			 TEST_CASE_DIR=$TEST_CASES_DIR/$TESTCASE_PROJECT-$SUPPORT_VERSION
 			 mkdir $TEST_CASE_DIR
 			 #
@@ -76,10 +96,15 @@ for TESTCASE_PROJECT in `ls $AUTOTEST_HOME`
 			 #
 			 cp $TESTCASE_PROJECT_DIR/config/expectedData.yaml $TEST_CASE_DIR
 			 eval sed -e 's/\{CASES_IMAGE_VERSION\}/$SUPPORT_VERSION/' $TESTCASE_PROJECT_DIR/config/docker-compose.yml > $TEST_CASE_DIR/docker-compose.yml
-			 cp $TESTCASE_PROJECT_DIR/config/testcase.desc $TEST_CASE_DIR/testcase.desc
-			 echo "# The components of current test case used" >> $TEST_CASE_DIR/testcase.desc
-			 echo "case.components=$TEST_FRAMEWORK-$SUPPORT_VERSION" >> $TEST_CASE_DIR/testcase.desc
+			 #
+			 # Generate testcase desc file
+			 #
+			 touch $TEST_CASE_DIR/testcase.desc
+			 echo "case.testFramework=$TEST_FRAMEWORK" >> $TEST_CASE_DIR/testcase.desc
+			 echo "case.testVersion=$SUPPORT_VERSION" >> $TEST_CASE_DIR/testcase.desc
+			 echo "case.request_url=$TEST_CASE_REQUEST_URL" >> $TEST_CASE_DIR/testcase.desc
 
+			 echo "Build $TESTCASE_PROJECT:$SUPPORT_VERSION success."
 			done
 		else
 			if [ -d "$TESTCASE_PROJECT" ]; then

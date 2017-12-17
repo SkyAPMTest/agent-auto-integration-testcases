@@ -1,8 +1,0 @@
-# Current test case name.
-case.name=jedis-standalone-case
-# The server url of current test case
-case.request_url=http://localhost:18080/jedis-standalone-case/case/jedis-standalone
-# The test framework
-case.test.framework=jedis
-# The version of current case support
-case.support.versions=2.9.0,2.8.2

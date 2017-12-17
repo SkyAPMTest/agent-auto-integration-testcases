@@ -225,6 +225,7 @@ do
 	docker-compose -f ${CASE_DIR}/docker-compose.yml stop
 done
 
+exit 
 
 echo "generate report...."
 java -DtestDate="$TEST_TIME" \
