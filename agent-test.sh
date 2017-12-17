@@ -64,6 +64,7 @@ checkoutSourceCode(){
 	eval "cd $SOURCE_CODE_DIR && git reset --hard && git checkout $REPO_BRANCH && git fetch origin && git pull origin $REPO_BRANCH" 1>&2 > /dev/null
 	cd $SOURCE_CODE_DIR && LAST_COMMIT=$(git rev-parse HEAD)
 	echo $LAST_COMMIT
+	cd $WORKSPACE_DIR
 }
 
 buildProject(){
