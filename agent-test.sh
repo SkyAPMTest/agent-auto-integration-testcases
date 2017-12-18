@@ -89,6 +89,8 @@ REPORT_GIT_URL=https://github.com/SkywalkingTest/agent-integration-test-report.g
 REPORT_GIT_BRANCH=master
 TEST_TIME=`date "+%Y-%m-%d-%H-%M"`
 RECIEVE_DATA_URL=http://127.0.0.1:12800/receiveData
+TEST_CASES_COMMITID=""
+TEST_CASES_BRANCH=""
 TEST_CASES=()
 TEST_CASES_STR=""
 PULL_CODE=false
@@ -134,6 +136,15 @@ do
 	esac
 done
 
+#
+#
+#
+TEST_CASES_BRANCH=$(cd $AGENT_TEST_HOME && git symbolic-ref --short -q HEAD)
+TEST_CASES_COMMITID=$(cd $AGENT_TEST_HOME && git rev-parse HEAD)
+echo "current test case branch: ${TEST_CASES_BRANCH}. current test case commit id: ${TEST_CASES_COMMITID}"
+#
+#
+#
 echo "clear Workspace"
 clearWorkspace
 ############## build agent ##############
@@ -220,21 +231,19 @@ echo "generate report...."
 java -DtestDate="$TEST_TIME" \
 	-DagentBranch="$AGENT_GIT_BRANCH" -DagentCommit="$AGENT_COMMIT" \
 	-DtestCasePath="$TEST_CASES_DIR" -DreportFilePath="$REPORT_DIR" \
+	-DcasesBranch="$TEST_CASES_BRANCH" - DcasesCommitId="${TEST_CASES_COMMITID}" \
 	-DtestCases="$TEST_CASES_STR"	\
-	-jar $WORKSPACE_DIR/skywalking-autotest.jar > $REPORT_DIR/report.log
+	-jar $WORKSPACE_DIR/skywalking-autotest.jar 
 
 if [ ! -f "$REPORT_DIR/${AGENT_GIT_BRANCH}" ]; then
 	mkdir -p $REPORT_DIR/${AGENT_GIT_BRANCH}
 fi
-cp -f $REPORT_DIR/report.log $REPORT_DIR/${AGENT_GIT_BRANCH}/report-${TEST_TIME}.log
 cp -f $REPORT_DIR/README.md $REPORT_DIR/${AGENT_GIT_BRANCH}/report-${TEST_TIME}.md
 
 if [ "$SKIP_REPORT" = "false" ]; then
 	echo "push report...."
 	cd $REPORT_DIR
-	git add $REPORT_DIR/report.log
 	git add $REPORT_DIR/README.md
-	git add $REPORT_DIR/${AGENT_GIT_BRANCH}/report-${TEST_TIME}.log
 	git add $REPORT_DIR/${AGENT_GIT_BRANCH}/report-${TEST_TIME}.md
 	git commit -m "push report report-${TEST_TIME}.md" .
 
