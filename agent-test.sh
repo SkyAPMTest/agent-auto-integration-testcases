@@ -5,7 +5,6 @@ usage(){
 	echo -e "  -r, --repo \t\t\t skywalking repository url"
 	echo -e "  -b, --branch, -t, --tag \t skywalking repository branch or tag"
 	echo -e "  -p, --only-pull-code \t\t only pull source code, not clone source code"
-	echo -e "  -t, --testCases \t\t tes cases, split ,"
 	echo -e "      --skipReport \t\t skip report "
 	echo -e "      --skipBuild \t\t skip build"
 }
@@ -120,14 +119,6 @@ do
 			PULL_CODE=true;
 			shift;
 			;;
-	 	-t | --testCases )
-	 		TEST_CASES_STR=$2
-			OLD_IFS="$IFS"
-			IFS=","
-			TEST_CASES=($2)
-			IFS="$OLD_IFS"
-	 		shift 2;
-			;;
 		--skipReport )
 			SKIP_REPORT=true;
 			shift;
@@ -187,15 +178,13 @@ cp ${SOURCE_DIR}/test-tools/target/skywalking-autotest.jar ${WORKSPACE_DIR}
 ########################################
 cd $TEST_CASES_DIR
 #echo "clone test cases git url"
-if [ "$TEST_CASES_STR" = "" ]; then
-	for TEST_CASE in `ls $TEST_CASES_DIR`
-	do
-		if [ -d "$TEST_CASES_DIR/$TEST_CASE" ]; then
-			TEST_CASES=(${TEST_CASES[*]} $TEST_CASE)
-			TEST_CASES_STR="$TEST_CASES_STR,$TEST_CASE"
-		fi
-	done
-fi
+for TEST_CASE in `ls $TEST_CASES_DIR`
+do
+	if [ -d "$TEST_CASES_DIR/$TEST_CASE" ]; then
+		TEST_CASES=(${TEST_CASES[*]} $TEST_CASE)
+		TEST_CASES_STR="$TEST_CASES_STR,$TEST_CASE"
+	fi
+done
 echo "Here is the test cases: ${TEST_CASES_STR}"
 
 ##### downlod report repository ########
