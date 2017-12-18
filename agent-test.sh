@@ -64,7 +64,6 @@ checkoutSourceCode(){
 	eval "cd $SOURCE_CODE_DIR && git reset --hard && git checkout $REPO_BRANCH && git fetch origin && git pull origin $REPO_BRANCH" 1>&2 > /dev/null
 	cd $SOURCE_CODE_DIR && LAST_COMMIT=$(git rev-parse HEAD)
 	echo $LAST_COMMIT
-	cd $WORKSPACE_DIR
 }
 
 buildProject(){
@@ -174,7 +173,9 @@ cp -r $SOURCE_DIR/skywalking/packages/skywalking-agent/* $AGENT_DIR/
 ########################################
 echo "clone test tool source code"
 #echo "clone test tool and build"
+echo "eval checkoutSourceCode $TEST_TOOL_GIT_URL $TEST_TOOL_GIT_BRANCH $SOURCE_DIR/test-tools"
 checkoutSourceCode $TEST_TOOL_GIT_URL $TEST_TOOL_GIT_BRANCH $SOURCE_DIR/test-tools
+echo "eval buildProject $SOURCE_DIR/test-tools"
 buildProject $SOURCE_DIR/test-tools
 echo "copy test tools to ${WORKSPACE_DIR}"
 #echo "copy auto-test.jar"
@@ -184,7 +185,7 @@ cp ${SOURCE_DIR}/test-tools/target/skywalking-autotest.jar ${WORKSPACE_DIR}
 #	1. checkout test tool code
 #	2. switch branch
 ########################################
-echo "clone test cases"
+cd $TEST_CASES_DIR
 #echo "clone test cases git url"
 if [ "$TEST_CASES_STR" = "" ]; then
 	for TEST_CASE in `ls $TEST_CASES_DIR`

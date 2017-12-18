@@ -11,7 +11,7 @@ testcase:
   #
   # The framework name that need tested.
   #
-  test_framework: jedis
+  test_framework: jedis 
   #
   # The framework version list of current test case supported
   #
