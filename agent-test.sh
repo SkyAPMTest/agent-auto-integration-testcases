@@ -231,7 +231,7 @@ echo "generate report...."
 java -DtestDate="$TEST_TIME" \
 	-DagentBranch="$AGENT_GIT_BRANCH" -DagentCommit="$AGENT_COMMIT" \
 	-DtestCasePath="$TEST_CASES_DIR" -DreportFilePath="$REPORT_DIR" \
-	-DcasesBranch="$TEST_CASES_BRANCH" - DcasesCommitId="${TEST_CASES_COMMITID}" \
+	-DcasesBranch="$TEST_CASES_BRANCH" -DcasesCommitId="${TEST_CASES_COMMITID}" \
 	-DtestCases="$TEST_CASES_STR"	\
 	-jar $WORKSPACE_DIR/skywalking-autotest.jar 
 
