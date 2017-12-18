@@ -103,7 +103,8 @@ for TESTCASE_PROJECT in `ls $AUTOTEST_HOME`
 			 echo "case.testFramework=$TEST_FRAMEWORK" >> $TEST_CASE_DIR/testcase.desc
 			 echo "case.testVersion=$SUPPORT_VERSION" >> $TEST_CASE_DIR/testcase.desc
 			 echo "case.request_url=$TEST_CASE_REQUEST_URL" >> $TEST_CASE_DIR/testcase.desc
-
+			 echo "case.projectName=${TESTCASE_PROJECT}" >> $TEST_CASE_DIR/testcase.desc
+			 
 			 echo "Build $TESTCASE_PROJECT:$SUPPORT_VERSION success."
 			done
 		else
