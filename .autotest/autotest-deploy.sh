@@ -34,13 +34,32 @@ parse_yaml() {
     ) < "$yaml_file"
 }
 
-clearEnvVariables(){
+cleanEnvVariables(){
 	testcase_support_versions=""
 }
 
 PRG="$0"
 PRGDIR=`dirname "$PRG"`
-[ -z "$AUTOTEST_HOME" ] && AUTOTEST_HOME=`cd "$PRGDIR" >/dev/null; pwd`
+[ -z "$AUTOTEST_HOME" ] && AUTOTEST_HOME=`cd "$PRGDIR/.." >/dev/null; pwd`
+
+#
+# define env variables
+#
+TEST_PROJECT_NAME=""
+#
+# Parse the input parameters
+#
+until [ $# -eq 0 ]
+do
+	case "$1" in
+		--project )
+			TEST_PROJECT_NAME=$2
+			shift 2;
+			;;
+		* )
+			;;
+	esac
+done
 
 #
 # Set Auto test project environment
@@ -69,6 +88,11 @@ for TESTCASE_PROJECT in `ls $AUTOTEST_HOME`
 		checkIfCaseProject $TESTCASE_PROJECT_DIR
 		IS_TESTCASE_PROJECT=$?
 		if [ "$IS_TESTCASE_PROJECT" = "0" ]; then
+
+			if [ "$TEST_PROJECT_NAME" != "" ] && [ "$TESTCASE_PROJECT" != "$TEST_PROJECT_NAME" ]; then
+				continue
+			fi
+
 			echo "Begin to deploy ${TESTCASE_PROJECT}"
 			#
 			# Read config file 
@@ -109,9 +133,9 @@ for TESTCASE_PROJECT in `ls $AUTOTEST_HOME`
 			 echo "case.request_url=$TEST_CASE_REQUEST_URL" >> $TEST_CASE_DIR/testcase.desc
 			 echo "case.projectName=${TESTCASE_PROJECT}" >> $TEST_CASE_DIR/testcase.desc
 			 #
-			 # To avoid contaminate the env variables
+			 # To avoid contaminate the env variables 
 			 #
-			 clearEnvVariables
+			 cleanEnvVariables
 
 			 echo "Build $TESTCASE_PROJECT:$SUPPORT_VERSION success."
 			done
@@ -120,6 +144,7 @@ for TESTCASE_PROJECT in `ls $AUTOTEST_HOME`
 				echo "$TESTCASE_PROJECT is not a test case project."
 			fi
 		fi
+
 done
 
 echo "Done!"
