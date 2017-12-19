@@ -212,6 +212,7 @@ do
 	CASE_DIR="$TEST_CASES_DIR/$TEST_CASE"
 	ESCAPE_PATH=$(echo "$AGENT_DIR" |sed -e 's/\//\\\//g' )
 	eval sed -i -e 's/\{AGENT_FILE_PATH\}/$ESCAPE_PATH/' $CASE_DIR/docker-compose.yml
+	cd $CASE_DIR && docker-compose rm -s -f
 	echo "start docker container"
 	docker-compose -f $CASE_DIR/docker-compose.yml up -d
 	sleep 40
