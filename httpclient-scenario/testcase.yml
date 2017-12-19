@@ -7,14 +7,13 @@ testcase:
   #
   # The request url of current test cases.
   #
-  request_url: http://localhost:18080/jedis-standalone-case/case/jedis-standalone
+  request_url: http://localhost:18080/httpclient-case/case/httpclient 
   #
   # The framework name that need tested.
   #
-  test_framework: Jedis 
+  test_framework: Httpclient 
   #
   # The framework version list of current test case supported
   #
   support_versions:
-    - 2.9.0
-    - 2.8.2
+    - 4.3

@@ -1,0 +1,72 @@
+registryItems:
+  applications:
+  - {httpclient-case: nq 0}
+  instances:
+  - {httpclient-case: 1}
+  operationNames:
+  - httpclient-case: [/httpclient-case/case/httpclient,/httpclient-case/case/context-propagate]
+segmentItems:
+- applicationCode: httpclient-case
+  segmentSize: 2
+  segments:
+    - segmentId: not null
+      spans:
+        -
+          operationName: /httpclient-case/case/context-propagate
+          operationId: eq 0
+          parentSpanId: 0
+          spanId: 1
+          startTime: nq 0
+          endTime: nq 0
+          isError: false
+          spanLayer: Http
+          spanType: Exit
+          componentName: null
+          componentId: eq 2
+          tags:
+            - {key: url, value: 'http://127.0.0.1:8080/httpclient-case/case/context-propagate'}
+            - {key: http.method, value: GET}
+          logs: []
+          peer: null
+          peerId: eq 0
+        -
+          operationName: /httpclient-case/case/httpclient
+          operationId: eq 0
+          parentSpanId: -1
+          spanId: 0
+          startTime: nq 0
+          endTime: nq 0
+          spanLayer: Http
+          isError: false
+          spanType: Entry
+          componentName: null
+          componentId: 1
+          tags:
+            - {key: url, value: 'http://localhost:18080/httpclient-case/case/httpclient'}
+            - {key: http.method, value: GET}
+          logs: []
+          peer: null
+          peerId: eq 0
+      
+    - segmentId: not null
+      spans:
+        -
+          operationName: /httpclient-case/case/context-propagate
+          operationId: eq 0
+          parentSpanId: -1
+          spanId: 0
+          tags: 
+            - {key: url, value: 'http://127.0.0.1:8080/httpclient-case/case/context-propagate'}
+            - {key: http.method, value: GET}
+          logs: []
+          startTime: nq 0
+          endTime: nq 0
+          spanLayer: Http
+          isError: false
+          spanType: Entry
+          componentName: null
+          componentId: 1
+          peer: null
+          peerId: eq 0
+          refs: 
+            - {parentSpanId: 1, parentTraceSegmentId: "${httpclient-case[0]}", entryServiceName: "/httpclient-case/case/httpclient", networkAddress: "127.0.0.1:8080",parentServiceName: "/httpclient-case/case/httpclient",entryApplicationInstanceId: nq 0 }
