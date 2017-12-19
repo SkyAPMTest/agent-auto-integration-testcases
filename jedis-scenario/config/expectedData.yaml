@@ -23,7 +23,7 @@ segmentItems:
           startTime: nq 0
           endTime: nq 0
           isError: false
-          spanLayer: Database
+          spanLayer: Cache
           spanType: Exit
           componentName: null
           componentId: 7
@@ -41,7 +41,7 @@ segmentItems:
           startTime: nq 0
           endTime: nq 0
           isError: false
-          spanLayer: Database
+          spanLayer: Cache
           spanType: Exit
           componentName: null
           componentId: 7
@@ -59,7 +59,7 @@ segmentItems:
           startTime: nq 0
           endTime: nq 0
           isError: false
-          spanLayer: Database
+          spanLayer: Cache
           spanType: Exit
           componentName: null
           componentId: 7

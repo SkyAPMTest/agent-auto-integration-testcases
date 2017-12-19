@@ -233,7 +233,7 @@ java -DtestDate="$TEST_TIME" \
 	-DtestCasePath="$TEST_CASES_DIR" -DreportFilePath="$REPORT_DIR" \
 	-DcasesBranch="$TEST_CASES_BRANCH" -DcasesCommitId="${TEST_CASES_COMMITID}" \
 	-DtestCases="$TEST_CASES_STR"	\
-	-jar $WORKSPACE_DIR/skywalking-autotest.jar 
+	-jar $WORKSPACE_DIR/skywalking-autotest.jar > /dev/null
 
 if [ ! -f "$REPORT_DIR/${AGENT_GIT_BRANCH}" ]; then
 	mkdir -p $REPORT_DIR/${AGENT_GIT_BRANCH}
