@@ -49,15 +49,15 @@ TEST_PROJECT_NAME=""
 #
 # Parse the input parameters
 #
-until [ $# -eq 0 ]
-do
+while [[ $# -gt 0 ]]; do
 	case "$1" in
 		--project )
 			TEST_PROJECT_NAME=$2
-			shift 2;
+			shift 2
 			;;
 		* )
-			;;
+			shift
+			break
 	esac
 done
 

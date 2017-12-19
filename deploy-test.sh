@@ -16,28 +16,18 @@ TEST_PROJECT_NAME=""
 #
 # Parse the input parameters
 #
-until [ $# -eq 0 ]
-do
-
+while [[ $# -gt 0 ]]; do
 	case "$1" in
 		-p | --project )
 			TEST_PROJECT_NAME=$2
-			shift 2;
-			;;
-		-h | --help )
-			Usage
-			exit 0
+			shift 2
 			;;
 		* )
-			echo "333"
-			shift;
-			;;
+			shift
+			break
 	esac
 done
 
+${AGENT_TEST_HOME}/.autotest/autotest-deploy.sh --project "${TEST_PROJECT_NAME}"
 
-${AGENT_TEST_HOME}/.autotest/autotest-deploy.sh --project ${TEST_PROJECT_NAME}
-
-if [ "$REPORT_DATA" = "true" ]; then
-	${AGENT_TEST_HOME}/.autotest/agent-test.sh
-fi
+${AGENT_TEST_HOME}/.autotest/agent-test.sh
