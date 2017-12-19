@@ -34,6 +34,10 @@ parse_yaml() {
     ) < "$yaml_file"
 }
 
+clearEnvVariables(){
+	testcase_support_versions=""
+}
+
 PRG="$0"
 PRGDIR=`dirname "$PRG"`
 [ -z "$AUTOTEST_HOME" ] && AUTOTEST_HOME=`cd "$PRGDIR" >/dev/null; pwd`
@@ -104,7 +108,11 @@ for TESTCASE_PROJECT in `ls $AUTOTEST_HOME`
 			 echo "case.testVersion=$SUPPORT_VERSION" >> $TEST_CASE_DIR/testcase.desc
 			 echo "case.request_url=$TEST_CASE_REQUEST_URL" >> $TEST_CASE_DIR/testcase.desc
 			 echo "case.projectName=${TESTCASE_PROJECT}" >> $TEST_CASE_DIR/testcase.desc
-			 
+			 #
+			 # To avoid contaminate the env variables
+			 #
+			 clearEnvVariables
+
 			 echo "Build $TESTCASE_PROJECT:$SUPPORT_VERSION success."
 			done
 		else
