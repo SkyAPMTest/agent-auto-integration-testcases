@@ -120,12 +120,6 @@
             </properties>
         </profile>
         <profile>
-            <id>mysql-scenario-5.1.38</id>
-            <properties>
-                <test.framework.version>5.1.38</test.framework.version>
-            </properties>
-        </profile>
-        <profile>
             <id>mysql-scenario-5.1.37</id>
             <properties>
                 <test.framework.version>5.1.37</test.framework.version>
