@@ -37,4 +37,4 @@ done
 
 ${AGENT_TEST_HOME}/.autotest/autotest-deploy.sh --project "${TEST_PROJECT_NAME}" --collector-image-version "$MOCK_COLLECTOR_IMAGE_VERSION"
 
-${AGENT_TEST_HOME}/.autotest/agent-test.sh -p --skipReport
+${AGENT_TEST_HOME}/.autotest/agent-test.sh
