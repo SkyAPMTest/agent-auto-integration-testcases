@@ -120,7 +120,7 @@ for TESTCASE_PROJECT in `ls $AUTOTEST_HOME`
 			for SUPPORT_VERSION in ${SUPPORT_VERSIONS[@]}
 			do
 			 echo "execute mvn package docker:build -P${TESTCASE_PROJECT}-${SUPPORT_VERSION}"
-			 mvn clean package docker:build -P${TESTCASE_PROJECT}-${SUPPORT_VERSION} > /dev/null
+			 mvn clean package docker:build -P${TESTCASE_PROJECT}-${SUPPORT_VERSION}
 			 
 			 TEST_CASE_DIR=$TEST_CASES_DIR/$TESTCASE_PROJECT-$SUPPORT_VERSION
 			 mkdir $TEST_CASE_DIR
