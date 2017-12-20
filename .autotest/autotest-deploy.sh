@@ -131,8 +131,9 @@ for TESTCASE_PROJECT in `ls $AUTOTEST_HOME`
 			 #
 			 # replace config variables
 			 #
-			 eval sed -e 's/\{CASES_IMAGE_VERSION\}/$SUPPORT_VERSION/' $TESTCASE_PROJECT_DIR/config/docker-compose.yml > $TEST_CASE_DIR/docker-compose.yml  # replace the test case image version
-			 eval sed -e 's/\{COLLECTOR_IMAGE_VERSION\}/$COLLECTOR_IMAGE_VERSION/' $TESTCASE_PROJECT_DIR/config/docker-compose.yml > $TEST_CASE_DIR/docker-compose.yml # replace mock collector image version
+			 cp $TESTCASE_PROJECT_DIR/config/docker-compose.yml $TEST_CASE_DIR
+			 eval sed -e 's/\{CASES_IMAGE_VERSION\}/$SUPPORT_VERSION/' $TEST_CASE_DIR/docker-compose.yml > $TEST_CASE_DIR/docker-compose.yml  # replace the test case image version
+			 eval sed -e 's/\{COLLECTOR_IMAGE_VERSION\}/$COLLECTOR_IMAGE_VERSION/' $TEST_CASE_DIR/docker-compose.yml > $TEST_CASE_DIR/docker-compose.yml # replace mock collector image version
 			 #
 			 # Generate testcase desc file
 			 #
