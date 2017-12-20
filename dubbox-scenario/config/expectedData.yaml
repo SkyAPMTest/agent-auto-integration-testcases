@@ -1,0 +1,76 @@
+registryItems:
+  applications:
+  - {dubbox-provider: nq 0}
+  - {dubbox-consumer: nq 0}
+  instances:
+  - {dubbox-provider: 1}
+  - {dubbox-consumer: 1}
+  operationNames:
+  - dubbox-consumer: [/dubbox-case/case/dubbox-rest]
+  - dubbox-provider: [org.skywaking.apm.testcase.dubbo.services.GreetService.doBusiness()]
+segmentItems:
+- applicationCode: dubbox-consumer
+  segmentSize: 1
+  segments:
+    - segmentId: not null
+      spans:
+        -
+          operationName: org.skywaking.apm.testcase.dubbo.services.GreetService.doBusiness()
+          operationId: eq 0
+          parentSpanId: 0
+          spanId: 1
+          tags: 
+          - {key: "url", value: not null}
+          logs: []
+          startTime: nq 0
+          endTime: nq 0
+          isError: false
+          spanLayer: RPCFramework
+          spanType: Exit
+          componentName: null
+          componentId: 3
+          peer: not null
+          peerId: eq 0
+        -
+          operationName: /dubbox-case/case/dubbox-rest
+          operationId: eq 0
+          parentSpanId: -1
+          spanId: 0
+          startTime: nq 0
+          endTime: nq 0
+          spanLayer: Http
+          isError: false
+          spanType: Entry
+          componentName: null
+          componentId: 1
+          tags:
+            - {key: url, value: 'http://localhost:18080/dubbox-case/case/dubbox-rest'}
+            - {key: http.method, value: GET}
+          logs: []
+          peer: null
+          peerId: eq 0
+
+- applicationCode: dubbox-provider
+  segmentSize: 1
+  segments:      
+    - segmentId: not null
+      spans:
+        -
+          operationName: org.skywaking.apm.testcase.dubbo.services.GreetService.doBusiness()
+          operationId: eq 0
+          parentSpanId: -1
+          spanId: 0
+          tags: 
+            - {key: "url", value: not null}
+          logs: []
+          startTime: nq 0
+          endTime: nq 0
+          spanLayer: null
+          isError: false
+          spanType: Entry
+          componentName: null
+          componentId: 3
+          peer: null
+          peerId: eq 0
+          refs: 
+            - {parentSpanId: 1, parentTraceSegmentId: "${dubbox-consumer[0]}", entryServiceName: "/dubbox-case/case/dubbox-rest", networkAddress: not null, parentServiceName: "/dubbox-case/case/dubbox-rest",refType: not null,entryApplicationInstanceId: nq 0 }

@@ -24,7 +24,7 @@ services:
       - redis-server
 
   mock-collector:
-    image: skywalking/skywalking-mock-collector:3.2.6-2017
+    image: skywalking/skywalking-mock-collector:{COLLECTOR_IMAGE_VERSION}
     environment:
       - GRPC_BIND_HOST=mock-collector
     expose:

@@ -1,0 +1,19 @@
+#
+# Test case project define.
+#
+# Note: Test case project must a project that support output service.
+#
+testcase:
+  #
+  # The request url of current test cases.
+  #
+  request_url: http://localhost:18080/dubbox-case/case/dubbox-rest 
+  #
+  # The framework name that need tested.
+  #
+  test_framework: Dubbox 
+  #
+  # The framework version list of current test case supported
+  #
+  support_versions:
+    - 2.8.4

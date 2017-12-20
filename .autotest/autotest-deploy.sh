@@ -46,6 +46,7 @@ PRGDIR=`dirname "$PRG"`
 # define env variables
 #
 TEST_PROJECT_NAME=""
+COLLECTOR_IMAGE_VERSION=""
 #
 # Parse the input parameters
 #
@@ -53,6 +54,10 @@ while [[ $# -gt 0 ]]; do
 	case "$1" in
 		--project )
 			TEST_PROJECT_NAME=$2
+			shift 2
+			;;
+		--collector-image-version )
+			COLLECTOR_IMAGE_VERSION=$2
 			shift 2
 			;;
 		* )
@@ -123,7 +128,11 @@ for TESTCASE_PROJECT in `ls $AUTOTEST_HOME`
 			 # copy the test case files
 			 #
 			 cp $TESTCASE_PROJECT_DIR/config/expectedData.yaml $TEST_CASE_DIR
-			 eval sed -e 's/\{CASES_IMAGE_VERSION\}/$SUPPORT_VERSION/' $TESTCASE_PROJECT_DIR/config/docker-compose.yml > $TEST_CASE_DIR/docker-compose.yml
+			 #
+			 # replace config variables
+			 #
+			 eval sed -e 's/\{CASES_IMAGE_VERSION\}/$SUPPORT_VERSION/' $TESTCASE_PROJECT_DIR/config/docker-compose.yml > $TEST_CASE_DIR/docker-compose.yml  # replace the test case image version
+			 eval sed -e 's/\{COLLECTOR_IMAGE_VERSION\}/$COLLECTOR_IMAGE_VERSION/' $TESTCASE_PROJECT_DIR/config/docker-compose.yml > $TEST_CASE_DIR/docker-compose.yml # replace mock collector image version
 			 #
 			 # Generate testcase desc file
 			 #
