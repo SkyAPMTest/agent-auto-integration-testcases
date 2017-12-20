@@ -1,0 +1,19 @@
+#
+# Test case project define.
+#
+# Note: Test case project must a project that support output service.
+#
+testcase:
+  #
+  # The request url of current test cases.
+  #
+  request_url: http://localhost:18080/mysql-case/case/mysql 
+  #
+  # The framework name that need tested.
+  #
+  test_framework: Mysql 
+  #
+  # The framework version list of current test case supported
+  #
+  support_versions:
+    - 5.1.39

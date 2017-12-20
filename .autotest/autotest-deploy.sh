@@ -35,7 +35,7 @@ parse_yaml() {
 }
 
 cleanEnvVariables(){
-	testcase_support_versions=""
+	testcase_support_versions=()
 }
 
 PRG="$0"
