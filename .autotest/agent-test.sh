@@ -226,6 +226,9 @@ do
 
 	echo "stop docker container"
 	docker-compose -f ${CASE_DIR}/docker-compose.yml stop
+	
+	echo "remove the network"
+	docker network rm $(docker network ls | grep "bridge" | awk '/ / { print $1 }')
 done
 
 echo "generate report...."
