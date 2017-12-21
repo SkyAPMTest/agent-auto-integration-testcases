@@ -79,8 +79,54 @@ buildProject(){
 	fi
 }
 
+deployTestCase(){
+	TEST_CASE=$1
+	RUNNING_SIZE=$2
+	#
+	# calculate running port
+	#
+	CURRENT_RUNNING_INDEX=$MAX_RUNNING_SIZE - $RUNNING_SIZE #
+	COLLECTOR_OUTPUT_PORT=
+	SERVER_OUTPUT_PORT=
+	echo "[ ${TEST_CASE} ]: collector running in ${COLLECTOR_OUTPUT_PORT}, The service running in ${SERVER_OUTPUT_PORT}"
+	#
+	# replace the port in docker-compose.xml file and testcase.desc file
+	#
+	eval sed -i -e 's/\{COLLECTOR_OUTPUT_PORT\}/$COLLECTOR_OUTPUT_PORT/' $CASE_DIR/docker-compose.yml # replace value of `{COLLECTOR_OUTPUT_PORT}` parameter in docker-compose.xml
+	eval sed -i -e 's/\{SERVER_OUTPUT_PORT\}/$SERVER_OUTPUT_PORT/' $CASE_DIR/docker-compose.yml # replace value of `{SERVER_OUTPUT_PORT}` parameter in docker-compose.xml
+	eval sed -i -e 's/\{SERVER_OUTPUT_PORT\}/$SERVER_OUTPUT_PORT/' $CASE_DIR/testcase.desc # replace value of `{SERVER_OUTPUT_PORT}` parameter in testcase.desc
+	#
+	# running time 
+	#
+	CASE_DIR="$TEST_CASES_DIR/$TEST_CASE"
+	ESCAPE_PATH=$(echo "$AGENT_DIR" |sed -e 's/\//\\\//g' )
+	eval sed -i -e 's/\{AGENT_FILE_PATH\}/$ESCAPE_PATH/' $CASE_DIR/docker-compose.yml
+	cd $CASE_DIR && docker-compose rm -s -f
+	echo "start docker container"
+	docker-compose -f $CASE_DIR/docker-compose.yml up -d
+	sleep 40
+
+	CASE_REQUEST_URL=$(grep "case.request_url" $CASE_DIR/testcase.desc | awk -F '=' '{print $2}')
+	echo $CASE_REQUEST_URL
+	curl -s $CASE_REQUEST_URL
+	sleep 15
+
+	curl -s $RECIEVE_DATA_URL > $CASE_DIR/actualData.yaml
+
+	echo "stop docker container and remove the container network "
+	docker-compose -f ${CASE_DIR}/docker-compose.yml stop
+	docker network rm $(docker network ls | grep "bridge" | awk '/ / { print $1 }')
+	#
+	# remove the rid file
+	#
+	rm $RUNTIME_DIR/$TEST_CASE.rid
+}
+
 environmentCheck
 
+#
+# definetation env variables
+#
 TEST_TOOL_GIT_URL=https://github.com/SkywalkingTest/agent-integration-testtool.git
 TEST_TOOL_GIT_BRANCH=master
 AGENT_GIT_URL=https://github.com/apache/incubator-skywalking.git
@@ -101,8 +147,13 @@ PRGDIR=`dirname "$PRG"`
 [ -z "$AGENT_TEST_HOME" ] && AGENT_TEST_HOME=`cd "$PRGDIR/.." >/dev/null; pwd`
 WORKSPACE_DIR="$AGENT_TEST_HOME/workspace"
 SOURCE_DIR="$WORKSPACE_DIR/sources"
-TEST_CASES_DIR="$AGENT_TEST_HOME/testcases"
-
+#
+TEST_CASES_DIR="$AGENT_TEST_HOME/testcases" # Testcase dir
+#
+MAX_RUNNING_SIZE=2 # The max size of running testcase
+#
+#
+#
 ############## parse paremeters ##############
 #	parse paremeters
 ##############################################
@@ -124,6 +175,10 @@ do
 		--skipReport )
 			SKIP_REPORT=true;
 			shift;
+			;;
+		--max-running-size )
+			MAX_RUNNING_SIZE=$2;
+			shift 2;
 			;;
 		--skipBuild )
 			SKIP_BUILD=true;
@@ -206,31 +261,43 @@ echo "clone report repository"
 REPORT_DIR="$WORKSPACE_DIR/report"
 #echo "clone report "
 checkoutSourceCode ${REPORT_GIT_URL} ${REPORT_GIT_BRANCH} ${REPORT_DIR}
+#
+# Create runtime dir
+#
+RUNTIME_DIR=${AGENT_TEST_HOME}/.runtime
+rm -rf "$RUNTIME_DIR/*"
+mkdir -p $RUNTIME_DIR
+#
+#
+#
+while [[ ${#TEST_CASES[@]} gt 0 ]]; do
 
-for TEST_CASE in ${TEST_CASES[@]}
-do
-	CASE_DIR="$TEST_CASES_DIR/$TEST_CASE"
-	ESCAPE_PATH=$(echo "$AGENT_DIR" |sed -e 's/\//\\\//g' )
-	eval sed -i -e 's/\{AGENT_FILE_PATH\}/$ESCAPE_PATH/' $CASE_DIR/docker-compose.yml
-	cd $CASE_DIR && docker-compose rm -s -f
-	echo "start docker container"
-	docker-compose -f $CASE_DIR/docker-compose.yml up -d
-	sleep 40
-
-	CASE_REQUEST_URL=$(grep "case.request_url" $CASE_DIR/testcase.desc | awk -F '=' '{print $2}')
-	echo $CASE_REQUEST_URL
-	curl -s $CASE_REQUEST_URL
-	sleep 15
-
-	curl -s $RECIEVE_DATA_URL > $CASE_DIR/actualData.yaml
-
-	echo "stop docker container"
-	docker-compose -f ${CASE_DIR}/docker-compose.yml stop
-	
-	echo "remove the network"
-	docker network rm $(docker network ls | grep "bridge" | awk '/ / { print $1 }')
+	RUNNING_SIZE=`ls $RUNTIME_DIR/*.rid | wc -l`
+	if [ RUNNING_SIZE -gt ${MAX_RUNNING_SIZE}]; then
+		echo "Remainder run size is 0. retry in 15 seconds."
+		sleep 5
+		continue
+	fi
+	#
+	#
+	#
+	TEST_CASE=${TEST_CASES[0]}
+	TEST_CASES=("${TEST_CASES[@]:1}")
+	#
+	# create rid file
+	#
+	touch $RUNTIME_DIR/$TEST_CASE.rid
+	deployTestCase $TEST_CASE $RUNNING_SIZE &
+	echo "${TEST_CASE} start to running"
 done
 
+RUNNING_SIZE=`ls $RUNTIME_DIR/*.rid | wc -l`
+
+while [[ $RUNNING_SIZE gt 0 ]]; do
+	echo "$RUNNING_SIZE containers are running, The validate program will be retried in 10 seconds."
+done
+
+exit 
 echo "generate report...."
 java -DtestDate="$TEST_TIME" \
 	-DagentBranch="$AGENT_GIT_BRANCH" -DagentCommit="$AGENT_COMMIT" \
