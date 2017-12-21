@@ -220,13 +220,22 @@ checkoutSourceCode ${REPORT_GIT_URL} ${REPORT_GIT_BRANCH} ${REPORT_DIR}
 #
 #
 #
+RUNNTING_INDEXES=()
+for i in `seq 0 1 $MAX_RUNNING_SIZE` ;
+do
+	RUNNTING_INDEXES+=($i);
+done
+#
+#
+#
 deployTestCase(){
 	TEST_CASE=$1
 	RUNNING_SIZE=$2
+	CURRENT_RUNNING_INDEX=$3 #
 	#
 	# calculate running port
 	#
-	CURRENT_RUNNING_INDEX=$((MAX_RUNNING_SIZE - RUNNING_SIZE)) #
+
 	COLLECTOR_OUTPUT_PORT=$((12800 + $CURRENT_RUNNING_INDEX * 100))
 	SERVER_OUTPUT_PORT=$((18080 + $CURRENT_RUNNING_INDEX * 100))
 	RECIEVE_DATA_URL=http://127.0.0.1:${COLLECTOR_OUTPUT_PORT}/receiveData
@@ -244,25 +253,28 @@ deployTestCase(){
 	eval sed -i -e 's/\{SERVER_OUTPUT_PORT\}/$SERVER_OUTPUT_PORT/' $CASE_DIR/testcase.desc # replace value of `{SERVER_OUTPUT_PORT}` parameter in testcase.desc
 	eval sed -i -e 's/\{SERVER_OUTPUT_PORT\}/$SERVER_OUTPUT_PORT/' $CASE_DIR/expectedData.yaml # replace value of `{SERVER_OUTPUT_PORT}` parameter in testcase.desc
 	eval sed -i -e 's/\{AGENT_FILE_PATH\}/$ESCAPE_PATH/' $CASE_DIR/docker-compose.yml 
+	#
 	cd $CASE_DIR && docker-compose rm -s -f
+	
 	echo "start docker container"
 	docker-compose -f $CASE_DIR/docker-compose.yml up -d
 	sleep 40
 
 	CASE_REQUEST_URL=$(grep "case.request_url" $CASE_DIR/testcase.desc | awk -F '=' '{print $2}')
 	echo $CASE_REQUEST_URL
-	curl -s $CASE_REQUEST_URL
+	curl -s $CASE_REQUEST_URL > /dev/null
 	sleep 15
 
 	curl -s $RECIEVE_DATA_URL > $CASE_DIR/actualData.yaml
 
 	echo "stop docker container and remove the container network "
-	docker-compose -f ${CASE_DIR}/docker-compose.yml stop
-	docker network rm $(docker network ls | grep "bridge" | awk '/ / { print $1 }')
+	docker-compose -f ${CASE_DIR}/docker-compose.yml stop > /dev/null
+	(docker network rm $(docker network ls | grep "bridge" | awk '/ / { print $1 }')) > /dev/null
 	#
 	# remove the rid file
 	#
-	rm $RUNTIME_DIR/$TEST_CASE.rid
+	RUNNTING_INDEXES+=($CURRENT_RUNNING_INDEX)
+	eval sed -i -e 's/STARTED/FINISHED/' $RUNTIME_DIR/$TEST_CASE.rid
 }
 #
 # Create runtime dir
@@ -274,7 +286,17 @@ mkdir -p $RUNTIME_DIR
 #
 #
 while [ ${#TEST_CASES[@]} -gt 0 ]; do
-	RUNNING_SIZE=`ls $RUNTIME_DIR | wc -l`
+	#
+	#
+	#
+	FINISHED_INDEX_ARRAY=($(grep  -h 'FINISHED' $RUNTIME_DIR/* | awk -F ' ' '{print $1;}'))
+	RUNNTING_INDEXES+=(${FINISHED_INDEX_ARRAY[@]})
+	# remove finished files
+	grep -l 'FINISHED' $RUNTIME_DIR/*.rid | xargs rm -rf
+	#
+	#
+	#
+	RUNNING_SIZE=`grep -l 'STARTED' $RUNTIME_DIR/*rid | wc -l`
 	if [ $((MAX_RUNNING_SIZE - RUNNING_SIZE)) -eq 0 ]; then
 		echo "Remainder run size is 0. retry in 20 seconds."
 		sleep 20
@@ -285,19 +307,21 @@ while [ ${#TEST_CASES[@]} -gt 0 ]; do
 	#
 	TEST_CASE=${TEST_CASES[0]}
 	TEST_CASES=("${TEST_CASES[@]:1}")
+	RUNNING_INDEX=${RUNNTING_INDEXES[0]}
+	RUNNTING_INDEXES=("${RUNNTING_INDEXES[@]:1}")
 	#
 	# create rid file
 	#
-	touch $RUNTIME_DIR/$TEST_CASE.rid
-	deployTestCase $TEST_CASE $RUNNING_SIZE &
+	echo "$RUNNING_INDEX STARTED" > $RUNTIME_DIR/$TEST_CASE.rid
+	deployTestCase $TEST_CASE $RUNNING_SIZE $RUNNING_INDEX &
 	echo "${TEST_CASE} start to running"
 done
 
-RUNNING_SIZE=`ls $RUNTIME_DIR | wc -l`
+RUNNING_SIZE=`grep -l 'STARTED' $RUNTIME_DIR/* | wc -l`
 while [[ $RUNNING_SIZE -gt 0 ]]; do
 	echo "$RUNNING_SIZE containers are running, The validate program will be retried in 40 seconds."
 	sleep 40;
-	RUNNING_SIZE=`ls $RUNTIME_DIR | wc -l`
+	RUNNING_SIZE=`grep -l 'STARTED' $RUNTIME_DIR/* | wc -l`
 done
 
 echo "generate report...."
