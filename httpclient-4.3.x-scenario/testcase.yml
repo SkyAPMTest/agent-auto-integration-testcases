@@ -7,7 +7,7 @@ testcase:
   #
   # The request url of current test cases.
   #
-  request_url: http://localhost:18080/httpclient-case/case/httpclient 
+  request_url: http://localhost:{SERVER_OUTPUT_PORT}/httpclient-case/case/httpclient 
   #
   # The framework name that need tested.
   #

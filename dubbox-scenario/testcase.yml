@@ -7,7 +7,7 @@ testcase:
   #
   # The request url of current test cases.
   #
-  request_url: http://localhost:18080/dubbox-case/case/dubbox-rest 
+  request_url: http://localhost:{SERVER_OUTPUT_PORT}/dubbox-case/case/dubbox-rest 
   #
   # The framework name that need tested.
   #

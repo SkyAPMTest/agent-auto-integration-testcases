@@ -69,7 +69,7 @@ buildProject(){
 	PROJECT_DIR=$1;
 	if [ "$SKIP_BUILD" = "false" ]; then
 		cd $PROJECT_DIR
-		mvn clean package >/dev/null
+		mvn clean package
 		IS_BUILD_SUCCESS=$?
 		if [ "$IS_BUILD_SUCCESS" = "0" ]; then
 			echo "Build project success"
@@ -77,49 +77,6 @@ buildProject(){
 			echo "Build project failed"
 		fi
 	fi
-}
-
-deployTestCase(){
-	TEST_CASE=$1
-	RUNNING_SIZE=$2
-	#
-	# calculate running port
-	#
-	CURRENT_RUNNING_INDEX=$MAX_RUNNING_SIZE - $RUNNING_SIZE #
-	COLLECTOR_OUTPUT_PORT=
-	SERVER_OUTPUT_PORT=
-	echo "[ ${TEST_CASE} ]: collector running in ${COLLECTOR_OUTPUT_PORT}, The service running in ${SERVER_OUTPUT_PORT}"
-	#
-	# replace the port in docker-compose.xml file and testcase.desc file
-	#
-	eval sed -i -e 's/\{COLLECTOR_OUTPUT_PORT\}/$COLLECTOR_OUTPUT_PORT/' $CASE_DIR/docker-compose.yml # replace value of `{COLLECTOR_OUTPUT_PORT}` parameter in docker-compose.xml
-	eval sed -i -e 's/\{SERVER_OUTPUT_PORT\}/$SERVER_OUTPUT_PORT/' $CASE_DIR/docker-compose.yml # replace value of `{SERVER_OUTPUT_PORT}` parameter in docker-compose.xml
-	eval sed -i -e 's/\{SERVER_OUTPUT_PORT\}/$SERVER_OUTPUT_PORT/' $CASE_DIR/testcase.desc # replace value of `{SERVER_OUTPUT_PORT}` parameter in testcase.desc
-	#
-	# running time 
-	#
-	CASE_DIR="$TEST_CASES_DIR/$TEST_CASE"
-	ESCAPE_PATH=$(echo "$AGENT_DIR" |sed -e 's/\//\\\//g' )
-	eval sed -i -e 's/\{AGENT_FILE_PATH\}/$ESCAPE_PATH/' $CASE_DIR/docker-compose.yml
-	cd $CASE_DIR && docker-compose rm -s -f
-	echo "start docker container"
-	docker-compose -f $CASE_DIR/docker-compose.yml up -d
-	sleep 40
-
-	CASE_REQUEST_URL=$(grep "case.request_url" $CASE_DIR/testcase.desc | awk -F '=' '{print $2}')
-	echo $CASE_REQUEST_URL
-	curl -s $CASE_REQUEST_URL
-	sleep 15
-
-	curl -s $RECIEVE_DATA_URL > $CASE_DIR/actualData.yaml
-
-	echo "stop docker container and remove the container network "
-	docker-compose -f ${CASE_DIR}/docker-compose.yml stop
-	docker network rm $(docker network ls | grep "bridge" | awk '/ / { print $1 }')
-	#
-	# remove the rid file
-	#
-	rm $RUNTIME_DIR/$TEST_CASE.rid
 }
 
 environmentCheck
@@ -134,7 +91,6 @@ AGENT_GIT_BRANCH=master
 REPORT_GIT_URL=https://github.com/SkywalkingTest/agent-integration-test-report.git
 REPORT_GIT_BRANCH=master
 TEST_TIME=`date "+%Y-%m-%d-%H-%M"`
-RECIEVE_DATA_URL=http://127.0.0.1:12800/receiveData
 TEST_CASES_COMMITID=""
 TEST_CASES_BRANCH=""
 TEST_CASES=()
@@ -262,6 +218,53 @@ REPORT_DIR="$WORKSPACE_DIR/report"
 #echo "clone report "
 checkoutSourceCode ${REPORT_GIT_URL} ${REPORT_GIT_BRANCH} ${REPORT_DIR}
 #
+#
+#
+deployTestCase(){
+	TEST_CASE=$1
+	RUNNING_SIZE=$2
+	#
+	# calculate running port
+	#
+	CURRENT_RUNNING_INDEX=$((MAX_RUNNING_SIZE - RUNNING_SIZE)) #
+	COLLECTOR_OUTPUT_PORT=$((12800 + $CURRENT_RUNNING_INDEX * 100))
+	SERVER_OUTPUT_PORT=$((18080 + $CURRENT_RUNNING_INDEX * 100))
+	RECIEVE_DATA_URL=http://127.0.0.1:${COLLECTOR_OUTPUT_PORT}/receiveData
+	echo "[ ${TEST_CASE} ]: collector running in ${COLLECTOR_OUTPUT_PORT}, The service running in ${SERVER_OUTPUT_PORT}"
+	#
+	# running time 
+	#
+	CASE_DIR="$TEST_CASES_DIR/$TEST_CASE"
+	ESCAPE_PATH=$(echo "$AGENT_DIR" |sed -e 's/\//\\\//g' )
+	#
+	# replace the port in docker-compose.xml file and testcase.desc file
+	#
+	eval sed -i -e 's/\{COLLECTOR_OUTPUT_PORT\}/$COLLECTOR_OUTPUT_PORT/' $CASE_DIR/docker-compose.yml # replace value of `{COLLECTOR_OUTPUT_PORT}` parameter in docker-compose.xml
+	eval sed -i -e 's/\{SERVER_OUTPUT_PORT\}/$SERVER_OUTPUT_PORT/' $CASE_DIR/docker-compose.yml # replace value of `{SERVER_OUTPUT_PORT}` parameter in docker-compose.xml
+	eval sed -i -e 's/\{SERVER_OUTPUT_PORT\}/$SERVER_OUTPUT_PORT/' $CASE_DIR/testcase.desc # replace value of `{SERVER_OUTPUT_PORT}` parameter in testcase.desc
+	eval sed -i -e 's/\{SERVER_OUTPUT_PORT\}/$SERVER_OUTPUT_PORT/' $CASE_DIR/expectedData.yaml # replace value of `{SERVER_OUTPUT_PORT}` parameter in testcase.desc
+	eval sed -i -e 's/\{AGENT_FILE_PATH\}/$ESCAPE_PATH/' $CASE_DIR/docker-compose.yml 
+	cd $CASE_DIR && docker-compose rm -s -f
+	echo "start docker container"
+	docker-compose -f $CASE_DIR/docker-compose.yml up -d
+	sleep 40
+
+	CASE_REQUEST_URL=$(grep "case.request_url" $CASE_DIR/testcase.desc | awk -F '=' '{print $2}')
+	echo $CASE_REQUEST_URL
+	curl -s $CASE_REQUEST_URL
+	sleep 15
+
+	curl -s $RECIEVE_DATA_URL > $CASE_DIR/actualData.yaml
+
+	echo "stop docker container and remove the container network "
+	docker-compose -f ${CASE_DIR}/docker-compose.yml stop
+	docker network rm $(docker network ls | grep "bridge" | awk '/ / { print $1 }')
+	#
+	# remove the rid file
+	#
+	rm $RUNTIME_DIR/$TEST_CASE.rid
+}
+#
 # Create runtime dir
 #
 RUNTIME_DIR=${AGENT_TEST_HOME}/.runtime
@@ -270,12 +273,11 @@ mkdir -p $RUNTIME_DIR
 #
 #
 #
-while [[ ${#TEST_CASES[@]} gt 0 ]]; do
-
-	RUNNING_SIZE=`ls $RUNTIME_DIR/*.rid | wc -l`
-	if [ RUNNING_SIZE -gt ${MAX_RUNNING_SIZE}]; then
-		echo "Remainder run size is 0. retry in 15 seconds."
-		sleep 5
+while [ ${#TEST_CASES[@]} -gt 0 ]; do
+	RUNNING_SIZE=`ls $RUNTIME_DIR | wc -l`
+	if [ $((MAX_RUNNING_SIZE - RUNNING_SIZE)) -eq 0 ]; then
+		echo "Remainder run size is 0. retry in 20 seconds."
+		sleep 20
 		continue
 	fi
 	#
@@ -291,13 +293,13 @@ while [[ ${#TEST_CASES[@]} gt 0 ]]; do
 	echo "${TEST_CASE} start to running"
 done
 
-RUNNING_SIZE=`ls $RUNTIME_DIR/*.rid | wc -l`
-
-while [[ $RUNNING_SIZE gt 0 ]]; do
-	echo "$RUNNING_SIZE containers are running, The validate program will be retried in 10 seconds."
+RUNNING_SIZE=`ls $RUNTIME_DIR | wc -l`
+while [[ $RUNNING_SIZE -gt 0 ]]; do
+	echo "$RUNNING_SIZE containers are running, The validate program will be retried in 40 seconds."
+	sleep 40;
+	RUNNING_SIZE=`ls $RUNTIME_DIR | wc -l`
 done
 
-exit 
 echo "generate report...."
 java -DtestDate="$TEST_TIME" \
 	-DagentBranch="$AGENT_GIT_BRANCH" -DagentCommit="$AGENT_COMMIT" \

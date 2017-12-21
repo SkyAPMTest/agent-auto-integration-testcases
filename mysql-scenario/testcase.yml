@@ -7,7 +7,7 @@ testcase:
   #
   # The request url of current test cases.
   #
-  request_url: http://localhost:18080/mysql-case/case/mysql 
+  request_url: http://localhost:{SERVER_OUTPUT_PORT}/mysql-case/case/mysql 
   #
   # The framework name that need tested.
   #

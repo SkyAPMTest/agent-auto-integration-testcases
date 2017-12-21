@@ -16,9 +16,9 @@ services:
   mysql-testcase:
     image: skywalking/mysql-scenario:{CASES_IMAGE_VERSION}
     expose:
-      - "18080"
+      - "8080"
     ports:
-      - "18080:8080"
+      - "{SERVER_OUTPUT_PORT}:8080"
     environment:
       - COLLECTOR_SERVER=mock-collector:12800
       - MYSQL_INSTANCE_HOST=mysql-server:3306
@@ -38,9 +38,9 @@ services:
     expose:
       - "12800"
     ports:
-      - "12800:12800"
+      - "{COLLECTOR_OUTPUT_PORT}:12800"
     healthcheck:
-      test: ["CMD", "curl", "-f", "http://127.0.0.1:12800/receiveData"]
+      test: ["CMD", "curl", "-f", "http://127.0.0.1:{COLLECTOR_OUTPUT_PORT}/receiveData"]
       interval: 10s
       timeout: 10s
       retries: 5

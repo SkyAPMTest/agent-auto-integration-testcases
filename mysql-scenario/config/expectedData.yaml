@@ -100,7 +100,7 @@ segmentItems:
           componentName: null
           componentId: 1
           tags:
-            - {key: url, value: 'http://localhost:18080/mysql-case/case/mysql'}
+            - {key: url, value: 'http://localhost:{SERVER_OUTPUT_PORT}/mysql-case/case/mysql'}
             - {key: http.method, value: GET}
           logs: []
           peer: null
