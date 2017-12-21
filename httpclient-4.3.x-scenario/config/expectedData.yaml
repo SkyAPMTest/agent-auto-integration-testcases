@@ -42,7 +42,7 @@ segmentItems:
           componentName: null
           componentId: 1
           tags:
-            - {key: url, value: 'http://localhost:18080/httpclient-case/case/httpclient'}
+            - {key: url, value: 'http://localhost:{SERVER_OUTPUT_PORT}/httpclient-case/case/httpclient'}
             - {key: http.method, value: GET}
           logs: []
           peer: null
@@ -56,7 +56,7 @@ segmentItems:
           parentSpanId: -1
           spanId: 0
           tags: 
-            - {key: url, value: 'http://127.0.0.1:{SERVER_OUTPUT_PORT}/httpclient-case/case/context-propagate'}
+            - {key: url, value: 'http://127.0.0.1:8080/httpclient-case/case/context-propagate'}
             - {key: http.method, value: GET}
           logs: []
           startTime: nq 0
