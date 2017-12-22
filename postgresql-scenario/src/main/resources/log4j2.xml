@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="debug">
+    <Appenders>
+        <Console name="Console" target="SYSTEM_OUT">
+            <PatternLayout pattern="%d [%traceId] %-5p %c{1}:%L - %m%n"/>
+        </Console>
+    </Appenders>
+    <Loggers>
+        <Root level="OFF">
+            <AppenderRef ref="Console"/>
+        </Root>
+    </Loggers>
+</Configuration>

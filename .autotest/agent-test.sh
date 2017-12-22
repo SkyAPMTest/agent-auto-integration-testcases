@@ -274,7 +274,7 @@ deployTestCase(){
 	# remove the rid file
 	#
 	RUNNTING_INDEXES+=($CURRENT_RUNNING_INDEX)
-	eval sed -i -e 's/STARTED/FINISHED/' $RUNTIME_DIR/$TEST_CASE.rid
+	echo "$CURRENT_RUNNING_INDEX FINISHED" > $RUNTIME_DIR/$TEST_CASE.rid
 }
 #
 # Create runtime dir
@@ -296,7 +296,7 @@ while [ ${#TEST_CASES[@]} -gt 0 ]; do
 	#
 	#
 	#
-	RUNNING_SIZE=`grep -l 'STARTED' $RUNTIME_DIR/*rid | wc -l`
+	RUNNING_SIZE=`grep -l 'STARTED' $RUNTIME_DIR/* | wc -l`
 	if [ $((MAX_RUNNING_SIZE - RUNNING_SIZE)) -eq 0 ]; then
 		echo "Remainder run size is 0. retry in 20 seconds."
 		sleep 20

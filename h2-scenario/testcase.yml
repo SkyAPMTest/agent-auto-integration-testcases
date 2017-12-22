@@ -1,0 +1,19 @@
+#
+# Test case project define.
+#
+# Note: Test case project must a project that support output service.
+#
+testcase:
+  #
+  # The request url of current test cases.
+  #
+  request_url: http://localhost:{SERVER_OUTPUT_PORT}/h2-scenario/case/h2
+  #
+  # The framework name that need tested.
+  #
+  test_framework: H2
+  #
+  # The framework version list of current test case supported
+  #
+  support_versions:
+    - 1.3.168
