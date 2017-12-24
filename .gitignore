@@ -3,3 +3,4 @@ target/
 testcases/
 *.iml
 .runtime/
+.idea/

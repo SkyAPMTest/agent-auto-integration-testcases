@@ -7,7 +7,7 @@
 
     <servlet>
         <servlet-name>caseServlet</servlet-name>
-        <servlet-class>org.skywalking.apm.testcase.mysql.CaseServlet</servlet-class>
+        <servlet-class>org.apache.skywalking.apm.testcase.mysql.CaseServlet</servlet-class>
     </servlet>
 
     <servlet-mapping>
