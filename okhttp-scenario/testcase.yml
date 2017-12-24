@@ -1,0 +1,19 @@
+#
+# Test case project define.
+#
+# Note: Test case project must a project that support output service.
+#
+testcase:
+  #
+  # The request url of current test cases.
+  #
+  request_url: http://localhost:{SERVER_OUTPUT_PORT}/okhttp-case/case/okhttp-case
+  #
+  # The framework name that need tested.
+  #
+  test_framework: OKHttp3
+  #
+  # The framework version list of current test case supported
+  #
+  support_versions:
+    - 3.0.0

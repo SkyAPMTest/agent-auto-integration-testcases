@@ -1,0 +1,119 @@
+registryItems:
+  applications:
+  - {okhttp-scenario: nq 0}
+  instances:
+  - {okhttp-scenario: 1}
+  operationNames:
+  - okhttp-scenario: [/case/okhttp-case, /okhttp-case/case/receiveContext-0]
+  heartbeat: []
+segmentItems:
+- applicationCode: okhttp-scenario
+  segmentSize: 4
+  segments:
+  - segmentId: not null
+    spans:
+    - operationName: /okhttp-case/case/receiveContext-0
+      operationId: 0
+      parentSpanId: 0
+      spanId: 1
+      spanLayer: Http
+      startTime: nq 0
+      endTime: nq 0
+      componentId: 12
+      componentName: null
+      isError: false
+      spanType: Exit
+      peer: 127.0.0.1:8080
+      peerId: 0
+      tags:
+      - {key: http.method, value: GET}
+      - {key: url, value: 'http://127.0.0.1:8080/okhttp-case/case/receiveContext-0'}
+    - operationName: /case/okhttp-case
+      operationId: 0
+      parentSpanId: -1
+      spanId: 0
+      spanLayer: Http
+      startTime: nq 0
+      endTime: nq 0
+      componentId: 14
+      componentName: null
+      isError: false
+      spanType: Entry
+      peer: null
+      peerId: 0
+      tags:
+      - {key: url, value: 'http://localhost:{SERVER_OUTPUT_PORT}/okhttp-case/case/okhttp-case'}
+      - {key: http.method, value: GET}
+  - segmentId: not null
+    spans:
+    - operationName: /case/receiveContext-0
+      operationId: 0
+      parentSpanId: -1
+      spanId: 0
+      spanLayer: Http
+      startTime: nq 0
+      endTime: nq 0
+      componentId: 14
+      componentName: null
+      isError: false
+      spanType: Entry
+      peer: null
+      peerId: 0
+      tags:
+      - {key: url, value: 'http://127.0.0.1:8080/okhttp-case/case/receiveContext-0'}
+      - {key: http.method, value: GET}
+      refs:
+      - {parentServiceId: 0, parentServiceName: /case/okhttp-case, networkAddressId: 0, entryServiceId: 0, refType: CrossProcess, parentSpanId: 1, parentTraceSegmentId: ${okhttp-scenario[0], parentApplicationInstanceId: nq 0, networkAddress: '127.0.0.1:8080', entryServiceName: /case/okhttp-case, entryApplicationInstanceId: nq 0}
+  - segmentId: not null
+    spans:
+    - operationName: /case/receiveContext-1
+      operationId: 0
+      parentSpanId: -1
+      spanId: 0
+      spanLayer: Http
+      startTime: nq 0
+      endTime: nq 0
+      componentId: 14
+      componentName: null
+      isError: false
+      spanType: Entry
+      peer: null
+      peerId: 0
+      tags:
+      - {key: url, value: 'http://127.0.0.1:8080/okhttp-case/case/receiveContext-1'}
+      - {key: http.method, value: GET}
+      refs:
+      - {parentServiceId: 0, parentServiceName: CallBack/AsyncCall, networkAddressId: 0, entryServiceId: 0, refType: CrossProcess, parentSpanId: 1, parentTraceSegmentId: ${okhttp-scenario[3], parentApplicationInstanceId: nq 0, networkAddress: '127.0.0.1:8080', entryServiceName: /case/okhttp-case, entryApplicationInstanceId: nq 0}
+  - segmentId: not null
+    spans:
+    - operationName: /okhttp-case/case/receiveContext-1
+      operationId: 0
+      parentSpanId: 0
+      spanId: 1
+      spanLayer: Http
+      startTime: nq 0
+      endTime: nq 0
+      componentId: 12
+      componentName: null
+      isError: false
+      spanType: Exit
+      peer: 127.0.0.1:8080
+      peerId: 0
+      tags:
+      - {key: http.method, value: GET}
+      - {key: url, value: 'http://127.0.0.1:8080/okhttp-case/case/receiveContext-1'}
+    - operationName: CallBack/AsyncCall
+      operationId: 0
+      parentSpanId: -1
+      spanId: 0
+      spanLayer: not null
+      startTime: nq 0
+      endTime: nq 0
+      componentId: 0
+      componentName: null
+      isError: false
+      spanType: Local
+      peer: ''
+      peerId: 0
+      refs:
+      - {parentServiceId: 0, parentServiceName: /case/okhttp-case, networkAddressId: 0, entryServiceId: 0, refType: CrossThread, parentSpanId: 1, parentTraceSegmentId: ${okhttp-scenario[0]}, parentApplicationInstanceId: 0, networkAddress: '', entryServiceName: /case/okhttp-case, entryApplicationInstanceId: nq 0}
