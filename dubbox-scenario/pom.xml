@@ -4,7 +4,7 @@
 
     <groupId>org.apache.skywalking</groupId>
     <artifactId>skywalking-dubbox-scenario</artifactId>
-    <version>3.2.6-2017</version>
+    <version>5.0.0</version>
     <modules>
         <module>dubbox-interfaces</module>
         <module>dubbox-provider</module>
@@ -12,7 +12,7 @@
     </modules>
     <packaging>pom</packaging>
 
-    <name>skywalking-docker-dubbo-scenario</name>
+    <name>skywalking-dubbox-scenario</name>
     <url>http://maven.apache.org</url>
 
     <properties>

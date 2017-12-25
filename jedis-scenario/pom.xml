@@ -6,7 +6,7 @@
 
     <groupId>org.apache.skywalking</groupId>
     <artifactId>jedis-scenario</artifactId>
-    <version>3.2.3-2017</version>
+    <version>5.0.0</version>
     <packaging>war</packaging>
 
     <properties>

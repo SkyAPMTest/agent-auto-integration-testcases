@@ -6,7 +6,7 @@
 
     <groupId>org.apache.skywalking</groupId>
     <artifactId>httpclient-scenario</artifactId>
-    <version>3.2.3-2017</version>
+    <version>5.0.0</version>
     <packaging>war</packaging>
 
     <properties>
@@ -17,7 +17,7 @@
         <docker.image.version>${test.framework.version}</docker.image.version>
     </properties>
 
-    <name>skywalking-httpclient-scenario</name>
+    <name>skywalking-httpclient-4.3.x-scenario</name>
 
     <dependencies>
         <dependency>

@@ -3,7 +3,7 @@
     <parent>
         <artifactId>skywalking-dubbox-scenario</artifactId>
         <groupId>org.apache.skywalking</groupId>
-        <version>3.2.6-2017</version>
+        <version>5.0.0</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 

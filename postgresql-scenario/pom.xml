@@ -4,11 +4,11 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>org.apache.skywalking</groupId>
-    <version>3.2.3-2017</version>
+    <version>5.0.0</version>
     <packaging>war</packaging>
 
     <artifactId>postgresql-scenario</artifactId>
-    <name>postgresql-scenario</name>
+    <name>skywalking-postgresql-scenario</name>
 
     <properties>
         <test.framework.version>9.0-801.jdbc4</test.framework.version>

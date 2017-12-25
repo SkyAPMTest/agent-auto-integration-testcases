@@ -6,7 +6,7 @@
 
     <groupId>org.skywalking</groupId>
     <artifactId>mysql-scenario</artifactId>
-    <version>3.2.6-2017</version>
+    <version>5.0.0</version>
     <packaging>war</packaging>
 
     <properties>
@@ -14,7 +14,7 @@
         <docker.image.version>${test.framework.version}</docker.image.version>
     </properties>
 
-    <name>mysql-scenario</name>
+    <name>skywalking-mysql-scenario</name>
 
     <dependencies>
          <dependency>
