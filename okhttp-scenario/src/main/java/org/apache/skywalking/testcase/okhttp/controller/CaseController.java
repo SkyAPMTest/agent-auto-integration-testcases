@@ -6,18 +6,13 @@ import okhttp3.Callback;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 @RequestMapping("/case")
 public class CaseController {
-
-    private Logger logger = LogManager.getLogger(CaseController.class);
 
     @RequestMapping("/receiveContext-1")
     @ResponseBody
@@ -42,7 +37,7 @@ public class CaseController {
 
         new OkHttpClient().newCall(request).enqueue(new Callback() {
             @Override public void onFailure(Call call, IOException e) {
-                logger.error("Failed to execute ");
+                //Never do this
             }
 
             @Override

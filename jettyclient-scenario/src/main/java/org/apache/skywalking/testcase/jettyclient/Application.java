@@ -1,4 +1,4 @@
-package org.apache.skywalking.testcase.okhttp;
+package org.apache.skywalking.testcase.jettyclient;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
@@ -8,7 +8,7 @@ import org.springframework.context.annotation.ComponentScan;
 
 @EnableAutoConfiguration
 @SpringBootApplication
-@ComponentScan("org.apache.skywalking.testcase.okhttp")
+@ComponentScan("org.apache.skywalking.testcase.jettyclient")
 public class Application extends SpringBootServletInitializer {
 
     public static void main(String[] args) {

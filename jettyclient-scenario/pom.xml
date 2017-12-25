@@ -5,13 +5,13 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>org.apache.skywalking</groupId>
-    <artifactId>okhttp-scenario</artifactId>
+    <artifactId>jettyclient-scenario</artifactId>
     <version>1.0-SNAPSHOT</version>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
-        <test.framework.version>3.0.0</test.framework.version>
+        <test.framework.version>9.0.0.v20130308</test.framework.version>
         <docker.image.version>${test.framework.version}</docker.image.version>
 
         <log4j.version>2.6.2</log4j.version>
@@ -21,8 +21,8 @@
 
     <dependencies>
         <dependency>
-            <groupId>com.squareup.okhttp3</groupId>
-            <artifactId>okhttp</artifactId>
+            <groupId>org.eclipse.jetty</groupId>
+            <artifactId>jetty-client</artifactId>
             <version>${test.framework.version}</version>
         </dependency>
 
@@ -65,15 +65,15 @@
 
     <profiles>
         <profile>
-            <id>okhttp-scenario-3.0.0</id>
+            <id>jettyclient-scenario-9.0.0.v20130308</id>
             <properties>
-                <test.framework.version>3.0.0</test.framework.version>
+                <test.framework.version>9.0.0.v20130308</test.framework.version>
             </properties>
         </profile>
     </profiles>
 
     <build>
-        <finalName>okhttp-scenario</finalName>
+        <finalName>jettyclient-scenario</finalName>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -103,7 +103,7 @@
                 <version>0.4.13</version>
                 <configuration>
                     <skipDocker>false</skipDocker>
-                    <imageName>skywalking/okhttp-scenario</imageName>
+                    <imageName>skywalking/jettyclient-scenario</imageName>
                     <imageTags>
                         <imageTag>${docker.image.version}</imageTag>
                     </imageTags>
