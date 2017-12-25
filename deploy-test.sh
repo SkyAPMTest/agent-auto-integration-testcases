@@ -4,7 +4,8 @@ Usage(){
 	echo "Usage: agent-test.sh [OPTIONS]"
 	echo "Options:"
 	echo -e "    -p | --project projectName  \t\t Only test the case under the project. "
-	echo -e "    -civ | --collector-image-version version \t\t Set mock collector image"
+	echo -e "    -civ | --collector-image-version version \t\t Set mock collector image. "
+	echo -e "    -b | --branch branch \t\t The branch name of Skywalking. "
 }
 
 PRG="$0"
@@ -16,6 +17,7 @@ PRGDIR=`dirname "$PRG"`
 #
 TEST_PROJECT_NAME=""
 MOCK_COLLECTOR_IMAGE_VERSION="3.2.6-2017"
+AGENT_BRANCH_NAME="master"
 #
 # Parse the input parameters
 #
@@ -29,6 +31,10 @@ while [[ $# -gt 0 ]]; do
 			MOCK_COLLECTOR_IMAGE_VERSION=$2
 			shift 2
 			;;
+		-b | --branch )
+			AGENT_BRANCH_NAME=$2
+			shift 2
+			;;
 		* )
 			shift
 			break
@@ -37,5 +43,5 @@ done
 
 ${AGENT_TEST_HOME}/.autotest/autotest-deploy.sh --project "${TEST_PROJECT_NAME}" --collector-image-version "$MOCK_COLLECTOR_IMAGE_VERSION"
 
-${AGENT_TEST_HOME}/.autotest/agent-test.sh --max-running-size 5
+${AGENT_TEST_HOME}/.autotest/agent-test.sh --max-running-size 5 --branch "$AGENT_BRANCH_NAME" 
 
