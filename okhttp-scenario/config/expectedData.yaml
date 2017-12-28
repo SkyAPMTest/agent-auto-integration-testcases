@@ -39,7 +39,7 @@ segmentItems:
       peer: null
       peerId: 0
       tags:
-      - {key: url, value: 'http://localhost:18080/okhttp-case/case/okhttp-case'}
+      - {key: url, value: 'http://localhost:{SERVER_OUTPUT_PORT}/okhttp-case/case/okhttp-case'}
       - {key: http.method, value: GET}
   - segmentId: not null
     spans:
