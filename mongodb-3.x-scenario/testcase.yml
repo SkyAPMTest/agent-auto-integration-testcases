@@ -1,0 +1,19 @@
+#
+# Test case project define.
+#
+# Note: Test case project must a project that support output service.
+#
+testcase:
+  #
+  # The request url of current test cases.
+  #
+  request_url: http://localhost:{SERVER_OUTPUT_PORT}/mongodb-case/case/mongodb
+  #
+  # The framework name that need tested.
+  #
+  test_framework: MongoDB
+  #
+  # The framework version list of current test case supported
+  #
+  support_versions:
+    - 3.3.0

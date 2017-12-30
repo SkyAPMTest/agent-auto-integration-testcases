@@ -1,0 +1,135 @@
+registryItems:
+  applications:
+  - {mongodb-scenario: nq 0}
+  instances:
+  - {mongodb-scenario: 1}
+  operationNames:
+  - mongodb-scenario: [MongoDB/FindOperation, MongoDB/CreateCollectionOperation, /case/mongodb, MongoDB/MixedBulkWriteOperation, MongoDB/CommandWriteOperation]
+  heartbeat: []
+segmentItems:
+- applicationCode: mongodb-scenario
+  segmentSize: 1
+  segments:
+  - segmentId: not null
+    spans:
+    - operationName: MongoDB/CreateCollectionOperation
+      operationId: 0
+      parentSpanId: 0
+      spanId: 1
+      spanLayer: Database
+      startTime: nq 0
+      endTime: nq 0
+      componentId: 9
+      componentName: ''
+      isError: false
+      spanType: Exit
+      peer: mongo-server:27017
+      peerId: 0
+      tags:
+      - {key: db.type, value: MongoDB}
+    - operationName: MongoDB/MixedBulkWriteOperation
+      operationId: 0
+      parentSpanId: 0
+      spanId: 2
+      spanLayer: Database
+      startTime: nq 0
+      endTime: nq 0
+      componentId: 9
+      componentName: ''
+      isError: false
+      spanType: Exit
+      peer: mongo-server:27017
+      peerId: 0
+      tags:
+      - {key: db.type, value: MongoDB}
+    - operationName: MongoDB/FindOperation
+      operationId: 0
+      parentSpanId: 0
+      spanId: 3
+      spanLayer: Database
+      startTime: nq 0
+      endTime: nq 0
+      componentId: 9
+      componentName: ''
+      isError: false
+      spanType: Exit
+      peer: mongo-server:27017
+      peerId: 0
+      tags:
+      - {key: db.type, value: MongoDB}
+    - operationName: MongoDB/MixedBulkWriteOperation
+      operationId: 0
+      parentSpanId: 0
+      spanId: 4
+      spanLayer: Database
+      startTime: nq 0
+      endTime: nq 0
+      componentId: 9
+      componentName: ''
+      isError: false
+      spanType: Exit
+      peer: mongo-server:27017
+      peerId: 0
+      tags:
+      - {key: db.type, value: MongoDB}
+    - operationName: MongoDB/FindOperation
+      operationId: 0
+      parentSpanId: 0
+      spanId: 5
+      spanLayer: Database
+      startTime: nq 0
+      endTime: nq 0
+      componentId: 9
+      componentName: ''
+      isError: false
+      spanType: Exit
+      peer: mongo-server:27017
+      peerId: 0
+      tags:
+      - {key: db.type, value: MongoDB}
+    - operationName: MongoDB/MixedBulkWriteOperation
+      operationId: 0
+      parentSpanId: 0
+      spanId: 6
+      spanLayer: Database
+      startTime: nq 0
+      endTime: nq 0
+      componentId: 9
+      componentName: ''
+      isError: false
+      spanType: Exit
+      peer: mongo-server:27017
+      peerId: 0
+      tags:
+      - {key: db.type, value: MongoDB}
+    - operationName: MongoDB/CommandWriteOperation
+      operationId: 0
+      parentSpanId: 0
+      spanId: 7
+      spanLayer: Database
+      startTime: nq 0
+      endTime: nq 0
+      componentId: 9
+      componentName: ''
+      isError: false
+      spanType: Exit
+      peer: mongo-server:27017
+      peerId: 0
+      tags:
+      - {key: db.type, value: MongoDB}
+    - operationName: /case/mongodb
+      operationId: 0
+      parentSpanId: -1
+      spanId: 0
+      spanLayer: Http
+      startTime: nq 0
+      endTime: nq 0
+      componentId: 14
+      componentName: ''
+      isError: false
+      spanType: Entry
+      peer: ''
+      peerId: 0
+      tags:
+      - {key: url, value: 'http://localhost:{SERVER_OUTPUT_PORT}/mongodb-case/case/mongodb'}
+      - {key: http.method, value: GET}

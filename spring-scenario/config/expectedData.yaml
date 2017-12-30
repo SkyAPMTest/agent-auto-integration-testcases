@@ -94,7 +94,7 @@ segmentItems:
       - {key: url, value: 'http://restapi-scenario:18080/restapi-case/delete/1'}
       - {key: http.method, value: DELETE}
       refs:
-      - {parentServiceId: 0, parentServiceName: /case/resttemplate, networkAddressId: 0, entryServiceId: 0, refType: CrossProcess, parentSpanId: 4, parentTraceSegmentId: '${resttemplate-scenario[0]}', parentApplicationInstanceId: 1, networkAddress: 'restapi-scenario:18080', entryServiceName: /case/resttemplate, entryApplicationInstanceId: 1}
+      - {parentServiceId: 0, parentServiceName: /case/resttemplate, networkAddressId: 0, entryServiceId: 0, refType: CrossProcess, parentSpanId: 4, parentTraceSegmentId: '${resttemplate-scenario[0]}', parentApplicationInstanceId: nq 0, networkAddress: 'restapi-scenario:18080', entryServiceName: /case/resttemplate, entryApplicationInstanceId: nq 0}
 - applicationCode: spring3-scenario
   segmentSize: 1
   segments:
@@ -117,7 +117,7 @@ segmentItems:
       - {key: url, value: 'http://spring3-scenario:8080/spring-projectc/spring3/'}
       - {key: http.method, value: GET}
       refs:
-      - {parentServiceId: 0, parentServiceName: /case/resttemplate, networkAddressId: 0,entryServiceId: 0, refType: CrossProcess, parentSpanId: 5, parentTraceSegmentId: '${resttemplate-scenario[0]}', parentApplicationInstanceId: 1, networkAddress: 'spring3-scenario:8080', entryServiceName: /case/resttemplate, entryApplicationInstanceId: 1}
+      - {parentServiceId: 0, parentServiceName: /case/resttemplate, networkAddressId: 0,entryServiceId: 0, refType: CrossProcess, parentSpanId: 5, parentTraceSegmentId: '${resttemplate-scenario[0]}', parentApplicationInstanceId: nq 0, networkAddress: 'spring3-scenario:8080', entryServiceName: /case/resttemplate, entryApplicationInstanceId: nq 0}
 - applicationCode: resttemplate-scenario
   segmentSize: 1
   segments:
