@@ -2,30 +2,21 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>jetty-scenario</artifactId>
+        <groupId>org.apache.skywalking</groupId>
+        <version>5.0.0</version>
+    </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>org.apache.skywalking</groupId>
     <artifactId>jettyclient-scenario</artifactId>
-    <version>5.0.0</version>
 
-    <name>skywalking-jettyclient-scenario</name>
-
-    <properties>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-
-        <test.framework.version>9.0.0.v20130308</test.framework.version>
-        <docker.image.version>${test.framework.version}</docker.image.version>
-
-        <log4j.version>2.6.2</log4j.version>
-        <spring.version>4.3.8.RELEASE</spring.version>
-        <spring-boot-version>1.5.2.RELEASE</spring-boot-version>
-    </properties>
 
     <dependencies>
         <dependency>
             <groupId>org.eclipse.jetty</groupId>
             <artifactId>jetty-client</artifactId>
-            <version>${test.framework.version}</version>
+            <version>${jettyclient.version}</version>
         </dependency>
 
         <dependency>
@@ -65,28 +56,10 @@
         </dependency>
     </dependencies>
 
-    <profiles>
-        <profile>
-            <id>jettyclient-scenario-9.0.0.v20130308</id>
-            <properties>
-                <test.framework.version>9.0.0.v20130308</test.framework.version>
-            </properties>
-        </profile>
-    </profiles>
 
     <build>
         <finalName>jettyclient-scenario</finalName>
         <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.6.0</version>
-                <configuration>
-                    <source>1.8</source>
-                    <target>1.8</target>
-                    <encoding>${project.build.sourceEncoding}</encoding>
-                </configuration>
-            </plugin>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
