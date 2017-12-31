@@ -1,0 +1,185 @@
+registryItems:
+  applications:
+  - {feign-scenario: nq 0}
+  instances:
+  - {feign-scenario: 1}
+  operationNames:
+  - feign-scenario: [/case/feign, '/update/{id}', '/delete/{id}', '/feign-case/create/', '/feign-case/delete/1', /create/, '/get/{id}', '/feign-case/update/1','/feign-case/get/1']
+segmentItems:
+- applicationCode: feign-scenario
+  segmentSize: 5
+  segments:
+  - segmentId: not null
+    spans:
+    - operationName: /create/
+      operationId: 0
+      parentSpanId: -1
+      spanId: 0
+      spanLayer: Http
+      startTime: nq 0
+      endTime: nq 0
+      componentId: 14
+      componentName: ''
+      isError: false
+      spanType: Entry
+      peer: ''
+      peerId: 0
+      tags:
+      - {key: url, value: 'http://localhost:8080/feign-case/create/'}
+      - {key: http.method, value: POST}
+      refs:
+      - {parentServiceId: 0, parentServiceName: /case/feign, networkAddressId: 0,
+        entryServiceId: 0, refType: CrossProcess, parentSpanId: 1, parentTraceSegmentId: "${feign-scenario[4]}",
+        parentApplicationInstanceId: nq 0, networkAddress: 'localhost:8080', entryServiceName: /case/feign,
+        entryApplicationInstanceId: nq 0}
+  - segmentId: not null
+    spans:
+    - operationName: /get/{id}
+      operationId: 0
+      parentSpanId: -1
+      spanId: 0
+      spanLayer: Http
+      startTime: nq 0
+      endTime: nq 0
+      componentId: 14
+      componentName: ''
+      isError: false
+      spanType: Entry
+      peer: ''
+      peerId: 0
+      tags:
+      - {key: url, value: 'http://localhost:8080/feign-case/get/1'}
+      - {key: http.method, value: GET}
+      refs:
+      - {parentServiceId: 0, parentServiceName: /case/feign, networkAddressId: 0,
+        entryServiceId: 0, refType: CrossProcess, parentSpanId: 2, parentTraceSegmentId: "${feign-scenario[4]}",
+        parentApplicationInstanceId: 1, networkAddress: 'localhost:8080', entryServiceName: /case/feign,
+        entryApplicationInstanceId: 1}
+  - segmentId: not null
+    spans:
+    - operationName: /update/{id}
+      operationId: 0
+      parentSpanId: -1
+      spanId: 0
+      spanLayer: Http
+      startTime: nq 0
+      endTime: nq 0
+      componentId: 14
+      componentName: ''
+      isError: false
+      spanType: Entry
+      peer: ''
+      peerId: 0
+      tags:
+      - {key: url, value: 'http://localhost:8080/feign-case/update/1'}
+      - {key: http.method, value: PUT}
+      refs:
+      - {parentServiceId: 0, parentServiceName: /case/feign, networkAddressId: 0,
+        entryServiceId: 0, refType: CrossProcess, parentSpanId: 3, parentTraceSegmentId: "${feign-scenario[4]}",
+        parentApplicationInstanceId: 1, networkAddress: 'localhost:8080', entryServiceName: /case/feign,
+        entryApplicationInstanceId: 1}
+  - segmentId: not null
+    spans:
+    - operationName: /delete/{id}
+      operationId: 0
+      parentSpanId: -1
+      spanId: 0
+      spanLayer: Http
+      startTime: nq 0
+      endTime: nq 0
+      componentId: 14
+      componentName: ''
+      isError: false
+      spanType: Entry
+      peer: ''
+      peerId: 0
+      tags:
+      - {key: url, value: 'http://localhost:8080/feign-case/delete/1'}
+      - {key: http.method, value: DELETE}
+      refs:
+      - {parentServiceId: 0, parentServiceName: /case/feign, networkAddressId: 0,
+        entryServiceId: 0, refType: CrossProcess, parentSpanId: 4, parentTraceSegmentId: "${feign-scenario[4]}",
+        parentApplicationInstanceId: 1, networkAddress: 'localhost:8080', entryServiceName: /case/feign,
+        entryApplicationInstanceId: 1}
+  - segmentId: not null
+    spans:
+    - operationName: /feign-case/create/
+      operationId: 0
+      parentSpanId: 0
+      spanId: 1
+      spanLayer: Http
+      startTime: nq 0
+      endTime: nq 0
+      componentId: 11
+      componentName: ''
+      isError: false
+      spanType: Exit
+      peer: localhost:8080
+      peerId: 0
+      tags:
+      - {key: http.method, value: POST}
+      - {key: url, value: 'http://localhost:8080/feign-case/create/'}
+    - operationName: /feign-case/get/1
+      operationId: 0
+      parentSpanId: 0
+      spanId: 2
+      spanLayer: Http
+      startTime: nq 0
+      endTime: nq 0
+      componentId: 11
+      componentName: ''
+      isError: false
+      spanType: Exit
+      peer: localhost:8080
+      peerId: 0
+      tags:
+      - {key: http.method, value: GET}
+      - {key: url, value: 'http://localhost:8080/feign-case/get/1'}
+    - operationName: /feign-case/update/1
+      operationId: 0
+      parentSpanId: 0
+      spanId: 3
+      spanLayer: Http
+      startTime: nq 0
+      endTime: nq 0
+      componentId: 11
+      componentName: ''
+      isError: false
+      spanType: Exit
+      peer: localhost:8080
+      peerId: 0
+      tags:
+      - {key: http.method, value: PUT}
+      - {key: url, value: 'http://localhost:8080/feign-case/update/1'}
+    - operationName: /feign-case/delete/1
+      operationId: 0
+      parentSpanId: 0
+      spanId: 4
+      spanLayer: Http
+      startTime: nq 0
+      endTime: nq 0
+      componentId: 11
+      componentName: ''
+      isError: false
+      spanType: Exit
+      peer: localhost:8080
+      peerId: 0
+      tags:
+      - {key: http.method, value: DELETE}
+      - {key: url, value: 'http://localhost:8080/feign-case/delete/1'}
+    - operationName: /case/feign
+      operationId: 0
+      parentSpanId: -1
+      spanId: 0
+      spanLayer: Http
+      startTime: nq 0
+      endTime: nq 0
+      componentId: 14
+      componentName: ''
+      isError: false
+      spanType: Entry
+      peer: ''
+      peerId: 0
+      tags:
+      - {key: url, value: 'http://localhost:{SERVER_OUTPUT_PORT}/feign-case/case/feign'}
+      - {key: http.method, value: GET}
