@@ -1,0 +1,19 @@
+#
+# Test case project define.
+#
+# Note: Test case project must a project that support output service.
+#
+testcase:
+  #
+  # The request url of current test cases.
+  #
+  request_url: http://localhost:{SERVER_OUTPUT_PORT}/struts2-scenario/struts2/case.action
+  #
+  # The framework name that need tested.
+  #
+  test_framework: Struts2
+  #
+  # The framework version list of current test case supported
+  #
+  support_versions:
+    - 2.3.1.2
