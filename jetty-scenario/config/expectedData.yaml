@@ -67,5 +67,5 @@ segmentItems:
       peer: null
       peerId: 0
       tags:
-      - {key: url, value: 'http://localhost:18080/jettyclient-case/case/jettyclient-case'}
+      - {key: url, value: 'http://localhost:{SERVER_OUTPUT_PORT}/jettyclient-case/case/jettyclient-case'}
       - {key: http.method, value: GET}
