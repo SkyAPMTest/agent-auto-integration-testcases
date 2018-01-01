@@ -258,7 +258,7 @@ deployTestCase(){
 	
 	echo "start docker container"
 	docker-compose -f $CASE_DIR/docker-compose.yml up -d
-	sleep 40
+	sleep 60
 
 	CASE_REQUEST_URL=$(grep "case.request_url" $CASE_DIR/testcase.desc | awk -F '=' '{print $2}')
 	echo $CASE_REQUEST_URL
