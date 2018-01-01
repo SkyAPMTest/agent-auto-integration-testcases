@@ -1,0 +1,68 @@
+registryItems:
+  applications:
+  - {motan-provider: nq 0 }
+  - {motan-consumer: nq 0 }
+  instances:
+  - {motan-provider: 1}
+  - {motan-consumer: 1}
+  operationNames:
+  - motan-provider: [org.apache.skywaking.apm.testcase.motan.interfaces.BusinessService.hello(java.lang.String)]
+  - motan-consumer: [/motan-consumer/case/motan-case, org.apache.skywaking.apm.testcase.motan.interfaces.BusinessService.hello(java.lang.String)]
+  heartbeat: []
+segmentItems:
+- applicationCode: motan-provider
+  segmentSize: 1
+  segments:
+  - segmentId: not null
+    spans:
+    - operationName: org.apache.skywaking.apm.testcase.motan.interfaces.BusinessService.hello(java.lang.String)
+      operationId: 0
+      parentSpanId: -1
+      spanId: 0
+      spanLayer: RPCFramework
+      startTime: nq 0
+      endTime: nq 0
+      componentId: 8
+      componentName: ''
+      isError: false
+      spanType: Entry
+      peer: ''
+      peerId: 0
+      refs:
+      - {parentServiceId: 0, parentServiceName: /motan-consumer/case/motan-case, networkAddressId: 0, entryServiceId: 0, refType: CrossProcess, parentSpanId: 1, parentTraceSegmentId: '${motan-consumer[0]}', parentApplicationInstanceId: nq 0, networkAddress: not null, entryServiceName: /motan-consumer/case/motan-case, entryApplicationInstanceId: nq 0}
+- applicationCode: motan-consumer
+  segmentSize: 1
+  segments:
+  - segmentId: not null
+    spans:
+    - operationName: org.apache.skywaking.apm.testcase.motan.interfaces.BusinessService.hello(java.lang.String)
+      operationId: 0
+      parentSpanId: 0
+      spanId: 1
+      spanLayer: RPCFramework
+      startTime: nq 0
+      endTime: nq 0
+      componentId: 8
+      componentName: ''
+      isError: false
+      spanType: Exit
+      peer: not null
+      peerId: 0
+      tags:
+      - {key: url, value: not null}
+    - operationName: /motan-consumer/case/motan-case
+      operationId: 0
+      parentSpanId: -1
+      spanId: 0
+      spanLayer: Http
+      startTime: nq 0
+      endTime: nq 0
+      componentId: 1
+      componentName: ''
+      isError: false
+      spanType: Entry
+      peer: ''
+      peerId: 0
+      tags:
+      - {key: url, value: 'http://localhost:18080/motan-consumer/case/motan-case'}
+      - {key: http.method, value: GET}
