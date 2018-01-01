@@ -11,7 +11,7 @@ testcase:
   #
   # The framework name that need tested.
   #
-  test_framework: RestTemplate
+  test_framework: Spring-RestTemplate_Spring-Annotation_Spring-RestAnnotation
   #
   # The framework version list of current test case supported
   #
