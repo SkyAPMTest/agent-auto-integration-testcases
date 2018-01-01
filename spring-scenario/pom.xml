@@ -23,7 +23,7 @@
         <resttemplate.version>4.3.8.RELEASE</resttemplate.version>
         <spring3.version>3.1.1.RELEASE</spring3.version>
         <spring4.version>4.3.8.RELEASE</spring4.version>
-        <docker.image.version>4.3.8-3.1.1-4.3.8</docker.image.version>
+        <docker.image.version>Spring-RestTemplate-4.3.8_Spring-Annotation-3.1.1_Spring-RestAnnotation-4.3.8</docker.image.version>
 
         <spring-boot-version>1.5.2.RELEASE</spring-boot-version>
     </properties>
@@ -39,12 +39,12 @@
 
     <profiles>
         <profile>
-            <id>spring-scenario-4.3.8-3.1.1-4.3.8</id>
+            <id>spring-scenario-Spring-RestTemplate-4.3.8_Spring-Annotation-3.1.1_Spring-RestAnnotation-4.3.8</id>
             <properties>
                 <resttemplate.version>4.3.8.RELEASE</resttemplate.version>
                 <spring3.version>3.1.1.RELEASE</spring3.version>
                 <spring4.version>4.3.8.RELEASE</spring4.version>
-                <docker.image.version>4.3.8-3.1.1-4.3.8</docker.image.version>
+                <docker.image.version>Spring-RestTemplate-4.3.8_Spring-Annotation-3.1.1_Spring-RestAnnotation-4.3.8</docker.image.version>
             </properties>
         </profile>
     </profiles>

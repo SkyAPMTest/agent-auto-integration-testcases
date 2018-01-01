@@ -72,6 +72,60 @@
                 <test.framework.version>3.3.0</test.framework.version>
             </properties>
         </profile>
+        <profile>
+            <id>mongodb-3.x-scenario-3.4.0</id>
+            <properties>
+                <test.framework.version>3.4.0</test.framework.version>
+            </properties>
+        </profile>
+        <profile>
+            <id>mongodb-3.x-scenario-3.4.1</id>
+            <properties>
+                <test.framework.version>3.4.1</test.framework.version>
+            </properties>
+        </profile>
+        <profile>
+            <id>mongodb-3.x-scenario-3.4.0</id>
+            <properties>
+                <test.framework.version>3.3.0</test.framework.version>
+            </properties>
+        </profile>
+        <profile>
+            <id>mongodb-3.x-scenario-3.3.0</id>
+            <properties>
+                <test.framework.version>3.3.0</test.framework.version>
+            </properties>
+        </profile>
+        <profile>
+            <id>mongodb-3.x-scenario-3.3.0</id>
+            <properties>
+                <test.framework.version>3.3.0</test.framework.version>
+            </properties>
+        </profile>
+        <profile>
+            <id>mongodb-3.x-scenario-3.3.0</id>
+            <properties>
+                <test.framework.version>3.3.0</test.framework.version>
+            </properties>
+        </profile>
+        <profile>
+            <id>mongodb-3.x-scenario-3.3.0</id>
+            <properties>
+                <test.framework.version>3.3.0</test.framework.version>
+            </properties>
+        </profile>
+        <profile>
+            <id>mongodb-3.x-scenario-3.3.0</id>
+            <properties>
+                <test.framework.version>3.3.0</test.framework.version>
+            </properties>
+        </profile>
+        <profile>
+            <id>mongodb-3.x-scenario-3.3.0</id>
+            <properties>
+                <test.framework.version>3.3.0</test.framework.version>
+            </properties>
+        </profile>
     </profiles>
 
     <build>
