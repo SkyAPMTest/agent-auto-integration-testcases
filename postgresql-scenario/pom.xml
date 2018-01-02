@@ -11,13 +11,13 @@
     <name>skywalking-postgresql-scenario</name>
 
     <properties>
-        <test.framework.version>9.0-801.jdbc4</test.framework.version>
+        <test.framework.version>9.2-1002-jdbc4</test.framework.version>
         <docker.image.version>${test.framework.version}</docker.image.version>
     </properties>
 
     <dependencies>
         <dependency>
-            <groupId>postgresql</groupId>
+            <groupId>org.postgresql</groupId>
             <artifactId>postgresql</artifactId>
             <version>${test.framework.version}</version>
         </dependency>
