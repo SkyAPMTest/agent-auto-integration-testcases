@@ -357,4 +357,11 @@ fi
 #
 # clear unused images
 #
-docker images | grep '<none>' | awk '{print $3}' | xargs docker rmi -f
+(docker images | grep '<none>' | awk '{print $3}' | xargs docker rmi -f) > /dev/null
+(docker images | grep skywalking | grep -v 'skywalking/skywalking-mock-collector' | awk '{print $3}' | xargs docker rmi -f) > /dev/null
+echo "clear images Done!"
+#
+#
+#
+echo "Build successfully!"
+
