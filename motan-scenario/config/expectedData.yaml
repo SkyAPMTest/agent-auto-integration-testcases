@@ -64,5 +64,5 @@ segmentItems:
       peer: ''
       peerId: 0
       tags:
-      - {key: url, value: 'http://localhost:18080/motan-consumer/case/motan-case'}
+      - {key: url, value: 'http://localhost:{SERVER_OUTPUT_PORT}/motan-consumer/case/motan-case'}
       - {key: http.method, value: GET}
