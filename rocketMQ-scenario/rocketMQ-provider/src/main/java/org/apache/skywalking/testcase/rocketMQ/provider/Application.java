@@ -1,14 +1,15 @@
-package org.apache.skywalking.apm.testcase.resttemplate;
+package org.apache.skywalking.testcase.rocketMQ.provider;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.web.support.SpringBootServletInitializer;
 import org.springframework.context.annotation.ComponentScan;
 
 @EnableAutoConfiguration
 @SpringBootApplication
-@ComponentScan("org.apache.skywalking.apm.testcase.resttemplate")
-public class Application {
+@ComponentScan("org.apache.skywalking.testcase.rocketMQ")
+public class Application extends SpringBootServletInitializer {
 
     public static void main(String[] args) {
         try {

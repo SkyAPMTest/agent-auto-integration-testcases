@@ -13,7 +13,7 @@ services:
     links:
       - mock-collector
     volumes:
-     - {AGENT_FILE_PATH}:/usr/local/spring-scenario/agent
+     - {AGENT_FILE_PATH}:/usr/local/tomcat/agent
     depends_on:
       mock-collector:
         condition: service_healthy

@@ -66,7 +66,7 @@ public class RestCaseController {
 
     @DeleteMapping(value = "/delete/{id}")
     @ResponseBody
-    public ResponseEntity<User> deleteUser(@PathVariable("id") int id) throws InterruptedException {
+    public ResponseEntity<Void> deleteUser(@PathVariable("id") int id) throws InterruptedException {
         User currentUser = users.get(id);
         if (currentUser == null) {
             return ResponseEntity.noContent().build();
