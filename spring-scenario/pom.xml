@@ -20,9 +20,9 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <log4j.version>2.6.2</log4j.version>
 
-        <resttemplate.version>3.2.10.RELEASE</resttemplate.version>
-        <spring3.version>3.2.10.RELEASE</spring3.version>
-        <spring4.version>4.3.3.RELEASE</spring4.version>
+        <resttemplate.version>4.0.1.RELEASE</resttemplate.version>
+        <spring3.version>4.0.1.RELEASE</spring3.version>
+        <spring4.version>5.0.1.RELEASE</spring4.version>
         <docker.image.version>Spring-RestTemplate-3.2.10_Annotation-3.2.10_RestAnnotation-4.3.3
         </docker.image.version>
 
