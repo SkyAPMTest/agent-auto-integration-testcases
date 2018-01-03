@@ -85,45 +85,33 @@
             </properties>
         </profile>
         <profile>
-            <id>mongodb-3.x-scenario-3.4.0</id>
+            <id>mongodb-3.x-scenario-3.4.2</id>
             <properties>
-                <test.framework.version>3.3.0</test.framework.version>
+                <test.framework.version>3.4.2</test.framework.version>
             </properties>
         </profile>
         <profile>
-            <id>mongodb-3.x-scenario-3.3.0</id>
+            <id>mongodb-3.x-scenario-3.4.3</id>
             <properties>
-                <test.framework.version>3.3.0</test.framework.version>
+                <test.framework.version>3.4.3</test.framework.version>
             </properties>
         </profile>
         <profile>
-            <id>mongodb-3.x-scenario-3.3.0</id>
+            <id>mongodb-3.x-scenario-3.5.0</id>
             <properties>
-                <test.framework.version>3.3.0</test.framework.version>
+                <test.framework.version>3.5.0</test.framework.version>
             </properties>
         </profile>
         <profile>
-            <id>mongodb-3.x-scenario-3.3.0</id>
+            <id>mongodb-3.x-scenario-3.6.0</id>
             <properties>
-                <test.framework.version>3.3.0</test.framework.version>
+                <test.framework.version>3.6.0</test.framework.version>
             </properties>
         </profile>
         <profile>
-            <id>mongodb-3.x-scenario-3.3.0</id>
+            <id>mongodb-3.x-scenario-3.6.1</id>
             <properties>
-                <test.framework.version>3.3.0</test.framework.version>
-            </properties>
-        </profile>
-        <profile>
-            <id>mongodb-3.x-scenario-3.3.0</id>
-            <properties>
-                <test.framework.version>3.3.0</test.framework.version>
-            </properties>
-        </profile>
-        <profile>
-            <id>mongodb-3.x-scenario-3.3.0</id>
-            <properties>
-                <test.framework.version>3.3.0</test.framework.version>
+                <test.framework.version>3.6.1</test.framework.version>
             </properties>
         </profile>
     </profiles>
