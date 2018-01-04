@@ -22,14 +22,14 @@ public class CaseServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         // Create user
-        HttpEntity<User> userEntity = new HttpEntity<>(new User(1, "a"));
+        HttpEntity<User> userEntity = new HttpEntity<User>(new User(1, "a"));
         new RestTemplate().postForEntity(Config.projectBURL() + "/create/", userEntity, Void.class);
 
         // Find User
         new RestTemplate().getForEntity(Config.projectBURL() + "/get/{id}", User.class, 1);
 
         //Modify user
-        HttpEntity<User> updateUserEntity = new HttpEntity<>(new User(1, "b"));
+        HttpEntity<User> updateUserEntity = new HttpEntity<User>(new User(1, "b"));
         new RestTemplate().put(Config.projectBURL() + "/update/{id}", updateUserEntity, userEntity.getBody().getId(), 1);
 
         //Delete user

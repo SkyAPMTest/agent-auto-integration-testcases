@@ -31,10 +31,10 @@ segmentItems:
       peer: ''
       peerId: 0
       tags:
-      - {key: url, value: 'http://restapi-scenario:18080/restapi-case/create/'}
+      - {key: url, value: 'http://restapi-scenario:8080/restapi-case/create/'}
       - {key: http.method, value: POST}
       refs:
-      - {parentServiceId: 0, parentServiceName: /resttemplate-case/case/resttemplate, networkAddressId: 0, entryServiceId: 0, refType: CrossProcess, parentSpanId: 1, parentTraceSegmentId: '${resttemplate-scenario[0]}', parentApplicationInstanceId: nq 0, networkAddress: 'restapi-scenario:18080', entryServiceName: /resttemplate-case/case/resttemplate, entryApplicationInstanceId: nq 0}
+      - {parentServiceId: 0, parentServiceName: /resttemplate-case/case/resttemplate, networkAddressId: 0, entryServiceId: 0, refType: CrossProcess, parentSpanId: 1, parentTraceSegmentId: '${resttemplate-scenario[0]}', parentApplicationInstanceId: nq 0, networkAddress: 'restapi-scenario:8080', entryServiceName: /resttemplate-case/case/resttemplate, entryApplicationInstanceId: nq 0}
   - segmentId: not null
     spans:
     - operationName: /get/{id}
@@ -51,10 +51,10 @@ segmentItems:
       peer: ''
       peerId: 0
       tags:
-      - {key: url, value: 'http://restapi-scenario:18080/restapi-case/get/1'}
+      - {key: url, value: 'http://restapi-scenario:8080/restapi-case/get/1'}
       - {key: http.method, value: GET}
       refs:
-      - {parentServiceId: 0, parentServiceName: /resttemplate-case/case/resttemplate, networkAddressId: 0, entryServiceId: 0, refType: CrossProcess, parentSpanId: 2, parentTraceSegmentId: '${resttemplate-scenario[0]}', parentApplicationInstanceId: nq 0, networkAddress: 'restapi-scenario:18080', entryServiceName: /resttemplate-case/case/resttemplate, entryApplicationInstanceId: nq 0}
+      - {parentServiceId: 0, parentServiceName: /resttemplate-case/case/resttemplate, networkAddressId: 0, entryServiceId: 0, refType: CrossProcess, parentSpanId: 2, parentTraceSegmentId: '${resttemplate-scenario[0]}', parentApplicationInstanceId: nq 0, networkAddress: 'restapi-scenario:8080', entryServiceName: /resttemplate-case/case/resttemplate, entryApplicationInstanceId: nq 0}
   - segmentId: not null
     spans:
     - operationName: /update/{id}
@@ -71,10 +71,10 @@ segmentItems:
       peer: ''
       peerId: 0
       tags:
-      - {key: url, value: 'http://restapi-scenario:18080/restapi-case/update/1'}
+      - {key: url, value: 'http://restapi-scenario:8080/restapi-case/update/1'}
       - {key: http.method, value: PUT}
       refs:
-      - {parentServiceId: 0, parentServiceName: /resttemplate-case/case/resttemplate, networkAddressId: 0, entryServiceId: 0, refType: CrossProcess, parentSpanId: 3, parentTraceSegmentId: '${resttemplate-scenario[0]}', parentApplicationInstanceId: nq 0, networkAddress: 'restapi-scenario:18080', entryServiceName: /resttemplate-case/case/resttemplate, entryApplicationInstanceId: nq 0}
+      - {parentServiceId: 0, parentServiceName: /resttemplate-case/case/resttemplate, networkAddressId: 0, entryServiceId: 0, refType: CrossProcess, parentSpanId: 3, parentTraceSegmentId: '${resttemplate-scenario[0]}', parentApplicationInstanceId: nq 0, networkAddress: 'restapi-scenario:8080', entryServiceName: /resttemplate-case/case/resttemplate, entryApplicationInstanceId: nq 0}
   - segmentId: not null
     spans:
     - operationName: /delete/{id}
@@ -91,10 +91,10 @@ segmentItems:
       peer: ''
       peerId: 0
       tags:
-      - {key: url, value: 'http://restapi-scenario:18080/restapi-case/delete/1'}
+      - {key: url, value: 'http://restapi-scenario:8080/restapi-case/delete/1'}
       - {key: http.method, value: DELETE}
       refs:
-      - {parentServiceId: 0, parentServiceName: /resttemplate-case/case/resttemplate, networkAddressId: 0, entryServiceId: 0, refType: CrossProcess, parentSpanId: 4, parentTraceSegmentId: '${resttemplate-scenario[0]}', parentApplicationInstanceId: nq 0, networkAddress: 'restapi-scenario:18080', entryServiceName: /resttemplate-case/case/resttemplate, entryApplicationInstanceId: nq 0}
+      - {parentServiceId: 0, parentServiceName: /resttemplate-case/case/resttemplate, networkAddressId: 0, entryServiceId: 0, refType: CrossProcess, parentSpanId: 4, parentTraceSegmentId: '${resttemplate-scenario[0]}', parentApplicationInstanceId: nq 0, networkAddress: 'restapi-scenario:8080', entryServiceName: /resttemplate-case/case/resttemplate, entryApplicationInstanceId: nq 0}
 - applicationCode: spring3-scenario
   segmentSize: 1
   segments:
@@ -134,10 +134,10 @@ segmentItems:
       componentName: ''
       isError: false
       spanType: Exit
-      peer: restapi-scenario:18080
+      peer: restapi-scenario:8080
       peerId: 0
       tags:
-      - {key: url, value: 'http://restapi-scenario:18080/restapi-case/create/'}
+      - {key: url, value: 'http://restapi-scenario:8080/restapi-case/create/'}
       - {key: http.method, value: POST}
     - operationName: /restapi-case/get/1
       operationId: 0
@@ -150,10 +150,10 @@ segmentItems:
       componentName: ''
       isError: false
       spanType: Exit
-      peer: restapi-scenario:18080
+      peer: restapi-scenario:8080
       peerId: 0
       tags:
-      - {key: url, value: 'http://restapi-scenario:18080/restapi-case/get/1'}
+      - {key: url, value: 'http://restapi-scenario:8080/restapi-case/get/1'}
       - {key: http.method, value: GET}
     - operationName: /restapi-case/update/1
       operationId: 0
@@ -166,10 +166,10 @@ segmentItems:
       componentName: ''
       isError: false
       spanType: Exit
-      peer: restapi-scenario:18080
+      peer: restapi-scenario:8080
       peerId: 0
       tags:
-      - {key: url, value: 'http://restapi-scenario:18080/restapi-case/update/1'}
+      - {key: url, value: 'http://restapi-scenario:8080/restapi-case/update/1'}
       - {key: http.method, value: PUT}
     - operationName: /restapi-case/delete/1
       operationId: 0
@@ -182,10 +182,10 @@ segmentItems:
       componentName: ''
       isError: false
       spanType: Exit
-      peer: restapi-scenario:18080
+      peer: restapi-scenario:8080
       peerId: 0
       tags:
-      - {key: url, value: 'http://restapi-scenario:18080/restapi-case/delete/1'}
+      - {key: url, value: 'http://restapi-scenario:8080/restapi-case/delete/1'}
       - {key: http.method, value: DELETE}
     - operationName: /spring-projectc/spring3/
       operationId: 0

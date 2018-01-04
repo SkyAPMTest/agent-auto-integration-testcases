@@ -22,7 +22,7 @@
 
         <resttemplate.version>4.0.1.RELEASE</resttemplate.version>
         <spring3.version>4.0.1.RELEASE</spring3.version>
-        <spring4.version>5.0.1.RELEASE</spring4.version>
+        <spring4.version>4.3.0.RELEASE</spring4.version>
         <docker.image.version>Spring-RestTemplate-3.2.10_Annotation-3.2.10_RestAnnotation-4.3.3
         </docker.image.version>
 
@@ -839,8 +839,8 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.6.0</version>
                 <configuration>
-                    <source>1.8</source>
-                    <target>1.8</target>
+                    <source>1.6</source>
+                    <target>1.6</target>
                     <encoding>${project.build.sourceEncoding}</encoding>
                 </configuration>
             </plugin>

@@ -37,7 +37,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 @RestController
 public class RestCaseController {
 
-    private static final Map<Integer, User> users = new ConcurrentHashMap<>();
+    private static final Map<Integer, User> users = new ConcurrentHashMap<Integer, User>();
 
     @GetMapping(value = "/get/{id}")
     @ResponseBody

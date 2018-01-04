@@ -1,16 +1,13 @@
-FROM openjdk:8-jdk
+FROM tomcat:8.0.45-jre8-alpine
 
 ENV COLLECTOR_SERVER=127.0.0.1:12800
 
-ADD startup.sh /usr/local/spring-restapi-scenario/
-ADD spring-projectB.jar /usr/local/spring-restapi-scenario/
+COPY catalina.sh /usr/local/tomcat/bin/
+ADD restapi-case /usr/local/tomcat/webapps/restapi-case
 
 ADD docker-entrypoint.sh /
-RUN chmod +x /usr/local/spring-restapi-scenario/startup.sh && chmod +x /docker-entrypoint.sh
+RUN chmod +x /usr/local/tomcat/bin/catalina.sh && chmod +x /docker-entrypoint.sh
 
-EXPOSE 5005
-EXPOSE 8080
-
-VOLUME /usr/local/spring-restapi-scenario/agent
+VOLUME /usr/local/tomcat/agent
 ENTRYPOINT ["/docker-entrypoint.sh"]
-CMD ["/usr/local/spring-restapi-scenario/startup.sh"]
+CMD ["catalina.sh", "run"]
