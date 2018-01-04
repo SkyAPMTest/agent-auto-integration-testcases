@@ -7,7 +7,7 @@ registryItems:
   - postgresql-scenario: [/postgresql-scenario/case/postgres]
 segmentItems:
 - applicationCode: postgresql-scenario
-  segmentSize: 1
+  segmentSize: ge 1
   segments:
     - segmentId: not null
       spans:
