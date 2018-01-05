@@ -20,10 +20,10 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <log4j.version>2.6.2</log4j.version>
 
-        <resttemplate.version>5.0.2.RELEASE</resttemplate.version>
-        <spring3.version>5.0.2.RELEASE</spring3.version>
-        <spring4.version>5.0.0.RELEASE</spring4.version>
-        <docker.image.version>Spring-RestTemplate-5.0.2_Annotation-5.0.2_RestAnnotation-5.0.0
+        <resttemplate.version>3.1.2.RELEASE</resttemplate.version>
+        <spring3.version>3.1.2.RELEASE</spring3.version>
+        <spring4.version>4.3.0.RELEASE</spring4.version>
+        <docker.image.version>Spring-RestTemplate-3.1.2_Annotation-3.1.2_RestAnnotation-4.3.0
         </docker.image.version>
 
         <spring-boot-version>1.5.2.RELEASE</spring-boot-version>
@@ -730,82 +730,82 @@
             </properties>
         </profile>
         <profile>
-            <id>spring-scenario-Spring-RestTemplate-3.0.7_Annotation-3.0.7_RestAnnotation-4.3.0</id>
+            <id>spring-scenario-Spring-RestTemplate-3.1.7_Annotation-3.0.7_RestAnnotation-4.3.0</id>
             <properties>
-                <resttemplate.version>3.0.7.RELEASE</resttemplate.version>
+                <resttemplate.version>3.1.7.RELEASE</resttemplate.version>
                 <spring3.version>3.0.7.RELEASE</spring3.version>
                 <spring4.version>4.3.0.RELEASE</spring4.version>
-                <docker.image.version>Spring-RestTemplate-3.0.7_Annotation-3.0.7_RestAnnotation-4.3.0
+                <docker.image.version>Spring-RestTemplate-3.1.7_Annotation-3.0.7_RestAnnotation-4.3.0
                 </docker.image.version>
             </properties>
         </profile>
         <profile>
-            <id>spring-scenario-Spring-RestTemplate-3.0.6_Annotation-3.0.6_RestAnnotation-4.3.0</id>
+            <id>spring-scenario-Spring-RestTemplate-3.1.6_Annotation-3.0.6_RestAnnotation-4.3.0</id>
             <properties>
-                <resttemplate.version>3.0.6.RELEASE</resttemplate.version>
+                <resttemplate.version>3.1.6.RELEASE</resttemplate.version>
                 <spring3.version>3.0.6.RELEASE</spring3.version>
                 <spring4.version>4.3.0.RELEASE</spring4.version>
-                <docker.image.version>Spring-RestTemplate-3.0.6_Annotation-3.0.6_RestAnnotation-4.3.0
+                <docker.image.version>Spring-RestTemplate-3.1.6_Annotation-3.0.6_RestAnnotation-4.3.0
                 </docker.image.version>
             </properties>
         </profile>
         <profile>
-            <id>spring-scenario-Spring-RestTemplate-3.0.5_Annotation-3.0.5_RestAnnotation-4.3.0</id>
+            <id>spring-scenario-Spring-RestTemplate-3.1.5_Annotation-3.0.5_RestAnnotation-4.3.0</id>
             <properties>
-                <resttemplate.version>3.0.5.RELEASE</resttemplate.version>
+                <resttemplate.version>3.1.5.RELEASE</resttemplate.version>
                 <spring3.version>3.0.5.RELEASE</spring3.version>
                 <spring4.version>4.3.0.RELEASE</spring4.version>
-                <docker.image.version>Spring-RestTemplate-3.0.5_Annotation-3.0.5_RestAnnotation-4.3.0
+                <docker.image.version>Spring-RestTemplate-3.1.5_Annotation-3.0.5_RestAnnotation-4.3.0
                 </docker.image.version>
             </properties>
         </profile>
         <profile>
-            <id>spring-scenario-Spring-RestTemplate-3.0.4_Annotation-3.0.4_RestAnnotation-4.3.0</id>
+            <id>spring-scenario-Spring-RestTemplate-3.1.4_Annotation-3.0.4_RestAnnotation-4.3.0</id>
             <properties>
-                <resttemplate.version>3.0.4.RELEASE</resttemplate.version>
+                <resttemplate.version>3.1.4.RELEASE</resttemplate.version>
                 <spring3.version>3.0.4.RELEASE</spring3.version>
                 <spring4.version>4.3.0.RELEASE</spring4.version>
-                <docker.image.version>Spring-RestTemplate-3.0.4_Annotation-3.0.4_RestAnnotation-4.3.0
+                <docker.image.version>Spring-RestTemplate-3.1.4_Annotation-3.0.4_RestAnnotation-4.3.0
                 </docker.image.version>
             </properties>
         </profile>
         <profile>
-            <id>spring-scenario-Spring-RestTemplate-3.0.3_Annotation-3.0.3_RestAnnotation-4.3.0</id>
+            <id>spring-scenario-Spring-RestTemplate-3.1.3_Annotation-3.0.3_RestAnnotation-4.3.0</id>
             <properties>
-                <resttemplate.version>3.0.3.RELEASE</resttemplate.version>
+                <resttemplate.version>3.1.3.RELEASE</resttemplate.version>
                 <spring3.version>3.0.3.RELEASE</spring3.version>
                 <spring4.version>4.3.0.RELEASE</spring4.version>
-                <docker.image.version>Spring-RestTemplate-3.0.3_Annotation-3.0.3_RestAnnotation-4.3.0
+                <docker.image.version>Spring-RestTemplate-3.1.3_Annotation-3.0.3_RestAnnotation-4.3.0
                 </docker.image.version>
             </properties>
         </profile>
         <profile>
-            <id>spring-scenario-Spring-RestTemplate-3.0.2_Annotation-3.0.2_RestAnnotation-4.3.0</id>
+            <id>spring-scenario-Spring-RestTemplate-3.1.2_Annotation-3.0.2_RestAnnotation-4.3.0</id>
             <properties>
-                <resttemplate.version>3.0.2.RELEASE</resttemplate.version>
+                <resttemplate.version>3.1.2.RELEASE</resttemplate.version>
                 <spring3.version>3.0.2.RELEASE</spring3.version>
                 <spring4.version>4.3.0.RELEASE</spring4.version>
-                <docker.image.version>Spring-RestTemplate-3.0.2_Annotation-3.0.2_RestAnnotation-4.3.0
+                <docker.image.version>Spring-RestTemplate-3.1.2_Annotation-3.0.2_RestAnnotation-4.3.0
                 </docker.image.version>
             </properties>
         </profile>
         <profile>
-            <id>spring-scenario-Spring-RestTemplate-3.0.1_Annotation-3.0.1_RestAnnotation-4.3.0</id>
+            <id>spring-scenario-Spring-RestTemplate-3.1.2_Annotation-3.0.1_RestAnnotation-4.3.0</id>
             <properties>
-                <resttemplate.version>3.0.1.RELEASE</resttemplate.version>
+                <resttemplate.version>3.1.2.RELEASE</resttemplate.version>
                 <spring3.version>3.0.1.RELEASE</spring3.version>
                 <spring4.version>4.3.0.RELEASE</spring4.version>
-                <docker.image.version>Spring-RestTemplate-3.0.1_Annotation-3.0.1_RestAnnotation-4.3.0
+                <docker.image.version>Spring-RestTemplate-3.1.2_Annotation-3.0.1_RestAnnotation-4.3.0
                 </docker.image.version>
             </properties>
         </profile>
         <profile>
-            <id>spring-scenario-Spring-RestTemplate-3.0.0_Annotation-3.0.0_RestAnnotation-4.3.0</id>
+            <id>spring-scenario-Spring-RestTemplate-3.1.2_Annotation-3.0.0_RestAnnotation-4.3.0</id>
             <properties>
-                <resttemplate.version>3.0.0.RELEASE</resttemplate.version>
+                <resttemplate.version>3.1.2.RELEASE</resttemplate.version>
                 <spring3.version>3.0.0.RELEASE</spring3.version>
                 <spring4.version>4.3.0.RELEASE</spring4.version>
-                <docker.image.version>Spring-RestTemplate-3.0.0_Annotation-3.0.0_RestAnnotation-4.3.0
+                <docker.image.version>Spring-RestTemplate-3.1.2_Annotation-3.0.0_RestAnnotation-4.3.0
                 </docker.image.version>
             </properties>
         </profile>

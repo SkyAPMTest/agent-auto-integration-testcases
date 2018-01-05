@@ -85,14 +85,13 @@ testcase:
     - Spring-RestTemplate-3.1.2_Annotation-3.1.2_RestAnnotation-4.3.0
     - Spring-RestTemplate-3.1.1_Annotation-3.1.1_RestAnnotation-4.3.0
     - Spring-RestTemplate-3.1.0_Annotation-3.1.0_RestAnnotation-4.3.0
-    - Spring-RestTemplate-3.0.7_Annotation-3.0.7_RestAnnotation-4.3.0
-    - Spring-RestTemplate-3.0.6_Annotation-3.0.6_RestAnnotation-4.3.0
-    - Spring-RestTemplate-3.0.5_Annotation-3.0.5_RestAnnotation-4.3.0
-    - Spring-RestTemplate-3.0.4_Annotation-3.0.4_RestAnnotation-4.3.0
-    - Spring-RestTemplate-3.0.3_Annotation-3.0.3_RestAnnotation-4.3.0
-    - Spring-RestTemplate-3.0.2_Annotation-3.0.2_RestAnnotation-4.3.0
-    - Spring-RestTemplate-3.0.1_Annotation-3.0.1_RestAnnotation-4.3.0
-    - Spring-RestTemplate-3.0.0_Annotation-3.0.0_RestAnnotation-4.3.0
+    - Spring-RestTemplate-3.1.7_Annotation-3.0.7_RestAnnotation-4.3.0
+    - Spring-RestTemplate-3.1.6_Annotation-3.0.6_RestAnnotation-4.3.0
+    - Spring-RestTemplate-3.1.5_Annotation-3.0.5_RestAnnotation-4.3.0
+    - Spring-RestTemplate-3.1.4_Annotation-3.0.4_RestAnnotation-4.3.0
+    - Spring-RestTemplate-3.1.3_Annotation-3.0.3_RestAnnotation-4.3.0
+    - Spring-RestTemplate-3.1.2_Annotation-3.0.2_RestAnnotation-4.3.0
+    - Spring-RestTemplate-3.1.2_Annotation-3.0.1_RestAnnotation-4.3.0
+    - Spring-RestTemplate-3.1.2_Annotation-3.0.0_RestAnnotation-4.3.0
     - Spring-RestTemplate-4.0.0_Annotation-4.0.0_RestAnnotation-4.3.0
-    - Spring-RestTemplate-4.0.0_Annotation-4.0.0_RestAnnotation-5.0.2
     - Spring-RestTemplate-4.0.0_Annotation-4.0.0_RestAnnotation-5.0.2
