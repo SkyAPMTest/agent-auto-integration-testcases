@@ -7,7 +7,8 @@ Usage(){
 	echo -e "    -civ | --collector-image-version version \t\t Set mock collector image. "
 	echo -e "    -b | --branch branch \t\t The branch name of Skywalking. "
 	echo -e "    -r | --repo repo \t\t The repo of Skywalking. "
-	echo -e "	 -tcb | --testcase-branch branchName ".
+	echo -e "	 -tcb | --testcase-branch branchName "
+	echo -e "    		--reportFileMode CONVERAGE | NONE"
 }
 
 PRG="$0"
@@ -22,6 +23,7 @@ MOCK_COLLECTOR_IMAGE_VERSION="3.2.6-2017"
 AGENT_BRANCH_NAME="master"
 AGENT_GIT_URL="https://github.com/apache/incubator-skywalking.git"
 TESTCASE_BRANCH="master"
+REPORT_FILE_MODE="NONE"
 #
 # Parse the input parameters
 #
@@ -47,6 +49,10 @@ while [[ $# -gt 0 ]]; do
 			TESTCASE_BRANCH=$2
 			shift 2
 			;;
+		--reportFileMode )
+			REPORT_FILE_MODE=$2
+			shift 2
+			;;	
 		* )
 			shift
 			break
@@ -56,5 +62,5 @@ done
 
 ${AGENT_TEST_HOME}/.autotest/autotest-deploy.sh --project "${TEST_PROJECT_NAME}" --collector-image-version "$MOCK_COLLECTOR_IMAGE_VERSION"
 
-${AGENT_TEST_HOME}/.autotest/agent-test.sh --max-running-size 10 --branch "$AGENT_BRANCH_NAME" -r "$AGENT_GIT_URL" --reportFileMode CONVERAGE --testcase-branch "$TESTCASE_BRANCH"
+${AGENT_TEST_HOME}/.autotest/agent-test.sh --max-running-size 10 --branch "$AGENT_BRANCH_NAME" -r "$AGENT_GIT_URL" --reportFileMode ${REPORT_FILE_MODE} --testcase-branch "$TESTCASE_BRANCH"
 

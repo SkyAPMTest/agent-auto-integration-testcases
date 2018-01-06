@@ -364,7 +364,7 @@ if [ "$SKIP_REPORT" = "false" ]; then
 	echo "push report...."
 	cd $REPORT_DIR
 	git add $REPORT_DIR/README.md
-	git add $REPORT_DIR/${AGENT_GIT_BRANCH}/report-${TEST_TIME}.md
+	git add $REPORT_DIR/${TEST_TIME_YEAR}/${TEST_TIME_MONTH}/${COMMITTER}/testReport-${TEST_CASES_BRANCH}-${TEST_TIME}.md 
 	git commit -m "push report report-${TEST_TIME}.md" .
 
 	if [ ! -z "$GITHUB_TOKEN" ]; then
