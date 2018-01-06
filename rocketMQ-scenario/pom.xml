@@ -6,17 +6,13 @@
 
     <groupId>org.skywalking</groupId>
     <artifactId>rocketMQ-scenario</artifactId>
-    <packaging>pom</packaging>
+    <packaging>jar</packaging>
     <version>5.0.0</version>
-    <modules>
-        <module>rocketMQ-consumer</module>
-        <module>rocketMQ-provider</module>
-    </modules>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        
-        <test.framework.version>4.2.0</test.framework.version>
+
+        <test.framework.version>4.1.0-incubating</test.framework.version>
         <docker.image.version>${test.framework.version}</docker.image.version>
 
         <log4j.version>2.6.2</log4j.version>
@@ -28,7 +24,7 @@
         <dependency>
             <groupId>org.apache.rocketmq</groupId>
             <artifactId>rocketmq-client</artifactId>
-            <version>4.2.0</version>
+            <version>${test.framework.version}</version>
         </dependency>
 
         <dependency>
@@ -68,8 +64,36 @@
         </dependency>
     </dependencies>
 
+    <profiles>
+        <profile>
+            <id>rocketMQ-scenario-4.2.0</id>
+            <properties>
+                <test.framework.version>4.2.0</test.framework.version>
+            </properties>
+        </profile>
+        <profile>
+            <id>rocketMQ-scenario-4.1.0-incubating</id>
+            <properties>
+                <test.framework.version>4.1.0-incubating</test.framework.version>
+            </properties>
+        </profile>
+    </profiles>
+
     <build>
+        <finalName>rocketMQ-scenario</finalName>
         <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <version>1.5.9.RELEASE</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>repackage</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
@@ -80,6 +104,36 @@
                     <encoding>${project.build.sourceEncoding}</encoding>
                 </configuration>
             </plugin>
+            <plugin>
+                <groupId>com.spotify</groupId>
+                <artifactId>docker-maven-plugin</artifactId>
+                <version>0.4.13</version>
+                <configuration>
+                    <imageName>skywalking/rocketmq-scenario</imageName>
+                    <imageTags>
+                        <imageTag>${docker.image.version}</imageTag>
+                    </imageTags>
+                    <dockerDirectory>${project.basedir}/docker</dockerDirectory>
+                    <resources>
+                        <resource>
+                            <targetPath>/</targetPath>
+                            <directory>${project.build.directory}</directory>
+                            <include>${project.build.finalName}.jar</include>
+                        </resource>
+                    </resources>
+                </configuration>
+            </plugin>
         </plugins>
     </build>
+
+    <pluginRepositories>
+        <pluginRepository>
+            <id>spring-snapshots</id>
+            <url>http://repo.spring.io/snapshot</url>
+        </pluginRepository>
+        <pluginRepository>
+            <id>spring-milestones</id>
+            <url>http://repo.spring.io/milestone</url>
+        </pluginRepository>
+    </pluginRepositories>
 </project>

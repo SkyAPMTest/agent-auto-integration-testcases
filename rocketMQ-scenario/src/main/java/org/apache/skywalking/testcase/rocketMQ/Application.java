@@ -1,4 +1,4 @@
-package org.apache.skywalking.testcase.rocketMQ.provider;
+package org.apache.skywalking.testcase.rocketMQ;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;

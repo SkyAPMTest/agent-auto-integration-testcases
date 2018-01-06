@@ -1,0 +1,21 @@
+#
+# Test case project define.
+#
+# Note: Test case project must a project that support output service.
+#
+testcase:
+  #
+  # The request url of current test cases.
+  #
+  request_url: http://localhost:{SERVER_OUTPUT_PORT}/rocketMQ-provider/case/rocketMQ-Provider
+  #
+  # The framework name that need tested.
+  #
+  test_framework: RocketMQ
+  #
+  # The framework version list of current test case supported
+  #
+  support_versions:
+    - 4.1.0-incubating
+    - 4.2.0
+    - 4.0.0-incubating
