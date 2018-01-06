@@ -7,6 +7,7 @@ usage(){
 	echo -e "  -p, --only-pull-code \t\t only pull source code, not clone source code"
 	echo -e "      --skipReport \t\t skip report "
 	echo -e "      --skipBuild \t\t skip build"
+	echo -e "      --reportFileMode  CONVERAGE | NONE \t\t skip build"
 }
 
 # environment check
@@ -79,6 +80,13 @@ buildProject(){
 	fi
 }
 
+getCommitter(){
+	BRANCH_URL=$1
+	proto="$(echo $BRANCH_URL | grep :// | sed -e's,^\(.*://\).*,\1,g')"
+	url="$(echo ${BRANCH_URL/$proto/})"
+	echo $url | grep / | cut -d '/' -f 2
+}
+
 environmentCheck
 
 #
@@ -91,13 +99,17 @@ AGENT_GIT_BRANCH=master
 REPORT_GIT_URL=https://github.com/SkywalkingTest/agent-integration-test-report.git
 REPORT_GIT_BRANCH=master
 TEST_TIME=`date "+%Y-%m-%d-%H-%M"`
+TEST_TIME_YEAR=$((`echo $TEST_TIME | cut -d '-' -f 1`))
+TEST_TIME_MONTH=$((`echo $TEST_TIME | cut -d '-' -f 2`))
 TEST_CASES_COMMITID=""
 TEST_CASES_BRANCH=""
 TEST_CASES=()
+COMMITTER=`getCommitter $AGENT_GIT_URL`
 TEST_CASES_STR=""
 PULL_CODE=false
 SKIP_REPORT=false
 SKIP_BUILD=false
+REPORT_FILE_MODE="CONVERAGE"
 PRG="$0"
 PRGDIR=`dirname "$PRG"`
 [ -z "$AGENT_TEST_HOME" ] && AGENT_TEST_HOME=`cd "$PRGDIR/.." >/dev/null; pwd`
@@ -118,6 +130,7 @@ do
 	case "$1" in
 		-r | --repo )
 			AGENT_GIT_URL=$2;
+			COMMITTER=`getCommitter $AGENT_GIT_URL`
 			shift 2;
 			;;
 		-b | --branch | -t | --tag )
@@ -140,6 +153,14 @@ do
 			SKIP_BUILD=true;
 			shift;
 			;;
+		--reportFileMode )
+			REPORT_FILE_MODE=$2;
+			shift 2;
+			;;
+		--testcase-branch )
+			TEST_CASES_BRANCH=$2;
+			shift 2;
+			;;
 		* )
 			usage;
 			exit 1;
@@ -150,7 +171,6 @@ done
 #
 #
 #
-TEST_CASES_BRANCH=$(cd $AGENT_TEST_HOME && git symbolic-ref --short -q HEAD)
 TEST_CASES_COMMITID=$(cd $AGENT_TEST_HOME && git rev-parse HEAD)
 echo "current test case branch: ${TEST_CASES_BRANCH}. current test case commit id: ${TEST_CASES_COMMITID}"
 #
@@ -329,13 +349,16 @@ java -DtestDate="$TEST_TIME" \
 	-DagentBranch="$AGENT_GIT_BRANCH" -DagentCommit="$AGENT_COMMIT" \
 	-DtestCasePath="$TEST_CASES_DIR" -DreportFilePath="$REPORT_DIR" \
 	-DcasesBranch="$TEST_CASES_BRANCH" -DcasesCommitId="${TEST_CASES_COMMITID}" \
-	-DtestCases="$TEST_CASES_STR"	\
-	-jar $WORKSPACE_DIR/skywalking-autotest.jar > /dev/null
+	-Dcommitter="$COMMITTER"	\
+	-jar $WORKSPACE_DIR/skywalking-autotest.jar
 
 if [ ! -f "$REPORT_DIR/${AGENT_GIT_BRANCH}" ]; then
 	mkdir -p $REPORT_DIR/${AGENT_GIT_BRANCH}
 fi
-cp -f $REPORT_DIR/README.md $REPORT_DIR/${AGENT_GIT_BRANCH}/report-${TEST_TIME}.md
+
+if [ "$REPORT_FILE_MODE" = "CONVERAGE" ]; then
+	cp -f $REPORT_DIR/${TEST_TIME_YEAR}/${TEST_TIME_MONTH}/${COMMITTER}/testReport-${TEST_CASES_BRANCH}-${TEST_TIME}.md $REPORT_DIR/README.md
+fi
 
 if [ "$SKIP_REPORT" = "false" ]; then
 	echo "push report...."

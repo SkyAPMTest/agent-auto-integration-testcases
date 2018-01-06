@@ -6,6 +6,8 @@ Usage(){
 	echo -e "    -p | --project projectName  \t\t Only test the case under the project. "
 	echo -e "    -civ | --collector-image-version version \t\t Set mock collector image. "
 	echo -e "    -b | --branch branch \t\t The branch name of Skywalking. "
+	echo -e "    -r | --repo repo \t\t The repo of Skywalking. "
+	echo -e "	 -tcb | --testcase-branch branchName ".
 }
 
 PRG="$0"
@@ -18,6 +20,8 @@ PRGDIR=`dirname "$PRG"`
 TEST_PROJECT_NAME=""
 MOCK_COLLECTOR_IMAGE_VERSION="3.2.6-2017"
 AGENT_BRANCH_NAME="master"
+AGENT_GIT_URL="https://github.com/apache/incubator-skywalking.git"
+TESTCASE_BRANCH="master"
 #
 # Parse the input parameters
 #
@@ -25,6 +29,10 @@ while [[ $# -gt 0 ]]; do
 	case "$1" in
 		-p | --project )
 			TEST_PROJECT_NAME=$2
+			shift 2
+			;;
+		-r | --repo )
+			AGENT_GIT_URL=$2
 			shift 2
 			;;
 		-civ | --collector-image-version )
@@ -35,13 +43,18 @@ while [[ $# -gt 0 ]]; do
 			AGENT_BRANCH_NAME=$2
 			shift 2
 			;;
+		-tcb | --testcase-branch )
+			TESTCASE_BRANCH=$2
+			shift 2
+			;;
 		* )
 			shift
 			break
 	esac
 done
 
+
 ${AGENT_TEST_HOME}/.autotest/autotest-deploy.sh --project "${TEST_PROJECT_NAME}" --collector-image-version "$MOCK_COLLECTOR_IMAGE_VERSION"
 
-${AGENT_TEST_HOME}/.autotest/agent-test.sh --max-running-size 10 --branch "$AGENT_BRANCH_NAME"
+${AGENT_TEST_HOME}/.autotest/agent-test.sh --max-running-size 10 --branch "$AGENT_BRANCH_NAME" -r "$AGENT_GIT_URL" --reportFileMode CONVERAGE --testcase-branch "$TESTCASE_BRANCH"
 
