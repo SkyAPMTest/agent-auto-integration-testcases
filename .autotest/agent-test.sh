@@ -289,8 +289,8 @@ deployTestCase(){
 
 	echo "stop docker container and remove the container network "
 	docker-compose -f ${CASE_DIR}/docker-compose.yml stop > /dev/null
-	#(docker network rm $(docker network ls | grep "bridge" | awk '/ / { print $1 }')) > /dev/null
-	docker network prune -f
+	(docker network rm $(docker network ls | grep "bridge" | awk '/ / { print $1 }')) > /dev/null
+	#docker network prune -f
 	#
 	# remove the rid file
 	#
