@@ -7,13 +7,13 @@
     <version>5.0.0</version>
     <packaging>war</packaging>
 
-    <artifactId>h2-scenario</artifactId>
-    <name>skywalking-h2-scenario</name>
+    <artifactId>h2-struts2.3-scenario</artifactId>
+    <name>skywalking-h2-struts2.3-scenario</name>
 
     <properties>
         <h2.version>1.3.168</h2.version>
-        <struts2.version>2.3.1.2</struts2.version>
-        <docker.image.version>H2-1.3.168_Struts2-2.3.1.2</docker.image.version>
+        <struts2.version>2.3.4</struts2.version>
+        <docker.image.version>H2-1.3.168_Struts2-2.3.4</docker.image.version>
     </properties>
 
     <dependencies>
@@ -48,7 +48,7 @@
 
     <profiles>
         <profile>
-            <id>h2-scenario-H2-1.4.196_Struts2-2.3.1</id>
+            <id>h2-struts2.3-scenario-H2-1.4.196_Struts2-2.3.1</id>
             <properties>
                 <h2.version>1.4.196</h2.version>
                 <struts2.version>2.3.1</struts2.version>
@@ -56,7 +56,7 @@
             </properties>
         </profile>
         <profile>
-            <id>h2-scenario-H2-1.4.195_Struts2-2.3.1.1</id>
+            <id>h2-struts2.3-scenario-H2-1.4.195_Struts2-2.3.1.1</id>
             <properties>
                 <h2.version>1.4.195</h2.version>
                 <struts2.version>2.3.1.1</struts2.version>
@@ -64,7 +64,7 @@
             </properties>
         </profile>
         <profile>
-            <id>h2-scenario-H2-1.4.194_Struts2-2.3.3</id>
+            <id>h2-struts2.3-scenario-H2-1.4.194_Struts2-2.3.3</id>
             <properties>
                 <h2.version>1.4.194</h2.version>
                 <struts2.version>2.3.3</struts2.version>
@@ -72,7 +72,7 @@
             </properties>
         </profile>
         <profile>
-            <id>h2-scenario-H2-1.4.193_Struts2-2.3.4</id>
+            <id>h2-struts2.3-scenario-H2-1.4.193_Struts2-2.3.4</id>
             <properties>
                 <h2.version>1.4.193</h2.version>
                 <struts2.version>2.3.4</struts2.version>
@@ -80,7 +80,7 @@
             </properties>
         </profile>
         <profile>
-            <id>h2-scenario-H2-1.4.192_Struts2-2.3.4.1</id>
+            <id>h2-struts2.3-scenario-H2-1.4.192_Struts2-2.3.4.1</id>
             <properties>
                 <h2.version>1.4.192</h2.version>
                 <struts2.version>2.3.4.1</struts2.version>
@@ -88,7 +88,7 @@
             </properties>
         </profile>
         <profile>
-            <id>h2-scenario-H2-1.4.191_Struts2-2.3.7</id>
+            <id>h2-struts2.3-scenario-H2-1.4.191_Struts2-2.3.7</id>
             <properties>
                 <h2.version>1.4.191</h2.version>
                 <struts2.version>2.3.7</struts2.version>
@@ -96,7 +96,7 @@
             </properties>
         </profile>
         <profile>
-            <id>h2-scenario-H2-1.4.190_Struts2-2.3.8</id>
+            <id>h2-struts2.3-scenario-H2-1.4.190_Struts2-2.3.8</id>
             <properties>
                 <h2.version>1.4.190</h2.version>
                 <struts2.version>2.3.8</struts2.version>
@@ -104,7 +104,7 @@
             </properties>
         </profile>
         <profile>
-            <id>h2-scenario-H2-1.4.189_Struts2-2.3.12</id>
+            <id>h2-struts2.3-scenario-H2-1.4.189_Struts2-2.3.12</id>
             <properties>
                 <h2.version>1.4.189</h2.version>
                 <struts2.version>2.3.12</struts2.version>
@@ -112,7 +112,7 @@
             </properties>
         </profile>
         <profile>
-            <id>h2-scenario-H2-1.4.188_Struts2-2.3.14</id>
+            <id>h2-struts2.3-scenario-H2-1.4.188_Struts2-2.3.14</id>
             <properties>
                 <h2.version>1.4.188</h2.version>
                 <struts2.version>2.3.14</struts2.version>
@@ -120,7 +120,7 @@
             </properties>
         </profile>
         <profile>
-            <id>h2-scenario-H2-1.4.187_Struts2-2.3.14.1</id>
+            <id>h2-struts2.3-scenario-H2-1.4.187_Struts2-2.3.14.1</id>
             <properties>
                 <h2.version>1.4.187</h2.version>
                 <struts2.version>2.3.14.1</struts2.version>
@@ -128,7 +128,7 @@
             </properties>
         </profile>
         <profile>
-            <id>h2-scenario-H2-1.4.186_Struts2-2.3.14.2</id>
+            <id>h2-struts2.3-scenario-H2-1.4.186_Struts2-2.3.14.2</id>
             <properties>
                 <h2.version>1.4.186</h2.version>
                 <struts2.version>2.3.14.2</struts2.version>
@@ -136,7 +136,7 @@
             </properties>
         </profile>
         <profile>
-            <id>h2-scenario-H2-1.4.185_Struts2-2.3.14.3</id>
+            <id>h2-struts2.3-scenario-H2-1.4.185_Struts2-2.3.14.3</id>
             <properties>
                 <h2.version>1.4.185</h2.version>
                 <struts2.version>2.3.14.3</struts2.version>
@@ -144,7 +144,7 @@
             </properties>
         </profile>
         <profile>
-            <id>h2-scenario-H2-1.4.184_Struts2-2.3.15</id>
+            <id>h2-struts2.3-scenario-H2-1.4.184_Struts2-2.3.15</id>
             <properties>
                 <h2.version>1.4.184</h2.version>
                 <struts2.version>2.3.15</struts2.version>
@@ -152,7 +152,7 @@
             </properties>
         </profile>
         <profile>
-            <id>h2-scenario-H2-1.4.183_Struts2-2.3.15.1</id>
+            <id>h2-struts2.3-scenario-H2-1.4.183_Struts2-2.3.15.1</id>
             <properties>
                 <h2.version>1.4.183</h2.version>
                 <struts2.version>2.3.15.1</struts2.version>
@@ -160,7 +160,7 @@
             </properties>
         </profile>
         <profile>
-            <id>h2-scenario-H2-1.4.182_Struts2-2.3.15.2</id>
+            <id>h2-struts2.3-scenario-H2-1.4.182_Struts2-2.3.15.2</id>
             <properties>
                 <h2.version>1.4.182</h2.version>
                 <struts2.version>2.3.15.2</struts2.version>
@@ -168,7 +168,7 @@
             </properties>
         </profile>
         <profile>
-            <id>h2-scenario-H2-1.4.181_Struts2-2.3.15.3</id>
+            <id>h2-struts2.3-scenario-H2-1.4.181_Struts2-2.3.15.3</id>
             <properties>
                 <h2.version>1.4.181</h2.version>
                 <struts2.version>2.3.15.3</struts2.version>
@@ -176,7 +176,7 @@
             </properties>
         </profile>
         <profile>
-            <id>h2-scenario-H2-1.4.180_Struts2-2.3.16</id>
+            <id>h2-struts2.3-scenario-H2-1.4.180_Struts2-2.3.16</id>
             <properties>
                 <h2.version>1.4.180</h2.version>
                 <struts2.version>2.3.16</struts2.version>
@@ -184,7 +184,7 @@
             </properties>
         </profile>
         <profile>
-            <id>h2-scenario-H2-1.4.179_Struts2-2.3.16.1</id>
+            <id>h2-struts2.3-scenario-H2-1.4.179_Struts2-2.3.16.1</id>
             <properties>
                 <h2.version>1.4.179</h2.version>
                 <struts2.version>2.3.16.1</struts2.version>
@@ -192,7 +192,7 @@
             </properties>
         </profile>
         <profile>
-            <id>h2-scenario-H2-1.4.178_Struts2-2.3.16.2</id>
+            <id>h2-struts2.3-scenario-H2-1.4.178_Struts2-2.3.16.2</id>
             <properties>
                 <h2.version>1.4.178</h2.version>
                 <struts2.version>2.3.16.2</struts2.version>
@@ -200,7 +200,7 @@
             </properties>
         </profile>
         <profile>
-            <id>h2-scenario-H2-1.4.177_Struts2-2.3.16.3</id>
+            <id>h2-struts2.3-scenario-H2-1.4.177_Struts2-2.3.16.3</id>
             <properties>
                 <h2.version>1.4.177</h2.version>
                 <struts2.version>2.3.16.3</struts2.version>
@@ -208,7 +208,7 @@
             </properties>
         </profile>
         <profile>
-            <id>h2-scenario-H2-1.3.176_Struts2-2.3.20</id>
+            <id>h2-struts2.3-scenario-H2-1.3.176_Struts2-2.3.20</id>
             <properties>
                 <h2.version>1.3.176</h2.version>
                 <struts2.version>2.3.20</struts2.version>
@@ -216,7 +216,7 @@
             </properties>
         </profile>
         <profile>
-            <id>h2-scenario-H2-1.3.175_Struts2-2.3.20.1</id>
+            <id>h2-struts2.3-scenario-H2-1.3.175_Struts2-2.3.20.1</id>
             <properties>
                 <h2.version>1.3.175</h2.version>
                 <struts2.version>2.3.20.1</struts2.version>
@@ -224,7 +224,7 @@
             </properties>
         </profile>
         <profile>
-            <id>h2-scenario-H2-1.3.174_Struts2-2.3.20.3</id>
+            <id>h2-struts2.3-scenario-H2-1.3.174_Struts2-2.3.20.3</id>
             <properties>
                 <h2.version>1.3.174</h2.version>
                 <struts2.version>2.3.20.3</struts2.version>
@@ -232,7 +232,7 @@
             </properties>
         </profile>
         <profile>
-            <id>h2-scenario-H2-1.3.173_Struts2-2.3.24</id>
+            <id>h2-struts2.3-scenario-H2-1.3.173_Struts2-2.3.24</id>
             <properties>
                 <h2.version>1.3.173</h2.version>
                 <struts2.version>2.3.24</struts2.version>
@@ -240,7 +240,7 @@
             </properties>
         </profile>
         <profile>
-            <id>h2-scenario-H2-1.3.172_Struts2-2.3.24.1</id>
+            <id>h2-struts2.3-scenario-H2-1.3.172_Struts2-2.3.24.1</id>
             <properties>
                 <h2.version>1.3.172</h2.version>
                 <struts2.version>2.3.24.1</struts2.version>
@@ -248,7 +248,7 @@
             </properties>
         </profile>
         <profile>
-            <id>h2-scenario-H2-1.3.171_Struts2-2.3.24.3</id>
+            <id>h2-struts2.3-scenario-H2-1.3.171_Struts2-2.3.24.3</id>
             <properties>
                 <h2.version>1.3.171</h2.version>
                 <struts2.version>2.3.24.3</struts2.version>
@@ -256,7 +256,7 @@
             </properties>
         </profile>
         <profile>
-            <id>h2-scenario-H2-1.3.170_Struts2-2.3.28</id>
+            <id>h2-struts2.3-scenario-H2-1.3.170_Struts2-2.3.28</id>
             <properties>
                 <h2.version>1.3.170</h2.version>
                 <struts2.version>2.3.28</struts2.version>
@@ -264,7 +264,7 @@
             </properties>
         </profile>
         <profile>
-            <id>h2-scenario-H2-1.3.169_Struts2-2.3.28.1</id>
+            <id>h2-struts2.3-scenario-H2-1.3.169_Struts2-2.3.28.1</id>
             <properties>
                 <h2.version>1.3.169</h2.version>
                 <struts2.version>2.3.28.1</struts2.version>
@@ -272,7 +272,7 @@
             </properties>
         </profile>
         <profile>
-            <id>h2-scenario-H2-1.3.168_Struts2-2.3.1.2</id>
+            <id>h2-struts2.3-scenario-H2-1.3.168_Struts2-2.3.1.2</id>
             <properties>
                 <h2.version>1.3.168</h2.version>
                 <struts2.version>2.3.1.2</struts2.version>
@@ -280,7 +280,7 @@
             </properties>
         </profile>
         <profile>
-            <id>h2-scenario-H2-1.3.167_Struts2-2.3.29</id>
+            <id>h2-struts2.3-scenario-H2-1.3.167_Struts2-2.3.29</id>
             <properties>
                 <h2.version>1.3.167</h2.version>
                 <struts2.version>2.3.29</struts2.version>
@@ -288,7 +288,7 @@
             </properties>
         </profile>
         <profile>
-            <id>h2-scenario-H2-1.3.166_Struts2-2.3.30</id>
+            <id>h2-struts2.3-scenario-H2-1.3.166_Struts2-2.3.30</id>
             <properties>
                 <h2.version>1.3.166</h2.version>
                 <struts2.version>2.3.30</struts2.version>
@@ -296,7 +296,7 @@
             </properties>
         </profile>
         <profile>
-            <id>h2-scenario-H2-1.3.165_Struts2-2.3.31</id>
+            <id>h2-struts2.3-scenario-H2-1.3.165_Struts2-2.3.31</id>
             <properties>
                 <h2.version>1.3.165</h2.version>
                 <struts2.version>2.3.31</struts2.version>
@@ -304,7 +304,7 @@
             </properties>
         </profile>
         <profile>
-            <id>h2-scenario-H2-1.3.164_Struts2-2.3.32</id>
+            <id>h2-struts2.3-scenario-H2-1.3.164_Struts2-2.3.32</id>
             <properties>
                 <h2.version>1.3.164</h2.version>
                 <struts2.version>2.3.32</struts2.version>
@@ -312,7 +312,7 @@
             </properties>
         </profile>
         <profile>
-            <id>h2-scenario-H2-1.3.163_Struts2-2.3.33</id>
+            <id>h2-struts2.3-scenario-H2-1.3.163_Struts2-2.3.33</id>
             <properties>
                 <h2.version>1.3.163</h2.version>
                 <struts2.version>2.3.33</struts2.version>
@@ -320,7 +320,7 @@
             </properties>
         </profile>
         <profile>
-            <id>h2-scenario-H2-1.3.162_Struts2-2.3.34</id>
+            <id>h2-struts2.3-scenario-H2-1.3.162_Struts2-2.3.34</id>
             <properties>
                 <h2.version>1.3.162</h2.version>
                 <struts2.version>2.3.34</struts2.version>
@@ -328,95 +328,7 @@
             </properties>
         </profile>
         <profile>
-            <id>h2-scenario-H2-1.3.161_Struts2-2.5</id>
-            <properties>
-                <h2.version>1.3.161</h2.version>
-                <struts2.version>2.5</struts2.version>
-                <docker.image.version>H2-1.3.161_Struts2-2.5</docker.image.version>
-            </properties>
-        </profile>
-        <profile>
-            <id>h2-scenario-H2-1.3.160_Struts2-2.5.1</id>
-            <properties>
-                <h2.version>1.3.160</h2.version>
-                <struts2.version>2.5.1</struts2.version>
-                <docker.image.version>H2-1.3.160_Struts2-2.5.1</docker.image.version>
-            </properties>
-        </profile>
-        <profile>
-            <id>h2-scenario-H2-1.3.159_Struts2-2.5.2</id>
-            <properties>
-                <h2.version>1.3.159</h2.version>
-                <struts2.version>2.5.2</struts2.version>
-                <docker.image.version>H2-1.3.159_Struts2-2.5.2</docker.image.version>
-            </properties>
-        </profile>
-        <profile>
-            <id>h2-scenario-H2-1.3.158_Struts2-2.5.5</id>
-            <properties>
-                <h2.version>1.3.158</h2.version>
-                <struts2.version>2.5.5</struts2.version>
-                <docker.image.version>H2-1.3.158_Struts2-2.5.5</docker.image.version>
-            </properties>
-        </profile>
-        <profile>
-            <id>h2-scenario-H2-1.3.157_Struts2-2.5.8</id>
-            <properties>
-                <h2.version>1.3.157</h2.version>
-                <struts2.version>2.5.8</struts2.version>
-                <docker.image.version>H2-1.3.157_Struts2-2.5.8</docker.image.version>
-            </properties>
-        </profile>
-        <profile>
-            <id>h2-scenario-H2-1.3.156_Struts2-2.5.10</id>
-            <properties>
-                <h2.version>1.3.156</h2.version>
-                <struts2.version>2.5.10</struts2.version>
-                <docker.image.version>H2-1.3.156_Struts2-2.5.10</docker.image.version>
-            </properties>
-        </profile>
-        <profile>
-            <id>h2-scenario-H2-1.3.155_Struts2-2.5.10.1</id>
-            <properties>
-                <h2.version>1.3.155</h2.version>
-                <struts2.version>2.5.10.1</struts2.version>
-                <docker.image.version>H2-1.3.155_Struts2-2.5.10.1</docker.image.version>
-            </properties>
-        </profile>
-        <profile>
-            <id>h2-scenario-H2-1.3.154_Struts2-2.5.12</id>
-            <properties>
-                <h2.version>1.3.154</h2.version>
-                <struts2.version>2.5.12</struts2.version>
-                <docker.image.version>H2-1.3.154_Struts2-2.5.12</docker.image.version>
-            </properties>
-        </profile>
-        <profile>
-            <id>h2-scenario-H2-1.3.153_Struts2-2.5.13</id>
-            <properties>
-                <h2.version>1.3.153</h2.version>
-                <struts2.version>2.5.13</struts2.version>
-                <docker.image.version>H2-1.3.153_Struts2-2.5.13</docker.image.version>
-            </properties>
-        </profile>
-        <profile>
-            <id>h2-scenario-H2-1.3.152_Struts2-2.5.14</id>
-            <properties>
-                <h2.version>1.3.152</h2.version>
-                <struts2.version>2.5.14</struts2.version>
-                <docker.image.version>H2-1.3.152_Struts2-2.5.14</docker.image.version>
-            </properties>
-        </profile>
-        <profile>
-            <id>h2-scenario-H2-1.3.151_Struts2-2.5.14.1</id>
-            <properties>
-                <h2.version>1.3.151</h2.version>
-                <struts2.version>2.5.14.1</struts2.version>
-                <docker.image.version>H2-1.3.151_Struts2-2.5.14.1</docker.image.version>
-            </properties>
-        </profile>
-        <profile>
-            <id>h2-scenario-H2-1.3.150_Struts2-2.3.1.2</id>
+            <id>h2-struts2.3-scenario-H2-1.3.150_Struts2-2.3.1.2</id>
             <properties>
                 <h2.version>1.3.150</h2.version>
                 <struts2.version>2.3.1.2</struts2.version>
@@ -424,7 +336,7 @@
             </properties>
         </profile>
         <profile>
-            <id>h2-scenario-H2-1.3.149_Struts2-2.3.1.2</id>
+            <id>h2-struts2.3-scenario-H2-1.3.149_Struts2-2.3.1.2</id>
             <properties>
                 <h2.version>1.3.149</h2.version>
                 <struts2.version>2.3.1.2</struts2.version>
@@ -432,7 +344,7 @@
             </properties>
         </profile>
         <profile>
-            <id>h2-scenario-H2-1.3.148_Struts2-2.3.1.2</id>
+            <id>h2-struts2.3-scenario-H2-1.3.148_Struts2-2.3.1.2</id>
             <properties>
                 <h2.version>1.3.148</h2.version>
                 <struts2.version>2.3.1.2</struts2.version>
@@ -440,7 +352,7 @@
             </properties>
         </profile>
         <profile>
-            <id>h2-scenario-H2-1.3.146_Struts2-2.3.1.2</id>
+            <id>h2-struts2.3-scenario-H2-1.3.146_Struts2-2.3.1.2</id>
             <properties>
                 <h2.version>1.3.146</h2.version>
                 <struts2.version>2.3.1.2</struts2.version>

@@ -1,0 +1,53 @@
+#
+# Test case project define.
+#
+# Note: Test case project must a project that support output service.
+#
+testcase:
+  #
+  # The request url of current test cases.
+  #
+  request_url: http://localhost:{SERVER_OUTPUT_PORT}/struts2-h2-scenario/h2-struts2/case.action
+  #
+  # The framework name that need tested.
+  #
+  test_framework: Strut2_H2
+  #
+  # The framework version list of current test case supported
+  #
+  support_versions:
+    - H2-1.4.196_Struts2-2.3.1
+#    - H2-1.4.195_Struts2-2.3.1.1
+#    - H2-1.4.194_Struts2-2.3.3
+#    - H2-1.4.193_Struts2-2.3.4
+#    - H2-1.4.192_Struts2-2.3.4.1
+#    - H2-1.4.191_Struts2-2.3.7
+#    - H2-1.4.190_Struts2-2.3.8
+#    - H2-1.4.189_Struts2-2.3.12
+#    - H2-1.4.188_Struts2-2.3.14
+#    - H2-1.4.187_Struts2-2.3.14.1
+#    - H2-1.4.186_Struts2-2.3.14.2
+#    - H2-1.4.185_Struts2-2.3.14.3
+#    - H2-1.4.184_Struts2-2.3.15
+#    - H2-1.4.183_Struts2-2.3.15.1
+#    - H2-1.4.182_Struts2-2.3.15.2
+#    - H2-1.4.181_Struts2-2.3.15.3
+#    - H2-1.4.180_Struts2-2.3.16
+#    - H2-1.4.179_Struts2-2.3.16.1
+#    - H2-1.4.178_Struts2-2.3.16.2
+#    - H2-1.4.177_Struts2-2.3.16.3
+#    - H2-1.3.176_Struts2-2.3.20
+#    - H2-1.3.175_Struts2-2.3.20.1
+#    - H2-1.3.174_Struts2-2.3.20.3
+#    - H2-1.3.173_Struts2-2.3.24
+#    - H2-1.3.172_Struts2-2.3.24.1
+#    - H2-1.3.171_Struts2-2.3.24.3
+#    - H2-1.3.170_Struts2-2.3.28
+#    - H2-1.3.169_Struts2-2.3.28.1
+#    - H2-1.3.168_Struts2-2.3.1.2
+#    - H2-1.3.167_Struts2-2.3.29
+#    - H2-1.3.166_Struts2-2.3.30
+#    - H2-1.3.165_Struts2-2.3.31
+#    - H2-1.3.164_Struts2-2.3.32
+#    - H2-1.3.163_Struts2-2.3.33
+#    - H2-1.3.162_Struts2-2.3.34

@@ -1,0 +1,105 @@
+registryItems:
+  applications:
+  - {h2-case: nq 0}
+  instances:
+  - {h2-case: 1}
+  operationNames:
+  - h2-case: [H2/JDBI/Statement/execute, H2/JDBI/Connection/close, H2/JDBI/CallableStatement/execute, H2/JDBI/PreparedStatement/execute, /struts2-h2-scenario/h2-struts2/case.action]
+segmentItems:
+- applicationCode: h2-case
+  segmentSize: 1
+  segments:
+    - segmentId: not null
+      spans:
+        -
+          operationName: H2/JDBI/PreparedStatement/execute
+          operationId: eq 0
+          parentSpanId: 0
+          spanId: 1
+          tags: 
+          - {key: "db.type", value: "sql"}
+          - {key: "db.instance", value: "test"}
+          - {key: "db.statement", value: "CREATE TABLE test_007(\nid VARCHAR(1) PRIMARY KEY, \nvalue VARCHAR(1) NOT NULL)"}
+          logs: []
+          startTime: nq 0
+          endTime: nq 0
+          isError: false
+          spanLayer: Database
+          spanType: Exit
+          componentName: null
+          componentId: 4
+          peer: localhost:-1
+          peerId: eq 0
+        -
+          operationName: H2/JDBI/CallableStatement/prepareCall
+          operationId: eq 0
+          parentSpanId: 0
+          spanId: 2
+          tags: 
+          - {key: "db.type", value: "sql"}
+          - {key: "db.instance", value: "test"}
+          - {key: "db.statement", value: "INSERT INTO test_007(id, value) VALUES(?,?)"}
+          logs: []
+          startTime: nq 0
+          endTime: nq 0
+          isError: false
+          spanLayer: Database
+          spanType: Exit
+          componentName: null
+          componentId: 4
+          peer: localhost:-1
+          peerId: eq 0
+        -
+          operationName: H2/JDBI/Statement/execute
+          operationId: eq 0
+          parentSpanId: 0
+          spanId: 3
+          tags: 
+          - {key: "db.type", value: "sql"}
+          - {key: "db.instance", value: "test"}
+          - {key: "db.statement", value: "DROP table test_007"}
+          logs: []
+          startTime: nq 0
+          endTime: nq 0
+          isError: false
+          spanLayer: Database
+          spanType: Exit
+          componentName: null
+          componentId: 4
+          peer: localhost:-1
+          peerId: eq 0
+        -
+          operationName: H2/JDBI/Connection/close
+          operationId: eq 0
+          parentSpanId: 0
+          spanId: 4
+          tags: 
+          - {key: "db.type", value: "sql"}
+          - {key: "db.instance", value: "test"}
+          - {key: "db.statement", value: ""}
+          logs: []
+          startTime: nq 0
+          endTime: nq 0
+          isError: false
+          spanLayer: Database
+          spanType: Exit
+          componentName: null
+          componentId: 4
+          peer: localhost:-1
+          peerId: eq 0
+        - operationName: /struts2-h2-scenario/h2-struts2/case.action
+          operationId: 0
+          parentSpanId: -1
+          spanId: 0
+          spanLayer: Http
+          startTime: nq 0
+          endTime: nq 0
+          componentId: 15
+          componentName: ''
+          isError: false
+          spanType: Entry
+          peer: ''
+          peerId: 0
+          tags:
+          - {key: url, value: 'http://localhost:{SERVER_OUTPUT_PORT}/struts2-h2-scenario/h2-struts2/case.action'}
+          - {key: http.method, value: GET}
