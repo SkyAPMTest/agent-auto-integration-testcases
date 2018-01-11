@@ -76,6 +76,30 @@
                 <test.framework.version>9.4.1212</test.framework.version>
             </properties>
         </profile>
+        <profile>
+            <id>postgresql-9.4-scenario-9.4.1208.jre7</id>
+            <properties>
+                <test.framework.version>9.4.1208.jre7</test.framework.version>
+            </properties>
+        </profile>
+        <profile>
+            <id>postgresql-9.4-scenario-9.4.1208.jre6</id>
+            <properties>
+                <test.framework.version>9.4.1208.jre6</test.framework.version>
+            </properties>
+        </profile>
+        <profile>
+            <id>postgresql-9.4-scenario-9.4.1209.jre7</id>
+            <properties>
+                <test.framework.version>9.4.1209.jre7</test.framework.version>
+            </properties>
+        </profile>
+        <profile>
+            <id>postgresql-9.4-scenario-9.4.1209.jre6</id>
+            <properties>
+                <test.framework.version>9.4.1209.jre6</test.framework.version>
+            </properties>
+        </profile>
     </profiles>
 
     <build>
