@@ -167,7 +167,20 @@ do
 			;;
 	esac
 done
-
+#
+#
+#
+echo ""
+echo "------------------------------------------------------------------------"
+echo "-                          Envrionment variables                       -"
+echo "------------------------------------------------------------------------"
+echo -e "The repository url of skywalking:  $AGENT_GIT_URL"
+echo -e "The  branch  name  of skywalking:  $AGENT_GIT_BRANCH"
+echo -e "The         test            date:  ${TEST_TIME}"
+echo -e "The  branch  name  of   testcase:  ${TEST_CASES_BRANCH}"
+echo "------------------------------------------------------------------------"
+echo ""
+echo ""
 #
 #
 #
