@@ -11,7 +11,7 @@
     <name>skywalking-postgresql-scenario</name>
 
     <properties>
-        <test.framework.version>9.2-1002-jdbc4</test.framework.version>
+        <test.framework.version>9.4-1206-jdbc42</test.framework.version>
         <docker.image.version>${test.framework.version}</docker.image.version>
     </properties>
 
@@ -302,6 +302,12 @@
             <id>postgresql-scenario-9.4.1211</id>
             <properties>
                 <test.framework.version>9.4.1211</test.framework.version>
+            </properties>
+        </profile>
+        <profile>
+            <id>postgresql-scenario-9.4.1212</id>
+            <properties>
+                <test.framework.version>9.4.1212</test.framework.version>
             </properties>
         </profile>
     </profiles>

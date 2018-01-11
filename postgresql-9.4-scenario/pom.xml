@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>org.apache.skywalking</groupId>
+    <version>5.0.0</version>
+    <packaging>war</packaging>
+
+    <artifactId>postgresql-9.4-scenario</artifactId>
+    <name>skywalking-postgresql-scenario</name>
+
+    <properties>
+        <test.framework.version>9.4-1206-jdbc42</test.framework.version>
+        <docker.image.version>${test.framework.version}</docker.image.version>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.postgresql</groupId>
+            <artifactId>postgresql</artifactId>
+            <version>${test.framework.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>javax.servlet-api</artifactId>
+            <version>3.1.0</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-api</artifactId>
+            <version>2.8.1</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-core</artifactId>
+            <version>2.8.1</version>
+        </dependency>
+    </dependencies>
+
+    <profiles>
+        <profile>
+            <id>postgresql-9.4-scenario-9.4.1207</id>
+            <properties>
+                <test.framework.version>9.4.1207</test.framework.version>
+            </properties>
+        </profile>
+        <profile>
+            <id>postgresql-9.4-scenario-9.4.1208</id>
+            <properties>
+                <test.framework.version>9.4.1208</test.framework.version>
+            </properties>
+        </profile>
+        <profile>
+            <id>postgresql-9.4-scenario-9.4.1209</id>
+            <properties>
+                <test.framework.version>9.4.1209</test.framework.version>
+            </properties>
+        </profile>
+        <profile>
+            <id>postgresql-9.4-scenario-9.4.1210</id>
+            <properties>
+                <test.framework.version>9.4.1210</test.framework.version>
+            </properties>
+        </profile>
+        <profile>
+            <id>postgresql-9.4-scenario-9.4.1211</id>
+            <properties>
+                <test.framework.version>9.4.1211</test.framework.version>
+            </properties>
+        </profile>
+        <profile>
+            <id>postgresql-9.4-scenario-9.4.1212</id>
+            <properties>
+                <test.framework.version>9.4.1212</test.framework.version>
+            </properties>
+        </profile>
+    </profiles>
+
+    <build>
+        <finalName>postgresql-scenario</finalName>
+        <plugins>
+            <plugin>
+                <groupId>com.spotify</groupId>
+                <artifactId>docker-maven-plugin</artifactId>
+                <version>0.4.13</version>
+                <configuration>
+                    <skipDocker>false</skipDocker>
+                    <imageName>skywalking/postgresql-scenario</imageName>
+                    <imageTags>
+                        <imageTag>${docker.image.version}</imageTag>
+                    </imageTags>
+                    <dockerDirectory>${project.basedir}/docker</dockerDirectory>
+                    <resources>
+                        <resource>
+                            <targetPath>/${build.finalName}</targetPath>
+                            <directory>${project.build.directory}/${build.finalName}</directory>
+                        </resource>
+                    </resources>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+</project>
+

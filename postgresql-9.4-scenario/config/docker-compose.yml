@@ -1,0 +1,42 @@
+version: '2.1'
+services:
+  postgresql-server:
+    image: postgres:9.3-alpine
+    environment:
+      - POSTGRES_PASSWORD=root
+      - POSTGRES_USER=root
+      - POSTGRES_DB=test
+    expose:
+      - "5432"
+
+  postgresql-testcase:
+    image: skywalking/postgresql-scenario:{CASES_IMAGE_VERSION}
+    expose:
+      - "8080"
+    ports:
+      - "{SERVER_OUTPUT_PORT}:8080"
+    environment:
+      - COLLECTOR_SERVER=mock-collector:12800
+      - POSTGRES_INSTANCE_HOST=postgresql-server:5432
+    links:
+      - mock-collector
+      - postgresql-server
+    volumes:
+      - {AGENT_FILE_PATH}:/usr/local/tomcat/agent
+    depends_on:
+      - mock-collector
+      - postgresql-server
+
+  mock-collector:
+    image: skywalking/skywalking-mock-collector:{COLLECTOR_IMAGE_VERSION}
+    environment:
+      - GRPC_BIND_HOST=mock-collector
+    expose:
+      - "12800"
+    ports:
+      - "{COLLECTOR_OUTPUT_PORT}:12800"
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://127.0.0.1:12800/receiveData"]
+      interval: 10s
+      timeout: 10s
+      retries: 5

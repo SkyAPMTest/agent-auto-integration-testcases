@@ -1,0 +1,24 @@
+#
+# Test case project define.
+#
+# Note: Test case project must a project that support output service.
+#
+testcase:
+  #
+  # The request url of current test cases.
+  #
+  request_url: http://localhost:{SERVER_OUTPUT_PORT}/postgresql-scenario/case/postgres 
+  #
+  # The framework name that need tested.
+  #
+  test_framework: PostgreSQL 
+  #
+  # The framework version list of current test case supported
+  #
+  support_versions:
+    - 9.4.1207
+    - 9.4.1208
+    - 9.4.1209
+    - 9.4.1210
+    - 9.4.1211
+    - 9.4.1212
