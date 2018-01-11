@@ -41,30 +41,6 @@
 
     <profiles>
         <profile>
-            <id>postgresql-scenario-9.0-801.jdbc4</id>
-            <properties>
-                <test.framework.version>9.0-801.jdbc4</test.framework.version>
-            </properties>
-        </profile>
-        <profile>
-            <id>postgresql-scenario-9.1-901.jdbc3</id>
-            <properties>
-                <test.framework.version>9.1-901.jdbc3</test.framework.version>
-            </properties>
-        </profile>
-        <profile>
-            <id>postgresql-scenario-9.1-901.jdbc4</id>
-            <properties>
-                <test.framework.version>9.1-901.jdbc4</test.framework.version>
-            </properties>
-        </profile>
-        <profile>
-            <id>postgresql-scenario-9.1-903.jdbc3</id>
-            <properties>
-                <test.framework.version>9.1-903.jdbc3</test.framework.version>
-            </properties>
-        </profile>
-        <profile>
             <id>postgresql-scenario-9.2-1002-jdbc4</id>
             <properties>
                 <test.framework.version>9.2-1002-jdbc4</test.framework.version>

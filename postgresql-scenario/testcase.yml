@@ -16,10 +16,6 @@ testcase:
   # The framework version list of current test case supported
   #
   support_versions:
-    - 9.0-801.jdbc4
-    - 9.1-901.jdbc3
-    - 9.1-901.jdbc4
-    - 9.1-903.jdbc3
     - 9.2-1002-jdbc4
     - 9.2-1003-jdbc3
     - 9.2-1003-jdbc4
