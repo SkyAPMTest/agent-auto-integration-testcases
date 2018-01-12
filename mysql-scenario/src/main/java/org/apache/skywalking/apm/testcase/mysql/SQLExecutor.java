@@ -26,7 +26,7 @@ public class SQLExecutor {
     }
 
     public void insertData(String sql, String id, String value) throws SQLException {
-        CallableStatement preparedStatement = connection.prepareCall(sql);
+        PreparedStatement preparedStatement = connection.prepareStatement(sql);
         preparedStatement.setString(1, id);
         preparedStatement.setString(2, value);
         preparedStatement.execute();
