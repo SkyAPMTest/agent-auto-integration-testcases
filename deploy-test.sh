@@ -62,5 +62,5 @@ done
 
 ${AGENT_TEST_HOME}/.autotest/autotest-deploy.sh --project "${TEST_PROJECT_NAME}" --collector-image-version "$MOCK_COLLECTOR_IMAGE_VERSION"
 
-${AGENT_TEST_HOME}/.autotest/agent-test.sh --max-running-size 13 --branch "$AGENT_BRANCH_NAME" -r "$AGENT_GIT_URL" --reportFileMode ${REPORT_FILE_MODE} --testcase-branch "$TESTCASE_BRANCH"
+${AGENT_TEST_HOME}/.autotest/agent-test.sh --max-running-size 10 --branch "$AGENT_BRANCH_NAME" -r "$AGENT_GIT_URL" --reportFileMode ${REPORT_FILE_MODE} --testcase-branch "$TESTCASE_BRANCH"
 

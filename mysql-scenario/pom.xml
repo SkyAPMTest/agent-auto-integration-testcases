@@ -10,7 +10,7 @@
     <packaging>war</packaging>
 
     <properties>
-        <test.framework.version>5.1.39</test.framework.version>
+        <test.framework.version>5.1.5</test.framework.version>
         <docker.image.version>${test.framework.version}</docker.image.version>
     </properties>
 
@@ -339,42 +339,6 @@
             <id>mysql-scenario-5.1.1</id>
             <properties>
                 <test.framework.version>5.1.1</test.framework.version>
-            </properties>
-        </profile>
-        <profile>
-            <id>mysql-scenario-5.0.8</id>
-            <properties>
-                <test.framework.version>5.0.8</test.framework.version>
-            </properties>
-        </profile>
-        <profile>
-            <id>mysql-scenario-5.0.7</id>
-            <properties>
-                <test.framework.version>5.0.7</test.framework.version>
-            </properties>
-        </profile>
-        <profile>
-            <id>mysql-scenario-5.0.5</id>
-            <properties>
-                <test.framework.version>5.0.5</test.framework.version>
-            </properties>
-        </profile>
-        <profile>
-            <id>mysql-scenario-5.0.4</id>
-            <properties>
-                <test.framework.version>5.0.4</test.framework.version>
-            </properties>
-        </profile>
-        <profile>
-            <id>mysql-scenario-5.0.3</id>
-            <properties>
-                <test.framework.version>5.0.3</test.framework.version>
-            </properties>
-        </profile>
-        <profile>
-            <id>mysql-scenario-5.0.2</id>
-            <properties>
-                <test.framework.version>5.0.2</test.framework.version>
             </properties>
         </profile>
      </profiles>
