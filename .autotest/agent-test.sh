@@ -381,9 +381,9 @@ if [ "$SKIP_REPORT" = "false" ]; then
 	git add $REPORT_DIR/${TEST_TIME_YEAR}/${TEST_TIME_MONTH}/${COMMITTER}/testReport-${TEST_CASES_BRANCH}-${TEST_TIME}.md 
 	git commit -m "push report report-${TEST_TIME}.md" .
 
-	if [ ! -z "$GITHUB_TOKEN" ]; then
+	if [ ! -z "$GITHUB_ACCOUNT" ]; then
 		echo "set remote origin url"
-		git config remote.origin.url https://${GITHUB_TOKEN}@github.com/SkywalkingTest/agent-integration-test-report.git
+		git config remote.origin.url https://${GITHUB_ACCOUNT}@github.com/SkywalkingTest/agent-integration-test-report.git
 	fi
 
 	git push origin master
