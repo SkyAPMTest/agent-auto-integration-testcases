@@ -9,6 +9,7 @@ Usage(){
 	echo -e "    -r | --repo repo \t\t The repo of Skywalking. "
 	echo -e "	 -tcb | --testcase-branch branchName "
 	echo -e "    		--reportFileMode CONVERAGE | NONE"
+	echo -e "	 --parallel_running_case_number number \t\t The parallel running case number."
 }
 
 PRG="$0"
@@ -24,6 +25,7 @@ AGENT_BRANCH_NAME="master"
 AGENT_GIT_URL="https://github.com/apache/incubator-skywalking.git"
 TESTCASE_BRANCH="master"
 REPORT_FILE_MODE="NONE"
+PARALLEL_RUNNING_CASE_NUMBER=8
 #
 # Parse the input parameters
 #
@@ -53,6 +55,10 @@ while [[ $# -gt 0 ]]; do
 			REPORT_FILE_MODE=$2
 			shift 2
 			;;	
+		--parallel_running_case_number )
+			PARALLEL_RUNNING_CASE_NUMBER=$2
+			shift 2
+			;;
 		* )
 			shift
 			break
@@ -62,5 +68,5 @@ done
 
 ${AGENT_TEST_HOME}/.autotest/autotest-deploy.sh --project "${TEST_PROJECT_NAME}" --collector-image-version "$MOCK_COLLECTOR_IMAGE_VERSION"
 
-${AGENT_TEST_HOME}/.autotest/agent-test.sh --max-running-size 8 --branch "$AGENT_BRANCH_NAME" -r "$AGENT_GIT_URL" --reportFileMode ${REPORT_FILE_MODE} --testcase-branch "$TESTCASE_BRANCH"
+${AGENT_TEST_HOME}/.autotest/agent-test.sh --max-running-size ${PARALLEL_RUNNING_CASE_NUMBER} --branch "$AGENT_BRANCH_NAME" -r "$AGENT_GIT_URL" --reportFileMode ${REPORT_FILE_MODE} --testcase-branch "$TESTCASE_BRANCH"
 
