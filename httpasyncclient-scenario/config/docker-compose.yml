@@ -1,0 +1,48 @@
+version: '2.1'
+services:
+  mysql-server:
+    image: mysql:5.6
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=sky
+    expose:
+      - "3306"
+    healthcheck:
+      test: mysqladmin -uroot -proot ping
+      interval: 2s
+      timeout: 5s
+      retries: 30
+
+  httpasyncclient-scenario:
+    image:  skywalking/httpasyncclient-scenario:{CASES_IMAGE_VERSION}
+    expose:
+      - "8080"
+    ports:
+      - "{SERVER_OUTPUT_PORT}:8080"
+    environment:
+      - COLLECTOR_SERVER=mock-collector:12800
+      - MYSQL_HOST=mysql-server:3306
+    links:
+      - mock-collector
+      - mysql-server
+    volumes:
+      - {AGENT_FILE_PATH}:/usr/local/httpasyncclient-scenario/agent
+    depends_on:
+      mysql-server:
+        condition: service_healthy
+      mock-collector:
+        condition: service_healthy
+
+  mock-collector:
+    image: skywalking/skywalking-mock-collector:{COLLECTOR_IMAGE_VERSION}
+    environment:
+      - GRPC_BIND_HOST=mock-collector
+    expose:
+      - "12800"
+    ports:
+      - "{COLLECTOR_OUTPUT_PORT}:12800"
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://127.0.0.1:12800/receiveData"]
+      interval: 5s
+      timeout: 10s
+      retries: 5
