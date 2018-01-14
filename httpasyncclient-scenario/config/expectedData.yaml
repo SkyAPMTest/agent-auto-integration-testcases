@@ -63,7 +63,7 @@ segmentItems:
         componentName:
         componentId: eq 26
         tags:
-        - {key: url, value: 'http://1270.0.1:8080/httpasyncclient/back'}
+        - {key: url, value: 'http://127.0.0.1:8080/httpasyncclient/back'}
         - {key: http.method, value: GET}
         logs: []
         peer: 127.0.0.1:8080
@@ -200,4 +200,4 @@ segmentItems:
         peer: null
         peerId: eq 0
         refs:
-          - {parentServiceId: 0, parentServiceName: AsyncThread/execute , networkAddressId: 0, entryServiceId: 0, refType: CrossProcess, parentSpanId: 1, parentTraceSegmentId: '${httpasyncclient-scenario[0]}', parentApplicationInstanceId: nq 0, networkAddress: '127.0.0.1:8080', entryServiceName: /front, entryApplicationInstanceId: nq 0}
+          - {parentServiceId: 0, parentServiceName: AsyncThread/execute , networkAddressId: 0, entryServiceId: 0, refType: CrossProcess, parentSpanId: 1, parentTraceSegmentId: '${httpasyncclient-scenario[1]}', parentApplicationInstanceId: nq 0, networkAddress: '127.0.0.1:8080', entryServiceName: /front, entryApplicationInstanceId: nq 0}
