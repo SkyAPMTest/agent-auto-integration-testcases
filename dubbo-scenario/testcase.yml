@@ -1,0 +1,24 @@
+#
+# Test case project define.
+#
+# Note: Test case project must a project that support output service.
+#
+testcase:
+  #
+  # The request url of current test cases.
+  #
+  request_url: http://localhost:{SERVER_OUTPUT_PORT}/dubbo-case/case/dubbo-rest
+  #
+  # The framework name that need tested.
+  #
+  test_framework: Dubbo
+  #
+  # The framework version list of current test case supported
+  #
+  support_versions:
+    - 2.5.4
+    - 2.5.5
+    - 2.5.6
+    - 2.5.7
+    - 2.5.8
+    - 2.6.0
