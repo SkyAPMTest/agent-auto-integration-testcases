@@ -82,6 +82,34 @@
         </dependency>
     </dependencies>
 
+    <!--profiles-->
+    <profiles>
+      <profile>
+        <id>kafka-scenario-0.11.0.0</id>
+        <properties>
+          <test.framework.version>0.11.0.0</test.framework.version>
+        </properties>
+      </profile>
+      <profile>
+        <id>kafka-scenario-0.11.0.1</id>
+        <properties>
+          <test.framework.version>0.11.0.1</test.framework.version>
+        </properties>
+      </profile>
+      <profile>
+        <id>kafka-scenario-0.11.0.2</id>
+        <properties>
+          <test.framework.version>0.11.0.2</test.framework.version>
+        </properties>
+      </profile>
+      <profile>
+        <id>kafka-scenario-1.0.0</id>
+        <properties>
+          <test.framework.version>1.0.0</test.framework.version>
+        </properties>
+      </profile>
+    </profiles>
+
     <build>
         <finalName>kafka-scenario</finalName>
         <plugins>
