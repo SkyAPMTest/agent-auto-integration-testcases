@@ -1,0 +1,82 @@
+registryItems:
+  applications:
+  - {kafka-scenario: nq 0}
+  instances:
+  - {kafka-scenario: nq 0}
+  operationNames:
+  - kafka-scenario: [Kafka/Producer/send, Producer/Callback, Kafka/Consumer/Poll, /case/kafka-case]
+segmentItems:
+- applicationCode: kafka-scenario
+  segmentSize: ge 3
+  segments:
+  - segmentId: not null
+    spans:
+    - operationName: Kafka/Producer/send
+      operationId: 0
+      parentSpanId: 0
+      spanId: 1
+      spanLayer: MQ
+      startTime: nq 0
+      endTime: nq 0
+      componentId: 27
+      componentName: ''
+      isError: false
+      spanType: Exit
+      peer: 127.0.0.1:9092
+      peerId: 0
+      tags:
+      - {key: mq.broker, value: '127.0.0.1:9092'}
+      - {key: mq.topic, value: not null}
+    - operationName: /case/kafka-case
+      operationId: 0
+      parentSpanId: -1
+      spanId: 0
+      spanLayer: Http
+      startTime: nq 0
+      endTime: nq 0
+      componentId: 14
+      componentName: ''
+      isError: false
+      spanType: Entry
+      peer: ''
+      peerId: 0
+      tags:
+      - {key: url, value: 'http://localhost:{SERVER_OUTPUT_PORT}/kafka-scenario/case/kafka-case'}
+      - {key: http.method, value: GET}
+  - segmentId: not null
+    spans:
+    - operationName: Producer/Callback
+      operationId: 0
+      parentSpanId: -1
+      spanId: 0
+      spanLayer: Unknown
+      startTime: nq 0
+      endTime: nq 0
+      componentId: 0
+      componentName: ''
+      isError: false
+      spanType: Local
+      peer: ''
+      peerId: 0
+      refs:
+      - {parentServiceId: 0, parentServiceName: /case/kafka-case, networkAddressId: 0, entryServiceId: 0, refType: CrossThread, parentSpanId: 1, parentTraceSegmentId: '${kafka-scenario[0]}', parentApplicationInstanceId: 0, networkAddress: '', entryServiceName: /case/kafka-case, entryApplicationInstanceId: nq 0 }
+  - segmentId: not null
+    spans:
+    - operationName: Kafka/Consumer/Poll
+      operationId: 0
+      parentSpanId: -1
+      spanId: 0
+      spanLayer: MQ
+      startTime: nq 0
+      endTime: nq 0
+      componentId: 27
+      componentName: ''
+      isError: false
+      spanType: Entry
+      peer: ''
+      peerId: 0
+      tags:
+      - {key: mq.broker, value: '127.0.0.1:9092'}
+      - {key: mq.topic, value: not null}
+      refs:
+      - {parentServiceId: 0, parentServiceName: /case/kafka-case, networkAddressId: 0, entryServiceId: 0, refType: CrossProcess, parentSpanId: 1, parentTraceSegmentId: '${kafka-scenario[0]}', parentApplicationInstanceId: nq 0, networkAddress: '127.0.0.1:9092', entryServiceName: /case/kafka-case, entryApplicationInstanceId: nq 0}
