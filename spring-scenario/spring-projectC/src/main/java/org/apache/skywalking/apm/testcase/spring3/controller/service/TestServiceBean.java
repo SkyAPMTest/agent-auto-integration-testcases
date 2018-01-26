@@ -16,25 +16,23 @@
  *
  */
 
-package org.apache.skywalking.apm.testcase.spring3.controller;
+package org.apache.skywalking.apm.testcase.spring3.controller.service;
 
-import org.apache.skywalking.apm.testcase.spring3.controller.service.TestServiceBean;
+import org.apache.skywalking.apm.testcase.spring3.controller.component.TestComponentBean;
+import org.apache.skywalking.apm.testcase.spring3.controller.dao.TestRepositoryBean;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.stereotype.Service;
 
-@Controller
-public class CaseController {
+@Service
+public class TestServiceBean {
+    @Autowired
+    private TestComponentBean componentBean;
 
     @Autowired
-    private TestServiceBean testServiceBean;
+    private TestRepositoryBean repositoryBean;
 
-    @RequestMapping(value = "/spring3")
-    @ResponseBody
-    public String updateUser() throws InterruptedException {
-        testServiceBean.doSomeBusiness("test");
-        return "{id: 1, userName: 'test'}";
+    public void doSomeBusiness(String name) {
+        componentBean.componentMethod(name);
+        repositoryBean.doSomeStuff(name);
     }
-
 }
