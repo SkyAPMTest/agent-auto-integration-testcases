@@ -11,7 +11,7 @@ segmentItems:
   segments:
   - segmentId: not null
     spans:
-    - operationName: Kafka/Producer/send
+    - operationName: Kafka/test/Producer
       operationId: 0
       parentSpanId: 0
       spanId: 1
@@ -26,7 +26,7 @@ segmentItems:
       peerId: 0
       tags:
       - {key: mq.broker, value: '127.0.0.1:9092'}
-      - {key: mq.topic, value: not null}
+      - {key: mq.topic, value: test}
     - operationName: /case/kafka-case
       operationId: 0
       parentSpanId: -1
@@ -62,7 +62,7 @@ segmentItems:
       - {parentServiceId: 0, parentServiceName: /case/kafka-case, networkAddressId: 0, entryServiceId: 0, refType: CrossThread, parentSpanId: 1, parentTraceSegmentId: '${kafka-scenario[0]}', parentApplicationInstanceId: 0, networkAddress: '', entryServiceName: /case/kafka-case, entryApplicationInstanceId: nq 0 }
   - segmentId: not null
     spans:
-    - operationName: Kafka/Consumer/Poll
+    - operationName: Kafka/test/Consumer
       operationId: 0
       parentSpanId: -1
       spanId: 0
@@ -77,6 +77,6 @@ segmentItems:
       peerId: 0
       tags:
       - {key: mq.broker, value: '127.0.0.1:9092'}
-      - {key: mq.topic, value: not null}
+      - {key: mq.topic, value: test}
       refs:
       - {parentServiceId: 0, parentServiceName: /case/kafka-case, networkAddressId: 0, entryServiceId: 0, refType: CrossProcess, parentSpanId: 1, parentTraceSegmentId: '${kafka-scenario[0]}', parentApplicationInstanceId: nq 0, networkAddress: '127.0.0.1:9092', entryServiceName: /case/kafka-case, entryApplicationInstanceId: nq 0}

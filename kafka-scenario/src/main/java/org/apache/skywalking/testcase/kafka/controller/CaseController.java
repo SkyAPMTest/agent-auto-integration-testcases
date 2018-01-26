@@ -52,7 +52,7 @@ public class CaseController {
 
     @PostConstruct
     private void setUp() {
-        topicName = UUID.randomUUID().toString().replaceAll("\\-", "");
+        topicName = "test";
     }
 
     @RequestMapping("/kafka-case")
