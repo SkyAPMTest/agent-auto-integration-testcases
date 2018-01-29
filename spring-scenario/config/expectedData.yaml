@@ -100,6 +100,45 @@ segmentItems:
   segments:
   - segmentId: not null
     spans:
+    - operationName: org.apache.skywalking.apm.testcase.spring3.controller.component.TestComponentBean.componentMethod
+      operationId: 0
+      parentSpanId: 1
+      spanId: 2
+      spanLayer: Unknown
+      startTime: nq 0
+      endTime: nq 0
+      componentId: 0
+      componentName: ''
+      isError: false
+      spanType: Local
+      peer: ''
+      peerId: 0
+    - operationName: org.apache.skywalking.apm.testcase.spring3.controller.dao.TestRepositoryBean.doSomeStuff
+      operationId: 0
+      parentSpanId: 1
+      spanId: 3
+      spanLayer: Unknown
+      startTime: nq 0
+      endTime: nq 0
+      componentId: 0
+      componentName: ''
+      isError: false
+      spanType: Local
+      peer: ''
+      peerId: 0
+    - operationName: org.apache.skywalking.apm.testcase.spring3.controller.service.TestServiceBean.doSomeBusiness
+      operationId: 0
+      parentSpanId: 0
+      spanId: 1
+      spanLayer: Unknown
+      startTime: nq 0
+      endTime: nq 0
+      componentId: 0
+      componentName: ''
+      isError: false
+      spanType: Local
+      peer: ''
+      peerId: 0
     - operationName: /spring3
       operationId: 0
       parentSpanId: -1

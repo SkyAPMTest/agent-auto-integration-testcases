@@ -211,6 +211,10 @@ echo "copy agent jar to $AGENT_DIR"
 #echo "copy agent"
 cp -r $SOURCE_DIR/skywalking/packages/skywalking-agent/* $AGENT_DIR/
 
+#
+# Copy the optional plugins
+#
+cp -r $AGENT_DIR/optional-plugins/* $AGENT_DIR/plugins/
 ############ build test tool ###########
 #	1. checkout test tool code
 #	2. switch branch
