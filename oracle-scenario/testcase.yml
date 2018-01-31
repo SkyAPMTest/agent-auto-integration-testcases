@@ -1,0 +1,25 @@
+#
+# Test case project define.
+#
+# Note: Test case project must a project that support output service.
+#
+testcase:
+  #
+  # The request url of current test cases.
+  #
+  request_url: http://localhost:{SERVER_OUTPUT_PORT}/oracle-case/case/oracle-scenario
+  #
+  # The running mode:  TOGETHER(default), SINGLE
+  #
+  running_mode: SINGLE
+  #
+  # The framework name that need tested.
+  #
+  test_framework: Oracle
+  #
+  # The framework version list of current test case supported
+  #
+  support_versions:
+    - 10.2.0.4.0
+    - 10.2.0.3.0
+    - 10.2.0.2.0

@@ -97,7 +97,7 @@ for TESTCASE_PROJECT in `ls $AUTOTEST_HOME`
 			if [ "$TEST_PROJECT_NAME" != "" ] && [ "$TESTCASE_PROJECT" != "$TEST_PROJECT_NAME" ]; then
 				continue
 			fi
-
+     
 			echo "Begin to deploy ${TESTCASE_PROJECT}"
 			#
 			# Read config file 
@@ -110,6 +110,15 @@ for TESTCASE_PROJECT in `ls $AUTOTEST_HOME`
 			SUPPORT_VERSIONS=${testcase_support_versions[@]} # Read `testcase.support_versions` value from `testcase.yml`
 			TEST_FRAMEWORK=${testcase_test_framework} # Read `testcase.test_framework` value from `testcase.yml`
 			TEST_CASE_REQUEST_URL=${testcase_request_url} # Read `testcase.request_url` value from `testcase.yml`
+      RUNNING_MODE=${testcase_running_mode} # Read `testcase.running_mode` value from `testcase.yml`. default value is `SINGLE`
+      #
+      # The testcase which the running mode is `SINGLE` cannot running with other testcase together, because
+      # of these test cases consume lots of resources at run time.
+      #
+      if [ "$TEST_PROJECT_NAME" = "" ] && [ "$RUNNING_MODE" = "SINGLE" ]; then
+          echo "${TESTCASE_PROJECT} running mode : ${RUNNING_MODE}. skip this project"
+          continue
+      fi      
 			#
 			# go to TESTCASE_PROJECT_DIR
 			#

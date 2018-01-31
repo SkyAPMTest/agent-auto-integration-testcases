@@ -1,0 +1,80 @@
+registryItems:
+  applications:
+  - {oracle-scenario: nq 0}
+  instances:
+  - {oracle-scenario: nq 0}
+  operationNames:
+  - oracle-scenario: [Oracle/JDBI/Connection/close, Oracle/JDBI/PreparedStatement/executeQuery,
+      Oracle/JDBI/PreparedStatement/execute, Oracle/JDBI/Statement/execute, /case/oracle-scenario]
+segmentItems:
+- applicationCode: oracle-scenario
+  segmentSize: 1
+  segments:
+  - segmentId: not null
+    spans:
+    - operationName: Oracle/JDBI/Statement/execute
+      operationId: 0
+      parentSpanId: 0
+      spanId: 1
+      spanLayer: Database
+      startTime: nq 0
+      endTime: 151735616246
+      componentId: 6
+      componentName: ''
+      isError: false
+      spanType: Exit
+      peer: oracle-server:1521
+      peerId: 0
+      tags:
+      - {key: db.type, value: sql}
+      - {key: db.instance, value: xe}
+      - key: db.statement
+        value: "CREATE TABLE test_007(\nid VARCHAR(1) PRIMARY KEY, \nvalue VARCHAR(1)\
+          \ NOT NULL)"
+    - operationName: Oracle/JDBI/PreparedStatement/execute
+      operationId: 0
+      parentSpanId: 0
+      spanId: 2
+      spanLayer: Database
+      startTime: nq 0
+      endTime: nq 0
+      componentId: 6
+      componentName: ''
+      isError: false
+      spanType: Exit
+      peer: oracle-server:1521
+      peerId: 0
+      tags:
+      - {key: db.type, value: sql}
+      - {key: db.instance, value: xe}
+      - {key: db.statement, value: ''}
+    - operationName: Oracle/JDBI/PreparedStatement/executeQuery
+      spanLayer: Database
+      startTime: nq 0
+      endTime: nq 0
+      componentId: 6
+      componentName: ''
+      isError: false
+      spanType: Exit
+      peer: oracle-server:1521
+      peerId: 0
+      tags:
+      - {key: db.type, value: sql}
+      - {key: db.instance, value: xe}
+      - {key: db.statement, value: ''}
+    - operationName: /case/oracle-scenario
+      operationId: 0
+      parentSpanId: -1
+      spanId: 0
+      spanLayer: Http
+      startTime: nq 0
+      endTime: nq 0
+      componentId: 14
+      componentName: ''
+      isError: false
+      spanType: Entry
+      peer: ''
+      peerId: 0
+      tags:
+      - {key: url, value: 'http://localhost:{SERVER_OUTPUT_PORT}/oracle-case/case/oracle-scenario'}
+      - {key: http.method, value: GET}
