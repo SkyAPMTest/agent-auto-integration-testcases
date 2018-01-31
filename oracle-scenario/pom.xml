@@ -88,18 +88,6 @@
                 <test.framework.version>10.2.0.4.0</test.framework.version>
             </properties>
         </profile>
-        <profile>
-            <id>oracle-scenario-10.2.0.3.0</id>
-            <properties>
-                <test.framework.version>10.2.0.3.0</test.framework.version>
-            </properties>
-        </profile>
-        <profile>
-            <id>oracle-scenario-10.2.0.2.0</id>
-            <properties>
-                <test.framework.version>10.2.0.2.0</test.framework.version>
-            </properties>
-        </profile>
     </profiles>
 
     <build>
