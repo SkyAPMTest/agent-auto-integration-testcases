@@ -18,7 +18,7 @@ segmentItems:
       spanId: 1
       spanLayer: Database
       startTime: nq 0
-      endTime: 151735616246
+      endTime: nq 0
       componentId: 6
       componentName: ''
       isError: false
@@ -47,8 +47,11 @@ segmentItems:
       tags:
       - {key: db.type, value: sql}
       - {key: db.instance, value: xe}
-      - {key: db.statement, value: ''}
+      - {key: db.statement, value: 'INSERT INTO test_007(id, value) VALUES(?,?)'}
     - operationName: Oracle/JDBI/PreparedStatement/executeQuery
+      operationId: 0
+      parentSpanId: 0
+      spanId: 3
       spanLayer: Database
       startTime: nq 0
       endTime: nq 0
@@ -61,7 +64,41 @@ segmentItems:
       tags:
       - {key: db.type, value: sql}
       - {key: db.instance, value: xe}
-      - {key: db.statement, value: ''}
+      - {key: db.statement, value: 'SELECT id, value FROM test_007 WHERE id=?'}
+    - operationName: Oracle/JDBI/PreparedStatement/execute
+      operationId: 0
+      parentSpanId: 0
+      spanId: 4
+      spanLayer: Database
+      startTime: nq 0
+      endTime: nq 0
+      componentId: 6
+      componentName: ''
+      isError: false
+      spanType: Exit
+      peer: oracle-server:1521
+      peerId: 0
+      tags:
+      - {key: db.type, value: sql}
+      - {key: db.instance, value: xe}
+      - {key: db.statement, value: 'DROP table test_007'}
+    - operationName: Oracle/JDBI/Connection/close
+      operationId: 0
+      parentSpanId: 0
+      spanId: 5
+      spanLayer: Database
+      tags:
+      - {key: db.type,value: sql}
+      - {key: db.instance,value: xe}
+      - {key: db.statement,value: ''}
+      startTime: nq 0
+      endTime: nq 0
+      componentId: 6
+      componentName: ''
+      isError: false
+      spanType: Exit
+      peer: oracle-server:1521
+      peerId: 0
     - operationName: /case/oracle-scenario
       operationId: 0
       parentSpanId: -1

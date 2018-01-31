@@ -1,38 +1,38 @@
 version: '2.1'
-  services:
-    oracle-server:
-      image: alexeiled/docker-oracle-xe-11g
-      expose:
-        - "1521"
-        - "8080"
+services:
+  oracle-server:
+    image: alexeiled/docker-oracle-xe-11g
+    expose:
+      - "1521"
+      - "8080"
 
-    oracle-testcase:
-      image: skywalking/oracle-scenario:{CASES_IMAGE_VERSION}
-      expose:
-        - "8080"
-      ports:
-        - "{SERVER_OUTPUT_PORT}:8080"
-      environment:
-        - COLLECTOR_SERVER=mock-collector:12800
-        - ORACLE_ADDRESS=oracle-server:1521
-      links:
-        - mock-collector
-        - oracle-server
-      volumes:
-        - {AGENT_FILE_PATH}:/usr/local/oracle-scenario/agent
-      depends_on:
-        - mock-collector
+  oracle-testcase:
+    image: skywalking/oracle-scenario:{CASES_IMAGE_VERSION}
+    expose:
+      - "8080"
+    ports:
+      - "{SERVER_OUTPUT_PORT}:8080"
+    environment:
+      - COLLECTOR_SERVER=mock-collector:12800
+      - ORACLE_ADDRESS=oracle-server:1521
+    links:
+      - mock-collector
+      - oracle-server
+    volumes:
+      - {AGENT_FILE_PATH}:/usr/local/oracle-scenario/agent
+    depends_on:
+      - mock-collector
 
-    mock-collector:
-      image: skywalking/skywalking-mock-collector:{COLLECTOR_IMAGE_VERSION}
-      environment:
-        - GRPC_BIND_HOST=mock-collector
-      expose:
-        - "12800"
-      ports:
-        - "{COLLECTOR_OUTPUT_PORT}:12800"
-      healthcheck:
-        test: ["CMD", "curl", "-f", "http://127.0.0.1:12800/receiveData"]
-        interval: 10s
-        timeout: 10s
-        retries: 5
+  mock-collector:
+    image: skywalking/skywalking-mock-collector:{COLLECTOR_IMAGE_VERSION}
+    environment:
+      - GRPC_BIND_HOST=mock-collector
+    expose:
+      - "12800"
+    ports:
+      - "{COLLECTOR_OUTPUT_PORT}:12800"
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://127.0.0.1:12800/receiveData"]
+      interval: 10s
+      timeout: 10s
+      retries: 5
