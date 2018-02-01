@@ -117,6 +117,7 @@ for TESTCASE_PROJECT in `ls $AUTOTEST_HOME`
       #
       if [ "$TEST_PROJECT_NAME" = "" ] && [ "$RUNNING_MODE" = "SINGLE" ]; then
           echo "${TESTCASE_PROJECT} running mode : ${RUNNING_MODE}. skip this project"
+          cleanEnvVariables
           continue
       fi      
 			#
