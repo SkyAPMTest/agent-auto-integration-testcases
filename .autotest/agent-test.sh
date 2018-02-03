@@ -210,7 +210,8 @@ echo "agent branch: ${AGENT_GIT_BRANCH}, agent commit: ${AGENT_COMMIT}"
 AGENT_DIR="$WORKSPACE_DIR/agent"
 AGENT_WITH_OPTIONAL_PLUGIN_DIR="$WORKSPACE_DIR/agent-with-optional-plugins"
 if [ ! -f "${AGENT_DIR}" ]; then
-	mkdir -p ${AGENT_DIR}
+	  mkdir -p ${AGENT_DIR}
+    mkdir -p ${AGENT_WITH_OPTIONAL_PLUGIN_DIR}
 fi
 echo "copy agent jar to $AGENT_DIR"
 #echo "copy agent"
