@@ -13,6 +13,10 @@ testcase:
   #
   test_framework: Spring-RestTemplate_Annotation_RestAnnotation
   #
+  # The running mode:  TOGETHER(default), SINGLE, WITH_OPTIONAL
+  #
+  running_mode: WITH_OPTIONAL
+  #
   # The framework version list of current test case supported
   #
   support_versions:

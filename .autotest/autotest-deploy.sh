@@ -44,7 +44,10 @@ cleanEnvVariables(){
 PRG="$0"
 PRGDIR=`dirname "$PRG"`
 [ -z "$AUTOTEST_HOME" ] && AUTOTEST_HOME=`cd "$PRGDIR/.." >/dev/null; pwd`
-
+AGENT_DIR="${AUTOTEST_HOME}/workspace/agent"
+AGENT_WITH_OPTIONAL_PLUGINS_DIR="${AUTOTEST_HOME}/workspace/agent-with-optional-plugins"
+ESCAPE_AGENT_DIR=$(echo "$AGENT_DIR" |sed -e 's/\//\\\//g' )
+ESCAPE_AGENT_WITH_OPTIONAL_PLUGINS_DIR=$(echo "$AGENT_WITH_OPTIONAL_PLUGINS_DIR" |sed -e 's/\//\\\//g' )
 #
 # define env variables
 #
@@ -86,7 +89,6 @@ checkIfCaseProject(){
 		return 1
 	fi
 }
-
 #
 # Iterate all project in skywalking-autotest-scenario
 #
@@ -113,7 +115,7 @@ for TESTCASE_PROJECT in `ls $AUTOTEST_HOME`
 			SUPPORT_VERSIONS=${testcase_support_versions[@]} # Read `testcase.support_versions` value from `testcase.yml`
 			TEST_FRAMEWORK=${testcase_test_framework} # Read `testcase.test_framework` value from `testcase.yml`
 			TEST_CASE_REQUEST_URL=${testcase_request_url} # Read `testcase.request_url` value from `testcase.yml`
-      RUNNING_MODE=${testcase_running_mode} # Read `testcase.running_mode` value from `testcase.yml`. default value is `SINGLE`
+      RUNNING_MODE=${testcase_running_mode} # Read `testcase.running_mode` value from `testcase.yml`. default value is `TOGETHER`
       #
       # The testcase which the running mode is `SINGLE` cannot running with other testcase together, because
       # of these test cases consume lots of resources at run time.
@@ -122,7 +124,13 @@ for TESTCASE_PROJECT in `ls $AUTOTEST_HOME`
           echo "${TESTCASE_PROJECT} running mode : ${RUNNING_MODE}. skip this project"
           cleanEnvVariables
           continue
-      fi      
+      fi
+      
+      AGENT_FILE_PATH="${ESCAPE_AGENT_DIR}"
+      if [ "$RUNNING_MODE" = "WITH_OPTIONAL" ]; then
+          AGENT_FILE_PATH="${ESCAPE_AGENT_WITH_OPTIONAL_PLUGINS_DIR}"
+      fi
+      echo $AGENT_FILE_PATH
 			#
 			# go to TESTCASE_PROJECT_DIR
 			#
@@ -147,6 +155,7 @@ for TESTCASE_PROJECT in `ls $AUTOTEST_HOME`
 			 cp $TESTCASE_PROJECT_DIR/config/docker-compose.yml $TEST_CASE_DIR
 			 eval sed -i '' -e 's/\{CASES_IMAGE_VERSION\}/$SUPPORT_VERSION/' $TEST_CASE_DIR/docker-compose.yml  # replace the test case image version
 			 eval sed -i '' -e 's/\{COLLECTOR_IMAGE_VERSION\}/$COLLECTOR_IMAGE_VERSION/' $TEST_CASE_DIR/docker-compose.yml # replace mock collector image version
+       eval sed -i -e 's/\{AGENT_FILE_PATH\}/$AGENT_FILE_PATH/' $TEST_CASE_DIR/docker-compose.yml 
 			 #
 			 # Generate testcase desc file
 			 #

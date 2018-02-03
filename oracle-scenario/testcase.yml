@@ -9,7 +9,7 @@ testcase:
   #
   request_url: http://localhost:{SERVER_OUTPUT_PORT}/oracle-case/case/oracle-scenario
   #
-  # The running mode:  TOGETHER(default), SINGLE
+  # The running mode:  TOGETHER(default), SINGLE, WITH_OPTIONAL
   #
   running_mode: SINGLE
   #

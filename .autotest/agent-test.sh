@@ -203,23 +203,24 @@ AGENT_COMMIT=`checkoutSourceCode ${AGENT_GIT_URL} $AGENT_GIT_BRANCH $SOURCE_DIR/
 # To build ignore plug-in, we need to copy dependencies jar to ci-depencies foleder
 #
 DEPENDENCIES_JARS_FOLDERS=${AGENT_TEST_HOME}/dependencies-jars
-cp ${DEPENDENCIES_JARS_FOLDERS}/*.jar ${SOURCE_DIR}/skywalking/ci-dependencies
 #echo "clone agent"
 buildProject $SOURCE_DIR/skywalking
 echo "agent branch: ${AGENT_GIT_BRANCH}, agent commit: ${AGENT_COMMIT}"
 #echo "checkout agent and mvn build"
 AGENT_DIR="$WORKSPACE_DIR/agent"
+AGENT_WITH_OPTIONAL_PLUGIN_DIR="$WORKSPACE_DIR/agent-with-optional-plugins"
 if [ ! -f "${AGENT_DIR}" ]; then
 	mkdir -p ${AGENT_DIR}
 fi
 echo "copy agent jar to $AGENT_DIR"
 #echo "copy agent"
 cp -r $SOURCE_DIR/skywalking/packages/skywalking-agent/* $AGENT_DIR/
-
+#echo "copy agent with optional plugin"
+cp -r $SOURCE_DIR/skywalking/packages/skywalking-agent/* $AGENT_WITH_OPTIONAL_PLUGIN_DIR/
 #
 # Copy the optional plugins
 #
-cp -r $AGENT_DIR/optional-plugins/* $AGENT_DIR/plugins/
+cp -r $AGENT_WITH_OPTIONAL_PLUGIN_DIR/optional-plugins/* $AGENT_WITH_OPTIONAL_PLUGIN_DIR/plugins/
 ############ build test tool ###########
 #	1. checkout test tool code
 #	2. switch branch
@@ -286,16 +287,12 @@ deployTestCase(){
 	# running time 
 	#
 	CASE_DIR="$TEST_CASES_DIR/$TEST_CASE"
-	ESCAPE_PATH=$(echo "$AGENT_DIR" |sed -e 's/\//\\\//g' )
-	#
 	# replace the port in docker-compose.xml file and testcase.desc file
 	#
 	eval sed -i -e 's/\{COLLECTOR_OUTPUT_PORT\}/$COLLECTOR_OUTPUT_PORT/' $CASE_DIR/docker-compose.yml # replace value of `{COLLECTOR_OUTPUT_PORT}` parameter in docker-compose.xml
 	eval sed -i -e 's/\{SERVER_OUTPUT_PORT\}/$SERVER_OUTPUT_PORT/' $CASE_DIR/docker-compose.yml # replace value of `{SERVER_OUTPUT_PORT}` parameter in docker-compose.xml
 	eval sed -i -e 's/\{SERVER_OUTPUT_PORT\}/$SERVER_OUTPUT_PORT/' $CASE_DIR/testcase.desc # replace value of `{SERVER_OUTPUT_PORT}` parameter in testcase.desc
 	eval sed -i -e 's/\{SERVER_OUTPUT_PORT\}/$SERVER_OUTPUT_PORT/' $CASE_DIR/expectedData.yaml # replace value of `{SERVER_OUTPUT_PORT}` parameter in testcase.desc
-	eval sed -i -e 's/\{AGENT_FILE_PATH\}/$ESCAPE_PATH/' $CASE_DIR/docker-compose.yml 
-	#
 	cd $CASE_DIR && docker-compose rm -s -f -v 
 	
 	echo "start docker container"
