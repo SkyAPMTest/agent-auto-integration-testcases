@@ -39,7 +39,7 @@ services:
     expose:
       - "12800"
     ports:
-      - "12800:12800"
+      - "{COLLECTOR_OUTPUT_PORT}:12800"
     healthcheck:
       test: ["CMD", "curl", "-f", "http://127.0.0.1:12800/receiveData"]
       interval: 5s
