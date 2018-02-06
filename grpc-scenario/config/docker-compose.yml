@@ -1,0 +1,47 @@
+version: '2.1'
+services:
+  consumer-scenario:
+    image:  skywalking/grpc-consumer-scenario:1.8.0
+    expose:
+      - "8080"
+    ports:
+      - "{SERVER_OUTPUT_PORT}:8080"
+    environment:
+      - COLLECTOR_SERVER=mock-collector:12800
+      - GRPC_PROVIDER_HOST=provider-scenario
+    links:
+      - mock-collector
+      - provider-scenario
+    volumes:
+     - {AGENT_FILE_PATH}:/usr/local/tomcat/agent
+    depends_on:
+      mock-collector:
+        condition: service_healthy
+
+  provider-scenario:
+    image:  skywalking/grpc-provider-scenario:1.8.0
+    expose:
+      - "18080"
+    environment:
+      - COLLECTOR_SERVER=mock-collector:12800
+    links:
+      - mock-collector
+    volumes:
+     - {AGENT_FILE_PATH}:/usr/local/skywalking-grpc-scenario/agent
+    depends_on:
+      mock-collector:
+        condition: service_healthy
+
+  mock-collector:
+    image: skywalking/skywalking-mock-collector:3.2.6-2017
+    environment:
+      - GRPC_BIND_HOST=mock-collector
+    expose:
+      - "12800"
+    ports:
+      - "{COLLECTOR_OUTPUT_PORT}:12800"
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://127.0.0.1:12800/receiveData"]
+      interval: 5s
+      timeout: 10s
+      retries: 5
