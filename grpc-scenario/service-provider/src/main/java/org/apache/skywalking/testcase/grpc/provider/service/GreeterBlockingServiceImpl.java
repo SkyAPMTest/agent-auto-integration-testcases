@@ -16,24 +16,16 @@
  *
  */
 
-package org.apache.skywalking.testcase.grpc.consumer;
+package org.apache.skywalking.testcase.grpc.provider.service;
 
-import java.io.IOException;
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.annotation.ComponentScan;
+import io.grpc.stub.StreamObserver;
+import org.apache.skywalking.testcase.gpc.proto.GreeterBlockingGrpc;
+import org.apache.skywalking.testcase.gpc.proto.HelloReply;
+import org.apache.skywalking.testcase.gpc.proto.HelloRequest;
 
-@EnableAutoConfiguration
-@SpringBootApplication
-@ComponentScan("org.apache.skywalking.testcase.grpc.consumer")
-public class Consumer_Application {
-
-    public static void main(String[] args) throws IOException, InterruptedException {
-        try {
-            SpringApplication.run(Consumer_Application.class, args);
-        } catch (Exception e) {
-
-        }
+public class GreeterBlockingServiceImpl extends GreeterBlockingGrpc.GreeterBlockingImplBase {
+    @Override public void sayHello(HelloRequest request, StreamObserver<HelloReply> responseObserver) {
+        responseObserver.onNext(HelloReply.newBuilder().setMessage("Hi," + request.getName()).build());
+        responseObserver.onCompleted();
     }
 }

@@ -20,7 +20,12 @@ package org.apache.skywalking.testcase.grpc.provider;
 
 import io.grpc.Server;
 import io.grpc.ServerBuilder;
+import io.grpc.ServerInterceptors;
+import io.grpc.netty.NettyServerBuilder;
+import io.netty.channel.local.LocalAddress;
 import java.io.IOException;
+import org.apache.skywalking.testcase.grpc.provider.interceptor.ProviderInterceptor;
+import org.apache.skywalking.testcase.grpc.provider.service.GreeterBlockingServiceImpl;
 import org.apache.skywalking.testcase.grpc.provider.service.GreeterServiceImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -30,7 +35,8 @@ public class Provider_Application {
 
     public static void main(String[] args) throws IOException, InterruptedException {
         logger.info("start the server");
-        Server server = ServerBuilder.forPort(18080).addService(new GreeterServiceImpl()).build();
+        Server server = NettyServerBuilder.forAddress(LocalAddress.ANY).forPort(18080).addService(ServerInterceptors.intercept(new GreeterServiceImpl(), new ProviderInterceptor()))
+            .addService(ServerInterceptors.intercept(new GreeterBlockingServiceImpl(), new ProviderInterceptor())).build();
         server.start();
         server.awaitTermination();
     }

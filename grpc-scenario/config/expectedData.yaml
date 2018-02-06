@@ -1,0 +1,134 @@
+registryItems:
+  applications:
+  - {grpc-consumer-scenario: nq 0}
+  - {grpc-provider-scenario: nq 0}
+  instances:
+  - {grpc-consumer-scenario: 1}
+  - {grpc-provider-scenario: 1}
+  operationNames:
+  - grpc-consumer-scenario: [Greeter.sayHello, /service-consumer/case/grpc-scenario, RequestStreamObserver/onReady, ResponseStreamObserver/OnNext]
+  - grpc-provider-scenario: [Greeter.sayHello, ResponseStreamObserver/OnNext]
+segmentItems:
+- applicationCode: grpc-consumer-scenario
+  segmentSize: 2
+  segments:
+  - segmentId: not null
+    spans:
+    - operationName: Greeter.sayHello
+      operationId: 0
+      parentSpanId: 0
+      spanId: 1
+      spanLayer: RPCFramework
+      startTime: nq 0
+      endTime: nq 0
+      componentId: 23
+      componentName: ''
+      isError: false
+      spanType: Exit
+      peer: 'provider-scenario:18080'
+      peerId: 0
+    - operationName: /service-consumer/case/grpc-scenario
+      operationId: 0
+      parentSpanId: -1
+      spanId: 0
+      spanLayer: Http
+      startTime: nq 0
+      endTime: nq 0
+      componentId: 1
+      componentName: ''
+      isError: false
+      spanType: Entry
+      peer: ''
+      peerId: 0
+      tags:
+      - {key: url, value: 'http://localhost:{SERVER_OUTPUT_PORT}/service-consumer/case/grpc-scenario'}
+      - {key: http.method, value: GET}
+  - segmentId: not null
+    spans:
+    - operationName: ResponseStreamObserver/OnNext
+      operationId: 0
+      parentSpanId: 0
+      spanId: 1
+      spanLayer: Unknown
+      startTime: nq 0
+      endTime: nq 0
+      componentId: 0
+      componentName: ''
+      isError: false
+      spanType: Local
+      peer: ''
+      peerId: 0
+    - operationName: ResponseStreamObserver/OnNext
+      operationId: 0
+      parentSpanId: 0
+      spanId: 2
+      spanLayer: Unknown
+      startTime: nq 0
+      endTime: nq 0
+      componentId: 0
+      componentName: ''
+      isError: false
+      spanType: Local
+      peer: ''
+      peerId: 0
+    - operationName: RequestStreamObserver/onReady
+      operationId: 0
+      parentSpanId: -1
+      spanId: 0
+      spanLayer: RPCFramework
+      startTime: nq 0
+      endTime: nq 0
+      componentId: 23
+      componentName: ''
+      isError: false
+      spanType: Local
+      peer: ''
+      peerId: 0
+      refs:
+      - {parentServiceId: 0, parentServiceName: /service-consumer/case/grpc-scenario, networkAddressId: 0,entryServiceId: 0, refType: CrossThread, parentSpanId: 1, parentTraceSegmentId: '${grpc-consumer-scenario[0]}', parentApplicationInstanceId: 0, networkAddress: '', entryServiceName: /service-consumer/case/grpc-scenario, entryApplicationInstanceId: nq 0}
+- applicationCode: grpc-provider-scenario
+  segmentSize: 1
+  segments:
+  - segmentId: not null
+    spans:
+    - operationName: ResponseStreamObserver/OnNext
+      operationId: 0
+      parentSpanId: 0
+      spanId: 1
+      spanLayer: Unknown
+      startTime: nq 0
+      endTime: nq 0
+      componentId: 0
+      componentName: ''
+      isError: false
+      spanType: Local
+      peer: ''
+      peerId: 0
+    - operationName: ResponseStreamObserver/OnNext
+      operationId: 0
+      parentSpanId: 0
+      spanId: 2
+      spanLayer: Unknown
+      startTime: nq 0
+      endTime: nq 0
+      componentId: 0
+      componentName: ''
+      isError: false
+      spanType: Local
+      peer: ''
+      peerId: 0
+    - operationName: Greeter.sayHello
+      operationId: 0
+      parentSpanId: -1
+      spanId: 0
+      spanLayer: Unknown
+      startTime: nq 0
+      endTime: nq 0
+      componentId: 23
+      componentName: ''
+      isError: false
+      spanType: Entry
+      peer: ''
+      peerId: 0
+      refs:
+      - {parentServiceId: 0, parentServiceName: /service-consumer/case/grpc-scenario, networkAddressId: 0,entryServiceId: 0, refType: CrossProcess, parentSpanId: 1, parentTraceSegmentId: '${grpc-consumer-scenario[0]}',parentApplicationInstanceId: nq 0, networkAddress: 'provider-scenario:18080', entryServiceName: /service-consumer/case/grpc-scenario,entryApplicationInstanceId: nq 0}

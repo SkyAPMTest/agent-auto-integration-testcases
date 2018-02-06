@@ -29,8 +29,6 @@
 
     <artifactId>grpc-service-defination</artifactId>
 
-
-
     <build>
         <extensions>
             <extension>
