@@ -4,7 +4,7 @@ registryItems:
   instances:
   - {kafka-scenario: nq 0}
   operationNames:
-  - kafka-scenario: [Kafka/Producer/send, Producer/Callback, Kafka/Consumer/Poll, /case/kafka-case]
+  - kafka-scenario: [Kafka/test/Producer, Producer/Callback, Kafka/test/Consumer, /case/kafka-case]
 segmentItems:
 - applicationCode: kafka-scenario
   segmentSize: ge 3
