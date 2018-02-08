@@ -25,9 +25,8 @@ segmentItems:
       peer: localhost:9876
       peerId: 0
       tags:
-      - {key: brokerName, value: not null }
-      - {key: tags, value: not null }
-      - {key: communication.mode, value: SYNC}
+      - {key: mq.broker, value: not null }
+      - {key: mq.topic, value: TopicTest }
     - operationName: /case/rocketMQ-Provider
       operationId: 0
       parentSpanId: -1
