@@ -1,4 +1,4 @@
-FROM tomcat:8.0.45-jre8-alpine
+FROM tomcat:9.0.4-jre9-slim
 
 ENV COLLECTOR_SERVER=127.0.0.1:12800 \
     MYSQL_INSTANCE_HOST=127.0.0.1:3306 \
