@@ -2,8 +2,9 @@
 
 echo "begin to start nameservice"
 (cd ${ROCKETMQ_HOME}/bin && export JAVA_OPT=" -Duser.home=${ROCKETMQ_SCENARIO_HOME}/rocketMQ-${ROCKETMQ_VERSION}/volume" && nohup sh mqnamesrv &) > /dev/null
+sleep 5
 echo "begin to start broker"
-(cd ${ROCKETMQ_HOME}/bin && export JAVA_OPT=" -Duser.home=${ROCKETMQ_SCENARIO_HOME}/rocketMQ-${ROCKETMQ_VERSION}/volume" && nohup sh mqbroker -n $ROCKETMQ_NAMESRV &) > /dev/nul
+(cd ${ROCKETMQ_HOME}/bin && export JAVA_OPT=" -Duser.home=${ROCKETMQ_SCENARIO_HOME}/rocketMQ-${ROCKETMQ_VERSION}/volume" && nohup sh mqbroker -n $ROCKETMQ_NAMESRV autoCreateTopicEnable=true &) > /dev/nul
 echo "begin to start provider"
 
 export AGENT_FILE_PATH=${ROCKETMQ_SCENARIO_HOME}/agent

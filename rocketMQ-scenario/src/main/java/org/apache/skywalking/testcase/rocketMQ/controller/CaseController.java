@@ -40,26 +40,18 @@ public class CaseController {
 
     @PostConstruct
     public void setUp() throws MQClientException {
-        producer = new DefaultMQProducer(UUID.randomUUID().toString());
-        producer.setNamesrvAddr(nameSrv);
-        producer.start();
+
     }
 
     @RequestMapping("/rocketMQ-Provider")
     @ResponseBody
     public String rocketMQProvider() throws UnsupportedEncodingException, MQClientException, RemotingException, InterruptedException, MQBrokerException {
-
-        String[] tags = new String[] {"TagA", "TagB"};
+        producer = new DefaultMQProducer(UUID.randomUUID().toString());
+        producer.setNamesrvAddr(nameSrv);
+        producer.start();
         Message msg = new Message("TopicTest", "TagA", "KEY",
             ("Hello RocketMQ ").getBytes(RemotingHelper.DEFAULT_CHARSET));
-        SendResult sendResult = producer.send(msg, new MessageQueueSelector() {
-            @Override
-            public MessageQueue select(List<MessageQueue> mqs, Message msg, Object arg) {
-                Integer id = (Integer)arg;
-                int index = id % mqs.size();
-                return mqs.get(index);
-            }
-        }, 1);
+        SendResult sendResult = producer.send(msg);
 
         logger.info("{} %n", sendResult);
 
