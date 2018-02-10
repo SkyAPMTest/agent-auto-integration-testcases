@@ -125,7 +125,7 @@ HttpClient期望数据文件 --- [expectedData.yaml](https://github.com/Skywalki
 | `ge`     | 大于等于           |
 | `gt`     | 大于               |
 
-**字符串字段描述符
+**字符串字段描述符**
 
 | 描述符     | 描述                   |
 | :---       | :---                   |
@@ -355,7 +355,17 @@ testcase:
 |:---              |:---                                                                    |
 | request_url      | 用例工程暴露的Web服务的地址, URL中的端口用`{SERVER_OUTPUT_PORT}`替代.  |
 | test_framework   | 测试框架的名字. 例如HttpClient测试工程使用HttpClient作为test_framework |
-| support_versions | 支持框架的版本列表。                                                   |
+| support_versions | 支持框架的版本列表                                                    |
+
+以下为HttpClient的testcase.yaml文件:
+```yml
+testcase:
+  request_url: http://localhost:{SERVER_OUTPUT_PORT}/httpclient-case/case/httpclient 
+  support_versions:
+    - 4.3
+    ...
+    - 4.5.3
+```
 
 2. 添加Profile
 在pom.xml中添加`profiles`配置节点。其中每一个`profile`就代表中`testcase.yaml`中support_versions列表中的一个, `profile`中的id命名格式为: `${project.dir_name}-${support_version}`.
