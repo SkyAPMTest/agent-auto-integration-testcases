@@ -248,7 +248,8 @@ segments:
 #### 编写期望数据流程
 1. 编写RegistryItems
 
-HttpClient测试用例中是运行在一台Tomcat容器中，所以httpclient的实例数为1, 并且applicationId不为0。
+HttpClient测试用例中是运行在一台Tomcat容器中，所以httpclient的实例数为1, 并且applicationId不为0。HttpClient用例包含三个Span: 二个Tomcat埋点生成的Span，一个HttpClient埋点生成的Span,
+其中HttpClient Span的OperationName和SegementB的Tomcat生成的Span是一致的，所以operationNames中有两个operationName.
 ```yml
 registryItems:
   applications:
