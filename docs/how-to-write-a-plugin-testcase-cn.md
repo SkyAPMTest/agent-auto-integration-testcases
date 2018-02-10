@@ -110,13 +110,14 @@ HttpClient运行在Tomcat中，javaagent参数应该添加在`${project.basedir}
 6. 测试用例镜像. 具体参考文档中的测试章节
 
 ### 期望数据文件
-HttpClient期望数据文件 --- [expectedData.yaml](https://github.com/SkywalkingTest/skywalking-agent-testcases/blob/master/httpclient-4.3.x-scenario/config/expectedData.yaml**
+HttpClient期望数据文件 --- [expectedData.yaml](https://github.com/SkywalkingTest/skywalking-agent-testcases/blob/master/httpclient-4.3.x-scenario/config/expectedData.yaml)
 
 #### 期望数据
 期望数据文件用来描述用例生成的Segment数据，文件主要包含两部分内容：注册项 和 Segment数据. Segment数据中包含对Span的校验 和 Segment个数的校验。
 在介绍文件组成部分之前，先介绍下期望数据中的校验描述符:
 
 **数字型字段校验描述符**
+
 | 校验字段 | 描述               |
 | :---     | :---               |
 | `nq`     | 不等于             |
@@ -146,9 +147,10 @@ registryItems:
   operationNames:
   - APPLICATION_CODE: [ SPAN_OPERATION(string), ... ]
   ...
-``
+```
 
 以下对各个校验字段的描述:
+
 |                | 描述                                               |
 | :---           | :---                                               |
 | applications   | 注册的Aplication_code对应的application Id映射关系. |
