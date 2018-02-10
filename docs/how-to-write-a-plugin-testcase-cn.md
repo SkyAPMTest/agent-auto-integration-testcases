@@ -1,6 +1,6 @@
 # 如何编写插件测试用例
 ## 用例工程的目录结构
-用例工程是一个独立的Maven工程。该工程能够将用例打包成镜像。并且提供一个外部能够访问的Web服务
+用例工程是一个独立的Maven工程。该工程能够打包成镜像,并要求提供一个外部能够访问的Web服务用例测试调用链追踪
 
 以下是用例工程的目录图:
 ```
@@ -25,9 +25,9 @@
 
 | 文件               | 用途                                                     |
 |:-----|:---                                                      |
-| docker-compose.xml | 用来定义用例的docker运行容器环境                         |
-| expectedData.yaml  | 用来定义用例期望生成的Segment的数据                      |
-| testcase.yml       | 用来定义用例的基本信息，例如测试框架，用例覆盖版本的信息 |
+| docker-compose.xml | 定义用例的docker运行容器环境                           |
+| expectedData.yaml  | 定义用例期望生成的Segment的数据                        |
+| testcase.yml       | 定义用例的基本信息，如: 被测试框架名称、版本号        |
 
 ## 测试用例编写流程
 1. 编写用例代码
@@ -70,15 +70,16 @@ HttpClient用例运行在Tomcat容器中，该用例包含两个Servlet: CaseSer
 +------------------------------------------+
 ```
 ### 编写用例代码
-对pom.xml的一些建议，这样方便支持多版本测试，而不用修改任何代码
-1. 建议将测试框架依赖的版本号设置成一个属性
-2. 建议将镜像的版本号设置成一个属性，并且把镜像的版本号属性的值设置成框架版本号属性
+pom.xml最佳实践:
+1. 测试框架依赖的版本号设置为属性变量
+2. 镜像的版本号设置成属性变量，并且使用框架版本号作为镜像的版本号
 
-HttpClient测试用例中的pom.xml将httpclient的版本号设置成`${test.framework.version}`,镜像版本号设置成`${docker.image.version}`属性。具体请参考[配置](https://github.com/SkywalkingTest/skywalking-agent-testcases/blob/master/httpclient-4.3.x-scenario/pom.xml#L16-L17)
+具体请参考[配置](https://github.com/SkywalkingTest/skywalking-agent-testcases/blob/master/httpclient-4.3.x-scenario/pom.xml#L16-L17)
 
 ### 构建测试用例镜像
 1. 添加Maven docker插件. 
-在docker插件中有三个配置项需要注意：`imageName`, `imageTags`,`dockerDirectory`. 
+
+以下三个字段应重点注意:
 
 | 字段            | 意义                                                                                              |
 | ---             | ---                                                                                            |
@@ -91,12 +92,16 @@ HttpClient测试用例中的pom.xml将httpclient的版本号设置成`${test.fra
 3. 在config目录下添加docker-compose.xml
 HttpClient测试用例的docker-compose.xml请参考[配置](https://github.com/SkywalkingTest/skywalking-agent-testcases/blob/master/httpclient-4.3.x-scenario/config/docker-compose.yml)
 
-4. 测试用例容器
+4. 运行maven的docker插件
+执行`mvn package docker:build`命令打包用例镜像
+
+5. 运行并测试用例容器
 - 进入`config`目录，并运行`docker-compose up`
 - 访问容器暴露的web服务，确保用例能够正常运行
 
 ### 用例镜像加载探针
 1. Dockerfile添加探针挂载目录
+添加`VOLUME`配置项到Dockerfile,具体参考[配置](https://github.com/SkywalkingTest/skywalking-agent-testcases/blob/master/httpclient-4.3.x-scenario/docker/Dockerfile#L11)
 
 2. 在启动脚本中添加Agent参数
 HttpClient运行在Tomcat中，javaagent参数应该添加在`${project.basedir}/docker/catalina.sh`. 具体参考[配置](https://github.com/SkywalkingTest/skywalking-agent-testcases/blob/master/httpclient-4.3.x-scenario/docker/catalina.sh#L107-110)
@@ -109,70 +114,107 @@ HttpClient运行在Tomcat中，javaagent参数应该添加在`${project.basedir}
 
 5. 在docker-compose.xml中添加Agent的挂载. 具体参考[配置](https://github.com/SkywalkingTest/skywalking-agent-testcases/blob/master/httpclient-4.3.x-scenario/config/docker-compose.yml#L13-14)
 
-### 编写期望数据文件
-HttpClient期望数据文件 --- [expectedData.yaml](https://github.com/SkywalkingTest/skywalking-agent-testcases/blob/master/httpclient-4.3.x-scenario/config/expectedData.yaml)
+### 期望数据文件
+HttpClient期望数据文件 --- [expectedData.yaml](https://github.com/SkywalkingTest/skywalking-agent-testcases/blob/master/httpclient-4.3.x-scenario/config/expectedData.yaml**
 
-1. 编写RegistryItems
-以下是HttpClient的注册项的demo:
+#### 期望数据
+期望数据文件用来描述用例生成的Segment数据，文件主要包含两部分内容：注册项 和 Segment数据. Segment数据中包含对Span的校验 和 Segment个数的校验。
+在介绍文件组成部分之前，先介绍下期望数据中的校验描述符:
+
+**数字型字段校验描述符**
+| 校验字段 | 描述               |
+| :---     | :---               |
+| `nq`     | 不等于             |
+| `eq`     | 等于，默认可以不写 |
+| `ge`     | 大于等于           |
+| `gt`     | 大于               |
+
+**字符串字段描述符
+
+| 描述符     | 描述                   |
+| :---       | :---                   |
+| `not null` | 不为null               |
+| `null`     | 空字符或者null.        |
+| `eq`        | 精确匹配. 默认可以不写 |
+
+以上就是所有的期望数据中的校验描述符。下面介绍文件的主要组成部分
+
+**注册项数据校验格式**
 ```yml
 registryItems:
   applications:
-  - {httpclient-case: nq 0}
+  - APPLICATION_CODE: APPLICATION_ID(int)
+  ...
   instances:
-  - {httpclient-case: 1}
+  - APPLICATION_CODE: INSTANCE_COUNT(int)
+  ...
   operationNames:
-  - httpclient-case: [/httpclient-case/case/httpclient,/httpclient-case/case/context-propagate]
-```
-以下对各个校验字段的描述:
-
-|        | 描述                                                                                |
-|:---            |:---                                                                                 |
-| applications   | 注册的Aplication_code对应的application Id映射关系. `nq 0` 代表 applicationId不等于0 |
-| instances      | application对应的实例数量                                                           |
-| operationNames | 所有预期生成Span的OperationName列表.                                                |
-
-
-2. 编写segmentItems
-根据HttpClient用例的运行流程，可以推测出用例生成两个Segment. 第一个Segment是访问CaseServlet所产生的, 暂且叫它`SegmentA`。第二Segment是CaseServlet通过HttpClient调用ContextPropagateServlet所产生的, 暂且叫它`SegmentB`. SegmentB中包含一个SegmentRef，并且SegmentRef中的`parentTraceSegmentId`为SegmentA的segmentID。
-```yml
-  applicationCode: httpclient-case
-  segmentSize: 2
-```
+  - APPLICATION_CODE: [ SPAN_OPERATION(string), ... ]
+  ...
+``
 
 以下对各个校验字段的描述:
+|                | 描述                                               |
+| :---           | :---                                               |
+| applications   | 注册的Aplication_code对应的application Id映射关系. |
+| instances      | Application对应的实例数量                          |
+| operationNames | 所有预期生成Span的OperationName列表, key           |
 
-| 字段 | 描述 |
-|:--- |:---|
-| applicationCode | 注册的Application_code.|
-| segmentSize | 生成的Segment的数量. 目前支持的校验表达式有 `nq (not equal)` `eq (equals)` `gt (great than)` `ge (great equal)` |
 
-
-由于skywalking对于Tomcat有埋点，所以SegmentA中会包含两个Span，第一个Span是Tomcat的埋点，第二个Span是HttpClient的埋点。
-
-**注意**: 期望文件中Segment的Span是后进先出的顺序
-
-SegmentA的部分生成的Span数据如下：
+**Segment数据校验格式**
 ```yml
-- segmentId: not null
-  spans:
-  -
-    operationName: /httpclient-case/case/context-propagate
-    operationId: eq 0
-    parentSpanId: 0
-    spanId: 1
-    startTime: nq 0
-    endTime: nq 0
-    isError: false
-    spanLayer: Http
-    spanType: Exit
-    componentName: null
-    componentId: eq 2
+segments:
+-
+  applicationCode: APPLICATION_CODE(int)
+  segmentSize: SEGMENT_SIZE(int)
+  segments:
+  - segmentId: SEGMENT_ID(string)
+    spans:
+        ....
+```
+
+以下对各个校验字段的描述:
+
+| 字段            | 描述                    |
+| :---            | :---                    |
+| applicationCode | 注册的Application_code. |
+| segmentSize     | 生成的Segment的数量.    |
+| segmentId       | segment的trace ID.      |
+| spans           | segment生成的Span列表   |
+
+**Span数据校验格式**
+**注意**: 期望文件中Segment的Span是按照Span的结束顺序进行排列
+
+```yml
+    operationName: OPERATION_NAME(string)
+    operationId: SPAN_ID(int)
+    parentSpanId: PARENT_SPAN_ID(int)
+    spanId: SPAN_ID(int)
+    startTime: START_TIME(int)
+    endTime: END_TIME(int)
+    isError: IS_ERROR(string: true, false)
+    spanLayer: SPAN_LAYER(string: DB, RPC_FRAMEWORK, HTTP, MQ, CACHE)
+    spanType: SPAN_TYPE(string: Exit, Entry, Local )
+    componentName: COMPONENT_NAME(string)
+    componentId: COMPONENT_ID(int)
     tags:
-    - {key: url, value: 'http://127.0.0.1:8080/httpclient-case/case/context-propagate'}
-    - {key: http.method, value: GET}
-    logs: []
-    peer: null
-    peerId: eq 0
+    - {key: TAG_KEY(string), value: TAG_VALUE(string)}
+    ...
+    logs: 
+    - {key: LOG_KEY(string), value: LOG_VALUE(string)}
+    ...
+    peer: PEER(string)
+    peerId: PEER_ID(int)
+    refs:
+    - {
+       parentSpanId: PARENT_SPAN_ID(int), 
+       parentTraceSegmentId: PARENT_TRACE_SEGMENT_ID(string), 
+       entryServiceName: ENTRY_SERVICE_NAME(string), 
+       networkAddress: NETWORK_ADDRESS(string),
+       parentServiceName: PARENT_SERVICE_NAME(string),
+       entryApplicationInstanceId: ENTRY_APPLICATION_INSTANCE_ID(int) 
+     }
+   ...
 ```
 
 以下对各个校验字段的描述:
@@ -183,7 +225,7 @@ SegmentA的部分生成的Span数据如下：
 | operationId   | OperationName对应的Id, 这个值目前为0                                                                                                                                                                                                   |
 | parentSpanId  | Span的父级Span的Id.  **注意**: 第一个Span的parentSpanId为-1                                                                                                                                                                                                               |
 | spanId        | Span的Id. **注意**: ID是从0开始.                                                                                                                                                                                                                     |
-| startTime     | Span开始时间.                                                                                                                                                                                                                         |
+| startTime     | Span开始时间. 目前不支持精确匹配.                                                                                                                                                                                                              |
 | endTime       | Span的结束时间.                                                                                                                                                                                                                         |
 | isError       | 是否出现异常. 如果Span抛出异常或者状态码大于400，这个值为 true, 否则为false                                                                                                                                                                          |
 | componentName | 对应组件的名字。官方提供的[Component](https://github.com/apache/incubator-skywalking/blob/master/apm-protocol/apm-network/src/main/java/org/apache/skywalking/apm/network/trace/component/OfficialComponent.java)，则该值为null. |
@@ -192,21 +234,10 @@ SegmentA的部分生成的Span数据如下：
 | logs          | Span设置的log. **注意**: 顺序为设置Log的顺序                                                                                                                                                                                                      |
 | SpanLayer     | 设置的SpanLayer. 目前可能的值为: DB, RPC_FRAMEWORK, HTTP, MQ, CACHE                                                                                                                                                                    |
 | SpanType      | Span的类型. 目前的取值为 Exit, Entry, Local                                                                                                                                                                                            |
-| peer          | 访问的远端IP. 目前只有Exit类型的Span, 这个值不为空                                                                                                                                                                                      |
+| peer          | 访问的远端IP. Exit类型的Span, 这个值非空                                                                                                                                                                                                                      |
 | peerId        | 访问的远端IP的ID，这个值目前为0                                                                                                                                                                                                                         |
 
-SegmentB的segmentRef如下：
-```yml
-{ 
-    parentSpanId: 1, 
-    parentTraceSegmentId: "${httpclient-case[0]}", 
-    entryServiceName: "/httpclient-case/case/httpclient", 
-    networkAddress: "127.0.0.1:8080",
-    parentServiceName: "/httpclient-case/case/httpclient",
-    entryApplicationInstanceId: nq 0 
-}
-```
-以下对各个校验字段的描述:
+以下对SegmentRef各个校验字段的描述:
 
 | 字段                   | 描述                                                                                                                                                                                                    |
 |:----                       |:----                                                                                                                                                                                                    |
@@ -215,7 +246,99 @@ SegmentB的segmentRef如下：
 | entryServiceName           | 调用链入口的Segment的服务名词. 例如HttpClient的entryServiceName为`/httpclient-case/case/httpclient`                                                                                                                                                                                          |
 | networkAddress             | 被调用者的网络地址。例如CaseServlet通过127.0.0.1:8080调用到ContextPropagateServlet,所以这个值为127.0.0.1:8080                                                                                             |
 | parentServiceName          | 调用端的SpanID等于0的OperationName                                                                                                                                                                      |
-| entryApplicationInstanceId | 调用链入口的实例ID。                                                                                                                                                                                              |
+| entryApplicationInstanceId | 调用链入口的实例ID。                                                                                                                                                                
+
+#### 编写期望数据流程
+1. 编写RegistryItems
+HttpClient测试用例中只有一个实例,
+```yml
+registryItems:
+  applications:
+  - {httpclient-case: nq 0}
+  instances:
+  - {httpclient-case: 1}
+  operationNames:
+  - httpclient-case: [/httpclient-case/case/httpclient,/httpclient-case/case/context-propagate]
+```
+
+2. 编写segmentItems
+根据HttpClient用例的运行流程，推断httpclient-case产生两个Segment. 第一个Segment是访问CaseServlet所产生的, 暂且叫它`SegmentA`。第二Segment是CaseServlet通过HttpClient调用ContextPropagateServlet所产生的, 暂且叫它`SegmentB`. SegmentB中包含一个SegmentRef，并且SegmentRef中的`parentTraceSegmentId`为SegmentA的segmentID。
+
+```yml
+segments:
+  - applicationCode: httpclient-case
+    segmentSize: 2
+```
+
+Skywalking对于Tomcat有埋点，SegmentA中会包含两个Span，第一个Span是Tomcat的埋点，第二个Span是HttpClient的埋点.
+SegmentA的生成的Span数据如下：
+```yml
+    - segmentId: not null
+      spans:
+        -
+          operationName: /httpclient-case/case/context-propagate
+          operationId: eq 0
+          parentSpanId: 0
+          spanId: 1
+          startTime: nq 0
+          endTime: nq 0
+          isError: false
+          spanLayer: Http
+          spanType: Exit
+          componentName: null
+          componentId: eq 2
+          tags:
+            - {key: url, value: 'http://127.0.0.1:8080/httpclient-case/case/context-propagate'}
+            - {key: http.method, value: GET}
+          logs: []
+          peer: null
+          peerId: eq 0
+        -
+          operationName: /httpclient-case/case/httpclient
+          operationId: eq 0
+          parentSpanId: -1
+          spanId: 0
+          startTime: nq 0
+          endTime: nq 0
+          spanLayer: Http
+          isError: false
+          spanType: Entry
+          componentName: null
+          componentId: 1
+          tags:
+            - {key: url, value: 'http://localhost:{SERVER_OUTPUT_PORT}/httpclient-case/case/httpclient'}
+            - {key: http.method, value: GET}
+          logs: []
+          peer: null
+          peerId: eq 0
+```
+
+SegmentB由于Skywalking对于Tomcat进行埋点会产生一个Span，并且SegmentA传递ContextTrace给SegmentB，SegmentB的Span中会有SegmentRef.
+SegmentB的Span校验数据格式如下：
+```yml
+- segmentId: not null
+  spans:
+  -
+   operationName: /httpclient-case/case/context-propagate
+   operationId: eq 0
+   parentSpanId: -1
+   spanId: 0
+   tags: 
+   - {key: url, value: 'http://127.0.0.1:8080/httpclient-case/case/context-propagate'}
+   - {key: http.method, value: GET}
+   logs: []
+   startTime: nq 0
+   endTime: nq 0
+   spanLayer: Http
+   isError: false
+   spanType: Entry
+   componentName: null
+   componentId: 1
+   peer: null
+   peerId: eq 0
+   refs: 
+   - {parentSpanId: 1, parentTraceSegmentId: "${httpclient-case[0]}", entryServiceName: "/httpclient-case/case/httpclient", networkAddress: "127.0.0.1:8080",parentServiceName: "/httpclient-case/case/httpclient",entryApplicationInstanceId: nq 0 }
+```
 
 ### 编写用例配置文件
 1. 添加testcase.yaml文件. HttpClient的[testcase.yaml](https://github.com/SkywalkingTest/skywalking-agent-testcases/blob/master/httpclient-4.3.x-scenario/testcase.yml)
@@ -272,11 +395,16 @@ HttpClient支持4.3到4.5.3 14个版本, 所以在pom.xml中添加14个`profile`
 ```
 脚本运行参数的描述:
 
-| 运行参数 | 描述 |
-|:--- |:---|
-| -p project_dir_name | 指定测试用例进行测试. 默认为空，运行所有的测试用例工程 |
-| -b agent_repository_branch | Skywalking Agent的工程的分支名. 默认为`master` |
-| -r agent_repository_url | Skywalking Agent的工程的URL. 默认为`https://github.com/apache/incubator-skywalking.git`|
+| 运行参数                   | 描述                                                                            |
+| :---                       | :---                                                                            |
+| -p project_dir_name        | 指定测试用例进行测试. 默认为空，运行所有的测试用例工程                          |
+| -b agent_repository_branch | Skywalking工程的分支名. 默认为`master`                                          |
+| -r agent_repository_url    | Skywalking工程的URL. 默认为`https://github.com/apache/incubator-skywalking.git` |
+
 ### 查看生成报告
 测试用例运行完成之后，会自动生成报告，报告生成路径:
 `${SKYWALKING_AGENT_TESTCASES_HOME}/workspace/report/{CURRENT_YEAR}/{CURRENT_MONTH}/apache/testreport-{CURRENT_DATE}.md`
+
+### 查看校验日志
+校验的完整日志路径:
+`${SKYWALKING_AGENT_TESTCASES_HOME}/workspace/logs/validateDate-{CURRENT_DATE}.log`
