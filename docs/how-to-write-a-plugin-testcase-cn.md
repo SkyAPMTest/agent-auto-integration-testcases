@@ -99,7 +99,7 @@ HttpClient测试用例的docker-compose.xml请参考[配置](https://github.com/
 2. 在启动脚本中添加Agent参数
 HttpClient运行在Tomcat中，javaagent参数应该添加在`${project.basedir}/docker/catalina.sh`. 具体参考[配置](https://github.com/SkywalkingTest/skywalking-agent-testcases/blob/master/httpclient-4.3.x-scenario/docker/catalina.sh#L107-110)
 
-3. docker-compose.xml 添加 mock-collector 镜像. 具体请参考[配置](https://github.com/SkywalkingTest/skywalking-agent-testcases/blob/master/httpclient-4.3.x-scenario/config/docker-compose.yml#L19-31)
+3. docker-compose.xml 添加 mock-collector 镜像¹. 具体请参考[配置](https://github.com/SkywalkingTest/skywalking-agent-testcases/blob/master/httpclient-4.3.x-scenario/config/docker-compose.yml#L19-31)
 
 4. 修改docker-compose.xml中用例开放端口和镜像版本
 - 将测试用例中的镜像版本替换成`{CASES_IMAGE_VERSION}`
@@ -401,3 +401,6 @@ HttpClient支持4.3到4.5.3 14个版本, 所以在pom.xml中添加14个`profile`
 ### 查看校验日志
 校验的完整日志路径:
 `${SKYWALKING_AGENT_TESTCASES_HOME}/workspace/logs/validateDate-{CURRENT_DATE}.log`
+
+
+¹ `mock-collector`用来模拟Collector来接受探针上传的数据，源码地址:https://github.com/SkywalkingTest/skywalking-mock-collector.git.
