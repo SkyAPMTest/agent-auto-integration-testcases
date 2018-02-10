@@ -37,9 +37,8 @@
 5. 测试用例
 
 ## 示例
-下面以HttpClient插件为例子，HttpClient插件主要测试两点：1. 能否正确的创建HttpClient的Span 2. 能否正确的传递上下文，所以基于这两点，设计了如下设计用例:
-HttpClient用例运行在Tomcat容器中，该用例包含两个Servlet: CaseServlet 和 ContextPropagateServlet，其中CaseServlet通过HttpClient调用ContextPropagateServlet.
-运行流程如下：
+下面以HttpClient插件为例子，HttpClient插件主要测试两点：1. 能否正确的创建HttpClient的Span 2. 能否正确的传递上下文，所以基于这两点，设计了如下设计用例：
+
 ```
 +-------------+         +------------------+            +-------------------------+
 |   Browser   |         |  Case Servlet    |            | ContextPropagateServlet |
@@ -47,9 +46,9 @@ HttpClient用例运行在Tomcat容器中，该用例包含两个Servlet: CaseSer
 +-----|-------+         +---------|--------+            +------------|------------+
       |                           |                                  |
       |                           |                                  |
-      |                          +-+                                 |
-      +------------------------> |-|                                +-+
-      |                          |--------------------------------->--|
+      |       WebHttp            +-+                                 |
+      +------------------------> |-|         HttpClient             +-+
+      |                          |---------------------------------^--|
       |                          |-|                                |-|
       |                          |-|                                |-|
       |                          |-| <--------------------------------|
@@ -60,8 +59,9 @@ HttpClient用例运行在Tomcat容器中，该用例包含两个Servlet: CaseSer
       |                           |                                  |
       |                           |                                  |
       |                           |                                  |
-      +                           +                                  |
+      +                           +                                  +
 ```
+
 ### 编写用例代码
 pom.xml最佳实践:
 1. 测试框架依赖的版本号设置为属性变量
@@ -106,6 +106,8 @@ HttpClient运行在Tomcat中，javaagent参数应该添加在`${project.basedir}
 - 将修改放的端口替换成`{SERVER_OUTPUT_PORT}`
 
 5. 在docker-compose.xml中添加Agent的挂载. 具体参考[配置](https://github.com/SkywalkingTest/skywalking-agent-testcases/blob/master/httpclient-4.3.x-scenario/config/docker-compose.yml#L13-14)
+
+6. 测试用例镜像. 具体参考文档中的测试章节
 
 ### 期望数据文件
 HttpClient期望数据文件 --- [expectedData.yaml](https://github.com/SkywalkingTest/skywalking-agent-testcases/blob/master/httpclient-4.3.x-scenario/config/expectedData.yaml**
@@ -334,7 +336,16 @@ SegmentB的Span校验数据格式如下：
 ```
 
 ### 编写用例配置文件
-1. 添加testcase.yaml文件. HttpClient的[testcase.yaml](https://github.com/SkywalkingTest/skywalking-agent-testcases/blob/master/httpclient-4.3.x-scenario/testcase.yml)
+1. 添加testcase.yaml文件
+
+testcase.yaml文件格式如下:
+```yml
+testcase:
+  request_url: TESTCASE_REQUEST_URL 
+  test_framework: TEST_FRAMEWORK_NAME 
+  support_versions:
+    - VERSION
+```
 
 以下对各个字段的描述:
 
