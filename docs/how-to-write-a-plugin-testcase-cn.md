@@ -247,7 +247,8 @@ segments:
 
 #### 编写期望数据流程
 1. 编写RegistryItems
-HttpClient测试用例中只有一个实例,
+
+HttpClient测试用例中是运行在一台Tomcat容器中，所以httpclient的实例数为1, 并且applicationId不为0。
 ```yml
 registryItems:
   applications:
@@ -259,6 +260,7 @@ registryItems:
 ```
 
 2. 编写segmentItems
+
 根据HttpClient用例的运行流程，推断httpclient-case产生两个Segment. 第一个Segment是访问CaseServlet所产生的, 暂且叫它`SegmentA`。第二Segment是CaseServlet通过HttpClient调用ContextPropagateServlet所产生的, 暂且叫它`SegmentB`. SegmentB中包含一个SegmentRef，并且SegmentRef中的`parentTraceSegmentId`为SegmentA的segmentID。
 
 ```yml
