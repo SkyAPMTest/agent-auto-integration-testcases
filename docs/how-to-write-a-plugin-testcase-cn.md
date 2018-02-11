@@ -1,6 +1,6 @@
 # 如何编写插件测试用例
 ## 用例工程的目录结构
-用例工程是一个独立的Maven工程。该工程能够打包成镜像,并要求提供一个外部能够访问的Web服务用例测试调用链追踪
+用例工程是一个独立的Maven工程。该工程能够打包成镜像,并要求提供一个外部能够访问的Web服务用例测试调用链追踪。
 
 以下是用例工程的目录图:
 ```
@@ -63,6 +63,7 @@
 ```
 
 ### 编写用例代码
+
 pom.xml最佳实践:
 1. 测试框架依赖的版本号设置为属性变量
 2. 镜像的版本号设置成属性变量，并且使用框架版本号作为镜像的版本号
@@ -72,7 +73,7 @@ pom.xml最佳实践:
 ### 构建测试用例镜像
 1. 添加Maven docker插件. 
 
-以下三个字段应重点注意:
+在配置插件的过程中，以下三个字段应重点注意:
 
 | 字段            | 意义                                                                                              |
 | ---             | ---                                                                                            |
@@ -82,10 +83,12 @@ pom.xml最佳实践:
 
 2. 编写Dockerfile文件
 
-3. 在config目录下添加docker-compose.xml
-HttpClient测试用例的docker-compose.xml请参考[配置](https://github.com/SkywalkingTest/skywalking-agent-testcases/blob/master/httpclient-4.3.x-scenario/config/docker-compose.yml)
+3. 编写docker-compose.xml文件
+
+在config目录中编写docker-compose.xml文件。HttpClient测试用例的docker-compose.xml请参考[配置](https://github.com/SkywalkingTest/skywalking-agent-testcases/blob/master/httpclient-4.3.x-scenario/config/docker-compose.yml)
 
 4. 运行maven的docker插件
+
 执行`mvn package docker:build`命令打包用例镜像
 
 5. 运行并测试用例容器
@@ -93,21 +96,30 @@ HttpClient测试用例的docker-compose.xml请参考[配置](https://github.com/
 - 访问容器暴露的web服务，确保用例能够正常运行
 
 ### 用例镜像加载探针
+
 1. Dockerfile添加探针挂载目录
+
 添加`VOLUME`配置项到Dockerfile,具体参考[配置](https://github.com/SkywalkingTest/skywalking-agent-testcases/blob/master/httpclient-4.3.x-scenario/docker/Dockerfile#L11)
 
-2. 在启动脚本中添加Agent参数
+2. 启动脚本添加Agent启动参数
+
 HttpClient运行在Tomcat中，javaagent参数应该添加在`${project.basedir}/docker/catalina.sh`. 具体参考[配置](https://github.com/SkywalkingTest/skywalking-agent-testcases/blob/master/httpclient-4.3.x-scenario/docker/catalina.sh#L107-110)
 
-3. docker-compose.xml 添加 mock-collector 镜像¹. 具体请参考[配置](https://github.com/SkywalkingTest/skywalking-agent-testcases/blob/master/httpclient-4.3.x-scenario/config/docker-compose.yml#L19-31)
+3. 添加 mock-collector 镜像¹
+
+docker-compose文件中添加mock-collector镜像，具体请参考[配置](https://github.com/SkywalkingTest/skywalking-agent-testcases/blob/master/httpclient-4.3.x-scenario/config/docker-compose.yml#L19-31)
 
 4. 修改docker-compose.xml中用例开放端口和镜像版本
 - 将测试用例中的镜像版本替换成`{CASES_IMAGE_VERSION}`
 - 将修改放的端口替换成`{SERVER_OUTPUT_PORT}`
 
-5. 在docker-compose.xml中添加Agent的挂载. 具体参考[配置](https://github.com/SkywalkingTest/skywalking-agent-testcases/blob/master/httpclient-4.3.x-scenario/config/docker-compose.yml#L13-14)
+5. 添加Agent的挂载
 
-6. 测试用例镜像. 具体参考文档中的测试章节
+docker-compose文件中添加Agent挂载目录。具体参考[配置](https://github.com/SkywalkingTest/skywalking-agent-testcases/blob/master/httpclient-4.3.x-scenario/config/docker-compose.yml#L13-14)
+
+6. 测试用例镜像.
+
+具体参考文档中的测试章节
 
 ### 期望数据文件
 HttpClient期望数据文件 --- [expectedData.yaml](https://github.com/SkywalkingTest/skywalking-agent-testcases/blob/master/httpclient-4.3.x-scenario/config/expectedData.yaml)
@@ -180,6 +192,7 @@ segments:
 | spans           | segment生成的Span列表   |
 
 **Span数据校验格式**
+
 **注意**: 期望文件中Segment的Span是按照Span的结束顺序进行排列
 
 ```yml
@@ -271,6 +284,7 @@ segments:
 ```
 
 Skywalking对于Tomcat有埋点，SegmentA中会包含两个Span，第一个Span是Tomcat的埋点，第二个Span是HttpClient的埋点.
+
 SegmentA的生成的Span数据如下：
 ```yml
     - segmentId: not null
@@ -313,7 +327,8 @@ SegmentA的生成的Span数据如下：
           peerId: eq 0
 ```
 
-SegmentB由于Skywalking对于Tomcat进行埋点会产生一个Span，并且SegmentA传递ContextTrace给SegmentB，SegmentB的Span中会有SegmentRef.
+SegmentB由于Skywalking对于Tomcat进行埋点会产生一个Span，并且SegmentA传递ContextTrace给SegmentB，对于SegmentB需要校验SegmentRef数据.
+
 SegmentB的Span校验数据格式如下：
 ```yml
 - segmentId: not null
@@ -370,7 +385,8 @@ testcase:
     - 4.5.3
 ```
 
-2. 添加Profile
+2. 添加Profile配置
+
 在pom.xml中添加`profiles`配置节点。其中每一个`profile`就代表中`testcase.yaml`中support_versions列表中的一个, `profile`中的id命名格式为: `${project.dir_name}-${support_version}`.
 HttpClient支持4.3到4.5.3 14个版本, 所以在pom.xml中添加14个`profile`，如下:
 ```xml
