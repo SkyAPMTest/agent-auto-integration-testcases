@@ -1,0 +1,11 @@
+APPLICATION_ID: codefirsttest
+service_description:
+  name: codefirst
+  version: 0.0.1
+cse:
+  service:
+    registry:
+      address: http://{SERVICE_CENTER_HOST}:30100
+  rest:
+    address: {PROVIDER_REST_BIND_HOST}:8080
+

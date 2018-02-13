@@ -1,0 +1,26 @@
+#
+# Test case project define.
+#
+# Note: Test case project must a project that support output service.
+#
+testcase:
+  #
+  # The request url of current test cases.
+  #
+  request_url:  http://localhost:{SERVER_OUTPUT_PORT}/servicecomb/case
+  #
+  # The framework name that need tested.
+  #
+  test_framework: Servicecomb
+  #
+  # The framework version list of current test case supported
+  #
+  support_versions:
+    - 0.5.0
+    - 0.4.0
+    - 0.3.0
+    - 0.2.0
+    - 0.1.0
+    
+    
+    
