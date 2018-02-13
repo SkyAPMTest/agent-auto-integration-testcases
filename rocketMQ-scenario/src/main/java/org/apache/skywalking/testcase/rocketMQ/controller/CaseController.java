@@ -56,7 +56,6 @@ public class CaseController {
         logger.info("{} %n", sendResult);
 
         DefaultMQPushConsumer consumer = new DefaultMQPushConsumer(UUID.randomUUID().toString());
-        consumer.setPullInterval(10);
         consumer.setNamesrvAddr(nameSrv);
         consumer.subscribe("TopicTest", "*");
         consumer.registerMessageListener(new MessageListenerOrderly() {
