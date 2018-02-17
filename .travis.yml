@@ -1,2 +1,5 @@
+sudo: required
 language: java
-install: bash ./travis-ci/build.sh
+
+install:
+  - bash ./travis-ci/build.sh

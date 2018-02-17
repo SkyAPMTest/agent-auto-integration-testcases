@@ -18,7 +18,7 @@ checkIfCaseProject(){
 for TESTCASE_PROJECT in `ls $AUTOTEST_HOME`
 do
     TESTCASE_PROJECT_DIR="${AUTOTEST_HOME}/${TESTCASE_PROJECT}"
-    checkIfCasePRoject $TESTCASE_PROJECT_DIR
+    checkIfCaseProject $TESTCASE_PROJECT_DIR
     IS_TESTCASE_PROJECT=$?
 
     if [ "$IS_TESTCASE_PROJECT" = "0" ]; then
