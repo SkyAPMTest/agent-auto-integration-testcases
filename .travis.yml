@@ -1,0 +1,2 @@
+language: java
+install: ./travis-ci/build.sh
