@@ -1,2 +1,2 @@
 language: java
-install: ./travis-ci/build.sh
+install: bash ./travis-ci/build.sh
