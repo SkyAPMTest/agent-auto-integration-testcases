@@ -1,5 +1,4 @@
 sudo: required
 language: java
 
-install:
-  - bash ./travis-ci/build.sh
+script: ./travis-ci/build.sh
