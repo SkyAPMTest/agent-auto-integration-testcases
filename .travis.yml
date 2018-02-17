@@ -7,4 +7,4 @@ install:
   - mvn install:install-file  -Dfile=resin-4.0.41.jar  -DgroupId=com.caucho  -DartifactId=resin -Dversion=4.0.41 -Dpackaging=jar
   - cd ..
 
-  script: sh ./travis-ci/build.sh
+script: sh ./travis-ci/build.sh
