@@ -1,4 +1,10 @@
 sudo: required
 language: java
 
-script: sh ./travis-ci/build.sh
+install:
+  - cd ci-dependencies
+  - mvn install:install-file  -Dfile=ojdbc14-10.2.0.4.0.jar  -DgroupId=com.oracle  -DartifactId=ojdbc14 -Dversion=10.2.0.4.0 -Dpackaging=jar
+  - mvn install:install-file  -Dfile=resin-4.0.41.jar  -DgroupId=com.caucho  -DartifactId=resin -Dversion=4.0.41 -Dpackaging=jar
+  - cd ..
+
+  script: sh ./travis-ci/build.sh
