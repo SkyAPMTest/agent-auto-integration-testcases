@@ -200,6 +200,10 @@ clearWorkspace
 echo "clone agent source code"
 AGENT_COMMIT=`checkoutSourceCode ${AGENT_GIT_URL} $AGENT_GIT_BRANCH $SOURCE_DIR/skywalking`
 #
+# init submodule
+#
+cd $SOURCE_DIR/skywalking && git submodule init && git submodule update
+#
 # To build ignore plug-in, we need to copy dependencies jar to ci-depencies foleder
 #
 DEPENDENCIES_JARS_FOLDERS=${AGENT_TEST_HOME}/dependencies-jars
