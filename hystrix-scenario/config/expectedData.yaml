@@ -1,0 +1,82 @@
+registryItems:
+  applications:
+  - {hystrix-scenario: 2}
+  instances:
+  - {hystrix-scenario: 1}
+  operationNames:
+  - hystrix-scenario: [Hystrix/TestACommand/Execution, Hystrix/TestBCommand/Execution, Hystrix/TestACommand/Fallback, /case/hystrix-case]
+segmentItems:
+- applicationCode: hystrix-scenario
+  segmentSize: 3
+  segments:
+  - segmentId: not null
+    spans:
+    - operationName: Hystrix/TestACommand/Execution
+      operationId: 0
+      parentSpanId: -1
+      spanId: 0
+      spanLayer: Unknown
+      startTime: nq 0
+      endTime: nq 0
+      componentId: 29
+      componentName: ''
+      isError: false
+      spanType: Local
+      peer: ''
+      peerId: 0
+      logs:
+      - logEvent:
+        - {key: event, value: error}
+        - {key: error.kind, value: java.lang.InterruptedException}
+        - {key: message, value: not null}
+        - {key: stack, value: not null}
+      refs:
+      - {parentServiceId: 0, parentServiceName: /case/hystrix-case, networkAddressId: 0, entryServiceId: 0, refType: CrossThread, parentSpanId: 0, parentTraceSegmentId: '${hystrix-scenario[2]}', parentApplicationInstanceId: 0, networkAddress: '', entryServiceName: /case/hystrix-case, entryApplicationInstanceId: nq 0 }
+  - segmentId: not null
+    spans:
+    - operationName: Hystrix/TestACommand/Fallback
+      operationId: 0
+      parentSpanId: -1
+      spanId: 0
+      spanLayer: Unknown
+      startTime: nq 0
+      endTime: nq 0
+      componentId: 29
+      componentName: ''
+      isError: false
+      spanType: Local
+      peer: ''
+      peerId: 0
+      refs:
+      - {parentServiceId: 0, parentServiceName: Hystrix/TestACommand/Execution, networkAddressId: 0, entryServiceId: 0, refType: CrossThread, parentSpanId: 0, parentTraceSegmentId: '${hystrix-scenario[0]}', parentApplicationInstanceId: 0, networkAddress: '', entryServiceName: /case/hystrix-case, entryApplicationInstanceId: nq 0}
+  - segmentId: not null
+    spans:
+    - operationName: Hystrix/TestBCommand/Execution
+      operationId: 0
+      parentSpanId: 0
+      spanId: 1
+      spanLayer: Unknown
+      startTime: nq 0
+      endTime: nq 0
+      componentId: 29
+      componentName: ''
+      isError: false
+      spanType: Local
+      peer: ''
+      peerId: 0
+    - operationName: /case/hystrix-case
+      operationId: 0
+      parentSpanId: -1
+      spanId: 0
+      spanLayer: Http
+      startTime: nq 0
+      endTime: nq 0
+      componentId: 14
+      componentName: ''
+      isError: false
+      spanType: Entry
+      peer: ''
+      peerId: 0
+      tags:
+      - {key: url, value: 'http://localhost:{SERVER_OUTPUT_PORT}/hystrix-case/case/hystrix-case'}
+      - {key: http.method, value: GET}

@@ -1,0 +1,38 @@
+#
+# Test case project define.
+#
+# Note: Test case project must a project that support output service.
+#
+testcase:
+  #
+  # The request url of current test cases.
+  #
+  request_url: http://localhost:{SERVER_OUTPUT_PORT}/hystrix-case/case/hystrix-case
+  #
+  # The framework name that need tested.
+  #
+  test_framework: Hystrix
+  #
+  # The framework version list of current test case supported
+  #
+  support_versions:
+    - 1.5.12
+    - 1.5.11
+    - 1.5.10
+    - 1.5.9
+    - 1.5.8
+    - 1.5.7
+    - 1.5.6
+    - 1.5.5
+    - 1.5.4
+    - 1.5.3
+    - 1.5.2
+    - 1.5.1
+    - 1.5.0
+    - 1.4.26
+    - 1.4.25
+    - 1.4.24
+    - 1.4.23
+    - 1.4.22
+    - 1.4.21
+    - 1.4.20
