@@ -219,9 +219,9 @@ if [ ! -f "${AGENT_DIR}" ]; then
 fi
 echo "copy agent jar to $AGENT_DIR"
 #echo "copy agent"
-cp -r $SOURCE_DIR/skywalking/packages/skywalking-agent/* $AGENT_DIR/
+cp -r $SOURCE_DIR/skywalking/skywalking-agent/* $AGENT_DIR/
 #echo "copy agent with optional plugin"
-cp -r $SOURCE_DIR/skywalking/packages/skywalking-agent/* $AGENT_WITH_OPTIONAL_PLUGIN_DIR/
+cp -r $SOURCE_DIR/skywalking/skywalking-agent/* $AGENT_WITH_OPTIONAL_PLUGIN_DIR/
 #
 # Copy the optional plugins
 #
