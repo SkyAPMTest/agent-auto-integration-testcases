@@ -1,0 +1,28 @@
+version: '2.1'
+services:
+  jdk-cross-thread-server:
+    image: skywalking/jdk-cross-thread-scenario:{CASES_IMAGE_VERSION}
+    expose:
+      - "8080"
+    ports:
+      - "{SERVER_OUTPUT_PORT}:8080"
+    links:
+      - mock-collector
+    environment:
+      - COLLECTOR_SERVER=mock-collector:12800
+    volumes:
+      - {AGENT_FILE_PATH}:/usr/local/jdk-cross-thread-scenario/agent
+
+  mock-collector:
+    image: skywalking/skywalking-mock-collector:3.2.6-2017
+    environment:
+      - GRPC_BIND_HOST=mock-collector
+    expose:
+      - "12800"
+    ports:
+      - "{COLLECTOR_OUTPUT_PORT}:12800"
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://127.0.0.1:12800/receiveData"]
+      interval: 5s
+      timeout: 10s
+      retries: 5
