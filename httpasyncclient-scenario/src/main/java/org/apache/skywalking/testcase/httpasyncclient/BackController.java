@@ -12,7 +12,6 @@ public class BackController {
     @RequestMapping("/back")
     public String back() throws ClassNotFoundException, SQLException {
 
-        SQLUtils.query();
         logger.info("Hello back");
         return "Hello back";
 

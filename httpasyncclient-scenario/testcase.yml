@@ -7,7 +7,7 @@ testcase:
   #
   # The request url of current test cases.
   #
-  request_url: http://localhost:{SERVER_OUTPUT_PORT}/httpasyncclient/front
+  request_url: http://127.0.0.1:{SERVER_OUTPUT_PORT}/httpasyncclient/front
   #
   # The framework name that need tested.
   #
@@ -23,5 +23,4 @@ testcase:
     - 4.0.2
     - 4.0.1
     - 4.0
-
 

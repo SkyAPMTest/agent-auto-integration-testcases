@@ -72,7 +72,6 @@ public class FrontController {
                 } catch (IOException e) {
                     logger.error("Httpclient  close failed" + e);
                 }
-                SQLUtils.query();
             }
 
             public void failed(final Exception ex) {
