@@ -77,7 +77,7 @@ segmentItems:
       peerId: 0
       refs:
       - {parentServiceId: 0, parentServiceName: /service-consumer/case/grpc-scenario, networkAddressId: 0, entryServiceId: 0, refType: CrossThread, parentSpanId: 1, parentTraceSegmentId: '${grpc-consumer-scenario[0]}', parentApplicationInstanceId: nq 0, networkAddress: '', entryServiceName: /service-consumer/case/grpc-scenario, entryApplicationInstanceId: nq 0}
-   - segmentId: not null
+  - segmentId: not null
     spans:
     - operationName: Greeter.sayHello/client/ResponseObserver/onComplete
       operationId: 0
