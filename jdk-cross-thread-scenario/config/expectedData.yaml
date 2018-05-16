@@ -61,7 +61,7 @@ segmentItems:
       peer: ""
       peerId: 0
       refs:
-      - {parentServiceId: 0, parentServiceName: /case/cross-thread, networkAddressId: 0, entryServiceId: 0, refType: CrossThread, parentSpanId: 0, parentTraceSegmentId: '${jdk-cross-thread-scenario[2]}',parentApplicationInstanceId: 0,networkAddress: '', entryServiceName: /case/cross-thread,entryApplicationInstanceId: nq 0}
+      - {parentServiceId: 0, parentServiceName: /case/cross-thread, networkAddressId: 0, entryServiceId: 0, refType: CrossThread, parentSpanId: 0, parentTraceSegmentId: '${jdk-cross-thread-scenario[2]}',parentApplicationInstanceId: nq 0,networkAddress: '', entryServiceName: /case/cross-thread,entryApplicationInstanceId: nq 0}
   - segmentId: not null
     spans:
     - operationName: /case/cross-thread

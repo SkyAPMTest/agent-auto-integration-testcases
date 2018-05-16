@@ -31,7 +31,7 @@ segmentItems:
         - {key: message, value: not null}
         - {key: stack, value: not null}
       refs:
-      - {parentServiceId: 0, parentServiceName: /case/hystrix-case, networkAddressId: 0, entryServiceId: 0, refType: CrossThread, parentSpanId: 0, parentTraceSegmentId: '${hystrix-scenario[2]}', parentApplicationInstanceId: 0, networkAddress: '', entryServiceName: /case/hystrix-case, entryApplicationInstanceId: nq 0 }
+      - {parentServiceId: 0, parentServiceName: /case/hystrix-case, networkAddressId: 0, entryServiceId: 0, refType: CrossThread, parentSpanId: 0, parentTraceSegmentId: '${hystrix-scenario[2]}', parentApplicationInstanceId: nq 0, networkAddress: '', entryServiceName: /case/hystrix-case, entryApplicationInstanceId: nq 0 }
   - segmentId: not null
     spans:
     - operationName: Hystrix/TestACommand/Fallback
@@ -48,7 +48,7 @@ segmentItems:
       peer: ''
       peerId: 0
       refs:
-      - {parentServiceId: 0, parentServiceName: Hystrix/TestACommand/Execution, networkAddressId: 0, entryServiceId: 0, refType: CrossThread, parentSpanId: 0, parentTraceSegmentId: '${hystrix-scenario[0]}', parentApplicationInstanceId: 0, networkAddress: '', entryServiceName: /case/hystrix-case, entryApplicationInstanceId: nq 0}
+      - {parentServiceId: 0, parentServiceName: Hystrix/TestACommand/Execution, networkAddressId: 0, entryServiceId: 0, refType: CrossThread, parentSpanId: 0, parentTraceSegmentId: '${hystrix-scenario[0]}', parentApplicationInstanceId: nq 0, networkAddress: '', entryServiceName: /case/hystrix-case, entryApplicationInstanceId: nq 0}
   - segmentId: not null
     spans:
     - operationName: Hystrix/TestBCommand/Execution
