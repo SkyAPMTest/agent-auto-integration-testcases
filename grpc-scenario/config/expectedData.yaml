@@ -101,8 +101,8 @@ segmentItems:
     spans:
     - operationName: Greeter.sayHello
       operationId: 0
-      parentSpanId: 0
-      spanId: 1
+      parentSpanId: -1
+      spanId: 0
       spanLayer: Unknown
       startTime: nq 0
       endTime: nq 0
