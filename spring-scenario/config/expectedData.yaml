@@ -9,7 +9,7 @@ registryItems:
   - {resttemplate-scenario: 1}
   operationNames:
   - restapi-scenario: [/create/, '/update/{id}', '/delete/{id}', '/get/{id}']
-  - spring3-scenario: [/spring-projectc/spring3/]
+  - spring3-scenario: [/spring3]
   - resttemplate-scenario: [/spring-projectc/spring3/, /resttemplate-case/case/resttemplate, /restapi-case/create/, /restapi-case/update/1, /restapi-case/delete/1, /restapi-case/get/1]
 segmentItems:
 - applicationCode: restapi-scenario
@@ -139,7 +139,7 @@ segmentItems:
       spanType: Local
       peer: ''
       peerId: 0
-    - operationName: /spring-projectc/spring3/
+    - operationName: /spring3
       operationId: 0
       parentSpanId: -1
       spanId: 0
