@@ -26,7 +26,7 @@ segmentItems:
           spanLayer: Cache
           spanType: Exit
           componentName: null
-          componentId: 7
+          componentId: 30
           peer: redis-server:6379
           peerId: eq 0
         -
@@ -44,7 +44,7 @@ segmentItems:
           spanLayer: Cache
           spanType: Exit
           componentName: null
-          componentId: 7
+          componentId: 30
           peer: redis-server:6379
           peerId: eq 0
         -
@@ -62,7 +62,7 @@ segmentItems:
           spanLayer: Cache
           spanType: Exit
           componentName: null
-          componentId: 7
+          componentId: 30
           peer: redis-server:6379
           peerId: eq 0
         -

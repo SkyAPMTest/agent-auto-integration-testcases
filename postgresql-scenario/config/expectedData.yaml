@@ -27,7 +27,7 @@ segmentItems:
           spanLayer: Database
           spanType: Exit
           componentName: null
-          componentId: 22
+          componentId: 37
           peer: postgresql-server:5432
           peerId: eq 0
         -
@@ -46,7 +46,7 @@ segmentItems:
           spanLayer: Database
           spanType: Exit
           componentName: null
-          componentId: 22
+          componentId: 37
           peer: postgresql-server:5432
           peerId: eq 0
         -
@@ -65,7 +65,7 @@ segmentItems:
           spanLayer: Database
           spanType: Exit
           componentName: null
-          componentId: 22
+          componentId: 37
           peer: postgresql-server:5432
           peerId: eq 0
         -
@@ -84,7 +84,7 @@ segmentItems:
           spanLayer: Database
           spanType: Exit
           componentName: null
-          componentId: 22
+          componentId: 37
           peer: postgresql-server:5432
           peerId: eq 0
         -
@@ -103,7 +103,7 @@ segmentItems:
           spanLayer: Database
           spanType: Exit
           componentName: null
-          componentId: 22
+          componentId: 37
           peer: postgresql-server:5432
           peerId: eq 0
         -

@@ -27,7 +27,7 @@ segmentItems:
           spanLayer: Database
           spanType: Exit
           componentName: null
-          componentId: 5
+          componentId: 33
           peer: mysql-server:3306
           peerId: eq 0
         -
@@ -46,7 +46,7 @@ segmentItems:
           spanLayer: Database
           spanType: Exit
           componentName: null
-          componentId: 5
+          componentId: 33
           peer: mysql-server:3306
           peerId: eq 0
         -
@@ -65,7 +65,7 @@ segmentItems:
           spanLayer: Database
           spanType: Exit
           componentName: null
-          componentId: 5
+          componentId: 33
           peer: mysql-server:3306
           peerId: eq 0
         -
@@ -84,7 +84,7 @@ segmentItems:
           spanLayer: Database
           spanType: Exit
           componentName: null
-          componentId: 5
+          componentId: 33
           peer: mysql-server:3306
           peerId: eq 0
         -
