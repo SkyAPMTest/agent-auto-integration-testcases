@@ -5,3 +5,4 @@ testcases/
 .runtime/
 .idea/
 dependency-reduced-pom.xml
+.projectile

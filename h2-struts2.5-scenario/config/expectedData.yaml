@@ -27,7 +27,7 @@ segmentItems:
           spanLayer: Database
           spanType: Exit
           componentName: null
-          componentId: 4
+          componentId: 32
           peer: localhost:-1
           peerId: eq 0
         -
@@ -46,7 +46,7 @@ segmentItems:
           spanLayer: Database
           spanType: Exit
           componentName: null
-          componentId: 4
+          componentId: 32
           peer: localhost:-1
           peerId: eq 0
         -
@@ -65,7 +65,7 @@ segmentItems:
           spanLayer: Database
           spanType: Exit
           componentName: null
-          componentId: 4
+          componentId: 32
           peer: localhost:-1
           peerId: eq 0
         -
@@ -84,7 +84,7 @@ segmentItems:
           spanLayer: Database
           spanType: Exit
           componentName: null
-          componentId: 4
+          componentId: 32
           peer: localhost:-1
           peerId: eq 0
         - operationName: /struts2-h2-scenario/h2-struts2/case.action

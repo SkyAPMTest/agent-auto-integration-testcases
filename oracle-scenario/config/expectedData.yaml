@@ -19,7 +19,7 @@ segmentItems:
       spanLayer: Database
       startTime: nq 0
       endTime: nq 0
-      componentId: 6
+      componentId: 34
       componentName: ''
       isError: false
       spanType: Exit
@@ -38,7 +38,7 @@ segmentItems:
       spanLayer: Database
       startTime: nq 0
       endTime: nq 0
-      componentId: 6
+      componentId: 34
       componentName: ''
       isError: false
       spanType: Exit
@@ -55,7 +55,7 @@ segmentItems:
       spanLayer: Database
       startTime: nq 0
       endTime: nq 0
-      componentId: 6
+      componentId: 34
       componentName: ''
       isError: false
       spanType: Exit
@@ -72,7 +72,7 @@ segmentItems:
       spanLayer: Database
       startTime: nq 0
       endTime: nq 0
-      componentId: 6
+      componentId: 34
       componentName: ''
       isError: false
       spanType: Exit
@@ -93,7 +93,7 @@ segmentItems:
       - {key: db.statement,value: ''}
       startTime: nq 0
       endTime: nq 0
-      componentId: 6
+      componentId: 34
       componentName: ''
       isError: false
       spanType: Exit

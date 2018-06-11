@@ -1,0 +1,68 @@
+registryItems:
+  applications:
+  - {sofarpc-provider: nq 0 }
+  - {sofarpc-consumer: nq 0 }
+  instances:
+  - {sofarpc-provider: 1}
+  - {sofarpc-consumer: 1}
+  operationNames:
+  - sofarpc-provider: [org.apache.skywaking.apm.testcase.sofarpc.interfaces.SofaRpcDemoService.hello(java.lang.String)]
+  - sofarpc-consumer: [org.apache.skywaking.apm.testcase.sofarpc.interfaces.SofaRpcDemoService.hello(java.lang.String), /sofarpc-consumer/case/sofarpc-case]
+  heartbeat: []
+segmentItems:
+- applicationCode: sofarpc-provider
+  segmentSize: 1
+  segments:
+  - segmentId: not null
+    spans:
+    - operationName: org.apache.skywaking.apm.testcase.sofarpc.interfaces.SofaRpcDemoService.hello(java.lang.String)
+      operationId: 0
+      parentSpanId: -1
+      spanId: 0
+      spanLayer: RPCFramework
+      startTime: nq 0
+      endTime: nq 0
+      componentId: 43
+      componentName: ''
+      isError: false
+      spanType: Entry
+      peer: ''
+      peerId: 0
+      refs:
+      - {parentServiceId: 0, parentServiceName: /sofarpc-consumer/case/sofarpc-case, networkAddressId: 0, entryServiceId: 0, refType: CrossProcess, parentSpanId: 1, parentTraceSegmentId: '${sofarpc-consumer[0]}', parentApplicationInstanceId: nq 0, networkAddress: not null, entryServiceName: /sofarpc-consumer/case/sofarpc-case, entryApplicationInstanceId: nq 0}
+- applicationCode: sofarpc-consumer
+  segmentSize: 1
+  segments:
+  - segmentId: not null
+    spans:
+    - operationName: org.apache.skywaking.apm.testcase.sofarpc.interfaces.SofaRpcDemoService.hello(java.lang.String)
+      operationId: 0
+      parentSpanId: 0
+      spanId: 1
+      spanLayer: RPCFramework
+      startTime: nq 0
+      endTime: nq 0
+      componentId: 43
+      componentName: ''
+      isError: false
+      spanType: Exit
+      peer: not null
+      peerId: 0
+      tags:
+      - {key: url, value: not null}
+    - operationName: /sofarpc-consumer/case/sofarpc-case
+      operationId: 0
+      parentSpanId: -1
+      spanId: 0
+      spanLayer: Http
+      startTime: nq 0
+      endTime: nq 0
+      componentId: 14
+      componentName: ''
+      isError: false
+      spanType: Entry
+      peer: ''
+      peerId: 0
+      tags:
+      - {key: url, value: 'http://localhost:{SERVER_OUTPUT_PORT}/sofarpc-consumer/case/sofarpc-case'}
+      - {key: http.method, value: GET}
