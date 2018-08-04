@@ -8,6 +8,7 @@ usage(){
 	echo -e "      --skipReport \t\t skip report "
 	echo -e "      --skipBuild \t\t skip build"
 	echo -e "      --reportFileMode  CONVERAGE | NONE \t\t skip build"
+  echo -e "  --issueNo issueNo"
 }
 
 # environment check
@@ -126,6 +127,8 @@ TEST_CASES_DIR="$AGENT_TEST_HOME/testcases" # Testcase dir
 #
 MAX_RUNNING_SIZE=2 # The max size of running testcase
 #
+ISSUE_NO=""
+#
 #
 #
 ############## parse paremeters ##############
@@ -167,6 +170,10 @@ do
 			TEST_CASES_BRANCH=$2;
 			shift 2;
 			;;
+    --issueNo )
+        ISSUE_NO=$2
+        shift 2;
+        ;;
 		* )
 			usage;
 			exit 1;
@@ -414,6 +421,13 @@ if [ "$SKIP_REPORT" = "false" ]; then
 else
 	echo "skipt push report"
 fi
+
+if [ "$ISSUE_NO" = "UNKNOWN" ]; then
+    echo "issue no is empty, ignore to push comment"
+else
+    curl --user ${GITHUB_ACCOUNT} -X POST -H "Content-Type: text/plain" -d "{\"body\":\"Here is the [test report](http://github.com/SkywalkingTest/agent-integration-test-report/${TEST_TIME_YEAR}/${TEST_TIME_MONTH}/${COMMITTER}/testReport-${TEST_CASES_BRANCH}-${TEST_TIME}.md)\"}." https://api.github.com/repos/apache/incubator-skywalking/issues/${ISSUE_NO}/comments
+fi
+
 
 #
 # clear unused images
