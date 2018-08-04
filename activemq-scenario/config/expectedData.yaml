@@ -1,0 +1,65 @@
+registryItems:
+  applications:
+  - {activemq-scenario: nq 0}
+  instances:
+  - {activemq-scenario: nq 0}
+  operationNames:
+  - activemq-scenario: [ActiveMQ/Queue/test/Producer, ActiveMQ/Queue/test/Consumer, /case/activemq-case]
+segmentItems:
+- applicationCode: activemq-scenario
+  segmentSize: ge 2
+  segments:
+  - segmentId: not null
+    spans:
+    - operationName: ActiveMQ/Queue/test/Producer
+      operationId: 0
+      parentSpanId: 0
+      spanId: 1
+      spanLayer: MQ
+      startTime: nq 0
+      endTime: nq 0
+      componentId: 45
+      componentName: ''
+      isError: false
+      spanType: Exit
+      peer: 127.0.0.1:61616
+      peerId: 0
+      tags:
+      - {key: mq.broker, value: '127.0.0.1:61616'}
+      - {key: mq.queue, value: test}
+    - operationName: /case/activemq-case
+      operationId: 0
+      parentSpanId: -1
+      spanId: 0
+      spanLayer: Http
+      startTime: nq 0
+      endTime: nq 0
+      componentId: 14
+      componentName: ''
+      isError: false
+      spanType: Entry
+      peer: ''
+      peerId: 0
+      tags:
+      - {key: url, value: 'http://localhost:{SERVER_OUTPUT_PORT}/activemq-scenario/case/activemq-case'}
+      - {key: http.method, value: GET}
+  - segmentId: not null
+    spans:
+    - operationName: ActiveMQ/Queue/test/Consumer
+      operationId: 0
+      parentSpanId: -1
+      spanId: 0
+      spanLayer: MQ
+      startTime: nq 0
+      endTime: nq 0
+      componentId: 46
+      componentName: ''
+      isError: false
+      spanType: Entry
+      peer: ''
+      peerId: 0
+      tags:
+      - {key: mq.broker, value: '127.0.0.1:61616'}
+      - {key: mq.queue, value: test}
+      refs:
+      - {parentServiceId: 0, parentServiceName: /case/activemq-case, networkAddressId: 0, entryServiceId: 0, refType: CrossProcess, parentSpanId: 1, parentTraceSegmentId: '${activemq-scenario[0]}', parentApplicationInstanceId: nq 0, networkAddress: '127.0.0.1:61616', entryServiceName: /case/activemq-case, entryApplicationInstanceId: nq 0}
