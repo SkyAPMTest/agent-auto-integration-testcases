@@ -1,0 +1,43 @@
+#
+# Test case project define.
+#
+# Note: Test case project must a project that support output service.
+#
+testcase:
+  #
+  # The request url of current test cases.
+  #
+  request_url: http://localhost:{SERVER_OUTPUT_PORT}/elasticsearch-case/case/elasticsearch
+  #
+  # The framework name that need tested.
+  #
+  test_framework: Elasticsearch
+  #
+  # The framework version list of current test case supported
+  #
+  support_versions:
+    - 5.2.0
+    - 5.2.1
+    - 5.3.0
+    - 5.3.1
+    - 5.3.2
+    - 5.3.3
+    - 5.4.0
+    - 5.4.1
+    - 5.4.2
+    - 5.4.3
+    - 5.5.0
+    - 5.5.1
+    - 5.5.2
+    - 5.5.3
+    - 5.6.0
+    - 5.6.1
+    - 5.6.2
+    - 5.6.3
+    - 5.6.4
+    - 5.6.5
+    - 5.6.6
+    - 5.6.7
+    - 5.6.8
+    - 5.6.9
+    - 5.6.10

@@ -1,0 +1,165 @@
+registryItems:
+  applications:
+  - {elasticsearch-scenario: nq 0}
+  instances:
+  - {elasticsearch-scenario: 1}
+  operationNames:
+  - elasticsearch-scenario: [Elasticsearch/IndexRequest, Elasticsearch/GetRequest, Elasticsearch/SearchRequest, Elasticsearch/UpdateRequest, Elasticsearch/DeleteRequest, Elasticsearch/DeleteIndexRequest, Elasticsearch/actionGet, /case/elasticsearch]
+  heartbeat: []
+segmentItems:
+- applicationCode: elasticsearch-scenario
+  segmentSize: 1
+  segments:
+  - segmentId: not null
+    spans:
+    - operationName: Elasticsearch/IndexRequest
+      operationId: 0
+      parentSpanId: 0
+      spanId: 1
+      spanLayer: Database
+      startTime: nq 0
+      endTime: nq 0
+      componentId: 48
+      componentName: ''
+      isError: false
+      spanType: Exit
+      peer: not null
+      peerId: 0
+      tags:
+      - {key: db.type, value: Elasticsearch}
+      - {key: db.instance, value: not null}
+      - {key: db.statement, value: not null}
+      - {key: node.address, value: not null}
+      - {key: es.indices, value: not null}
+      - {key: es.types, value: not null}
+    - operationName: Elasticsearch/actionGet
+      operationId: 0
+      parentSpanId: 0
+      spanId: 2
+      spanLayer: null
+      startTime: nq 0
+      endTime: nq 0
+      componentId: 48
+      componentName: ''
+      isError: false
+      spanType: Local
+      peer: null
+      peerId: 0
+      tags:
+      - {key: db.type, value: Elasticsearch}
+    - operationName: Elasticsearch/GetRequest
+      operationId: 0
+      parentSpanId: 0
+      spanId: 3
+      spanLayer: Database
+      startTime: nq 0
+      endTime: nq 0
+      componentId: 48
+      componentName: ''
+      isError: false
+      spanType: Exit
+      peer: not null
+      peerId: 0
+      tags:
+      - {key: db.type, value: Elasticsearch}
+      - {key: db.instance, value: not null}
+      - {key: db.statement, value: not null}
+      - {key: node.address, value: not null}
+      - {key: es.indices, value: not null}
+      - {key: es.types, value: not null}
+    - operationName: Elasticsearch/SearchRequest
+      operationId: 0
+      parentSpanId: 0
+      spanId: 4
+      spanLayer: Database
+      startTime: nq 0
+      endTime: nq 0
+      componentId: 48
+      componentName: ''
+      isError: false
+      spanType: Exit
+      peer: not null
+      peerId: 0
+      tags:
+      - {key: db.type, value: Elasticsearch}
+      - {key: db.instance, value: not null}
+      - {key: db.statement, value: not null}
+      - {key: node.address, value: not null}
+      - {key: es.indices, value: not null}
+      - {key: es.types, value: not null}
+    - operationName: Elasticsearch/UpdateRequest
+      operationId: 0
+      parentSpanId: 0
+      spanId: 5
+      spanLayer: Database
+      startTime: nq 0
+      endTime: nq 0
+      componentId: 48
+      componentName: ''
+      isError: false
+      spanType: Exit
+      peer: not null
+      peerId: 0
+      tags:
+      - {key: db.type, value: Elasticsearch}
+      - {key: db.instance, value: not null}
+      - {key: db.statement, value: not null}
+      - {key: node.address, value: not null}
+      - {key: es.indices, value: not null}
+      - {key: es.types, value: not null}
+    - operationName: Elasticsearch/DeleteRequest
+      operationId: 0
+      parentSpanId: 0
+      spanId: 6
+      spanLayer: Database
+      startTime: nq 0
+      endTime: nq 0
+      componentId: 48
+      componentName: ''
+      isError: false
+      spanType: Exit
+      peer: not null
+      peerId: 0
+      tags:
+      - {key: db.type, value: Elasticsearch}
+      - {key: db.instance, value: not null}
+      - {key: db.statement, value: not null}
+      - {key: node.address, value: not null}
+      - {key: es.indices, value: not null}
+      - {key: es.types, value: not null}
+    - operationName: Elasticsearch/DeleteIndexRequest
+      operationId: 0
+      parentSpanId: 0
+      spanId: 7
+      spanLayer: Database
+      startTime: nq 0
+      endTime: nq 0
+      componentId: 48
+      componentName: ''
+      isError: false
+      spanType: Exit
+      peer: ''
+      peerId: 0
+      tags:
+      - {key: db.type, value: Elasticsearch}
+      - {key: db.instance, value: not null}
+      - {key: db.statement, value: ''}
+      - {key: node.address, value: not null}
+      - {key: es.indices, value: ''}
+      - {key: es.types, value: ''}
+    - operationName: /case/elasticsearch
+      operationId: 0
+      parentSpanId: -1
+      spanId: 0
+      spanLayer: Http
+      startTime: nq 0
+      endTime: nq 0
+      componentId: 14
+      componentName: ''
+      isError: false
+      spanType: Entry
+      peer: ''
+      peerId: 0
+      tags:
+      - {key: url, value: 'http://localhost:{SERVER_OUTPUT_PORT}/elasticsearch-case/case/elasticsearch'}
+      - {key: http.method, value: GET}
