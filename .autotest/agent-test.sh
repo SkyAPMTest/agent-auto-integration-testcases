@@ -71,7 +71,7 @@ buildProject(){
 	PROJECT_DIR=$1;
 	if [ "$SKIP_BUILD" = "false" ]; then
 		cd $PROJECT_DIR
-		mvn clean package
+		mvn clean package -Dmaven.test.skip=true
 		IS_BUILD_SUCCESS=$?
 		if [ "$IS_BUILD_SUCCESS" = "0" ]; then
 			echo "Build project success"
