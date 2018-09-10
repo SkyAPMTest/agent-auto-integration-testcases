@@ -71,9 +71,9 @@ while [[ $# -gt 0 ]]; do
 	esac
 done
 
-if [ "${TEST_PROJECT_NAME}" != "" ];
-   ${AGENT_TEST_HOME}/.autotest/autotest-deploy.sh --project "${TEST_PROJECT_NAME}" --collector-image-version "$MOCK_COLLECTOR_IMAGE_VERSION"
-then
+if [ "${TEST_PROJECT_NAME}" != "" ]; then
+    ${AGENT_TEST_HOME}/.autotest/autotest-deploy.sh --project "${TEST_PROJECT_NAME}" --collector-image-version "$MOCK_COLLECTOR_IMAGE_VERSION"
+else
    ${AGENT_TEST_HOME}/.autotest/autotest-deploy.sh --collector-image-version "$MOCK_COLLECTOR_IMAGE_VERSION" 
 fi
 
