@@ -59,7 +59,7 @@ checkoutSourceCode(){
 	REPO_BRANCH=$2
 	SOURCE_CODE_DIR=$3
 	if [ "$PULL_CODE" = "false" ]; then
-		git clone $REPO_URL "$SOURCE_CODE_DIR"
+		git clone $REPO_URL "$SOURCE_CODE_DIR" 1>&2 > /dev/null
 	fi
 
 	eval "cd $SOURCE_CODE_DIR && git reset --hard && git checkout $REPO_BRANCH && git fetch origin && git pull origin $REPO_BRANCH" 1>&2 > /dev/null
