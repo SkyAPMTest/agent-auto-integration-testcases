@@ -390,11 +390,13 @@ while [[ $RUNNING_SIZE -gt 0 ]]; do
 	RUNNING_SIZE=`grep -l 'STARTED' $RUNTIME_DIR/* | wc -l`
 done
 
+echo "normalize test branch name"
+NORMALIZED_TEST_CASES_BRANCH=${TEST_CASES_BRANCH//\//-}
 echo "generate report...."
 java -DtestDate="$TEST_TIME" \
 	-DagentBranch="$AGENT_GIT_BRANCH" -DagentCommit="$AGENT_COMMIT" \
 	-DtestCasePath="$TEST_CASES_DIR" -DreportFilePath="$REPORT_DIR" \
-	-DcasesBranch="$TEST_CASES_BRANCH" -DcasesCommitId="${TEST_CASES_COMMITID}" \
+	-DcasesBranch="$NORMALIZED_TEST_CASES_BRANCH" -DcasesCommitId="${TEST_CASES_COMMITID}" \
 	-Dcommitter="$COMMITTER"	\
 	-jar $WORKSPACE_DIR/skywalking-autotest.jar > $LOGS_DIR/validate-$TEST_TIME.log
 
@@ -403,14 +405,14 @@ if [ ! -f "$REPORT_DIR/${AGENT_GIT_BRANCH}" ]; then
 fi
 
 if [ "$REPORT_FILE_MODE" = "CONVERAGE" ]; then
-	cp -f $REPORT_DIR/${TEST_TIME_YEAR}/${TEST_TIME_MONTH}/${COMMITTER}/testReport-${TEST_CASES_BRANCH}-${TEST_TIME}.md $REPORT_DIR/README.md
+	cp -f $REPORT_DIR/${TEST_TIME_YEAR}/${TEST_TIME_MONTH}/${COMMITTER}/testReport-${NORMALIZED_TEST_CASES_BRANCH}-${TEST_TIME}.md $REPORT_DIR/README.md
 fi
 
 if [ "$SKIP_REPORT" = "false" ]; then
 	echo "push report...."
 	cd $REPORT_DIR
 	git add $REPORT_DIR/README.md
-	git add $REPORT_DIR/${TEST_TIME_YEAR}/${TEST_TIME_MONTH}/${COMMITTER}/testReport-${TEST_CASES_BRANCH}-${TEST_TIME}.md 
+	git add $REPORT_DIR/${TEST_TIME_YEAR}/${TEST_TIME_MONTH}/${COMMITTER}/testReport-${NORMALIZED_TEST_CASES_BRANCH}-${TEST_TIME}.md 
 	git commit -m "push report report-${TEST_TIME}.md" .
 
 	if [ ! -z "$GITHUB_ACCOUNT" ]; then
