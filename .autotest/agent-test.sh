@@ -8,7 +8,8 @@ usage(){
 	echo -e "      --skipReport \t\t skip report "
 	echo -e "      --skipBuild \t\t skip build"
 	echo -e "      --reportFileMode  CONVERAGE | NONE \t\t skip build"
-  echo -e "  --issueNo issueNo"
+	echo -e "  --issueNo issueNo"
+	echo -e "  --validateLogURL validate log url prefix"
 }
 
 # environment check
@@ -130,6 +131,8 @@ MAX_RUNNING_SIZE=2 # The max size of running testcase
 #
 ISSUE_NO=""
 #
+VALIDATE_LOG_URL_PREFIX=""
+#
 #
 #
 ############## parse paremeters ##############
@@ -171,10 +174,14 @@ do
 			TEST_CASES_BRANCH=$2;
 			shift 2;
 			;;
-    --issueNo )
-        ISSUE_NO=$2
-        shift 2;
-        ;;
+		--issueNo )
+		    ISSUE_NO=$2
+		    shift 2;
+		    ;;
+		--validateLogURL )
+		    VALIDATE_LOG_URL_PREFIX=$2
+		    shift 2;
+		    ;;
 		* )
 			usage;
 			exit 1;
@@ -428,7 +435,7 @@ fi
 if [ "$ISSUE_NO" = "UNKNOWN" ]; then
     echo "issue no is empty, ignore to push comment"
 else
-    curl --user ${GITHUB_ACCOUNT} -X POST -H "Content-Type: text/plain" -d "{\"body\":\"Here is the [test report](http://github.com/SkywalkingTest/agent-integration-test-report/tree/master/${TEST_TIME_YEAR}/${TEST_TIME_MONTH}/${COMMITTER}/testReport-${TEST_CASES_BRANCH}-${TEST_TIME}.md).\"}" https://api.github.com/repos/apache/incubator-skywalking/issues/${ISSUE_NO}/comments
+    curl --user ${GITHUB_ACCOUNT} -X POST -H "Content-Type: text/plain" -d "{\"body\":\"Here is the [test report](http://github.com/SkywalkingTest/agent-integration-test-report/tree/master/${TEST_TIME_YEAR}/${TEST_TIME_MONTH}/${COMMITTER}/testReport-${TEST_CASES_BRANCH}-${TEST_TIME}.md) and [validate logs](${VALIDATE_LOG_URL_PREFIX}/validate-$TEST_TIME.log)\"}" https://api.github.com/repos/apache/incubator-skywalking/issues/${ISSUE_NO}/comments
 fi
 
 
