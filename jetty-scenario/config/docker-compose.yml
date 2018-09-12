@@ -7,7 +7,7 @@ services:
     links:
       - mock-collector
     environment:
-      - COLLECTOR_SERVER=mock-collector:12800
+      - COLLECTOR_SERVER=mock-collector:19876
     volumes:
       - {AGENT_FILE_PATH}:/usr/local/skywalking-jettyserver-scenario/agent
     depends_on:
@@ -21,7 +21,7 @@ services:
     ports:
       - "{SERVER_OUTPUT_PORT}:8080"
     environment:
-      - COLLECTOR_SERVER=mock-collector:12800
+      - COLLECTOR_SERVER=mock-collector:19876
       - JETTY_SERVER_HOST=jettyserver-scenario
     links:
       - mock-collector

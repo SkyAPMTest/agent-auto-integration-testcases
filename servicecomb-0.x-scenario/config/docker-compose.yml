@@ -8,7 +8,7 @@ services:
     ports:
       - "{SERVER_OUTPUT_PORT}:9090"
     environment:
-      - COLLECTOR_SERVER=mock-collector:12800
+      - COLLECTOR_SERVER=mock-collector:19876
       - SERVICE_CENTER_HOST=service-center
       - PROVIDER_REST_BIND_HOST=servicecomb-consumer
       - CONSUMER_REST_BIND_HOST=0.0.0.0
@@ -25,7 +25,7 @@ services:
   servicecomb-provider:
     image: skywalking/servicecomb-provider-scenario:{CASES_IMAGE_VERSION}
     environment:
-      - COLLECTOR_SERVER=mock-collector:12800
+      - COLLECTOR_SERVER=mock-collector:19876
       - SERVICE_CENTER_HOST=service-center
       - PROVIDER_REST_BIND_HOST=servicecomb-provider
     expose:

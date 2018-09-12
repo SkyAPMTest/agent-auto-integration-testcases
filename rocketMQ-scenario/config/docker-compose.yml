@@ -9,7 +9,7 @@ services:
     links:
       - mock-collector
     environment:
-      - COLLECTOR_SERVER=mock-collector:12800
+      - COLLECTOR_SERVER=mock-collector:19876
     volumes:
       - {AGENT_FILE_PATH}:/usr/local/rocketMQ-scenario/agent
 

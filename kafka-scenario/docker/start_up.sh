@@ -11,7 +11,7 @@ echo "start kafka server"
 
 export AGENT_FILE_PATH=${KAFKA_SCENARIO_HOME}/agent
 if [ -f "${AGENT_FILE_PATH}/skywalking-agent.jar" ]; then
-    KAFKA_SCENARIO_OPTS=" -javaagent:${AGENT_FILE_PATH}/skywalking-agent.jar -Dskywalking.collector.grpc_channel_check_interval=2 -Dskywalking.collector.app_and_service_register_check_interval=2 -Dcollector.discovery_check_interval=2 -Dskywalking.collector.servers=${COLLECTOR_SERVER} -Dskywalking.agent.application_code=kafka-scenario "
+    KAFKA_SCENARIO_OPTS=" -javaagent:${AGENT_FILE_PATH}/skywalking-agent.jar -Dskywalking.collector.grpc_channel_check_interval=2 -Dskywalking.collector.app_and_service_register_check_interval=2 -Dcollector.discovery_check_interval=2 -Dskywalking.collector.backend_service=${COLLECTOR_SERVER} -Dskywalking.agent.application_code=kafka-scenario "
 fi
 
 java ${KAFKA_SCENARIO_OPTS} -Dbootstrap.servers=${KAFKA_BOOTSTRAP_SERVERS} -jar ${KAFKA_SCENARIO_HOME}/kafka-scenario.jar

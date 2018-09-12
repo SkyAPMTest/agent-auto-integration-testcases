@@ -19,6 +19,6 @@ do
     CLASSPATH="$i:$CLASSPATH"
 done
 
-JAVA_OPTS="$JAVA_OPTS -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=5005 -Dskywalking.collector.grpc_channel_check_interval=2 -Dskywalking.collector.app_and_service_register_check_interval=2 -Dcollector.discovery_check_interval=2 -Dskywalking.collector.servers=${COLLECTOR_SERVER} -Dskywalking.agent.application_code=dubbo-provider -Xms256m -Xmx256m -XX:PermSize=64M -XX:MaxPermSize=64"
+JAVA_OPTS="$JAVA_OPTS -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=5005 -Dskywalking.collector.grpc_channel_check_interval=2 -Dskywalking.collector.app_and_service_register_check_interval=2 -Dcollector.discovery_check_interval=2 -Dskywalking.collector.backend_service=${COLLECTOR_SERVER} -Dskywalking.agent.application_code=dubbo-provider -Xms256m -Xmx256m -XX:PermSize=64M -XX:MaxPermSize=64"
 
 $JAVA_HOME/bin/java $JAVA_OPTS -classpath "$CLASSPATH" $DUBBO_PROVIDER_OPTS org.apache.skywaking.apm.testcase.dubbo.provider.Main
