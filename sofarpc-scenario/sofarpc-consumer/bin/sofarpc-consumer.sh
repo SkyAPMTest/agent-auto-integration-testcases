@@ -25,4 +25,4 @@ echo $JAVA_OPTS
 echo $SOFARPC_CONSUMER_OPTS
 echo $CLASSPATH
 
-$JAVA_HOME/bin/java $JAVA_OPTS -classpath "$CLASSPATH" $SOFARPC_CONSUMER_OPTS org.apache.skywaking.apm.testcase.sofarpc.ClientApplication
+$JAVA_HOME/bin/java $JAVA_OPTS -classpath "$CLASSPATH" $SOFARPC_CONSUMER_OPTS test.apache.skywalking.apm.testcase.sofarpc.ClientApplication

@@ -6,8 +6,8 @@
             http://sofastack.io/schema/sofaboot http://sofastack.io/schema/sofaboot.xsd"
        default-autowire="byName">
 
-    <bean id="demoService" class="org.apache.skywaking.apm.testcase.sofarpc.provider.service.SofaRpcDemoServiceImpl"/>
-    <sofa:service interface="org.apache.skywaking.apm.testcase.sofarpc.interfaces.SofaRpcDemoService" ref="demoService">
+    <bean id="demoService" class="test.apache.skywalking.apm.testcase.sofarpc.provider.service.SofaRpcDemoServiceImpl"/>
+    <sofa:service interface="test.apache.skywalking.apm.testcase.sofarpc.interfaces.SofaRpcDemoService" ref="demoService">
         <sofa:binding.bolt/>
     </sofa:service>
 </beans>

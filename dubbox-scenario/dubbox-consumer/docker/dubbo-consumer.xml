@@ -8,6 +8,6 @@
     <dubbo:application name="skywalking-consumer"/>
     <dubbo:registry address="zookeeper://{ZK_ADDRESS}" timeout="1200000"/>
     <dubbo:protocol name="rest" port="20880" server="tomcat"/>
-    <dubbo:reference id="greetService" interface="org.apache.skywaking.apm.testcase.dubbox.services.GreetService"/>
+    <dubbo:reference id="greetService" interface="test.apache.skywalking.apm.testcase.dubbox.services.GreetService"/>
 
 </beans>

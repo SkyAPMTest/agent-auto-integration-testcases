@@ -7,7 +7,7 @@ registryItems:
   - {dubbox-consumer: 1}
   operationNames:
   - dubbox-consumer: [/dubbox-case/case/dubbox-rest]
-  - dubbox-provider: [org.apache.skywaking.apm.testcase.dubbox.services.GreetService.doBusiness()]
+  - dubbox-provider: [test.apache.skywalking.apm.testcase.dubbox.services.GreetService.doBusiness()]
 segmentItems:
 - applicationCode: dubbox-consumer
   segmentSize: 1
@@ -15,7 +15,7 @@ segmentItems:
     - segmentId: not null
       spans:
         -
-          operationName: org.apache.skywaking.apm.testcase.dubbox.services.GreetService.doBusiness()
+          operationName: test.apache.skywalking.apm.testcase.dubbox.services.GreetService.doBusiness()
           operationId: eq 0
           parentSpanId: 0
           spanId: 1
@@ -56,7 +56,7 @@ segmentItems:
     - segmentId: not null
       spans:
         -
-          operationName: org.apache.skywaking.apm.testcase.dubbox.services.GreetService.doBusiness()
+          operationName: test.apache.skywalking.apm.testcase.dubbox.services.GreetService.doBusiness()
           operationId: eq 0
           parentSpanId: -1
           spanId: 0

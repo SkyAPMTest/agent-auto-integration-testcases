@@ -6,7 +6,7 @@
    http://api.weibo.com/schema/motan http://api.weibo.com/schema/motan.xsd">
 
     <motan:registry regProtocol="zookeeper" name="zk" address="127.0.0.1:2181"/>
-    <bean id="serviceImpl" class="org.apache.skywaking.apm.testcase.motan.provider.service.BusinessServiceImpl"/>
-    <motan:service interface="org.apache.skywaking.apm.testcase.motan.interfaces.BusinessService" ref="serviceImpl"
+    <bean id="serviceImpl" class="test.apache.skywalking.apm.testcase.motan.provider.service.BusinessServiceImpl"/>
+    <motan:service interface="test.apache.skywalking.apm.testcase.motan.interfaces.BusinessService" ref="serviceImpl"
                    registry="zk" export="48002"/>
 </beans>

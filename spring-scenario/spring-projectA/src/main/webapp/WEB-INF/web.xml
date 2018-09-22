@@ -7,7 +7,7 @@
 
     <servlet>
         <servlet-name>caseServlet</servlet-name>
-        <servlet-class>org.apache.skywalking.apm.testcase.resttemplate.controller.CaseServlet</servlet-class>
+        <servlet-class>test.apache.skywalking.apm.testcase.resttemplate.controller.CaseServlet</servlet-class>
     </servlet>
 
     <servlet-mapping>

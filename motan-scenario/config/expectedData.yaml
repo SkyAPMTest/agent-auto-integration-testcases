@@ -6,8 +6,8 @@ registryItems:
   - {motan-provider: 1}
   - {motan-consumer: 1}
   operationNames:
-  - motan-provider: [org.apache.skywaking.apm.testcase.motan.interfaces.BusinessService.hello(java.lang.String)]
-  - motan-consumer: [/motan-consumer/case/motan-case, org.apache.skywaking.apm.testcase.motan.interfaces.BusinessService.hello(java.lang.String)]
+  - motan-provider: [test.apache.skywalking.apm.testcase.motan.interfaces.BusinessService.hello(java.lang.String)]
+  - motan-consumer: [/motan-consumer/case/motan-case, test.apache.skywalking.apm.testcase.motan.interfaces.BusinessService.hello(java.lang.String)]
   heartbeat: []
 segmentItems:
 - applicationCode: motan-provider
@@ -15,7 +15,7 @@ segmentItems:
   segments:
   - segmentId: not null
     spans:
-    - operationName: org.apache.skywaking.apm.testcase.motan.interfaces.BusinessService.hello(java.lang.String)
+    - operationName: test.apache.skywalking.apm.testcase.motan.interfaces.BusinessService.hello(java.lang.String)
       operationId: 0
       parentSpanId: -1
       spanId: 0
@@ -35,7 +35,7 @@ segmentItems:
   segments:
   - segmentId: not null
     spans:
-    - operationName: org.apache.skywaking.apm.testcase.motan.interfaces.BusinessService.hello(java.lang.String)
+    - operationName: test.apache.skywalking.apm.testcase.motan.interfaces.BusinessService.hello(java.lang.String)
       operationId: 0
       parentSpanId: 0
       spanId: 1

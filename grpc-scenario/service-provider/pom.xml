@@ -54,7 +54,7 @@
                             <transformers>
                                 <transformer
                                     implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
-                                    <mainClass>org.apache.skywalking.testcase.grpc.provider.Provider_Application
+                                    <mainClass>test.apache.skywalking.testcase.grpc.provider.Provider_Application
                                     </mainClass>
                                 </transformer>
                             </transformers>

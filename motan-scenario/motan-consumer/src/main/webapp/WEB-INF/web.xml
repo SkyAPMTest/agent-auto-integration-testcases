@@ -8,7 +8,7 @@
 
    <servlet>
        <servlet-name>caseServlet</servlet-name>
-       <servlet-class>org.apache.skywaking.apm.testcase.motan.consumer.CaseServlet</servlet-class>
+       <servlet-class>test.apache.skywalking.apm.testcase.motan.consumer.CaseServlet</servlet-class>
    </servlet>
 
     <servlet-mapping>

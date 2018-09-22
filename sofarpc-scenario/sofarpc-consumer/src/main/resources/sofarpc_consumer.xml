@@ -6,7 +6,7 @@
             http://sofastack.io/schema/sofaboot http://sofastack.io/schema/sofaboot.xsd"
        default-autowire="byName">
 
-    <sofa:reference id="sofaRpcDemoService" interface="org.apache.skywaking.apm.testcase.sofarpc.interfaces.SofaRpcDemoService">
+    <sofa:reference id="sofaRpcDemoService" interface="test.apache.skywalking.apm.testcase.sofarpc.interfaces.SofaRpcDemoService">
         <sofa:binding.bolt/>
     </sofa:reference>
 </beans>

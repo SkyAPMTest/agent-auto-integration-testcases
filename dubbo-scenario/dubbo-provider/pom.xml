@@ -49,7 +49,7 @@
                     </excludes>
                         <archive>
                             <manifest>
-                                <mainClass>org.apache.skywaking.apm.testcase.dubbo.provider.Main</mainClass>
+                                <mainClass>test.apache.skywalking.apm.testcase.dubbo.services.impl.Main</mainClass>
                             </manifest>
                         </archive>
                 </configuration>
