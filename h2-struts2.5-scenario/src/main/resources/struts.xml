@@ -5,7 +5,7 @@
 
 <struts>
     <package name="case" namespace="/h2-struts2" extends="struts-default">
-        <action name="case" class="org.apache.skywalking.apm.testcase.h2.CaseAction">
+        <action name="case" class="test.apache.skywalking.apm.testcase.h2.CaseAction">
             <result name="SUCCESS">/jsp/success.jsp</result>
         </action>
     </package>

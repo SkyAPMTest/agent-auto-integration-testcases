@@ -2,11 +2,11 @@ FROM openjdk:8-jdk
 
 ENV COLLECTOR_SERVER=127.0.0.1:12800 \
     ACTIVEMQ_BOOTSTRAP_SERVERS=127.0.0.1:61616 \
-    ACTIVEMQ_VERSION=5.15.4
+    ACTIVEMQ_VERSION=5.15.6
 
 WORKDIR /usr/local/activemq-scenario
 # download the activemq
-RUN  wget -q "http://mirror.bit.edu.cn/apache/activemq/${ACTIVEMQ_VERSION}/apache-activemq-${ACTIVEMQ_VERSION}-bin.tar.gz"  -O "/usr/local/activemq-scenario/apache-activemq-${ACTIVEMQ_VERSION}-bin.tar.gz" && tar -xvf /usr/local/activemq-scenario/apache-activemq-${ACTIVEMQ_VERSION}-bin.tar.gz
+RUN wget -q "http://mirror.bit.edu.cn/apache/activemq/${ACTIVEMQ_VERSION}/apache-activemq-${ACTIVEMQ_VERSION}-bin.tar.gz"  -O "/usr/local/activemq-scenario/apache-activemq-${ACTIVEMQ_VERSION}-bin.tar.gz" && tar -xvf /usr/local/activemq-scenario/apache-activemq-${ACTIVEMQ_VERSION}-bin.tar.gz
 
 # copy required packages
 ADD start_up.sh /usr/local/activemq-scenario/

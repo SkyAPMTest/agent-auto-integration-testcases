@@ -7,7 +7,7 @@
 
     <dubbo:application name="skywalking-provider"/>
     <dubbo:registry address="zookeeper://127.0.0.1:2181" timeout="1200000"/>
-    <bean id="greetService" class="org.apache.skywaking.apm.testcase.dubbo.services.impl.GreetServiceImpl"/>
-    <dubbo:service interface="org.apache.skywaking.apm.testcase.dubbo.services.GreetService" ref="greetService" timeout="5000"/>
+    <bean id="greetService" class="test.apache.skywalking.apm.testcase.dubbo.services.impl.GreetServiceImpl"/>
+    <dubbo:service interface="test.apache.skywalking.apm.testcase.dubbo.services.GreetService" ref="greetService" timeout="5000"/>
 
 </beans>

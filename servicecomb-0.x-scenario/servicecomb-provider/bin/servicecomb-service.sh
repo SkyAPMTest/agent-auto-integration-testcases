@@ -21,4 +21,4 @@ done
 
 JAVA_OPTS="$JAVA_OPTS -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=5005 -Dskywalking.collector.grpc_channel_check_interval=2 -Dskywalking.collector.app_and_service_register_check_interval=2 -Dcollector.discovery_check_interval=2 -Dskywalking.collector.servers=${COLLECTOR_SERVER} -Dskywalking.agent.application_code=servicecomb-provider -Xms256m -Xmx256m -XX:PermSize=64M -XX:MaxPermSize=64"
 
-$JAVA_HOME/bin/java -Dvertx.disableDnsResolver=true $JAVA_OPTS $SERVICECOMB_PROVIDER_OPTS -classpath "$CLASSPATH"  org.apache.skywaking.apm.testcase.servicecomb.provider.CodeFirstProviderMain
+$JAVA_HOME/bin/java -Dvertx.disableDnsResolver=true $JAVA_OPTS $SERVICECOMB_PROVIDER_OPTS -classpath "$CLASSPATH"  test.apache.skywalking.apm.testcase.servicecomb.provider.CodeFirstProviderMain

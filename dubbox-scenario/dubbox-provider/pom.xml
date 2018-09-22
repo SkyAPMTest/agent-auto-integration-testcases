@@ -48,7 +48,7 @@
                     </excludes>
                         <archive>
                             <manifest>
-                                <mainClass>org.apache.skywaking.apm.testcase.dubbox.provider.Main</mainClass>
+                                <mainClass>test.apache.skywalking.apm.testcase.dubbox.provider.Main</mainClass>
                             </manifest>
                         </archive>
                 </configuration>
