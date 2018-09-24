@@ -34,7 +34,7 @@ environmentCheck(){
 	fi
 
 	# check java
-	[ -z "$JAVA_HOME" ] && EXECUTE_JAVA=${JAVA_HOME}/bin/java
+	[ "$JAVA_HOME" ] && EXECUTE_JAVA=${JAVA_HOME}/bin/java
 	if [ "$EXECUTE_JAVA" = "" ]; then
 		EXECUTE_JAVA=java
 	fi
