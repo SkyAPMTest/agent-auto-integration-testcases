@@ -1,0 +1,29 @@
+registryItems:
+  applications:
+  - {undertow-scenario: nq 0}
+  instances:
+  - {undertow-scenario: 1}
+  operationNames:
+  - undertow-scenario: [/undertow-case/case/undertow]
+segmentItems:
+- applicationCode: undertow-scenario
+  segmentSize: 1
+  segments:
+  - segmentId: not null
+    spans:
+    - operationName: /undertow-case/case/undertow
+      operationId: 0
+      parentSpanId: -1
+      spanId: 0
+      spanLayer: Http
+      startTime: nq 0
+      endTime: nq 0
+      componentId: 49
+      componentName: ''
+      isError: false
+      spanType: Entry
+      peer: ''
+      peerId: 0
+      tags:
+      - {key: url, value: 'http://localhost:{SERVER_OUTPUT_PORT}/undertow-case/case/undertow'}
+      - {key: http.method, value: GET}

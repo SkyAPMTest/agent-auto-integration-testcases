@@ -1,0 +1,32 @@
+#
+# Test case project define.
+#
+# Note: Test case project must a project that support output service.
+#
+testcase:
+  #
+  # The request url of current test cases.
+  #
+  request_url: http://localhost:{SERVER_OUTPUT_PORT}/undertow-case/case/undertow
+  #
+  # The framework name that need tested.
+  #
+  test_framework: Undertow
+  #
+  # The framework version list of current test case supported
+  #
+  support_versions:
+    - 2.0.13.Final
+    - 2.0.12.Final
+    - 2.0.11.Final
+    - 2.0.10.Final
+    - 2.0.9.Final
+    - 2.0.8.Final
+    - 2.0.7.Final
+    - 2.0.6.Final
+    - 2.0.5.Final
+    - 2.0.4.Final
+    - 2.0.3.Final
+    - 2.0.2.Final
+    - 2.0.1.Final
+    - 2.0.0.Final
