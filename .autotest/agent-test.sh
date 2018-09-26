@@ -435,7 +435,7 @@ fi
 if [ "$ISSUE_NO" = "UNKNOWN" ]; then
     echo "issue no is empty, ignore to push comment"
 else
-    curl --user ${GITHUB_ACCOUNT} -X POST -H "Content-Type: text/plain" -d "{\"body\":\"Here is the [test report](http://github.com/SkywalkingTest/agent-integration-test-report/tree/master/${TEST_TIME_YEAR}/${TEST_TIME_MONTH}/${COMMITTER}/testReport-${TEST_CASES_BRANCH}-${TEST_TIME}.md) and [validate logs](${VALIDATE_LOG_URL_PREFIX}/validate-$TEST_TIME.log)\"}" https://api.github.com/repos/apache/incubator-skywalking/issues/${ISSUE_NO}/comments
+    curl --user ${GITHUB_ACCOUNT} -X POST -H "Content-Type: text/plain" -d "{\"body\":\"Here is the [test report](http://github.com/SkywalkingTest/agent-integration-test-report/tree/master/${TEST_TIME_YEAR}/${TEST_TIME_MONTH}/${COMMITTER}/testReport-${NORMALIZED_TEST_CASES_BRANCH}-${TEST_TIME}.md) and [validate logs](${VALIDATE_LOG_URL_PREFIX}/validate-$TEST_TIME.log)\"}" https://api.github.com/repos/apache/incubator-skywalking/issues/${ISSUE_NO}/comments
 fi
 
 
