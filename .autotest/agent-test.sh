@@ -130,6 +130,8 @@ MAX_RUNNING_SIZE=2 # The max size of running testcase
 #
 ISSUE_NO=""
 #
+VALIDATE_LOG_URL_PREFIX=""
+#
 #
 #
 ############## parse paremeters ##############
@@ -175,6 +177,10 @@ do
         ISSUE_NO=$2
         shift 2;
         ;;
+    --validateLogURL )
+		    VALIDATE_LOG_URL_PREFIX=$2
+		    shift 2;
+		    ;;
 		* )
 			usage;
 			exit 1;

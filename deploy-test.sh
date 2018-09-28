@@ -28,6 +28,7 @@ TESTCASE_BRANCH="master"
 REPORT_FILE_MODE="NONE"
 PARALLEL_RUNNING_CASE_NUMBER=8
 ISSUE_NO="UNKNOWN"
+VALIDATE_LOG_URL_PREFIX="http://35.227.88.23:49001/job/skywalking-agent-automated-testing/92/artifact/skywalking-agent-testcases/workspace/logs"
 #
 # Parse the input parameters
 #
@@ -62,9 +63,14 @@ while [[ $# -gt 0 ]]; do
 			shift 2
 			;;
     -i | --issueNo )
-      ISSUE_NO=$2
-      shift 2
-      ;;
+        ISSUE_NO=$2
+        shift 2
+        ;;
+    --validateLogURL )
+        VALIDATE_LOG_URL_PREFIX=$2
+		    shift 2;
+		    ;;
+
 		* )
 			shift
 			break
@@ -77,5 +83,5 @@ else
    ${AGENT_TEST_HOME}/.autotest/autotest-deploy.sh --collector-image-version "$MOCK_COLLECTOR_IMAGE_VERSION" 
 fi
 
-${AGENT_TEST_HOME}/.autotest/agent-test.sh --max-running-size ${PARALLEL_RUNNING_CASE_NUMBER} --branch "$AGENT_BRANCH_NAME" -r "$AGENT_GIT_URL" --reportFileMode ${REPORT_FILE_MODE} --testcase-branch "$TESTCASE_BRANCH" --issueNo ${ISSUE_NO}
+${AGENT_TEST_HOME}/.autotest/agent-test.sh --max-running-size ${PARALLEL_RUNNING_CASE_NUMBER} --branch "$AGENT_BRANCH_NAME" -r "$AGENT_GIT_URL" --reportFileMode ${REPORT_FILE_MODE} --testcase-branch "$TESTCASE_BRANCH" --issueNo ${ISSUE_NO} --validateLogURL ${VALIDATE_LOG_URL_PREFIX}
 
