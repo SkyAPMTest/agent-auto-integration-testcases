@@ -44,6 +44,15 @@ public class CaseServlet extends HttpServlet {
         } catch (IOException e) {
         }
 
+
+        Request inheritRequest = new Request.Builder().url(Config.projectDURL() + "/inherit/child/test").build();
+
+        try {
+            Response response = new OkHttpClient().newCall(inheritRequest).execute();
+            logger.info(response.toString());
+        } catch (IOException e) {
+        }
+
         PrintWriter printWriter = resp.getWriter();
         printWriter.write("success");
         printWriter.flush();

@@ -12,6 +12,7 @@
         <module>spring-projectA</module>
         <module>spring-projectB</module>
         <module>spring-projectC</module>
+        <module>spring-projectD</module>
     </modules>
 
     <name>skywalking-spring-scenrio</name>

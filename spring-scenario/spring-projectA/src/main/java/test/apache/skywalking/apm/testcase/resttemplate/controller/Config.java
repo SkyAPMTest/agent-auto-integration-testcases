@@ -10,6 +10,7 @@ public class Config {
     private static Logger logger = LogManager.getLogger(Config.class);
     private static String projectBURL;
     private static String projectCURL;
+    private static String projectDURL;
 
     static {
         InputStream inputStream = Config.class.getClassLoader().getResourceAsStream("/spring-config.properties");
@@ -22,6 +23,7 @@ public class Config {
 
         projectBURL = properties.getProperty("spring.projectB.url");
         projectCURL = properties.getProperty("spring.projectC.url");
+        projectDURL = properties.getProperty("spring.projectD.url");
     }
 
     public static String projectBURL() {
@@ -30,5 +32,13 @@ public class Config {
 
     public static String projectCURL() {
         return projectCURL;
+    }
+
+    public static String projectDURL() {
+        return projectDURL;
+    }
+
+    public static void main(String[] args) {
+        System.out.println(projectDURL());
     }
 }
