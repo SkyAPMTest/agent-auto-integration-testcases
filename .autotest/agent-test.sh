@@ -182,7 +182,7 @@ do
 		    VALIDATE_LOG_URL_PREFIX=$2
 		    shift 2;
 		    ;;
-    --test-tools-branch )
+    --test_tools_branch )
         TEST_TOOL_GIT_BRANCH=$2
         shift 2;
         ;;

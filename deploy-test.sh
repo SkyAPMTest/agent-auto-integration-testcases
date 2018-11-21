@@ -71,7 +71,7 @@ while [[ $# -gt 0 ]]; do
 		    VALIDATE_LOG_URL_PREFIX=$2
 		    shift 2
 		    ;;
-    --test-tools-branch )
+    --test_tools_branch )
         TEST_TOOLS_BRANCH=$2
         shift 2
         ;;
@@ -87,5 +87,5 @@ else
    ${AGENT_TEST_HOME}/.autotest/autotest-deploy.sh --collector-image-version "$MOCK_COLLECTOR_IMAGE_VERSION" 
 fi
 
-${AGENT_TEST_HOME}/.autotest/agent-test.sh --max-running-size ${PARALLEL_RUNNING_CASE_NUMBER} --branch "$AGENT_BRANCH_NAME" -r "$AGENT_GIT_URL" --reportFileMode ${REPORT_FILE_MODE} --testcase-branch "$TESTCASE_BRANCH" --issueNo ${ISSUE_NO} --validateLogURL $VALIDATE_LOG_URL_PREFIX --test-tools-branch $TEST_TOOLS_BRANCH
+${AGENT_TEST_HOME}/.autotest/agent-test.sh --max-running-size ${PARALLEL_RUNNING_CASE_NUMBER} --branch "$AGENT_BRANCH_NAME" -r "$AGENT_GIT_URL" --reportFileMode ${REPORT_FILE_MODE} --testcase-branch "$TESTCASE_BRANCH" --issueNo ${ISSUE_NO} --validateLogURL $VALIDATE_LOG_URL_PREFIX --test_tools_branch $TEST_TOOLS_BRANCH
 
