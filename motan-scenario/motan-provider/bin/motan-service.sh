@@ -19,6 +19,6 @@ do
     CLASSPATH="$i:$CLASSPATH"
 done
 
-JAVA_OPTS="$JAVA_OPTS -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=5005 -Dskywalking.collector.grpc_channel_check_interval=2 -Dskywalking.collector.app_and_service_register_check_interval=2 -Dskywalking.collector.discovery_check_interval=2 -Dskywalking.collector.backend_service=${COLLECTOR_SERVER} -Dskywalking.agent.application_code=motan-provider -Xms256m -Xmx256m -XX:PermSize=64M -XX:MaxPermSize=64"
+JAVA_OPTS="$JAVA_OPTS -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=5005 -Dskywalking.collector.grpc_channel_check_interval=2 -Dskywalking.collector.app_and_service_register_check_interval=2 -Dskywalking.collector.discovery_check_interval=2 -Dskywalking.collector.backend_service=${COLLECTOR_SERVER} -Dskywalking.agent.service_name=motan-provider -Xms256m -Xmx256m -XX:PermSize=64M -XX:MaxPermSize=64"
 
 $JAVA_HOME/bin/java $JAVA_OPTS -classpath "$CLASSPATH" $MOTAN_PROVIDER_OPTS test.apache.skywalking.apm.testcase.motan.provider.Application

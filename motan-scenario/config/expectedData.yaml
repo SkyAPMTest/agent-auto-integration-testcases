@@ -29,7 +29,7 @@ segmentItems:
       peer: ''
       peerId: 0
       refs:
-      - {parentServiceId: 0, parentServiceName: /motan-consumer/case/motan-case, networkAddressId: 0, entryServiceId: 0, refType: CrossProcess, parentSpanId: 1, parentTraceSegmentId: '${motan-consumer[0]}', parentApplicationInstanceId: nq 0, networkAddress: not null, entryServiceName: /motan-consumer/case/motan-case, entryApplicationInstanceId: nq 0}
+      - {parentEndpointId: 0, parentEndpoint: /motan-consumer/case/motan-case, networkAddressId: 0, entryEndpointId: 0, refType: CrossProcess, parentSpanId: 1, parentTraceSegmentId: '${motan-consumer[0]}', parentServiceInstanceId: nq 0, networkAddress: not null, entryEndpoint: /motan-consumer/case/motan-case, entryServiceInstanceId: nq 0}
 - applicationCode: motan-consumer
   segmentSize: 1
   segments:

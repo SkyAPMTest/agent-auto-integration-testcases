@@ -69,7 +69,7 @@ segmentItems:
               - {key: url, value: 'http://projectB-scenario:18080/projectB/test'}
               - {key: http.method, value: GET}
             refs:
-              - {parentServiceId: 0, parentServiceName: /test, networkAddressId: 0, entryServiceId: 0, refType: CrossProcess, parentSpanId: 1, parentTraceSegmentId: "${projectA[0]}", parentApplicationInstanceId: nq 0, networkAddress: 'projectB-scenario:18080', entryServiceName: /test, entryApplicationInstanceId: nq 0}
+              - {parentEndpointId: 0, parentEndpoint: /test, networkAddressId: 0, entryEndpointId: 0, refType: CrossProcess, parentSpanId: 1, parentTraceSegmentId: "${projectA[0]}", parentServiceInstanceId: nq 0, networkAddress: 'projectB-scenario:18080', entryEndpoint: /test, entryServiceInstanceId: nq 0}
   - applicationCode: projectA
     segmentSize: 1
     segments:
@@ -129,7 +129,7 @@ segmentItems:
               - {key: url, value: 'http://projectD-scenario:38080/projectD/test'}
               - {key: http.method, value: GET}
             refs:
-              - {parentServiceId: 0, parentServiceName: /test, networkAddressId: 0, entryServiceId: 0, refType: CrossProcess, parentSpanId: 2, parentTraceSegmentId: "${projectB[0]}", parentApplicationInstanceId: nq 0 , networkAddress: 'projectD-scenario:38080', entryServiceName: /test, entryApplicationInstanceId: nq 0}
+              - {parentEndpointId: 0, parentEndpoint: /test, networkAddressId: 0, entryEndpointId: 0, refType: CrossProcess, parentSpanId: 2, parentTraceSegmentId: "${projectB[0]}", parentServiceInstanceId: nq 0 , networkAddress: 'projectD-scenario:38080', entryEndpoint: /test, entryServiceInstanceId: nq 0}
   - applicationCode: projectC
     segmentSize: 1
     segments:
@@ -152,4 +152,4 @@ segmentItems:
               - {key: url, value: 'http://projectC-scenario:28080/projectC/test'}
               - {key: http.method, value: GET}
             refs:
-              - {parentServiceId: 0, parentServiceName: /test, networkAddressId: 0, entryServiceId: 0, refType: CrossProcess, parentSpanId: 1, parentTraceSegmentId: "${projectB[0]}", parentApplicationInstanceId: nq 0, networkAddress: 'projectC-scenario:28080', entryServiceName: /test, entryApplicationInstanceId: nq 0}
+              - {parentEndpointId: 0, parentEndpoint: /test, networkAddressId: 0, entryEndpointId: 0, refType: CrossProcess, parentSpanId: 1, parentTraceSegmentId: "${projectB[0]}", parentServiceInstanceId: nq 0, networkAddress: 'projectC-scenario:28080', entryEndpoint: /test, entryServiceInstanceId: nq 0}

@@ -21,7 +21,7 @@ PRGDIR=`dirname "$PRG"`
 # the define env variables
 #
 TEST_PROJECT_NAME=""
-MOCK_COLLECTOR_IMAGE_VERSION="3.2.6-2017"
+MOCK_COLLECTOR_IMAGE_VERSION="6.0.0-2018"
 AGENT_BRANCH_NAME="master"
 AGENT_GIT_URL="https://github.com/apache/incubator-skywalking.git"
 TESTCASE_BRANCH="master"

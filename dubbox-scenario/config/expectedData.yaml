@@ -73,4 +73,4 @@ segmentItems:
           peer: null
           peerId: eq 0
           refs: 
-            - {parentSpanId: 1, parentTraceSegmentId: "${dubbox-consumer[0]}", entryServiceName: "/dubbox-case/case/dubbox-rest", networkAddress: not null, parentServiceName: "/dubbox-case/case/dubbox-rest",refType: not null,entryApplicationInstanceId: nq 0 }
+            - {parentSpanId: 1, parentTraceSegmentId: "${dubbox-consumer[0]}", entryEndpoint: "/dubbox-case/case/dubbox-rest", networkAddress: not null, parentEndpoint: "/dubbox-case/case/dubbox-rest",refType: not null,entryServiceInstanceId: nq 0 }

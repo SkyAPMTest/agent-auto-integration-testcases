@@ -29,7 +29,7 @@ segmentItems:
       peer: ''
       peerId: 0
       refs:
-      - {parentServiceId: 0, parentServiceName: /sofarpc-consumer/case/sofarpc-case, networkAddressId: 0, entryServiceId: 0, refType: CrossProcess, parentSpanId: 1, parentTraceSegmentId: '${sofarpc-consumer[0]}', parentApplicationInstanceId: nq 0, networkAddress: not null, entryServiceName: /sofarpc-consumer/case/sofarpc-case, entryApplicationInstanceId: nq 0}
+      - {parentEndpointId: 0, parentEndpoint: /sofarpc-consumer/case/sofarpc-case, networkAddressId: 0, entryEndpointId: 0, refType: CrossProcess, parentSpanId: 1, parentTraceSegmentId: '${sofarpc-consumer[0]}', parentServiceInstanceId: nq 0, networkAddress: not null, entryEndpoint: /sofarpc-consumer/case/sofarpc-case, entryServiceInstanceId: nq 0}
 - applicationCode: sofarpc-consumer
   segmentSize: 1
   segments:

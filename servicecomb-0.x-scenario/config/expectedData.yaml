@@ -72,4 +72,4 @@ segmentItems:
           peer: null
           peerId: eq 0
           refs: 
-            - {parentSpanId: 1, parentTraceSegmentId: "${servicecomb-consumer[0]}", entryServiceName: "codefirstClient.codeFirstSpringmvcHello.say", networkAddress: not null, parentServiceName: "codefirstClient.codeFirstSpringmvcHello.say",refType: not null,entryApplicationInstanceId: nq 0 }
+            - {parentSpanId: 1, parentTraceSegmentId: "${servicecomb-consumer[0]}", entryEndpoint: "codefirstClient.codeFirstSpringmvcHello.say", networkAddress: not null, parentEndpoint: "codefirstClient.codeFirstSpringmvcHello.say",refType: not null,entryServiceInstanceId: nq 0 }

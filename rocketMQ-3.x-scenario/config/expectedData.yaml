@@ -59,4 +59,4 @@ segmentItems:
       peer: ''
       peerId: 0
       refs:
-      - {parentServiceId: 0, parentServiceName: /case/rocketMQ-Provider, networkAddressId: 0, entryServiceId: 0, refType: CrossProcess, parentSpanId: 1, parentTraceSegmentId: '${rocketMQ-scenario[0]}', parentApplicationInstanceId: nq 0, networkAddress: 'localhost:9876', entryServiceName: /case/rocketMQ-Provider, entryApplicationInstanceId: nq 0}
+      - {parentEndpointId: 0, parentEndpoint: /case/rocketMQ-Provider, networkAddressId: 0, entryEndpointId: 0, refType: CrossProcess, parentSpanId: 1, parentTraceSegmentId: '${rocketMQ-scenario[0]}', parentServiceInstanceId: nq 0, networkAddress: 'localhost:9876', entryEndpoint: /case/rocketMQ-Provider, entryServiceInstanceId: nq 0}

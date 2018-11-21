@@ -62,4 +62,4 @@ segmentItems:
       - {key: mq.broker, value: '127.0.0.1:61616'}
       - {key: mq.queue, value: test}
       refs:
-      - {parentServiceId: 0, parentServiceName: /case/activemq-case, networkAddressId: 0, entryServiceId: 0, refType: CrossProcess, parentSpanId: 1, parentTraceSegmentId: '${activemq-scenario[0]}', parentApplicationInstanceId: nq 0, networkAddress: '127.0.0.1:61616', entryServiceName: /case/activemq-case, entryApplicationInstanceId: nq 0}
+      - {parentEndpointId: 0, parentEndpoint: /case/activemq-case, networkAddressId: 0, entryEndpointId: 0, refType: CrossProcess, parentSpanId: 1, parentTraceSegmentId: '${activemq-scenario[0]}', parentServiceInstanceId: nq 0, networkAddress: '127.0.0.1:61616', entryEndpoint: /case/activemq-case, entryServiceInstanceId: nq 0}

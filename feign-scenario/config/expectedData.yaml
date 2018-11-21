@@ -28,10 +28,10 @@ segmentItems:
       - {key: url, value: 'http://localhost:8080/feign-case/create/'}
       - {key: http.method, value: POST}
       refs:
-      - {parentServiceId: 0, parentServiceName: /case/feign, networkAddressId: 0,
-        entryServiceId: 0, refType: CrossProcess, parentSpanId: 1, parentTraceSegmentId: "${feign-scenario[4]}",
-        parentApplicationInstanceId: nq 0, networkAddress: 'localhost:8080', entryServiceName: /case/feign,
-        entryApplicationInstanceId: nq 0}
+      - {parentEndpointId: 0, parentEndpoint: /case/feign, networkAddressId: 0,
+        entryEndpointId: 0, refType: CrossProcess, parentSpanId: 1, parentTraceSegmentId: "${feign-scenario[4]}",
+        parentServiceInstanceId: nq 0, networkAddress: 'localhost:8080', entryEndpoint: /case/feign,
+        entryServiceInstanceId: nq 0}
   - segmentId: not null
     spans:
     - operationName: /get/{id}
@@ -51,10 +51,10 @@ segmentItems:
       - {key: url, value: 'http://localhost:8080/feign-case/get/1'}
       - {key: http.method, value: GET}
       refs:
-      - {parentServiceId: 0, parentServiceName: /case/feign, networkAddressId: 0,
-        entryServiceId: 0, refType: CrossProcess, parentSpanId: 2, parentTraceSegmentId: "${feign-scenario[4]}",
-        parentApplicationInstanceId: 1, networkAddress: 'localhost:8080', entryServiceName: /case/feign,
-        entryApplicationInstanceId: 1}
+      - {parentEndpointId: 0, parentEndpoint: /case/feign, networkAddressId: 0,
+        entryEndpointId: 0, refType: CrossProcess, parentSpanId: 2, parentTraceSegmentId: "${feign-scenario[4]}",
+        parentServiceInstanceId: 1, networkAddress: 'localhost:8080', entryEndpoint: /case/feign,
+        entryServiceInstanceId: 1}
   - segmentId: not null
     spans:
     - operationName: /update/{id}
@@ -74,10 +74,10 @@ segmentItems:
       - {key: url, value: 'http://localhost:8080/feign-case/update/1'}
       - {key: http.method, value: PUT}
       refs:
-      - {parentServiceId: 0, parentServiceName: /case/feign, networkAddressId: 0,
-        entryServiceId: 0, refType: CrossProcess, parentSpanId: 3, parentTraceSegmentId: "${feign-scenario[4]}",
-        parentApplicationInstanceId: 1, networkAddress: 'localhost:8080', entryServiceName: /case/feign,
-        entryApplicationInstanceId: 1}
+      - {parentEndpointId: 0, parentEndpoint: /case/feign, networkAddressId: 0,
+        entryEndpointId: 0, refType: CrossProcess, parentSpanId: 3, parentTraceSegmentId: "${feign-scenario[4]}",
+        parentServiceInstanceId: 1, networkAddress: 'localhost:8080', entryEndpoint: /case/feign,
+        entryServiceInstanceId: 1}
   - segmentId: not null
     spans:
     - operationName: /delete/{id}
@@ -97,10 +97,10 @@ segmentItems:
       - {key: url, value: 'http://localhost:8080/feign-case/delete/1'}
       - {key: http.method, value: DELETE}
       refs:
-      - {parentServiceId: 0, parentServiceName: /case/feign, networkAddressId: 0,
-        entryServiceId: 0, refType: CrossProcess, parentSpanId: 4, parentTraceSegmentId: "${feign-scenario[4]}",
-        parentApplicationInstanceId: 1, networkAddress: 'localhost:8080', entryServiceName: /case/feign,
-        entryApplicationInstanceId: 1}
+      - {parentEndpointId: 0, parentEndpoint: /case/feign, networkAddressId: 0,
+        entryEndpointId: 0, refType: CrossProcess, parentSpanId: 4, parentTraceSegmentId: "${feign-scenario[4]}",
+        parentServiceInstanceId: 1, networkAddress: 'localhost:8080', entryEndpoint: /case/feign,
+        entryServiceInstanceId: 1}
   - segmentId: not null
     spans:
     - operationName: /feign-case/create/

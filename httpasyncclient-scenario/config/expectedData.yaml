@@ -4,7 +4,7 @@ registryItems:
   instances:
   - {httpasyncclient-scenario: 1}
   operationNames:
-  - httpasyncclient-scenario: [/httpasyncclient/back, /back, httpasyncclient/local,/front]
+  - httpasyncclient-scenario: [/httpasyncclient/back, /back, /front]
 segmentItems:
 - applicationCode: httpasyncclient-scenario
   segmentSize: 3
@@ -46,7 +46,7 @@ segmentItems:
       - {key: url, value: 'http://127.0.0.1:8080/httpasyncclient/back' }
       - {key: http.method, value: GET }
       refs:
-      - {parentServiceId: 0, parentServiceName: httpasyncclient/local, networkAddressId: 0, entryServiceId: 0, refType: CrossProcess, parentSpanId: 1, parentTraceSegmentId: '${httpasyncclient-scenario[2]}', parentApplicationInstanceId: nq 0, networkAddress: '127.0.0.1:8080', entryServiceName: /front, entryApplicationInstanceId: nq 0}
+      - {parentEndpointId: 0, parentEndpoint: httpasyncclient/local, networkAddressId: 0, entryEndpointId: 0, refType: CrossProcess, parentSpanId: 1, parentTraceSegmentId: '${httpasyncclient-scenario[2]}', parentServiceInstanceId: nq 0, networkAddress: '127.0.0.1:8080', entryEndpoint: /front, entryServiceInstanceId: nq 0}
   - segmentId: not null
     spans:
     - operationName: /httpasyncclient/back
@@ -79,4 +79,4 @@ segmentItems:
       peer: ""
       peerId: 0
       refs:
-      - {parentServiceId: 0, parentServiceName: /front, networkAddressId: 0, entryServiceId: 0, refType: CrossThread, parentSpanId: 0, parentTraceSegmentId: '${httpasyncclient-scenario[0]}',parentApplicationInstanceId: 1,networkAddress: '', entryServiceName: /front,entryApplicationInstanceId: 1}
+      - {parentEndpointId: 0, parentEndpoint: /front, networkAddressId: 0, entryEndpointId: 0, refType: CrossThread, parentSpanId: 0, parentTraceSegmentId: '${httpasyncclient-scenario[0]}',parentServiceInstanceId: 1,networkAddress: '', entryEndpoint: /front,entryServiceInstanceId: 1}

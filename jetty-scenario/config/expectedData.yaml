@@ -31,7 +31,7 @@ segmentItems:
       - {key: url, value: 'http://jettyserver-scenario:18080/jettyserver-case/case/receiveContext-0'}
       - {key: http.method, value: GET}
       refs:
-      - {parentServiceId: 0, parentServiceName: /case/jettyclient-case, networkAddressId: 0, entryServiceId: 0, refType: CrossProcess, parentSpanId: 1, parentTraceSegmentId: "${jettyclient-scenario[0]}", parentApplicationInstanceId: nq 0, networkAddress: 'jettyserver-scenario:18080', entryServiceName: /case/jettyclient-case, entryApplicationInstanceId: nq 0 }
+      - {parentEndpointId: 0, parentEndpoint: /case/jettyclient-case, networkAddressId: 0, entryEndpointId: 0, refType: CrossProcess, parentSpanId: 1, parentTraceSegmentId: "${jettyclient-scenario[0]}", parentServiceInstanceId: nq 0, networkAddress: 'jettyserver-scenario:18080', entryEndpoint: /case/jettyclient-case, entryServiceInstanceId: nq 0 }
 - applicationCode: jettyclient-scenario
   segmentSize: 1
   segments:

@@ -69,4 +69,4 @@ segmentItems:
           peer: null
           peerId: eq 0
           refs: 
-            - {parentSpanId: 1, parentTraceSegmentId: "${httpclient-case[0]}", entryServiceName: "/httpclient-case/case/httpclient", networkAddress: "127.0.0.1:8080",parentServiceName: "/httpclient-case/case/httpclient",entryApplicationInstanceId: nq 0 }
+            - {parentSpanId: 1, parentTraceSegmentId: "${httpclient-case[0]}", entryEndpoint: "/httpclient-case/case/httpclient", networkAddress: "127.0.0.1:8080",parentEndpoint: "/httpclient-case/case/httpclient",entryServiceInstanceId: nq 0 }
