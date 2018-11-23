@@ -4,7 +4,7 @@ registryItems:
   instances:
   - {elasticsearch-scenario: 1}
   operationNames:
-  - elasticsearch-scenario: [Elasticsearch/IndexRequest, Elasticsearch/GetRequest, Elasticsearch/SearchRequest, Elasticsearch/UpdateRequest, Elasticsearch/DeleteRequest, Elasticsearch/DeleteIndexRequest, Elasticsearch/actionGet, /case/elasticsearch]
+  - elasticsearch-scenario: [Elasticsearch/IndexRequest, Elasticsearch/GetRequest, Elasticsearch/SearchRequest, Elasticsearch/UpdateRequest, Elasticsearch/DeleteRequest, Elasticsearch/DeleteIndexRequest, /case/elasticsearch]
   heartbeat: []
 segmentItems:
 - applicationCode: elasticsearch-scenario
