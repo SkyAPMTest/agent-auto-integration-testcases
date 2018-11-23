@@ -4,7 +4,7 @@ registryItems:
   instances:
   - {jdk-cross-thread-scenario: 1}
   operationNames:
-  - jdk-cross-thread-scenario: [/jdk-cross-thread-scenario/case/echo, /case/echo, Thread/org.apache.skywalking.apm.toolkit.trace.CallableWrapper/call, /case/cross-thread]
+  - jdk-cross-thread-scenario: [/jdk-cross-thread-scenario/case/echo, /case/echo, /case/cross-thread]
 segmentItems:
 - applicationCode: jdk-cross-thread-scenario
   segmentSize: 3

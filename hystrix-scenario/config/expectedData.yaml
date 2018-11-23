@@ -4,7 +4,7 @@ registryItems:
   instances:
   - {hystrix-scenario: 1}
   operationNames:
-  - hystrix-scenario: [/hystrix-case]
+  - hystrix-scenario: [/case/hystrix-case]
 segmentItems:
 - applicationCode: hystrix-scenario
   segmentSize: 3
