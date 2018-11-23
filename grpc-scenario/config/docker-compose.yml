@@ -1,7 +1,7 @@
 version: '2.1'
 services:
   consumer-scenario:
-    image:  skywalking/grpc-consumer-scenario:1.8.0
+    image:  skywalking/grpc-consumer-scenario:{CASES_IMAGE_VERSION}
     expose:
       - "8080"
     ports:
@@ -19,7 +19,7 @@ services:
         condition: service_healthy
 
   provider-scenario:
-    image:  skywalking/grpc-provider-scenario:1.8.0
+    image:  skywalking/grpc-provider-scenario:{CASES_IMAGE_VERSION}
     expose:
       - "18080"
     environment:
@@ -33,7 +33,7 @@ services:
         condition: service_healthy
 
   mock-collector:
-    image: skywalking/skywalking-mock-collector:3.2.6-2017
+    image: skywalking/skywalking-mock-collector:{COLLECTOR_IMAGE_VERSION}
     environment:
       - GRPC_BIND_HOST=mock-collector
     expose:

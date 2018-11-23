@@ -16,7 +16,7 @@ testcase:
   # The framework version list of current test case supported
   #
   support_versions:
-    - 1.9.0
+    - 1.9.0                     
     - 1.8.0
     - 1.7.1
     - 1.7.0
