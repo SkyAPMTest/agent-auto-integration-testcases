@@ -447,7 +447,7 @@ fi
 # clear unused images
 #
 (docker images | grep '<none>' | awk '{print $3}' | xargs docker rmi -f) > /dev/null
-(docker ps -a | awk '{print $1}' | xargs docker rm -f -v) > /dev/null
+#(docker ps -a | awk '{print $1}' | xargs docker rm -f -v) > /dev/null
 #(docker images | grep skywalking | grep -v 'skywalking/skywalking-mock-collector' | awk '{print $3}' | xargs docker rmi -f) > /dev/null
 echo "clear images Done!"
 #
