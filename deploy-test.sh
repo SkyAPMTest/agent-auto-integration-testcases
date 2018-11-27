@@ -81,6 +81,21 @@ while [[ $# -gt 0 ]]; do
 	esac
 done
 
+clearDockerResource(){
+    echo "Stop the container"
+    CONTAINER_IDS="$(docker ps -a | awk '{print $1}' | grep -v CONTAINER)"
+    if [ "${CONTAINER_IDS}" != "" ]; then
+        docker ps -a | awk '{print $1}' | grep -v CONTAINER | xargs docker rm -f -v 
+    fi
+    echo "Remove unsed image"
+    IMAGE_IDS="$(docker images | grep '<none>' | awk '{print $3}')"
+    if [ "$IMAGE_IDS" != "" ]; then
+	      docker images | grep '<none>' | awk '{print $3}' | xargs docker rmi -f
+    fi
+}
+
+clearDockerResource
+
 if [ "${TEST_PROJECT_NAME}" != "" ]; then
     ${AGENT_TEST_HOME}/.autotest/autotest-deploy.sh --project "${TEST_PROJECT_NAME}" --collector-image-version "$MOCK_COLLECTOR_IMAGE_VERSION"
 else
@@ -89,3 +104,4 @@ fi
 
 ${AGENT_TEST_HOME}/.autotest/agent-test.sh --max-running-size ${PARALLEL_RUNNING_CASE_NUMBER} --branch "$AGENT_BRANCH_NAME" -r "$AGENT_GIT_URL" --reportFileMode ${REPORT_FILE_MODE} --testcase-branch "$TESTCASE_BRANCH" --issueNo ${ISSUE_NO} --validateLogURL $VALIDATE_LOG_URL_PREFIX --test_tools_branch $TEST_TOOLS_BRANCH
 
+clearDockerResource
