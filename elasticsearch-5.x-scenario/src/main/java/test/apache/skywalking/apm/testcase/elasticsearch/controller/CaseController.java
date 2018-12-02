@@ -96,7 +96,6 @@ public class CaseController {
         try {
             Settings settings = Settings.builder()
                 .put("cluster.name", "docker-cluster")
-                .put("client.transport.sniff", false)
                 .build();
             client = new PreBuiltTransportClient(settings)
                 .addTransportAddress(new InetSocketTransportAddress(InetAddress.getByName(host), 9300));
