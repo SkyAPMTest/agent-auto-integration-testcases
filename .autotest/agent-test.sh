@@ -339,7 +339,7 @@ deployTestCase(){
 	CASE_REQUEST_URL=$(grep "case.request_url" $CASE_DIR/testcase.desc | awk -F '=' '{print $2}')
 	echo $CASE_REQUEST_URL
 	curl -s $CASE_REQUEST_URL > /dev/null
-	sleep 15
+	sleep 30
 
 	curl -s $RECIEVE_DATA_URL > $CASE_DIR/actualData.yaml
 
