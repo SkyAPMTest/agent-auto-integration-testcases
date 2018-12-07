@@ -1,0 +1,67 @@
+registryItems:
+  applications:
+  - {rabbitmq-scenario: nq 0}
+  instances:
+  - {rabbitmq-scenario: nq 0}
+  operationNames:
+  - rabbitmq-scenario: [/case/rabbitmq-case,RabbitMQ/Topic/Queue/test/Producer,RabbitMQ/Topic/Queue/test/Consumer]
+segmentItems:
+- applicationCode: rabbitmq-scenario
+  segmentSize: ge 2
+  segments:
+  - segmentId: not null
+    spans:
+    - operationName: RabbitMQ/Topic/Queue/test/Consumer
+      operationId: 0
+      parentSpanId: -1
+      spanId: 0
+      spanLayer: MQ
+      startTime: nq 0
+      endTime: nq 0
+      componentId: 53
+      componentName: ''
+      isError: false
+      spanType: Entry
+      peer: ''
+      peerId: 0
+      tags:
+      - {key: mq.broker, value: 'not null'}
+      - {key: mq.topic, value: ''}
+      - {key: mq.queue, value: test}
+      refs:
+      - {parentEndpointId: 0, parentEndpoint: /case/rabbitmq-case, networkAddressId: 0,entryEndpointId: 0, refType: CrossProcess, parentSpanId: 1, parentTraceSegmentId: not null,parentServiceInstanceId: nq 0, networkAddress: not null, entryEndpoint: /case/rabbitmq-case,entryServiceInstanceId: nq 0}
+  - segmentId: not null
+    spans:
+    - operationName: RabbitMQ/Topic/Queue/test/Producer
+      operationId: 0
+      parentSpanId: 0
+      spanId: 1
+      spanLayer: MQ
+      startTime: nq 0
+      endTime: nq 0
+      componentId: 52
+      componentName: ''
+      isError: false
+      spanType: Exit
+      peer: not null
+      peerId: 0
+      tags:
+      - {key: mq.broker, value: 'not null'}
+      - {key: mq.queue, value: test}
+      - {key: mq.topic, value: ''}
+    - operationName: /case/rabbitmq-case
+      operationId: 0
+      parentSpanId: -1
+      spanId: 0
+      spanLayer: Http
+      startTime: nq 0
+      endTime: nq 0
+      componentId: 14
+      componentName: ''
+      isError: false
+      spanType: Entry
+      peer: ''
+      peerId: 0
+      tags:
+      - {key: url, value: 'http://localhost:{SERVER_OUTPUT_PORT}/rabbitmq-scenario/case/rabbitmq-case'}
+      - {key: http.method, value: GET}

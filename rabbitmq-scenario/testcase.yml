@@ -1,0 +1,30 @@
+#
+# Test case project define.
+#
+# Note: Test case project must a project that support output service.
+#
+testcase:
+  #
+  # The request url of current test cases.
+  #
+  request_url: http://localhost:{SERVER_OUTPUT_PORT}/rabbitmq-scenario/case/rabbitmq-case
+  #
+  # The framework name that need tested.
+  #
+  test_framework: RabbitMQ
+  #
+  # The framework version list of current test case supported
+  #
+  support_versions:
+    - 5.5.1
+    - 5.5.0
+    - 5.4.3
+    - 5.4.2
+    - 5.4.1
+    - 5.4.0
+    - 5.3.0
+    - 5.2.0
+    - 5.1.2
+    - 5.1.1
+    - 5.1.0
+    - 5.0.0 
