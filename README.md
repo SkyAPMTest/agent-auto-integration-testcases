@@ -7,5 +7,10 @@ and the [test tool](https://github.com/SkywalkingTest/agent-integration-testtool
 The **master branch** result is [root folder](https://github.com/SkywalkingTest/agent-integration-test-report). 
 The other branches and tags test results are in the folder of branch or tag name.
 
+# Document
+* [Endligh](docs/how-to-write-a-plugin-testcase.md)
+* [中文](docs/how-to-write-a-plugin-testcase-cn.md)
+
+
 # License
 Apache 2.0
