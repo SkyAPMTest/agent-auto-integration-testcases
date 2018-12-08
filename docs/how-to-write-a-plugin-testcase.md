@@ -262,13 +262,13 @@ segments:
 **Span ref expected data format**
 
 | Field                   | Comment                              |
-|:----                       |:----                                                                                                                                                                                                    |
-| parentSpanId               | 调用端的SpanID. 例如HttpClient是由SegmentA的SpanID为1的调用的，所以该值为1                                                                                                                              |
-| parentTraceSegmentId       | 调用端的SegmentID. 格式: ${APPLICATION_CODE[SEGMENT_INDEX]}, `SEGMENT_INDEX`是相对于期望文件的INDEX. 例如SegmentB由`httpclient-case`中的第0个Segment调用的，所以这个值为`${httpclient-case[0]}`     |
-| entryServiceName           | 调用链入口的Segment的服务名词. 例如HttpClient的entryServiceName为`/httpclient-case/case/httpclient`                                                                                                                                                                                          |
-| networkAddress             | 被调用者的网络地址。例如CaseServlet通过127.0.0.1:8080调用到ContextPropagateServlet,所以这个值为127.0.0.1:8080                                                                                             |
-| parentServiceName          | 调用端的SpanID等于0的OperationName                                                                                                                                                                      |
-| entryApplicationInstanceId | 调用链入口的实例ID。                                                                                                                                                                
+|:----                       |:----           |
+| parentSpanId               | Span ID of Parent segment.  |
+| parentTraceSegmentId       | Parent segment id. Format ${SERVICE_CODE[SEGMENT_INDEX]}, `SEGMENT_INDEX`in the INDEX in expected data. |
+| entryEndpoint           | OperationName of entry name in Segment. For example in HttpClient case, entryEndpoint is `/httpclient-case/case/httpclient`     |
+| networkAddress             | The address is used to call this service. For example, CaseServlet uses 127.0.0.1:8080 to call ContextPropagateServlet. Then the value of this field in ContextPropagateServlet should be 127.0.0.1:8080     |
+| parentEndpoint          | OperationName of entry name in parent segment     |
+| entryServiceInstanceId | The instance id of entry service. Not 0 should be enough |
 
 #### 编写期望数据流程
 1. 编写RegistryItems
