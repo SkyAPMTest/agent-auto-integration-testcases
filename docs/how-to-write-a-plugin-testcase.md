@@ -270,10 +270,12 @@ segments:
 | parentEndpoint          | OperationName of entry name in parent segment     |
 | entryServiceInstanceId | The instance id of entry service. Not 0 should be enough |
 
-#### 编写期望数据流程
-1. 编写RegistryItems
+#### The workflow of writing expected data file
+1. RegistryItems
 
-HttpClient测试用例中运行在Tomcat容器中，所以httpclient的实例数为1, 并且applicationId不为0。HttpClient Span的OperationName和ContextPropagateServlet生成的Span的OperationName一致，所以operationNames中只有两个operationName.
+HttpClient test case is based on Tomcat, only one instance is running. Service id is not null. 
+And there are two entry endpoints, `/httpclient-case/case/httpclient` and `/httpclient-case/case/context-propagate`
+
 ```yml
 registryItems:
   applications:
@@ -284,9 +286,10 @@ registryItems:
   - httpclient-case: [/httpclient-case/case/httpclient,/httpclient-case/case/context-propagate]
 ```
 
-2. 编写segmentItems
+2. segmentItems
 
-根据HttpClient用例的运行流程，推断httpclient-case产生两个Segment. 第一个Segment是访问CaseServlet所产生的, 暂且叫它`SegmentA`。第二Segment是ContextPropagateServlet所产生的, 暂且叫它`SegmentB`.
+In HttpClient case, there are two segment created, one is caused by requesting `CaseServlet`, named `SegmentA`, and the other is caused by requesting `ContextPropagateServlet`, named `SegmentB`.
+
 
 ```yml
 segments:
@@ -294,9 +297,7 @@ segments:
     segmentSize: 2
 ```
 
-Skywalking支持Tomcat埋点，所以SegmentA中会包含两个Span，第一个Span是Tomcat的埋点，第二个Span是HttpClient的埋点.
-
-SegmentA的生成的Span数据如下：
+Tomcat is supported, so in `SegmentA`, there is 2 spans. One is Tomcat, the other is HttpClient.
 ```yml
     - segmentId: not null
       spans:
@@ -338,9 +339,8 @@ SegmentA的生成的Span数据如下：
           peerId: eq 0
 ```
 
-SegmentB由于Skywalking对于Tomcat进行埋点会产生一个Span，并且SegmentA传递ContextTrace给SegmentB，对于SegmentB需要校验SegmentRef数据.
-
-SegmentB的Span校验数据格式如下：
+`SegmentB` is created by a internal request, but through network, HttpClient to `ContextPropagateServlet`. So, in `SegmentB`,
+`SegmentRef` is created because of trace context continuation.
 ```yml
 - segmentId: not null
   spans:
@@ -366,10 +366,10 @@ SegmentB的Span校验数据格式如下：
    - {parentSpanId: 1, parentTraceSegmentId: "${httpclient-case[0]}", entryServiceName: "/httpclient-case/case/httpclient", networkAddress: "127.0.0.1:8080",parentServiceName: "/httpclient-case/case/httpclient",entryApplicationInstanceId: nq 0 }
 ```
 
-### 编写用例配置文件
-1. 添加testcase.yaml文件
+### Provide metadata file
+1. Add testcase.yaml
 
-testcase.yaml文件格式如下:
+testcase.yaml Format:
 ```yml
 testcase:
   request_url: TESTCASE_REQUEST_URL 
@@ -378,15 +378,13 @@ testcase:
     - VERSION
 ```
 
-以下对各个字段的描述:
 
-| 字段             | 描述                                                                 |
+| Field            | Comment                                                 |
 |:---              |:---                                                                    |
-| request_url      | 用例工程暴露的Web服务的地址, URL中的端口用`{SERVER_OUTPUT_PORT}`替代.  |
-| test_framework   | 测试框架的名字. 例如HttpClient测试工程使用HttpClient作为test_framework |
-| support_versions | 支持框架的版本列表                                                    |
+| request_url      | URL used to request, use `{SERVER_OUTPUT_PORT}` as port.  |
+| test_framework   | Case folder name |
+| support_versions | Tests should be run in these component versions.           |
 
-以下为HttpClient的testcase.yaml文件:
 ```yml
 testcase:
   request_url: http://localhost:{SERVER_OUTPUT_PORT}/httpclient-case/case/httpclient 
@@ -396,10 +394,14 @@ testcase:
     - 4.5.3
 ```
 
-2. 添加Profile配置
+The whole example is [here](https://github.com/SkywalkingTest/skywalking-agent-testcases/blob/master/httpclient-4.3.x-scenario/testcase.yml)
 
-在pom.xml中添加`profiles`配置节点。其中每一个`profile`就代表中`testcase.yaml`中support_versions列表中的一个, `profile`中的id命名格式为: `${project.dir_name}-${support_version}`.
-HttpClient支持4.3到4.5.3 14个版本, 所以在pom.xml中添加14个`profile`，如下:
+2. Add Profile in maven
+
+In `profiles` section in pom.xml. Each `profile` represents a version in `support_versions` in `testcase.yaml`. 
+The format of profile id `${project.dir_name}-${support_version}`.
+
+Add 14 profiles in pom.xml in HttpClient case.
 ```xml
 <profiles>
     <profile>
@@ -419,16 +421,15 @@ HttpClient支持4.3到4.5.3 14个版本, 所以在pom.xml中添加14个`profile`
 ```
 
 
-## 运行测试用例
+## Run test cases
 
-### 安装环境
-运行测试用例目前需要在本地安装以下环境:
+### Intall required softwares
 * docker
 * docker-compose
 * maven
 * git
 
-### 运行测试用例
+### Run test case
 
 ```shell
 # export project_name=httpclient-4.3.x-scenario
@@ -439,30 +440,29 @@ HttpClient支持4.3到4.5.3 14个版本, 所以在pom.xml中添加14个`profile`
 -b ${agent_repository_branch} \
 -r ${agent_repository_url}
 ```
-脚本运行参数的描述:
 
-| 运行参数                   | 描述                                                                            |
+
+| Parameter                | Comment                                                             |
 | :---                       | :---                                                                            |
-| -p project_dir_name        | 指定测试用例进行测试. 默认运行所有的测试用例工程                             |
-| -b agent_repository_branch | Skywalking工程的分支名. 默认为`master`                                          |
-| -r agent_repository_url    | Skywalking工程的URL. 默认为`https://github.com/apache/incubator-skywalking.git` |
+| -p project_dir_name        | Run specific test case. Default, all.   |
+| -b agent_repository_branch | Repository branch, default `master`                                          |
+| -r agent_repository_url    | Repository url, default `https://github.com/apache/incubator-skywalking.git` |
 
-### 查看生成报告
-测试用例运行完成之后，会生成报告. 报告生成路径:
+### The test report
+The test result report is generated in here, 
 `${SKYWALKING_AGENT_TESTCASES_HOME}/workspace/report/{CURRENT_YEAR}/{CURRENT_MONTH}/{COMMITTER}/testreport-{TEST_DATE}.md`
 
-以下对路径中的字段的描述:
 
-| 字段          | 描述                                         |
+| Field     | Comment                           |
 | :---          | :---                                         |
-| CURRENT_YEAR  | 测试的年份                                   |
-| CURRENT_MONTH | 测试的月份                                   |
-| COMMITTER     | Skywalking工程的地址中的用户名. 默认为apache |
-| TEST_DATE     | 测试的时间                                   |
+| CURRENT_YEAR  | The year running test          |
+| CURRENT_MONTH | The month running test                   |
+| COMMITTER     | The user of Skywalking repository. default `apache` |
+| TEST_DATE     | The date running test                            |
 
-### 查看校验日志
-校验的完整日志路径:
+### Check verify log
+The verify log is here.
 `${SKYWALKING_AGENT_TESTCASES_HOME}/workspace/logs/validate-{CURRENT_DATE}.log`
 
 
-¹ `mock-collector`用来模拟Collector来接受探针上传的数据，源码地址:https://github.com/SkywalkingTest/skywalking-mock-collector.git.
+¹ `mock-collector`is a simulator backend, source code https://github.com/SkywalkingTest/skywalking-mock-collector.
