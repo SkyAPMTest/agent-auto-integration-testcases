@@ -187,7 +187,7 @@ registryItems:
 ```yml
 segments:
 -
-  applicationCode: APPLICATION_CODE(string)
+  applicationCode: SERVICE_CODE(string)
   segmentSize: SEGMENT_SIZE(int)
   segments:
   - segmentId: SEGMENT_ID(string)
@@ -195,18 +195,17 @@ segments:
         ....
 ```
 
-以下对各个校验字段的描述:
 
-| 字段            | 描述                                               |
+| Field            | Comment                                               |
 | :---            | :---                                               |
-| applicationCode | 待校验Segment的ApplicationCode.                    |
-| segmentSize     | 待校验Segment的ApplicationCode生成的Segment的数量. |
-| segmentId       | segment的trace ID.                                 |
-| spans           | segment生成的Span列表                              |
+| applicationCode | Service code of segment, the application code is the name used in 5.x.      |
+| segmentSize     | The number of segment in this service |
+| segmentId       | segment ID.                                 |
+| spans           | segment span list                     |
 
-**Span数据校验格式**
+**Span expected data format**
 
-**注意**: 期望文件中Segment的Span是按照Span的结束顺序进行排列
+**Attention**: Expected data span list should be sorted by the finished time.
 
 ```yml
     operationName: OPERATION_NAME(string)
@@ -240,29 +239,29 @@ segments:
    ...
 ```
 
-以下对各个校验字段的描述:
 
-| 字段      | 描述                                                                                                                                                                                                                                  |
-|:---           | ---                                                                                                                                                                                                                                    |
-| operationName | Span的Operation Name                                                                                                                                                                                                                   |
-| operationId   | OperationName对应的Id, 这个值目前为0                                                                                                                                                                                                   |
-| parentSpanId  | Span的父级Span的Id.  **注意**: 第一个Span的parentSpanId为-1                                                                                                                                                                                                               |
-| spanId        | Span的Id. **注意**: ID是从0开始.                                                                                                                                                                                                                     |
-| startTime     | Span开始时间. 目前不支持精确匹配，只需判断不为0即可                                                                                                                                                                                                     |
-| endTime       | Span的结束时间.目前不支持精确匹配，只需判断不为0即可                                                                                                                                                                                                                |
-| isError       | 是否出现异常. 如果Span抛出异常或者状态码大于400，该值为true, 否则为false                                                                                                                                                                            |
-| componentName | 对应组件的名字。官方提供的[Component](https://github.com/apache/incubator-skywalking/blob/master/apm-protocol/apm-network/src/main/java/org/apache/skywalking/apm/network/trace/component/OfficialComponent.java)，则该值为null. |
-| componentId   | 组件对应的ID. 。如果是官方提供的[Component](https://github.com/apache/incubator-skywalking/blob/master/apm-protocol/apm-network/src/main/java/org/apache/skywalking/apm/network/trace/component/OfficialComponent.java)，则该值为定义的组件ID   |
-| tags          | Span设置的Tag. **注意**: tag的顺序即为在插件中设置的顺序                                                                                                                                                                                         |
-| logs          | Span设置的log. **注意**: 顺序为设置Log的顺序                                                                                                                                                                                                      |
-| SpanLayer     | 设置的SpanLayer. 目前可能的值为: DB, RPC_FRAMEWORK, HTTP, MQ, CACHE                                                                                                                                                                    |
-| SpanType      | Span的类型. 目前的取值为 Exit, Entry, Local                                                                                                                                                                                            |
-| peer          | 访问的远端IP. Exit类型的Span, 该值非空                                                                                                                                                                                                                       |
-| peerId        | 访问的远端IP的ID，该值目前为0                                                                                                                                                                                                                          |
+| Field      | Comment                                                                                             |
+|:---           | ---                                                            |
+| operationName | Span Operation Name          |
+| operationId   | OperationName id, usually expected 0, because no request after register.    |
+| parentSpanId  | Paren span id.  **Attention**: First Span's parentSpanId is -1  |
+| spanId        | Span Id. **Attention**: ID starts with 0.    |
+| startTime     | Span start time, not 0 should be enough              |
+| endTime       | Span end  time, not 0 should be enough      |
+| isError       | Whether error happens. |
+| componentName | Match the [Component define](https://github.com/apache/incubator-skywalking/blob/master/apm-protocol/apm-network/src/main/java/org/apache/skywalking/apm/network/trace/component/ComponentsDefine.java)，In most case, it is null. ID is used for performance consideration. |
+| componentId   | Match the [Component define](https://github.com/apache/incubator-skywalking/blob/master/apm-protocol/apm-network/src/main/java/org/apache/skywalking/apm/network/trace/component/OfficialComponent.java)，|
+| tags          | Span Tag. **Attention**: Order sensitive, keep as same as you do in codes |
+| logs          | Span log. **Attention**: Order sensitive, keep as same as you do in codes        |
+| SpanLayer     | Span Layer, including DB, RPC_FRAMEWORK, HTTP, MQ, CACHE    |
+| SpanType      | Span type, including Exit, Entry, Local          |
+| peer          | Remote address in exit span, should be not null.  |
+| peerId        | 0 for now, use peer in every first request. |
 
-以下对SegmentRef各个校验字段的描述:
 
-| 字段                   | 描述                                                                                                                                                                                                    |
+**Span ref expected data format**
+
+| Field                   | Comment                              |
 |:----                       |:----                                                                                                                                                                                                    |
 | parentSpanId               | 调用端的SpanID. 例如HttpClient是由SegmentA的SpanID为1的调用的，所以该值为1                                                                                                                              |
 | parentTraceSegmentId       | 调用端的SegmentID. 格式: ${APPLICATION_CODE[SEGMENT_INDEX]}, `SEGMENT_INDEX`是相对于期望文件的INDEX. 例如SegmentB由`httpclient-case`中的第0个Segment调用的，所以这个值为`${httpclient-case[0]}`     |
