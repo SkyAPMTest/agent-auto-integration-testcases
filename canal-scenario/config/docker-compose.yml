@@ -1,0 +1,57 @@
+version: '2.1'
+services:
+  mysql:
+    image: mysql:5.7
+    environment:
+    - MYSQL_ROOT_PASSWORD=000000
+
+  canal-server:
+    image: canal/canal-server:v1.1.0
+    environment:
+    - canal.instance.master.address=mysql:3306
+    - canal.instance.master.journal.name=mysql-bin.000001
+    - canal.instance.dbUsername=root
+    - canal.instance.dbPassword=000000
+    expose:
+    - 11111
+    links:
+    - mysql
+    depends_on:
+    - mysql
+
+  canal-scenario:
+    image:  skywalking/canal-scenario:{CASES_IMAGE_VERSION}
+    expose:
+    - 8080
+    ports:
+    - "{SERVER_OUTPUT_PORT}:8080"
+    environment:
+    - COLLECTOR_SERVER=mock-collector:19876
+    - CANAL_HOST=canal-server
+    links:
+    - mock-collector
+    - canal-server
+    volumes:
+    - {AGENT_FILE_PATH}:/usr/local/skywalking-canal-scenario/agent
+    depends_on:
+      mock-collector:
+        condition: service_healthy
+
+  mock-collector:
+    image: skywalking/skywalking-mock-collector:{COLLECTOR_IMAGE_VERSION}
+    environment:
+      - GRPC_BIND_HOST=mock-collector
+    expose:
+      - 12800
+    ports:
+      - "{COLLECTOR_OUTPUT_PORT}:12800"
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://127.0.0.1:12800/receiveData"]
+      interval: 5s
+      timeout: 10s
+      retries: 5
+
+  
+
+
+ 
