@@ -24,6 +24,6 @@ do
     if [ "$IS_TESTCASE_PROJECT" = "0" ]; then
         echo "Start to build ${TESTCASE_PROJECT_DIR}"
         cd ${TESTCASE_PROJECT_DIR}
-        mvn compile
+        mvn -q compile
     fi
 done
