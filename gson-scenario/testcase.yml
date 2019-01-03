@@ -1,0 +1,30 @@
+#
+# Test case project define.
+#
+# Note: Test case project must a project that support output service.
+#
+testcase:
+  #
+  # The request url of current test cases.
+  #
+  request_url: http://localhost:{SERVER_OUTPUT_PORT}/gson-scenario/case/gson-case
+  #
+  # The framework name that need tested.
+  #
+  test_framework: Gson
+
+  #
+  # The running mode:  TOGETHER(default), SINGLE, WITH_OPTIONAL
+  #
+  running_mode: WITH_OPTIONAL
+  
+  #
+  # The framework version list of current test case supported
+  #
+  support_versions:
+    - 2.8.5 
+    - 2.8.4
+    - 2.8.3
+    - 2.8.2
+    - 2.8.1
+    - 2.8.0
