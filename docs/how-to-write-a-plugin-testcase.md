@@ -383,6 +383,7 @@ testcase:
 |:---              |:---                                                                    |
 | request_url      | URL used to request, use `{SERVER_OUTPUT_PORT}` as port.  |
 | test_framework   | Case folder name |
+| running_mode     | TOGETHER(default), SINGLE, WITH_OPTIONAL. WITH_OPTIONAL means need include optional plugins in this case |
 | support_versions | Tests should be run in these component versions.           |
 
 ```yml

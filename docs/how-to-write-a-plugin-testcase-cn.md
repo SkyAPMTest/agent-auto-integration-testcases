@@ -374,6 +374,7 @@ testcase:
 |:---              |:---                                                                    |
 | request_url      | 用例工程暴露的Web服务的地址, URL中的端口用`{SERVER_OUTPUT_PORT}`替代.  |
 | test_framework   | 测试框架的名字. 例如HttpClient测试工程使用HttpClient作为test_framework |
+| running_mode     | 跑测试框架的模式. TOGETHER(默认可不写), SINGLE, WITH_OPTIONAL 三种模式 例如HttpClient测试工程使用TOGETHER作为running_mode的模式 |
 | support_versions | 支持框架的版本列表                                                    |
 
 以下为HttpClient的testcase.yaml文件:
