@@ -1,0 +1,38 @@
+version: '2.1'
+services:
+  redis-server:
+    image: redis:3.2.9-alpine
+    expose:
+      - "6379"
+
+  redisson-scenario:
+    image: skywalking/redisson-scenario:{CASES_IMAGE_VERSION}
+    expose:
+      - "8080"
+    ports:
+      - "{SERVER_OUTPUT_PORT}:8080"
+    environment:
+      - COLLECTOR_SERVER=mock-collector:19876
+      - REDIS_HOST=redis-server
+    links:
+      - mock-collector
+      - redis-server
+    volumes:
+      - {AGENT_FILE_PATH}:/usr/local/skywalking-redisson-scenario/agent
+    depends_on:
+      - mock-collector
+      - redis-server
+
+  mock-collector:
+    image: skywalking/skywalking-mock-collector:{COLLECTOR_IMAGE_VERSION}
+    environment:
+      - GRPC_BIND_HOST=mock-collector
+    expose:
+      - "12800"
+    ports:
+      - "{COLLECTOR_OUTPUT_PORT}:12800"
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://127.0.0.1:12800/receiveData"]
+      interval: 5s
+      timeout: 10s
+      retries: 5
