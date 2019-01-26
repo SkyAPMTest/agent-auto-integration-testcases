@@ -1,0 +1,61 @@
+registryItems:
+  applications:
+  - {lettuce-scenario: 2}
+  instances:
+  - {lettuce-scenario: 1}
+  operationNames:
+  - lettuce-scenario: [Lettuce/GET, Lettuce/BATCH_WRITE, /lettuce/lettuce-case]
+segmentItems:
+- applicationCode: lettuce-scenario
+  segmentSize: 1
+  segments:
+  - segmentId: nq 0
+    spans:
+    - operationName: Lettuce/GET
+      operationId: 0
+      parentSpanId: 0
+      spanId: 1
+      spanLayer: Cache
+      startTime: nq 0
+      endTime: nq 0
+      componentId: 57
+      componentName: ''
+      isError: false
+      spanType: Exit
+      peer: 'not null'
+      peerId: 0
+      tags:
+      - {key: db.type, value: Redis}
+      - {key: db.statement, value: GET}
+    - operationName: Lettuce/BATCH_WRITE
+      operationId: 0
+      parentSpanId: 0
+      spanId: 2
+      spanLayer: Cache
+      startTime: nq 0
+      endTime: nq 0
+      componentId: 57
+      componentName: ''
+      isError: false
+      spanType: Exit
+      peer: 'not null'
+      peerId: 0
+      tags:
+      - {key: db.type, value: Redis}
+      - {key: db.statement, value: SET;SET;}
+    - operationName: /lettuce/lettuce-case
+      operationId: 0
+      parentSpanId: -1
+      spanId: 0
+      spanLayer: Http
+      startTime: nq 0
+      endTime: nq 0
+      componentId: 14
+      componentName: ''
+      isError: false
+      spanType: Entry
+      peer: ''
+      peerId: 0
+      tags:
+      - {key: url, value: 'http://localhost:{SERVER_OUTPUT_PORT}/lettuce-scenario/lettuce/lettuce-case'}
+      - {key: http.method, value: GET}

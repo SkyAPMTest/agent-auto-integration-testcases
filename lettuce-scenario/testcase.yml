@@ -1,0 +1,32 @@
+#
+# Test case project define.
+#
+# Note: Test case project must a project that support output service.
+#
+testcase:
+  #
+  # The request url of current test cases.
+  #
+  request_url: http://localhost:{SERVER_OUTPUT_PORT}/lettuce-scenario/lettuce/lettuce-case
+  #
+  # The framework name that need tested.
+  #
+  test_framework: Lettuce
+  #
+  # The running mode:  TOGETHER(default), SINGLE, WITH_OPTIONAL
+  #
+  running_mode: WITH_OPTIONAL
+  #
+  # The framework version list of current test case supported
+  #
+  support_versions:
+    - 5.1.3.RELEASE
+    - 5.1.2.RELEASE
+    - 5.1.1.RELEASE
+    - 5.1.0.RELEASE
+    - 5.0.5.RELEASE
+    - 5.0.4.RELEASE
+    - 5.0.3.RELEASE
+    - 5.0.2.RELEASE
+    - 5.0.1.RELEASE
+    - 5.0.0.RELEASE
