@@ -1,0 +1,115 @@
+registryItems:
+  applications:
+  - {zookeeper-scenario: nq 0}
+  instances:
+  - {zookeeper-scenario: 1}
+  operationNames:
+  - zookeeper-scenario: [/zookeeper/zookeeper-case, Zookeeper/exists, Zookeeper/delete]
+segmentItems:
+- applicationCode: zookeeper-scenario
+  segmentSize: nq 0
+  segments:
+  - segmentId: nq 0
+    spans:
+    - operationName: Zookeeper/exists
+      operationId: 0
+      parentSpanId: 0
+      spanId: 1
+      spanLayer: Cache
+      startTime: nq 0
+      endTime: nq 0
+      componentId: 58
+      componentName: ''
+      isError: false
+      spanType: Exit
+      peer: 'not null'
+      peerId: 0
+      tags:
+      - {key: db.type, value: Zookeeper}
+      - {key: path, value: /path}
+      - {key: watch, value: 'true'}
+    - operationName: Zookeeper/WatchedEvent/NodeDeleted
+      operationId: 0
+      parentSpanId: -1
+      spanId: 0
+      spanLayer: Unknown
+      startTime: nq 0
+      endTime: nq 0
+      componentId: 58
+      componentName: ''
+      isError: false
+      spanType: 'not null'
+      peer: 'not null'
+      peerId: 0
+      tags:
+      - {key: path, value: /path}
+      - {key: state, value: SyncConnected}
+      - {key: db.type, value: Zookeeper}
+  - segmentId: nq 0
+    spans:
+    - operationName: Zookeeper/create
+      operationId: 0
+      parentSpanId: 0
+      spanId: 1
+      spanLayer: Cache
+      startTime: nq 0
+      endTime: nq 0
+      componentId: 58
+      componentName: ''
+      isError: false
+      spanType: Exit
+      peer: 'not null'
+      peerId: 0
+      tags:
+      - {key: db.type, value: Zookeeper}
+      - {key: path, value: /path}
+    - operationName: Zookeeper/exists
+      operationId: 0
+      parentSpanId: 0
+      spanId: 2
+      spanLayer: Cache
+      startTime: nq 0
+      endTime: nq 0
+      componentId: 58
+      componentName: ''
+      isError: false
+      spanType: 'not null'
+      peer: 'not null'
+      peerId: 0
+      tags:
+      - {key: db.type, value: Zookeeper}
+      - {key: path, value: /path}
+      - {key: watch, value: 'true'}
+    - operationName: Zookeeper/delete
+      operationId: 0
+      parentSpanId: 0
+      spanId: 3
+      spanLayer: Cache
+      startTime: nq 0
+      endTime: nq 0
+      componentId: 58
+      componentName: ''
+      isError: false
+      spanType: 'not null'
+      peer: 'not null'
+      peerId: 0
+      tags:
+      - {key: db.type, value: Zookeeper}
+      - {key: path, value: /path}
+      - {key: version, value: '-1'}
+    - operationName: /zookeeper/zookeeper-case
+      operationId: 0
+      parentSpanId: -1
+      spanId: 0
+      spanLayer: Http
+      startTime: 'not null'
+      endTime: 'not null'
+      componentId: 14
+      componentName: ''
+      isError: false
+      spanType: Entry
+      peer: ''
+      peerId: 0
+      tags:
+      - {key: url, value: 'http://localhost:{SERVER_OUTPUT_PORT}/zookeeper-scenario/zookeeper/zookeeper-case'}
+      - {key: http.method, value: GET}
