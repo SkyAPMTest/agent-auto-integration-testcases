@@ -2,7 +2,7 @@ FROM openjdk:8-jdk
 
 ENV COLLECTOR_SERVER=127.0.0.1:12800 \
     ACTIVEMQ_BOOTSTRAP_SERVERS=127.0.0.1:61616 \
-    ACTIVEMQ_VERSION=5.15.6
+    ACTIVEMQ_VERSION=5.15.8
 
 WORKDIR /usr/local/activemq-scenario
 # download the activemq
