@@ -1,0 +1,137 @@
+registryItems:
+  applications:
+  - {customize-scenario: nq 0}
+  instances:
+  - {customize-scenario: 1}
+  operationNames:
+  - customize-scenario: [/customize/customize-case]
+segmentItems:
+- applicationCode: customize-scenario
+  segmentSize: nq 0
+  segments:
+  - segmentId: nq 0
+    spans:
+    - operationName: /is_static_method
+      operationId: 0
+      parentSpanId: 0
+      spanId: 1
+      startTime: nq 0
+      endTime: nq 0
+      componentName: ''
+      isError: false
+      peerId: 0
+      spanType: Local
+    - operationName: /is_static_method_args/id/123/a
+      operationId: 0
+      parentSpanId: 0
+      spanId: 2
+      startTime: nq 0
+      endTime: nq 0
+      componentName: ''
+      isError: false
+      peerId: 0
+      spanType: Local
+      tags:
+      - {key: tag_1, value: v1}
+      - {key: tag_2, value: '2'}
+      logs:
+      - logEvent:
+        - {key: log_1, value: '3'}
+    - operationName: test.apache.skywalking.testcase.customize.service.TestService1.method()
+      operationId: 0
+      parentSpanId: 0
+      spanId: 3
+      startTime: nq 0
+      endTime: nq 0
+      componentName: ''
+      isError: false
+      peerId: 0
+      spanType: Local
+    - operationName: /method_2/str
+      operationId: 0
+      parentSpanId: 0
+      spanId: 4
+      startTime: nq 0
+      endTime: nq 0
+      componentName: ''
+      isError: false
+      peerId: 0
+      spanType: Local
+      tags:
+      - {key: tag_1, value: str0}
+      logs:
+      - logEvent:
+        - {key: log_1, value: '123'}
+    - operationName: /method_3/id/name/10
+      operationId: 0
+      parentSpanId: 0
+      spanId: 5
+      startTime: nq 0
+      endTime: nq 0
+      componentName: ''
+      isError: false
+      peerId: 0
+      spanType: Local
+      tags:
+      - {key: tag_os, value: '2'}
+      logs:
+      - logEvent:
+        - {key: log_map, value: v1}
+    - operationName: /is_2_static_method
+      operationId: 0
+      parentSpanId: 0
+      spanId: 6
+      startTime: nq 0
+      endTime: nq 0
+      componentName: ''
+      isError: false
+      peerId: 0
+      spanType: Local
+      tags:
+      - {key: tag_2_1, value: s}
+      logs:
+      - logEvent:
+        - {key: log_1_1, value: '123'}
+    - operationName: /is_2_static_method
+      operationId: 0
+      parentSpanId: 0
+      spanId: 7
+      startTime: nq 0
+      endTime: nq 0
+      componentName: ''
+      isError: false
+      peerId: 0
+      spanType: Local
+      tags:
+      - {key: tag_4_1, value: '1'}
+    - operationName: /method_5
+      operationId: 0
+      parentSpanId: 0
+      spanId: 8
+      startTime: nq 0
+      endTime: nq 0
+      componentName: ''
+      isError: false
+      peerId: 0
+      spanType: Local
+      tags:
+      - {key: tag_5_1, value: a2}
+      logs:
+      - logEvent:
+        - {key: log_5_1, value: '123'}
+    - operationName: /customize/customize-case
+      operationId: 0
+      parentSpanId: -1
+      spanId: 0
+      spanLayer: Http
+      startTime: 'not null'
+      endTime: 'not null'
+      componentId: 14
+      componentName: ''
+      isError: false
+      spanType: Entry
+      peer: ''
+      peerId: 0
+      tags:
+      - {key: url, value: 'http://localhost:{SERVER_OUTPUT_PORT}/customize-scenario/customize/customize-case'}
+      - {key: http.method, value: GET}

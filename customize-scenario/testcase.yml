@@ -1,0 +1,23 @@
+#
+# Test case project define.
+#
+# Note: Test case project must a project that support output service.
+#
+testcase:
+  #
+  # The request url of current test cases.
+  #
+  request_url: http://localhost:{SERVER_OUTPUT_PORT}/customize-scenario/customize/customize-case
+  #
+  # The framework name that need tested.
+  #
+  test_framework: Customize
+  #
+  # The running mode:  TOGETHER(default), SINGLE, WITH_OPTIONAL
+  #
+  running_mode: WITH_OPTIONAL
+  #
+  # The framework version list of current test case supported
+  #
+  support_versions:
+    - 1.0.0
