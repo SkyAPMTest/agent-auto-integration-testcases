@@ -425,10 +425,12 @@ HttpClient支持4.3到4.5.3 14个版本, 所以在pom.xml中添加14个`profile`
 # export project_name=httpclient-4.3.x-scenario
 # export agent_repository_branch=master
 # export agent_repository_url=https://github.com/apache/incubator-skywalking.git
+# export parallel_running_case_number=2
 # sh ${SKYWALKING_AGENT_TESTCASES_HOME}/deploy-test.sh \
 -p ${project_name} \
 -b ${agent_repository_branch} \
--r ${agent_repository_url}
+-r ${agent_repository_url} \
+--parallel_running_case_number ${parallel_running_case_number}
 ```
 脚本运行参数的描述:
 
@@ -437,6 +439,7 @@ HttpClient支持4.3到4.5.3 14个版本, 所以在pom.xml中添加14个`profile`
 | -p project_dir_name        | 指定测试用例进行测试. 默认运行所有的测试用例工程                             |
 | -b agent_repository_branch | Skywalking工程的分支名. 默认为`master`                                          |
 | -r agent_repository_url    | Skywalking工程的URL. 默认为`https://github.com/apache/incubator-skywalking.git` |
+| --parallel_running_case_number parallel_running_case_number    | 并行运行测试用例的数量. 默认为8，请根据自己的机器配置设置合理数量 |
 
 ### 查看生成报告
 测试用例运行完成之后，会生成报告. 报告生成路径:

@@ -436,10 +436,12 @@ Add 14 profiles in pom.xml in HttpClient case.
 # export project_name=httpclient-4.3.x-scenario
 # export agent_repository_branch=master
 # export agent_repository_url=https://github.com/apache/incubator-skywalking.git
+# export parallel_running_case_number=2
 # sh ${SKYWALKING_AGENT_TESTCASES_HOME}/deploy-test.sh \
 -p ${project_name} \
 -b ${agent_repository_branch} \
--r ${agent_repository_url}
+-r ${agent_repository_url} \
+--parallel_running_case_number ${parallel_running_case_number}
 ```
 
 
@@ -448,6 +450,7 @@ Add 14 profiles in pom.xml in HttpClient case.
 | -p project_dir_name        | Run specific test case. Default, all.   |
 | -b agent_repository_branch | Repository branch, default `master`                                          |
 | -r agent_repository_url    | Repository url, default `https://github.com/apache/incubator-skywalking.git` |
+| --parallel_running_case_number parallel_running_case_number    | parallel running case number. default 8，Please set a reasonable amount according to your own machine  |
 
 ### The test report
 The test result report is generated in here, 
