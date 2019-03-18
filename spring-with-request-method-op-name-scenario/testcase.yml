@@ -1,0 +1,24 @@
+#
+# Test case project define.
+#
+# Note: Test case project must a project that support output service.
+#
+testcase:
+  #
+  # The request url of current test cases.
+  #
+  request_url: http://localhost:{SERVER_OUTPUT_PORT}/spring-with-request-method-op-name-scenario/requestmethod/requestmethod-case
+  #
+  # The framework name that need tested.
+  #
+  test_framework: SpringMVC
+  #
+  # The running mode:  TOGETHER(default), SINGLE, WITH_OPTIONAL
+  #
+  running_mode: WITH_OPTIONAL
+  #
+  # The framework version list of current test case supported
+  #
+  support_versions:
+    - spring-4.0.1-with-request-method-op-name-scenario
+    - spring-4.0.2-with-request-method-op-name-scenario
