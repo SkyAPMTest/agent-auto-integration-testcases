@@ -1,0 +1,76 @@
+registryItems:
+  applications:
+  - {dubbo-provider: nq 0}
+  - {dubbo-consumer: nq 0}
+  instances:
+  - {dubbo-provider: 1}
+  - {dubbo-consumer: 1}
+  operationNames:
+  - dubbo-consumer: [/dubbo-case/case/dubbo-rest]
+  - dubbo-provider: [test.apache.skywalking.apm.testcase.dubbo.services.GreetService.doBusiness()]
+segmentItems:
+- applicationCode: dubbo-consumer
+  segmentSize: 1
+  segments:
+    - segmentId: not null
+      spans:
+        -
+          operationName: test.apache.skywalking.apm.testcase.dubbo.services.GreetService.doBusiness()
+          operationId: eq 0
+          parentSpanId: 0
+          spanId: 1
+          tags: 
+          - {key: "url", value: not null}
+          logs: []
+          startTime: nq 0
+          endTime: nq 0
+          isError: false
+          spanLayer: RPCFramework
+          spanType: Exit
+          componentName: null
+          componentId: 3
+          peer: not null
+          peerId: eq 0
+        -
+          operationName: /dubbo-case/case/dubbo-rest
+          operationId: eq 0
+          parentSpanId: -1
+          spanId: 0
+          startTime: nq 0
+          endTime: nq 0
+          spanLayer: Http
+          isError: false
+          spanType: Entry
+          componentName: null
+          componentId: 1
+          tags:
+            - {key: url, value: 'http://localhost:{SERVER_OUTPUT_PORT}/dubbo-case/case/dubbo-rest'}
+            - {key: http.method, value: GET}
+          logs: []
+          peer: null
+          peerId: eq 0
+
+- applicationCode: dubbo-provider
+  segmentSize: 1
+  segments:      
+    - segmentId: not null
+      spans:
+        -
+          operationName: test.apache.skywalking.apm.testcase.dubbo.services.GreetService.doBusiness()
+          operationId: eq 0
+          parentSpanId: -1
+          spanId: 0
+          tags: 
+            - {key: "url", value: not null}
+          logs: []
+          startTime: nq 0
+          endTime: nq 0
+          spanLayer: null
+          isError: false
+          spanType: Entry
+          componentName: null
+          componentId: 3
+          peer: null
+          peerId: eq 0
+          refs: 
+            - {parentSpanId: 1, parentTraceSegmentId: "${dubbo-consumer[0]}", entryEndpoint: "/dubbo-case/case/dubbo-rest", networkAddress: not null, parentEndpoint: "/dubbo-case/case/dubbo-rest",refType: not null,entryServiceInstanceId: nq 0 }

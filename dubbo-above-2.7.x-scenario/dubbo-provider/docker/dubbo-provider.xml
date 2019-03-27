@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+	http://code.alibabatech.com/schema/dubbo http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+
+    <dubbo:application name="skywalking-provider"/>
+    <dubbo:registry address="zookeeper://{ZK_ADDRESS}" timeout="1200000"/>
+    <bean id="greetService" class="test.apache.skywalking.apm.testcase.dubbo.services.impl.GreetServiceImpl"/>
+    <dubbo:service interface="test.apache.skywalking.apm.testcase.dubbo.services.GreetService" ref="greetService" timeout="5000"/>
+
+</beans>
