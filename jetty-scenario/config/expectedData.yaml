@@ -37,7 +37,7 @@ segmentItems:
   segments:
   - segmentId: not null
     spans:
-    - operationName: /case/receiveContext-0
+    - operationName: /jettyserver-case/case/receiveContext-0
       operationId: 0
       parentSpanId: 0
       spanId: 1

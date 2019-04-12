@@ -31,7 +31,7 @@ segmentItems:
           peer: localhost:-1
           peerId: eq 0
         -
-          operationName: H2/JDBI/CallableStatement/prepareCall
+          operationName: H2/JDBI/CallableStatement/execute
           operationId: eq 0
           parentSpanId: 0
           spanId: 2
