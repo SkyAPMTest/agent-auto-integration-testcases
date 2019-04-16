@@ -1,0 +1,43 @@
+#
+# Test case project define.
+#
+# Note: Test case project must a project that support output service.
+#
+testcase:
+  #
+  # The request url of current test cases.
+  #
+  request_url: http://localhost:{SERVER_OUTPUT_PORT}/vertx-web-3-scenario/vertx-web/web-case
+  #
+  # The framework name that need tested.
+  #
+  test_framework: Vert.x
+  #
+  # The running mode: TOGETHER(default), SINGLE, WITH_OPTIONAL
+  #
+  running_mode: WITH_OPTIONAL
+  #
+  # The framework version list of current test case supported
+  #
+  support_versions:
+    - 3.7.0_web-scenario
+    - 3.6.3_web-scenario
+    - 3.6.2_web-scenario
+    - 3.6.1_web-scenario
+    - 3.6.0_web-scenario
+    - 3.5.4_web-scenario
+    - 3.5.3_web-scenario
+    - 3.5.2_web-scenario
+    - 3.5.1_web-scenario
+    - 3.5.0_web-scenario
+    - 3.4.2_web-scenario
+    - 3.4.1_web-scenario
+    - 3.4.0_web-scenario
+    - 3.3.3_web-scenario
+    - 3.3.2_web-scenario
+    - 3.3.1_web-scenario
+    - 3.3.0_web-scenario
+    - 3.2.1_web-scenario
+    - 3.2.0_web-scenario
+    - 3.1.0_web-scenario
+    - 3.0.0_web-scenario
