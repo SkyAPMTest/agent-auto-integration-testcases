@@ -1,6 +1,6 @@
 # 如何编写插件测试用例
 ## 用例工程的目录结构
-用例工程是一个独立的Maven工程。该工程能将工程打包镜像,并要求提供一个外部能够访问的Web服务用例测试调用链追踪。
+用例工程是一个独立的Maven工程。该工程能将工程打包镜像, 并要求提供一个外部能够访问的Web服务用例测试调用链追踪。
 
 以下是用例工程的目录图:
 ```
@@ -36,8 +36,8 @@
 4. 编写用例配置文件
 5. 测试用例
 
-## 示例
-下面以HttpClient插件为例子，HttpClient插件主要测试两点，能否正确的创建HttpClient的Span以及能否正确的传递上下文，基于这两点，设计如下用例：
+### 示例
+下面以HttpClient插件为例子，HttpClient插件测试两点: 能否正确的创建HttpClient的Span以及能否正确的传递上下文，基于这两点，设计如下用例：
 
 ```
 +-------------+         +------------------+            +-------------------------+
@@ -63,7 +63,6 @@
 ```
 
 ### 编写用例代码
-
 pom.xml最佳实践:
 1. 测试框架的版本号设置为属性变量
 2. 镜像的版本号设置成属性变量，并且使用框架版本号作为镜像的版本号
@@ -71,7 +70,7 @@ pom.xml最佳实践:
 具体请参考[配置](https://github.com/SkywalkingTest/skywalking-agent-testcases/blob/master/httpclient-4.3.x-scenario/pom.xml#L16-L17)
 
 ### 构建测试用例镜像
-1. 添加Maven docker插件. 
+1. 添加[Maven docker插件](https://github.com/spotify/docker-maven-plugin).
 
 在配置插件的过程中，以下三个字段需注意:
 
@@ -81,21 +80,18 @@ pom.xml最佳实践:
 | dockerDirectory | 镜像构建目录。推荐目录: ${project.basedir}/docker                                               |
 | imageTags       | 镜像版本。推荐插件的版本保持一致                                                                  |
 
-2. 编写Dockerfile文件
+2. 编写[Dockerfile文件](https://docs.docker.com/engine/reference/builder/)
 
-3. 编写docker-compose.xml文件
+3. 编写[docker-compose.xml文件](https://docs.docker.com/compose/compose-file/)
 - 在config目录创建docker-compose.xml
 - 编写docker-compose.xml
-
-HttpClient测试用例的docker-compose.xml请参考[配置](https://github.com/SkywalkingTest/skywalking-agent-testcases/blob/master/httpclient-4.3.x-scenario/config/docker-compose.yml)
 
 4. 运行maven的docker插件
 
 执行`mvn package docker:build`命令打包用例镜像
 
-5. 运行并测试用例容器
+5. 运行用例容器，并确保用例能够正常运行
 - 进入`config`目录，并运行`docker-compose up`
-- 访问容器暴露的web服务，确保用例能够正常运行
 
 ### 添加探针配置信息
 
@@ -114,8 +110,9 @@ HttpClient运行在Tomcat中，javaagent参数应该添加在`${project.basedir}
 具体请参考[配置](https://github.com/SkywalkingTest/skywalking-agent-testcases/blob/master/httpclient-4.3.x-scenario/config/docker-compose.yml#L19-31)
 
 4. 修改docker-compose.xml中用例开放端口和镜像版本
-- 将测试用例中的镜像版本替换成`{CASES_IMAGE_VERSION}`
-- 将修改放的端口替换成`{SERVER_OUTPUT_PORT}`
+- 将测试用例中的镜像版本替换成`{CASES_IMAGE_VERSION}`, 具体[参考](https://github.com/SkyAPMTest/agent-auto-integration-testcases/blob/master/httpclient-4.3.x-scenario/config/docker-compose.yml#L4)
+- 将修改服务映射端口替换成`{SERVER_OUTPUT_PORT}`, 具体[参考](https://github.com/SkyAPMTest/agent-auto-integration-testcases/blob/master/httpclient-4.3.x-scenario/config/docker-compose.yml#L8)
+- 修改Mock Collector映射端口`{COLLECTOR_OUTPUT_PORT}`, 具体[参考](https://github.com/SkyAPMTest/agent-auto-integration-testcases/blob/master/httpclient-4.3.x-scenario/config/docker-compose.yml#L26)
 
 5. docker-compose文件添加Agent挂载配置
 
@@ -212,19 +209,19 @@ segments:
     tags:
     - {key: TAG_KEY(string), value: TAG_VALUE(string)}
     ...
-    logs: 
+    logs:
     - {key: LOG_KEY(string), value: LOG_VALUE(string)}
     ...
     peer: PEER(string)
     peerId: PEER_ID(int)
     refs:
     - {
-       parentSpanId: PARENT_SPAN_ID(int), 
-       parentTraceSegmentId: PARENT_TRACE_SEGMENT_ID(string), 
-       entryServiceName: ENTRY_SERVICE_NAME(string), 
+       parentSpanId: PARENT_SPAN_ID(int),
+       parentTraceSegmentId: PARENT_TRACE_SEGMENT_ID(string),
+       entryServiceName: ENTRY_SERVICE_NAME(string),
        networkAddress: NETWORK_ADDRESS(string),
        parentServiceName: PARENT_SERVICE_NAME(string),
-       entryApplicationInstanceId: ENTRY_APPLICATION_INSTANCE_ID(int) 
+       entryApplicationInstanceId: ENTRY_APPLICATION_INSTANCE_ID(int)
      }
    ...
 ```
@@ -339,7 +336,7 @@ SegmentB的Span校验数据格式如下：
    operationId: eq 0
    parentSpanId: -1
    spanId: 0
-   tags: 
+   tags:
    - {key: url, value: 'http://127.0.0.1:8080/httpclient-case/case/context-propagate'}
    - {key: http.method, value: GET}
    logs: []
@@ -352,7 +349,7 @@ SegmentB的Span校验数据格式如下：
    componentId: 1
    peer: null
    peerId: eq 0
-   refs: 
+   refs:
    - {parentSpanId: 1, parentTraceSegmentId: "${httpclient-case[0]}", entryServiceName: "/httpclient-case/case/httpclient", networkAddress: "127.0.0.1:8080",parentServiceName: "/httpclient-case/case/httpclient",entryApplicationInstanceId: nq 0 }
 ```
 
@@ -362,8 +359,8 @@ SegmentB的Span校验数据格式如下：
 testcase.yaml文件格式如下:
 ```yml
 testcase:
-  request_url: TESTCASE_REQUEST_URL 
-  test_framework: TEST_FRAMEWORK_NAME 
+  request_url: TESTCASE_REQUEST_URL
+  test_framework: TEST_FRAMEWORK_NAME
   support_versions:
     - VERSION
 ```
@@ -380,7 +377,7 @@ testcase:
 以下为HttpClient的testcase.yaml文件:
 ```yml
 testcase:
-  request_url: http://localhost:{SERVER_OUTPUT_PORT}/httpclient-case/case/httpclient 
+  request_url: http://localhost:{SERVER_OUTPUT_PORT}/httpclient-case/case/httpclient
   support_versions:
     - 4.3
     ...
@@ -423,40 +420,34 @@ HttpClient支持4.3到4.5.3 14个版本, 所以在pom.xml中添加14个`profile`
 
 ```shell
 # export project_name=httpclient-4.3.x-scenario
-# export agent_repository_branch=master
-# export agent_repository_url=https://github.com/apache/incubator-skywalking.git
-# export parallel_running_case_number=2
-# sh ${SKYWALKING_AGENT_TESTCASES_HOME}/deploy-test.sh \
--p ${project_name} \
--b ${agent_repository_branch} \
--r ${agent_repository_url} \
---parallel_running_case_number ${parallel_running_case_number}
+# sh ${SKYWALKING_AGENT_TESTCASES_HOME}/deploy-test.sh --scenario ${scenario_name} ${agent_repo} ${agent_repo_branch}
 ```
 脚本运行参数的描述:
 
 | 运行参数                   | 描述                                                                            |
 | :---                       | :---                                                                            |
-| -p project_dir_name        | 指定测试用例进行测试. 默认运行所有的测试用例工程                             |
-| -b agent_repository_branch | Skywalking工程的分支名. 默认为`master`                                          |
-| -r agent_repository_url    | Skywalking工程的URL. 默认为`https://github.com/apache/incubator-skywalking.git` |
-| --parallel_running_case_number parallel_running_case_number    | 并行运行测试用例的数量. 默认为8，请根据自己的机器配置设置合理数量 |
+| --scenario scenario_dir_name | 指定测试用例进行测试. 默认运行所有的测试用例工程                             |
+| agent_repo                  | Skywalking agent Git仓库地址                                               |
+| agent_repo_branch          | Skywalking agent 仓库分支   |
 
-### 查看生成报告
-测试用例运行完成之后，会生成报告. 报告生成路径:
-`${SKYWALKING_AGENT_TESTCASES_HOME}/workspace/report/{CURRENT_YEAR}/{CURRENT_MONTH}/{COMMITTER}/testreport-{TEST_DATE}.md`
+更多脚本参数参考`sh ${SKYWALKING_AGENT_TESTCASES_HOME}/deploy-test.sh -h`
 
-以下对路径中的字段的描述:
+### 查看校验结果
+校验结果存放在`${SKYWALKING_AGENT_TESTCASES_HOME}/workspace/logs/test_report.log`.
+如果校验失败，`test_report.log`日志将会显示类似的校验失败异常。
+```
+assert failed.
+SegmentNotFoundException:
+expected:
+  Segment:
+  - span[-1, 0] /vertx-core-3-scenario/vertx-core/executeTest
 
-| 字段          | 描述                                         |
-| :---          | :---                                         |
-| CURRENT_YEAR  | 测试的年份                                   |
-| CURRENT_MONTH | 测试的月份                                   |
-| COMMITTER     | Skywalking工程的地址中的用户名. 默认为apache |
-| TEST_DATE     | 测试的时间                                   |
-
-### 查看校验日志
-校验的完整日志路径:
-`${SKYWALKING_AGENT_TESTCASES_HOME}/workspace/logs/validate-{CURRENT_DATE}.log`
-
+actual:
+  Segment[1.159.15542729582940000] e
+  expected:	Span[-1, 0] /vertx-core-3-scenario/vertx-core/executeTest
+  actual:	span[-1, 0] #local-message-receiver
+  reason:	[operation name]: expected=>{/vertx-core-3-scenario/vertx-core/executeTest}, actual=>{#local-message-receiver}
+```
+更多的校验失败异常以及修复办法，请参看[文档](https://github.com/SkyAPMTest/agent-integration-testtool/blob/master/README.md)
 
 ¹ `mock-collector`用来模拟Collector来接受探针上传的数据，源码地址:https://github.com/SkywalkingTest/skywalking-mock-collector.git.
