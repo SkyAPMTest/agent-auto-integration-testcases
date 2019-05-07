@@ -47,7 +47,7 @@ segmentItems:
       isError: false
       peerId: 0
       spanType: Local
-    - operationName: /method_2/str
+    - operationName: /method_2/str0
       operationId: 0
       parentSpanId: 0
       spanId: 4
@@ -62,7 +62,7 @@ segmentItems:
       logs:
       - logEvent:
         - {key: log_1, value: '123'}
-    - operationName: /method_3/id/name/10
+    - operationName: /method_3/id/name/100
       operationId: 0
       parentSpanId: 0
       spanId: 5
@@ -92,7 +92,7 @@ segmentItems:
       logs:
       - logEvent:
         - {key: log_1_1, value: '123'}
-    - operationName: /is_2_static_method
+    - operationName: /method_4
       operationId: 0
       parentSpanId: 0
       spanId: 7
