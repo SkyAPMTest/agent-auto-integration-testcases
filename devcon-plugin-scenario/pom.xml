@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>org.apache.skywalking</groupId>
-    <artifactId>httpclient-4.3.x-scenario</artifactId>
+    <artifactId>devcon-scenario</artifactId>
     <version>5.0.0</version>
     <packaging>war</packaging>
 
@@ -14,10 +14,9 @@
         <compiler.version>1.8</compiler.version>
 
         <test.framework.version>4.3</test.framework.version>
-        <docker.image.version>${test.framework.version}</docker.image.version>
     </properties>
 
-    <name>skywalking-httpclient-4.3.x-scenario</name>
+    <name>skywalking-devcon-scenario</name>
 
     <dependencies>
         <dependency>
@@ -45,9 +44,10 @@
 
     <profiles>
          <profile>
-            <id>devcon-plugin-scenario-4.3</id>
+            <id>devcon-plugin-scenario-0.1</id>
             <properties>
                 <test.framework.version>4.3</test.framework.version>
+                <docker.image.version>0.1</docker.image.version>
             </properties>
         </profile>
 
