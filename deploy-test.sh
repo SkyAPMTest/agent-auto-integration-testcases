@@ -7,7 +7,8 @@
 #ARG_OPTIONAL_SINGLE([issue_no],[],[The relate issue no],[UNKNOWN])
 #ARG_OPTIONAL_BOOLEAN([build],[],[Skip build projects.],[on])
 #ARG_OPTIONAL_BOOLEAN([report],[],[Skip report the testcase to GitHub],[off])
-#ARG_OPTIONAL_BOOLEAN([clone_code],[],[Skip clone the code],[off])
+#ARG_OPTIONAL_BOOLEAN([clone_code],[],[Skip clone the code],[on])
+#ARG_OPTIONAL_BOOLEAN([fetch_latest_code],[],[fetch latest code],[on])
 #ARG_OPTIONAL_BOOLEAN([skip_single_mode_scenario],[],[Skip build the scenario with single mode],[on])
 #ARG_OPTIONAL_SINGLE([collector_image_version],[],[The docker image version of mock collector],["6.0.0-2018"])
 #ARG_OPTIONAL_SINGLE([parallel_run_size],[],[The size of running testcase at the same time],[1])
@@ -46,7 +47,8 @@ _arg_scenario=()
 _arg_issue_no="UNKNOWN"
 _arg_build="on"
 _arg_report="off"
-_arg_clone_code="off"
+_arg_clone_code="on"
+_arg_fetch_latest_code="on"
 _arg_skip_single_mode_scenario="on"
 _arg_collector_image_version="6.0.0-2018"
 _arg_parallel_run_size="1"
@@ -55,7 +57,7 @@ _arg_validate_log_url_prefix="http://host:port/jenkins"
 
 print_help()
 {
-	printf 'Usage: %s [--testcase_branch <arg>] [--scenario <arg>] [--issue_no <arg>] [--(no-)build] [--(no-)report] [--(no-)clone_code] [--(no-)skip_single_mode_scenario] [--collector_image_version <arg>] [--parallel_run_size <arg>] [--validate_log_url_prefix <arg>] [-h|--help] <agent_repo> <agent_repo_branch>\n' "$0"
+	printf 'Usage: %s [--testcase_branch <arg>] [--scenario <arg>] [--issue_no <arg>] [--(no-)build] [--(no-)report] [--(no-)clone_code] [--(no-)fetch_latest_code] [--(no-)skip_single_mode_scenario] [--collector_image_version <arg>] [--parallel_run_size <arg>] [--validate_log_url_prefix <arg>] [-h|--help] <agent_repo> <agent_repo_branch>\n' "$0"
 	printf '\t%s\n' "<agent_repo>: The agent repository URL to be run"
 	printf '\t%s\n' "<agent_repo_branch>: The branch name of agent repository to be run"
 	printf '\t%s\n' "--testcase_branch: The branch of the testcase repository (no default)"
@@ -63,7 +65,8 @@ print_help()
 	printf '\t%s\n' "--issue_no: The relate issue no (default: 'UNKNOWN')"
 	printf '\t%s\n' "--build, --no-build: Skip build projects. (on by default)"
 	printf '\t%s\n' "--report, --no-report: Skip report the testcase to GitHub (off by default)"
-	printf '\t%s\n' "--clone_code, --no-clone_code: Skip clone the code (off by default)"
+	printf '\t%s\n' "--clone_code, --no-clone_code: Skip clone the code (on by default)"
+	printf '\t%s\n' "--fetch_latest_code, --no-fetch_latest_code: fetch latest code (on by default)"
 	printf '\t%s\n' "--skip_single_mode_scenario, --no-skip_single_mode_scenario: Skip build the scenario with single mode (on by default)"
 	printf '\t%s\n' "--collector_image_version: The docker image version of mock collector (default: '"6.0.0-2018"')"
 	printf '\t%s\n' "--parallel_run_size: The size of running testcase at the same time (default: '1')"
@@ -114,6 +117,10 @@ parse_commandline()
 			--no-clone_code|--clone_code)
 				_arg_clone_code="on"
 				test "${1:0:5}" = "--no-" && _arg_clone_code="off"
+				;;
+			--no-fetch_latest_code|--fetch_latest_code)
+				_arg_fetch_latest_code="on"
+				test "${1:0:5}" = "--no-" && _arg_fetch_latest_code="off"
 				;;
 			--no-skip_single_mode_scenario|--skip_single_mode_scenario)
 				_arg_skip_single_mode_scenario="on"
@@ -247,8 +254,9 @@ fi
 rm -rf ${LOGS_DIR} && mkdir -p ${LOGS_DIR}
 
 echo "[INFO] build workspace"
-${AGENT_TEST_HOME}/.autotest/build_agent.sh --build ${_arg_build} ${_arg_agent_repo} ${_arg_agent_repo_branch} ${AGENT_SOURCE_CODE} >${LOGS_DIR}/agent-build.log && ${AGENT_TEST_HOME}/.autotest/build_validate_tool.sh --build ${_arg_build} ${VALIDATE_TOOL_REPO} ${VALIDATE_TOOL_REPO_BRANCH} ${VALIDATE_TOOL_SOURCE_CODE} && ${AGENT_TEST_HOME}/.autotest/build_report.sh ${REPORT_HOME}
+${AGENT_TEST_HOME}/.autotest/build_agent.sh --build ${_arg_build} --fetch_latest_code ${_arg_fetch_latest_code} --clone_code ${_arg_clone_code} ${_arg_agent_repo} ${_arg_agent_repo_branch} ${AGENT_SOURCE_CODE} && ${AGENT_TEST_HOME}/.autotest/build_validate_tool.sh --fetch_latest_code ${_arg_fetch_latest_code} --build ${_arg_build} --clone_code ${_arg_clone_code} ${VALIDATE_TOOL_REPO} ${VALIDATE_TOOL_REPO_BRANCH} ${VALIDATE_TOOL_SOURCE_CODE} && ${AGENT_TEST_HOME}/.autotest/build_report.sh --fetch_latest_code ${_arg_fetch_latest_code} --clone_code ${_arg_clone_code} ${REPORT_HOME}
 
+exit 0
 AGENT_COMMIT_ID=$(cd $AGENT_SOURCE_CODE && git rev-parse HEAD)
 TESTCASE_COMMIT_ID=$(cd $AGENT_TEST_HOME && git rev-parse HEAD)
 

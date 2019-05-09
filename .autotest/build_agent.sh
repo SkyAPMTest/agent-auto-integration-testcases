@@ -3,6 +3,8 @@
 #ARG_POSITIONAL_SINGLE([branch],[The branch name of build project])
 #ARG_POSITIONAL_SINGLE([target_dir],[The target directory])
 #ARG_OPTIONAL_SINGLE([build],[],[skip to build project],[on])
+#ARG_OPTIONAL_SINGLE([clone_code],[],[skip to clone code],[off])
+#ARG_OPTIONAL_SINGLE([fetch_latest_code],[],[fetch latest code],[on])
 #ARG_HELP([])
 #ARGBASH_GO()
 # needed because of Argbash --> m4_ignore([
@@ -32,15 +34,19 @@ begins_with_short_option()
 _positionals=()
 # THE DEFAULTS INITIALIZATION - OPTIONALS
 _arg_build="on"
+_arg_clone_code="off"
+_arg_fetch_latest_code="on"
 
 
 print_help()
 {
-	printf 'Usage: %s [--build <arg>] [-h|--help] <repo> <branch> <target_dir>\n' "$0"
+	printf 'Usage: %s [--build <arg>] [--clone_code <arg>] [--fetch_latest_code <arg>] [-h|--help] <repo> <branch> <target_dir>\n' "$0"
 	printf '\t%s\n' "<repo>: The repository of build project"
 	printf '\t%s\n' "<branch>: The branch name of build project"
 	printf '\t%s\n' "<target_dir>: The target directory"
 	printf '\t%s\n' "--build: skip to build project (default: 'on')"
+	printf '\t%s\n' "--clone_code: skip to clone code (default: 'off')"
+	printf '\t%s\n' "--fetch_latest_code: fetch latest code (default: 'on')"
 	printf '\t%s\n' "-h, --help: Prints help"
 }
 
@@ -59,6 +65,22 @@ parse_commandline()
 				;;
 			--build=*)
 				_arg_build="${_key##--build=}"
+				;;
+			--clone_code)
+				test $# -lt 2 && die "Missing value for the optional argument '$_key'." 1
+				_arg_clone_code="$2"
+				shift
+				;;
+			--clone_code=*)
+				_arg_clone_code="${_key##--clone_code=}"
+				;;
+			--fetch_latest_code)
+				test $# -lt 2 && die "Missing value for the optional argument '$_key'." 1
+				_arg_fetch_latest_code="$2"
+				shift
+				;;
+			--fetch_latest_code=*)
+				_arg_fetch_latest_code="${_key##--fetch_latest_code=}"
 				;;
 			-h|--help)
 				print_help
@@ -118,7 +140,11 @@ PRGDIR=`dirname "$PRG"`
 AGENT_DIR=${BUILD_HOME}/../workspace/agent
 AGENT_WITH_OPTIONAL_PLUGIN_DIR=${BUILD_HOME}/../workspace/agent-with-optional-plugins
 
-${BUILD_HOME}/build_project.sh --build ${_arg_build} ${_arg_repo} ${_arg_branch} ${_arg_target_dir}
+${BUILD_HOME}/build_project.sh --fetch_latest_code ${_arg_fetch_latest_code} --clone_code ${_arg_clone_code} ${_arg_repo} ${_arg_branch} ${_arg_target_dir}
+
+if [ "${_arg_build}" = "on" ]; then
+    cd ${_arg_target_dir} && mvn clean package -Dmaven.test.skip=true
+fi
 
 if [ ! -d "${_arg_target_dir}/skywalking-agent" ]; then
     echo "[ERROR] the agent folder is not exist, Please make sure the command without --no-build."

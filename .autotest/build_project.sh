@@ -2,7 +2,8 @@
 #ARG_POSITIONAL_SINGLE([repo],[The repository of build project])
 #ARG_POSITIONAL_SINGLE([branch],[The branch name of build project])
 #ARG_POSITIONAL_SINGLE([target_dir],[The target directory])
-#ARG_OPTIONAL_SINGLE([build],[],[skip to build project],[off])
+#ARG_OPTIONAL_SINGLE([clone_code],[],[skip to clone code],[off])
+#ARG_OPTIONAL_SINGLE([fetch_latest_code],[],[fetch latest code],[on])
 #ARG_OPTIONAL_SINGLE([])
 #ARG_HELP([])
 #ARGBASH_GO()
@@ -32,16 +33,18 @@ begins_with_short_option()
 # THE DEFAULTS INITIALIZATION - POSITIONALS
 _positionals=()
 # THE DEFAULTS INITIALIZATION - OPTIONALS
-_arg_build="off"
+_arg_clone_code="off"
+_arg_fetch_latest_code="on"
 
 
 print_help()
 {
-	printf 'Usage: %s [--build <arg>] [-h|--help] <repo> <branch> <target_dir>\n' "$0"
+	printf 'Usage: %s [--clone_code <arg>] [--fetch_latest_code <arg>] [-h|--help] <repo> <branch> <target_dir>\n' "$0"
 	printf '\t%s\n' "<repo>: The repository of build project"
 	printf '\t%s\n' "<branch>: The branch name of build project"
 	printf '\t%s\n' "<target_dir>: The target directory"
-	printf '\t%s\n' "--build: skip to build project (default: 'off')"
+	printf '\t%s\n' "--clone_code: skip to clone code (default: 'off')"
+	printf '\t%s\n' "--fetch_latest_code: fetch latest code (default: 'on')"
 	printf '\t%s\n' "-h, --help: Prints help"
 }
 
@@ -53,13 +56,21 @@ parse_commandline()
 	do
 		_key="$1"
 		case "$_key" in
-			--build)
+			--clone_code)
 				test $# -lt 2 && die "Missing value for the optional argument '$_key'." 1
-				_arg_build="$2"
+				_arg_clone_code="$2"
 				shift
 				;;
-			--build=*)
-				_arg_build="${_key##--build=}"
+			--clone_code=*)
+				_arg_clone_code="${_key##--clone_code=}"
+				;;
+			--fetch_latest_code)
+				test $# -lt 2 && die "Missing value for the optional argument '$_key'." 1
+				_arg_fetch_latest_code="$2"
+				shift
+				;;
+			--fetch_latest_code=*)
+				_arg_fetch_latest_code="${_key##--fetch_latest_code=}"
 				;;
 			-h|--help)
 				print_help
@@ -112,16 +123,19 @@ assign_positional_args 1 "${_positionals[@]}"
 # [ <-- needed because of Argbash
 #
 PROJECT_DIR=${_arg_target_dir}
-if [ ! -d "${PROJECT_DIR}" ]; then
-    echo "[INFO] clone project[${_arg_name}] from ${_arg_repo}."
-    git clone --depth 1 ${_arg_repo} ${PROJECT_DIR}
+
+
+if [ ! -d "${PROJECT_DIR}" ] || [ "${_arg_clone_code}" = "on" ]; then
+  echo "[INFO] clone project[${_arg_name}] from ${_arg_repo}."
+  rm -rf ${PROJECT_DIR} && git clone --depth 1 ${_arg_repo} ${PROJECT_DIR}
+else
+  echo "[INFO] skip to clone project[${_arg_repo}]."
 fi
 
-cd ${PROJECT_DIR} && git fetch --tags --progress ${_arg_repo} +refs/heads/*:refs/remotes/origin/* && (git rev-parse origin/${_arg_branch}^{commit} | xargs git checkout -f ) && git submodule init && git submodule update
-git checkout ${_arg_branch}
-if [ "${_arg_build}" = "on" ]; then
-    cd ${PROJECT_DIR} && mvn clean package -Dmaven.test.skip=true
+if [ "${_arg_fetch_latest_code}" = "on" ]; then
+  cd ${PROJECT_DIR} && git fetch --tags --progress ${_arg_repo} +refs/heads/*:refs/remotes/origin/* && (git rev-parse origin/${_arg_branch}^{commit} | xargs git checkout -f ) && git submodule init && git submodule update
 fi
 
+cd ${PROJECT_DIR} && git checkout ${_arg_branch}
 #
 # ] <-- needed because of Argbash
