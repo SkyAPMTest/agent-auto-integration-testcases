@@ -282,7 +282,7 @@ if [ "${_arg_upload_report}" = "on" ]; then
     if [ "$ISSUE_NO" = "UNKNOWN" ]; then
         echo "issue no is empty, ignore to push comment"
     else
-      curl --user ${GITHUB_ACCOUNT} -X POST -H "Content-Type: text/plain" -d "{\"body\":\"Here is the [test report](http://github.com/SkywalkingTest/agent-integration-test-report/tree/master/${TEST_TIME_YEAR}/${TEST_TIME_MONTH}/${COMMITTER}/testReport-${NORMALIZED_TEST_CASES_BRANCH}-${TEST_TIME}.md) and [validate logs](${VALIDATE_LOG_URL_PREFIX}/validate_${TEST_TIME}.log)\"}" https://api.github.com/repos/apache/incubator-skywalking/issues/${ISSUE_NO}/comments
+      curl --user ${GITHUB_ACCOUNT} -X POST -H "Content-Type: text/plain" -d "{\"body\":\"Here is the [test report](http://github.com/SkywalkingTest/agent-integration-test-report/tree/master/${TEST_TIME_YEAR}/${TEST_TIME_MONTH}/${COMMITTER}/testReport-${NORMALIZED_TEST_CASES_BRANCH}-${TEST_TIME}.md) and [validate logs](${VALIDATE_LOG_URL_PREFIX}/validate_${TEST_TIME}.log)\"}" https://api.github.com/repos/apache/skywalking/issues/${ISSUE_NO}/comments
 
       #echo "[INFO] Test report: http://github.com/SkywalkingTest/agent-integration-test-report/tree/master/${TEST_TIME_YEAR}/${TEST_TIME_MONTH}/${COMMITTER}/testReport-${NORMALIZED_TEST_CASES_BRANCH}-${TEST_TIME}.md"
       #echo "[INFO] Validate logs: ${VALIDATE_LOG_URL_PREFIX}/validate-$TEST_TIME.log"
