@@ -1,0 +1,72 @@
+registryItems:
+  applications:
+  - {devcon-scenario: nq 0}
+  instances:
+  - {devcon-scenario: 1}
+  operationNames:
+  - devcon-scenario: [/devcon-scenario/case/httpclient,/devcon-scenario/case/context-propagate]
+segmentItems:
+- applicationCode: devcon-scenario
+  segmentSize: 2
+  segments:
+    - segmentId: not null
+      spans:
+        -
+          operationName: /devcon-scenario/case/context-propagate
+          operationId: eq 0
+          parentSpanId: 0
+          spanId: 1
+          startTime: nq 0
+          endTime: nq 0
+          isError: false
+          spanLayer: Http
+          spanType: Exit
+          componentName: null
+          componentId: eq 2
+          tags:
+            - {key: url, value: 'http://127.0.0.1:8080/devcon-scenario/case/context-propagate'}
+            - {key: http.method, value: GET}
+          logs: []
+          peer: null
+          peerId: eq 0
+        -
+          operationName: /devcon-scenario/case/httpclient
+          operationId: eq 0
+          parentSpanId: -1
+          spanId: 0
+          startTime: nq 0
+          endTime: nq 0
+          spanLayer: Http
+          isError: false
+          spanType: Entry
+          componentName: null
+          componentId: 1
+          tags:
+            - {key: url, value: 'http://localhost:{SERVER_OUTPUT_PORT}/devcon-scenario/case/httpclient'}
+            - {key: http.method, value: GET}
+          logs: []
+          peer: null
+          peerId: eq 0
+
+    - segmentId: not null
+      spans:
+        -
+          operationName: /devcon-scenario/case/context-propagate
+          operationId: eq 0
+          parentSpanId: -1
+          spanId: 0
+          tags:
+            - {key: url, value: 'http://127.0.0.1:8080/devcon-scenario/case/context-propagate'}
+            - {key: http.method, value: GET}
+          logs: []
+          startTime: nq 0
+          endTime: nq 0
+          spanLayer: Http
+          isError: false
+          spanType: Entry
+          componentName: null
+          componentId: 1
+          peer: null
+          peerId: eq 0
+          refs:
+            - {parentSpanId: 1, parentTraceSegmentId: "${devcon-scenario[0]}", entryEndpoint: "/devcon-scenario/case/httpclient", networkAddress: "127.0.0.1:8080",parentEndpoint: "/devcon-scenario/case/httpclient",entryServiceInstanceId: nq 0 }
