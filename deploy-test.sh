@@ -256,7 +256,6 @@ rm -rf ${LOGS_DIR} && mkdir -p ${LOGS_DIR}
 echo "[INFO] build workspace"
 ${AGENT_TEST_HOME}/.autotest/build_agent.sh --build ${_arg_build} --fetch_latest_code ${_arg_fetch_latest_code} --clone_code ${_arg_clone_code} ${_arg_agent_repo} ${_arg_agent_repo_branch} ${AGENT_SOURCE_CODE} && ${AGENT_TEST_HOME}/.autotest/build_validate_tool.sh --fetch_latest_code ${_arg_fetch_latest_code} --build ${_arg_build} --clone_code ${_arg_clone_code} ${VALIDATE_TOOL_REPO} ${VALIDATE_TOOL_REPO_BRANCH} ${VALIDATE_TOOL_SOURCE_CODE} && ${AGENT_TEST_HOME}/.autotest/build_report.sh --fetch_latest_code ${_arg_fetch_latest_code} --clone_code ${_arg_clone_code} ${REPORT_HOME}
 
-exit 0
 AGENT_COMMIT_ID=$(cd $AGENT_SOURCE_CODE && git rev-parse HEAD)
 TESTCASE_COMMIT_ID=$(cd $AGENT_TEST_HOME && git rev-parse HEAD)
 
