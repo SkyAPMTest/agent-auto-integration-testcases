@@ -365,9 +365,9 @@ Tomcat is supported, so in `SegmentA`, there is 2 spans. One is Tomcat, the othe
 ```
 
 ### Provide metadata file
-1. Add testcase.yaml
+1. Add testcase.yml
 
-testcase.yaml Format:
+testcase.yml Format:
 ```yml
 testcase:
   request_url: TESTCASE_REQUEST_URL

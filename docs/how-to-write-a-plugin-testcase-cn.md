@@ -354,9 +354,9 @@ SegmentB的Span校验数据格式如下：
 ```
 
 ### 编写用例配置文件
-1. 添加testcase.yaml文件
+1. 添加testcase.yml文件
 
-testcase.yaml文件格式如下:
+testcase.yml文件格式如下:
 ```yml
 testcase:
   request_url: TESTCASE_REQUEST_URL
