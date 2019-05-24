@@ -1,0 +1,79 @@
+registryItems:
+  applications:
+  - {resteasy-server1: nq 0}
+  - {resteasy-server2: nq 0}
+  instances:
+  - {resteasy-server1: 1}
+  - {resteasy-server2: 1}
+  operationNames:
+  - resteasy-server1: [
+    "/case/sync",
+    "/resteasy-server2-case/case/sync"
+  ]
+  - resteasy-server2: [
+    "/case/sync"
+  ]
+segmentItems:
+- applicationCode: resteasy-server1
+  segmentSize: 1
+  segments:
+  - segmentId: not null
+    spans:
+    - operationName: /resteasy-server2-case/case/sync
+      operationId: 0
+      parentSpanId: 0
+      spanId: 1
+      spanLayer: Http
+      startTime: nq 0
+      endTime: nq 0
+      componentId: 2
+      componentName: ''
+      isError: false
+      spanType: Exit
+      peer: resteasy-server2:8080
+      peerId: 0
+      tags:
+        - {key: url, value: 'http://resteasy-server2:8080/resteasy-server2-case/case/sync'}
+        - {key: http.method, value: GET}
+    - operationName: /case/sync
+      operationId: 0
+      parentSpanId: -1
+      spanId: 0
+      spanLayer: Http
+      startTime: nq 0
+      endTime: nq 0
+      componentId: 62
+      componentName: ''
+      isError: false
+      spanType: Entry
+      peer: ''
+      peerId: 0
+      tags:
+      - {key: url, value: 'http://localhost:{SERVER_OUTPUT_PORT}/resteasy-server1-case/case/sync'}
+      - {key: http.method, value: GET}
+- applicationCode: resteasy-server2
+  segmentSize: 1
+  segments:
+  - segmentId: not null
+    spans:
+      - operationName: /case/sync
+        operationId: 0
+        parentSpanId: -1
+        spanId: 0
+        spanLayer: Http
+        startTime: nq 0
+        endTime: nq 0
+        componentId: 62
+        componentName: ''
+        isError: false
+        spanType: Entry
+        peer: ''
+        peerId: 0
+        tags:
+          - {key: url, value: 'http://resteasy-server2:8080/resteasy-server2-case/case/sync'}
+          - {key: http.method, value: GET}
+        refs:
+          - {parentEndpointId: 0, parentEndpoint: /case/sync, networkAddressId: 0, entryEndpointId: 0,
+             refType: CrossProcess, parentSpanId: 1, parentTraceSegmentId: '${resteasy-server1[0]}',
+             parentServiceInstanceId: nq 0, networkAddress: 'resteasy-server2:8080', entryEndpoint: /case/sync,
+             entryServiceInstanceId: nq 0}

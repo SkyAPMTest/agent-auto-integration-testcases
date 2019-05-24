@@ -1,0 +1,49 @@
+version: '2.1'
+services:
+  resteasy-server1:
+    image: skywalking/resteasy-server1:{CASES_IMAGE_VERSION}
+    expose:
+      - "18080"
+    ports:
+      - "{SERVER_OUTPUT_PORT}:18080"
+    links:
+      - mock-collector
+      - resteasy-server2
+    environment:
+      - COLLECTOR_SERVER=mock-collector:19876
+      - RESTEASY_PORT=18080
+      - SERVER2_ADDRESS=resteasy-server2:8080
+    volumes:
+      - {AGENT_FILE_PATH}:/usr/local/resteasy-server1/agent
+    depends_on:
+      mock-collector:
+        condition: service_healthy
+
+  resteasy-server2:
+    image:  skywalking/resteasy-server2:{CASES_IMAGE_VERSION}
+    expose:
+      - "8080"
+    environment:
+      - COLLECTOR_SERVER=mock-collector:19876
+      - RESTEASY_PORT=8080
+    links:
+      - mock-collector
+    volumes:
+      - {AGENT_FILE_PATH}:/usr/local/resteasy-server2/agent
+    depends_on:
+      mock-collector:
+        condition: service_healthy
+
+  mock-collector:
+    image: skyapm/mock-collector:{COLLECTOR_IMAGE_VERSION}
+    environment:
+      - GRPC_BIND_HOST=mock-collector
+    expose:
+      - "12800"
+    ports:
+      - "{COLLECTOR_OUTPUT_PORT}:12800"
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://127.0.0.1:12800/receiveData"]
+      interval: 5s
+      timeout: 10s
+      retries: 5
