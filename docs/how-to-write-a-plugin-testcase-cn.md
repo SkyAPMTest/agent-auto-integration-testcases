@@ -420,7 +420,7 @@ HttpClient支持4.3到4.5.3 14个版本, 所以在pom.xml中添加14个`profile`
 
 ```shell
 # export project_name=httpclient-4.3.x-scenario
-# sh ${SKYWALKING_AGENT_TESTCASES_HOME}/deploy-test.sh --scenario ${scenario_name} ${agent_repo} ${agent_repo_branch}
+# bash ${SKYWALKING_AGENT_TESTCASES_HOME}/deploy-test.sh --scenario ${scenario_name} ${agent_repo} ${agent_repo_branch}
 ```
 脚本运行参数的描述:
 
@@ -430,7 +430,7 @@ HttpClient支持4.3到4.5.3 14个版本, 所以在pom.xml中添加14个`profile`
 | agent_repo                  | Skywalking agent Git仓库地址                                               |
 | agent_repo_branch          | Skywalking agent 仓库分支   |
 
-更多脚本参数参考`sh ${SKYWALKING_AGENT_TESTCASES_HOME}/deploy-test.sh -h`
+更多脚本参数参考`bash ${SKYWALKING_AGENT_TESTCASES_HOME}/deploy-test.sh -h`
 
 ### 查看校验结果
 校验结果存放在`${SKYWALKING_AGENT_TESTCASES_HOME}/workspace/logs/test_report.log`.

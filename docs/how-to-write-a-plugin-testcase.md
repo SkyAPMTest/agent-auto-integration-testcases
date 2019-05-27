@@ -432,7 +432,7 @@ Add 14 profiles in pom.xml in HttpClient case.
 
 ```shell
 # export project_name=httpclient-4.3.x-scenario
-# sh ${SKYWALKING_AGENT_TESTCASES_HOME}/deploy-test.sh --scenario ${scenario_name} ${agent_repo} ${agent_repo_branch}
+# bash ${SKYWALKING_AGENT_TESTCASES_HOME}/deploy-test.sh --scenario ${scenario_name} ${agent_repo} ${agent_repo_branch}
 ```
 
 | Parameter                | Comment                                                             |
