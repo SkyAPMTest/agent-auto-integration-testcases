@@ -1,0 +1,52 @@
+version: '2.1'
+services:
+  solr-server:
+    image: solr:7.7.1
+    expose:
+      - 8983
+    environment:
+      - "SOLR_HEAP=512m"
+    volumes:
+      - data:/opt/solr/server/solr/mycores
+    entrypoint:
+      - docker-entrypoint.sh
+      - solr-precreate
+      - mycore
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+
+  solrj-scenario:
+    image: skywalking/solrj-scenario:7.7.1
+    expose:
+      - 8080
+    ports:
+      - "{SERVER_OUTPUT_PORT}:8080"
+    environment:
+      - COLLECTOR_SERVER=mock-collector:19876
+      - SOLR_HOST=solr-server:8983
+    links:
+      - mock-collector
+      - solr-server
+    volumes:
+      - {AGENT_FILE_PATH}:/usr/local/skywalking-solrj-scenario/agent
+    depends_on:
+      mock-collector:
+        condition: service_healthy
+
+  mock-collector:
+    image: skyapm/mock-collector:{COLLECTOR_IMAGE_VERSION}
+    environment:
+      - GRPC_BIND_HOST=mock-collector
+    expose:
+      - 12800
+    ports:
+      - "{COLLECTOR_OUTPUT_PORT}:12800"
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://127.0.0.1:12800/receiveData"]
+      interval: 5s
+      timeout: 10s
+      retries: 5
+volumes:
+  data:
