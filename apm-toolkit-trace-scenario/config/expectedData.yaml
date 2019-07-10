@@ -1,0 +1,120 @@
+registryItems:
+  applications:
+  - {apm-toolkit-trace-scenario: nq 0}
+  instances:
+  - {apm-toolkit-trace-scenario: nq 0}
+  operationNames:
+  - apm-toolkit-trace-scenario: [/test]
+segmentItems:
+- applicationCode: apm-toolkit-trace-scenario
+  segmentSize: 1
+  segments:
+  - segmentId: not null
+    spans:
+    - operationName: test.apache.skywalking.testcase.toolkit.trace.controller.TestService.testInfo()
+      operationId: 0
+      parentSpanId: 0
+      spanId: 1
+      spanLayer: null
+      startTime: nq 0
+      endTime: nq 0
+      componentId: 0
+      componentName: null
+      isError: false
+      spanType: LocalSpan
+      peer:
+      peerId: 0
+      tags:
+      logs:
+      - logEvent:
+        - {key: event, value: info}
+        - {key: message, value: TestInfoMsg}
+      refs:
+    - operationName: test.apache.skywalking.testcase.toolkit.trace.controller.TestService.testDebug()
+      operationId: 0
+      parentSpanId: 0
+      spanId: 2
+      spanLayer: null
+      startTime: nq 0
+      endTime: nq 0
+      componentId: 0
+      componentName: null
+      isError: false
+      spanType: LocalSpan
+      peer:
+      peerId: 0
+      tags:
+      logs:
+      - logEvent:
+        - {key: event, value: debug}
+        - {key: message, value: TestDebugMsg}
+    - operationName: test.apache.skywalking.testcase.toolkit.trace.controller.TestService.testError()
+      operationId: 0
+      parentSpanId: 0
+      spanId: 3
+      spanLayer: null
+      startTime: nq 0
+      endTime: nq 0
+      componentId: 0
+      componentName: null
+      isError: true
+      spanType: LocalSpan
+      peer:
+      peerId: 0
+      tags:
+      logs:
+    - operationName: test.apache.skywalking.testcase.toolkit.trace.controller.TestService.testErrorMsg()
+      operationId: 0
+      parentSpanId: 0
+      spanId: 4
+      spanLayer: null
+      startTime: nq 0
+      endTime: nq 0
+      componentId: 0
+      componentName: null
+      isError: true
+      spanType: LocalSpan
+      peer:
+      peerId: 0
+      tags:
+      logs:
+      - logEvent:
+        - {key: event, value: error}
+        - {key: message, value: TestErrorMsg}
+    - operationName: test.apache.skywalking.testcase.toolkit.trace.controller.TestService.testErrorThrowable()
+      operationId: 0
+      parentSpanId: 0
+      spanId: 5
+      spanLayer: null
+      startTime: nq 0
+      endTime: nq 0
+      componentId: 0
+      componentName: null
+      isError: true
+      spanType: LocalSpan
+      peer:
+      peerId: 0
+      tags:
+      logs:
+      - logEvent:
+        - {key: event, value: error}
+        - {key: error.kind, value: java.lang.RuntimeException}
+        - {key: message, value: not null}
+        - {key: stack, value: not null}
+    - operationName: /test
+      operationId: 0
+      parentSpanId: -1
+      spanId: 0
+      spanLayer: null
+      startTime: nq 0
+      endTime: nq 0
+      componentId: 14
+      componentName: null
+      isError: true
+      spanType: EntrySpan
+      peer:
+      peerId: 0
+      tags:
+      - {key: 'url', value: 'not null'}
+      - {key: 'http.method', value: 'not null'}
+      logs:
