@@ -59,9 +59,11 @@ SCENARIOS_HOME=`cd ${_arg_scenario_home} >/dev/null; pwd`
 CASES_HOME=${SCENARIOS_HOME}/${_arg_target_dir}
 AGENT_DIR=${SCENARIOS_HOME}/${_arg_agent_dir}
 AGENT_WITH_OPTIONAL_PLUGINS_DIR=${SCENARIOS_HOME}/${_arg_agent_with_optional_dir}
+AGENT_WITH_BOOTSTRAP_PLUGINS_DIR=${SCENARIOS_HOME}/${_arg_agent_with_bootstrap_dir}
 COLLECTOR_IMAGE_VERSION=${_arg_collector_image_version}
 ESCAPE_AGENT_DIR=$(echo "$AGENT_DIR" |sed -e 's/\//\\\//g' )
 ESCAPE_AGENT_WITH_OPTIONAL_PLUGINS_DIR=$(echo "$AGENT_WITH_OPTIONAL_PLUGINS_DIR" |sed -e 's/\//\\\//g' )
+ESCAPE_AGENT_WITH_BOOTSTRAP_PLUGINS_DIR=$(echo "$AGENT_WITH_BOOTSTRAP_PLUGINS_DIR" |sed -e 's/\//\\\//g' )
 
 #
 rm -rf ${CASES_HOME} && mkdir -p ${CASES_HOME}
@@ -88,6 +90,8 @@ do
     AGENT_FILE_PATH="${ESCAPE_AGENT_DIR}"
     if [ "$RUNNING_MODE" = "WITH_OPTIONAL" ]; then
         AGENT_FILE_PATH="${ESCAPE_AGENT_WITH_OPTIONAL_PLUGINS_DIR}"
+    elif [ "$RUNNING_MODE" = "WITH_BOOTSTRAP" ]; then
+        AGENT_FILE_PATH="${ESCAPE_AGENT_WITH_BOOTSTRAP_PLUGINS_DIR}"
     fi
 
     cd ${SCENARIO_HOME}

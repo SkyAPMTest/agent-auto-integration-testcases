@@ -1,0 +1,70 @@
+registryItems:
+  applications:
+    - {jdk-http-scenario: nq 0}
+  instances:
+    - {jdk-http-scenario: 1}
+  operationNames:
+    - jdk-http-scenario: [/case/jdk-http-case, /case/receiveContext-0, /jdk-http-case/case/receiveContext-0]
+  heartbeat: []
+segmentItems:
+  - applicationCode: jdk-http-scenario
+    segmentSize: 2
+    segments:
+      - segmentId: not null
+        spans:
+          - operationName: /jdk-http-case/case/receiveContext-0
+            operationId: eq 0
+            parentSpanId: 0
+            spanId: 1
+            startTime: nq 0
+            endTime: nq 0
+            isError: false
+            spanLayer: Http
+            spanType: Exit
+            componentName: null
+            componentId: eq 66
+            tags:
+              - {key: http.method, value: GET}
+              - {key: url, value: 'http://127.0.0.1:8080/jdk-http-case/case/receiveContext-0'}
+            logs: []
+            peer: null
+            peerId: eq 0
+          - operationName: /case/jdk-http-case
+            operationId: eq 0
+            parentSpanId: -1
+            spanId: 0
+            startTime: nq 0
+            endTime: nq 0
+            spanLayer: Http
+            isError: false
+            spanType: Entry
+            componentName: null
+            componentId: 14
+            tags:
+              - {key: url, value: 'http://localhost:{SERVER_OUTPUT_PORT}/jdk-http-case/case/jdk-http-case'}
+              - {key: http.method, value: GET}
+            logs: []
+            peer: null
+            peerId: eq 0
+
+      - segmentId: not null
+        spans:
+          - operationName: /case/receiveContext-0
+            operationId: eq 0
+            parentSpanId: -1
+            spanId: 0
+            tags:
+              - {key: url, value: 'http://127.0.0.1:8080/jdk-http-case/case/receiveContext-0'}
+              - {key: http.method, value: GET}
+            logs: []
+            startTime: nq 0
+            endTime: nq 0
+            spanLayer: Http
+            isError: false
+            spanType: Entry
+            componentName: null
+            componentId: 14
+            peer: null
+            peerId: eq 0
+            refs:
+              - {parentSpanId: 1, parentTraceSegmentId: "${jdk-http-scenario[0]}", entryEndpoint: "/case/jdk-http-case", networkAddress: "127.0.0.1:8080",parentEndpoint: "/case/jdk-http-case",entryServiceInstanceId: nq 0 }

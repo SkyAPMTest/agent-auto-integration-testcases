@@ -15,6 +15,7 @@ PRGDIR=`dirname "$PRG"`
 #declare variables
 AGENT_DIR=${BUILD_HOME}/../workspace/agent
 AGENT_WITH_OPTIONAL_PLUGIN_DIR=${BUILD_HOME}/../workspace/agent-with-optional-plugins
+AGENT_WITH_BOOTSTRAP_PLUGIN_DIR=${BUILD_HOME}/../workspace/agent-with-bootstrap-plugins
 
 ${BUILD_HOME}/build_project.sh --fetch_latest_code ${_arg_fetch_latest_code} --clone_code ${_arg_clone_code} ${_arg_repo} ${_arg_branch} ${_arg_target_dir}
 
@@ -31,5 +32,6 @@ echo "[INFO] copy agent package"
 mkdir -p ${AGENT_DIR} && cp -r ${_arg_target_dir}/skywalking-agent/* ${AGENT_DIR}
 echo "[INFO] build agent package with optional plugins"
 mkdir -p ${AGENT_WITH_OPTIONAL_PLUGIN_DIR} && cp -r ${_arg_target_dir}/skywalking-agent/* ${AGENT_WITH_OPTIONAL_PLUGIN_DIR} && cp -r ${AGENT_WITH_OPTIONAL_PLUGIN_DIR}/optional-plugins/* ${AGENT_WITH_OPTIONAL_PLUGIN_DIR}/plugins/
+mkdir -p ${AGENT_WITH_BOOTSTRAP_PLUGIN_DIR} && cp -r ${_arg_target_dir}/skywalking-agent/* ${AGENT_WITH_BOOTSTRAP_PLUGIN_DIR} && cp -r ${AGENT_WITH_BOOTSTRAP_PLUGIN_DIR}/bootstrap-plugins/* ${AGENT_WITH_BOOTSTRAP_PLUGIN_DIR}/plugins/
 
 # ]
