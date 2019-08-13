@@ -1,0 +1,29 @@
+registryItems:
+  applications:
+    - {undertow-routing-scenario: nq 0}
+  instances:
+    - {undertow-routing-scenario: 1}
+  operationNames:
+    - undertow-routing-scenario: ["/projects/{projectId}"]
+segmentItems:
+  - applicationCode: undertow-routing-scenario
+    segmentSize: 1
+    segments:
+      - segmentId: not null
+        spans:
+          - operationName: "/projects/{projectId}"
+            operationId: 0
+            parentSpanId: -1
+            spanId: 0
+            spanLayer: Http
+            startTime: nq 0
+            endTime: nq 0
+            componentId: 49
+            componentName: ''
+            isError: false
+            spanType: Entry
+            peer: ''
+            peerId: 0
+            tags:
+              - {key: url, value: 'http://localhost:{SERVER_OUTPUT_PORT}/projects/1'}
+              - {key: http.method, value: GET}
