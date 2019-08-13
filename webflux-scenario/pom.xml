@@ -93,6 +93,20 @@
             </properties>
         </profile>
         <profile>
+            <id>webflux-scenario-spring-webflux_5.0.12.RELEASE-spring-mvc_5.0.12.RELEASE</id>
+            <properties>
+                <test.framework.version>2.0.8.RELEASE</test.framework.version>
+                <docker.image.version>spring-webflux_5.0.12.RELEASE-spring-mvc_5.0.12.RELEASE</docker.image.version>
+            </properties>
+        </profile>
+        <profile>
+            <id>webflux-scenario-spring-webflux_5.0.13.RELEASE-spring-mvc_5.0.13.RELEASE</id>
+            <properties>
+                <test.framework.version>2.0.9.RELEASE</test.framework.version>
+                <docker.image.version>spring-webflux_5.0.13.RELEASE-spring-mvc_5.0.13.RELEASE</docker.image.version>
+            </properties>
+        </profile>
+        <profile>
             <id>webflux-scenario-spring-webflux_5.1.2.RELEASE-spring-mvc_5.1.2.RELEASE</id>
             <properties>
                 <test.framework.version>2.1.0.RELEASE</test.framework.version>
@@ -106,7 +120,48 @@
                 <docker.image.version>spring-webflux_5.1.3.RELEASE-spring-mvc_5.1.3.RELEASE</docker.image.version>
             </properties>
         </profile>
-
+        <profile>
+            <id>webflux-scenario-spring-webflux_5.1.4.RELEASE-spring-mvc_5.1.4.RELEASE</id>
+            <properties>
+                <test.framework.version>2.1.2.RELEASE</test.framework.version>
+                <docker.image.version>spring-webflux_5.1.4.RELEASE-spring-mvc_5.1.4.RELEASE</docker.image.version>
+            </properties>
+        </profile>
+        <profile>
+            <id>webflux-scenario-spring-webflux_5.1.5.RELEASE-spring-mvc_5.1.5.RELEASE</id>
+            <properties>
+                <test.framework.version>2.1.3.RELEASE</test.framework.version>
+                <docker.image.version>spring-webflux_5.1.5.RELEASE-spring-mvc_5.1.5.RELEASE</docker.image.version>
+            </properties>
+        </profile>
+        <profile>
+            <id>webflux-scenario-spring-webflux_5.1.6.RELEASE-spring-mvc_5.1.6.RELEASE</id>
+            <properties>
+                <test.framework.version>2.1.4.RELEASE</test.framework.version>
+                <docker.image.version>spring-webflux_5.1.6.RELEASE-spring-mvc_5.1.6.RELEASE</docker.image.version>
+            </properties>
+        </profile>
+        <profile>
+            <id>webflux-scenario-spring-webflux_5.1.7.RELEASE-spring-mvc_5.1.7.RELEASE</id>
+            <properties>
+                <test.framework.version>2.1.5.RELEASE</test.framework.version>
+                <docker.image.version>spring-webflux_5.1.7.RELEASE-spring-mvc_5.1.7.RELEASE</docker.image.version>
+            </properties>
+        </profile>
+        <profile>
+            <id>webflux-scenario-spring-webflux_5.1.8.RELEASE-spring-mvc_5.1.8.RELEASE</id>
+            <properties>
+                <test.framework.version>2.1.6.RELEASE</test.framework.version>
+                <docker.image.version>spring-webflux_5.1.8.RELEASE-spring-mvc_5.1.8.RELEASE</docker.image.version>
+            </properties>
+        </profile>
+        <profile>
+            <id>webflux-scenario-spring-webflux_5.1.9.RELEASE-spring-mvc_5.1.9.RELEASE</id>
+            <properties>
+                <test.framework.version>2.1.7.RELEASE</test.framework.version>
+                <docker.image.version>spring-webflux_5.1.9.RELEASE-spring-mvc_5.1.9.RELEASE</docker.image.version>
+            </properties>
+        </profile>
     </profiles>
 
     <build>

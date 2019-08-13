@@ -6,60 +6,148 @@ registryItems:
     - {webflux-projectB: 1}
     - {webflux-projectA: 1}
   operationNames:
-    - webflux-projectB: [/notFound, /testcase]
-    - webflux-projectA: [/notFound, /testcase]
+    - webflux-projectB: [test.apache.skywalking.apm.testcase.webflux.controller.TestAnnotationController.error,
+                         RoutingConfiguration.test.apache.skywalking.apm.testcase.webflux.route.TestHandler,
+                         WEBFLUX.handle, test.apache.skywalking.apm.testcase.webflux.controller.TestAnnotationController.success]
+    - webflux-projectA: [/testcase/annotation/success, /notFound, /testcase/route/error,
+                         /testcase/route/success, /testcase, /testcase/annotation/error]
   heartbeat: []
 segmentItems:
   - applicationCode: webflux-projectB
-    segmentSize: 2
+    segmentSize: 5
     segments:
       - segmentId: not null
         spans:
-          - operationName: /testcase
+          - operationName: test.apache.skywalking.apm.testcase.webflux.controller.TestAnnotationController.success
             operationId: 0
             parentSpanId: -1
             spanId: 0
             spanLayer: Http
             startTime: nq 0
             endTime: nq 0
-            componentId: 14
+            componentId: 67
             componentName: ''
             isError: false
             spanType: Entry
             peer: ''
             peerId: 0
             tags:
-              - {key: url, value: /testcase}
-              - {key: http.method, value: GET}
+              - {key: url, value: not null}
             refs:
-              - {parentEndpointId: 0, parentEndpoint: /testcase, networkAddressId: 0, entryEndpointId: 0, refType: CrossProcess, parentSpanId: 1, parentTraceSegmentId: '${webflux-projectA[0]}', parentServiceInstanceId: nq 0, networkAddress: 'projectB-service:18080', entryEndpoint: /testcase, entryServiceInstanceId: nq 0}
+              - {parentEndpointId: 0, parentEndpoint: /testcase, networkAddressId: 0, entryEndpointId: 0,
+                 refType: CrossProcess, parentSpanId: 1, parentTraceSegmentId: '${webflux-projectA[0]}',
+                 parentServiceInstanceId: nq 0, networkAddress: not null, entryEndpoint: /testcase, entryServiceInstanceId: nq 0}
       - segmentId: not null
         spans:
-          - operationName: /notFound
+          - operationName: test.apache.skywalking.apm.testcase.webflux.controller.TestAnnotationController.error
             operationId: 0
             parentSpanId: -1
             spanId: 0
             spanLayer: Http
             startTime: nq 0
             endTime: nq 0
-            componentId: 14
+            componentId: 67
             componentName: ''
             isError: false
             spanType: Entry
             peer: ''
             peerId: 0
             tags:
-              - {key: url, value: /notFound}
-              - {key: http.method, value: GET}
-              - {key: status_code, value: '404'}
+              - {key: url, value: not null}
+              - {key: status_code, value: '500'}
+            logs:
+              - logEvent:
+                  - {key: event, value: error}
+                  - {key: error.kind, value: java.lang.RuntimeException}
+                  - {key: message, value: test_error}
+                  - {key: stack, value: not null}
             refs:
-              - {parentEndpointId: 0, parentEndpoint: /testcase, networkAddressId: 0, entryEndpointId: 0, refType: CrossProcess, parentSpanId: 2, parentTraceSegmentId: '${webflux-projectA[0]}', parentServiceInstanceId: nq 0, networkAddress: 'projectB-service:18080', entryEndpoint: /testcase, entryServiceInstanceId: nq 0}
+              - {parentEndpointId: 0, parentEndpoint: /testcase, networkAddressId: 0, entryEndpointId: 0,
+                 refType: CrossProcess, parentSpanId: 2, parentTraceSegmentId: '${webflux-projectA[0]}',
+                 parentServiceInstanceId: nq 0, networkAddress: not null, entryEndpoint: /testcase, entryServiceInstanceId: nq 0}
+      - segmentId: not null
+        spans:
+          - operationName: RoutingConfiguration.test.apache.skywalking.apm.testcase.webflux.route.TestHandler
+            operationId: 0
+            parentSpanId: -1
+            spanId: 0
+            spanLayer: Http
+            startTime: nq 0
+            endTime: nq 0
+            componentId: 67
+            componentName: ''
+            isError: false
+            spanType: Entry
+            peer: ''
+            peerId: 0
+            tags:
+              - {key: url, value: not null}
+            refs:
+              - {parentEndpointId: 0, parentEndpoint: /testcase, networkAddressId: 0, entryEndpointId: 0,
+                 refType: CrossProcess, parentSpanId: 3, parentTraceSegmentId: '${webflux-projectA[0]}',
+                 parentServiceInstanceId: nq 0, networkAddress: not null, entryEndpoint: /testcase, entryServiceInstanceId: nq 0}
+      - segmentId: not null
+        spans:
+          - operationName: RoutingConfiguration.test.apache.skywalking.apm.testcase.webflux.route.TestHandler
+            operationId: 0
+            parentSpanId: -1
+            spanId: 0
+            spanLayer: Http
+            startTime: nq 0
+            endTime: nq 0
+            componentId: 67
+            componentName: ''
+            isError: false
+            spanType: Entry
+            peer: ''
+            peerId: 0
+            tags:
+              - {key: url, value: not null}
+              - {key: status_code, value: '500'}
+            logs:
+              - logEvent:
+                  - {key: event, value: error}
+                  - {key: error.kind, value: java.lang.RuntimeException}
+                  - {key: message, value: test_error}
+                  - {key: stack, value: not null}
+            refs:
+              - {parentEndpointId: 0, parentEndpoint: /testcase, networkAddressId: 0, entryEndpointId: 0,
+                 refType: CrossProcess, parentSpanId: 4, parentTraceSegmentId: '${webflux-projectA[0]}',
+                 parentServiceInstanceId: nq 0, networkAddress: not null, entryEndpoint: /testcase, entryServiceInstanceId: nq 0}
+      - segmentId: not null
+        spans:
+          - operationName: WEBFLUX.handle
+            operationId: 0
+            parentSpanId: -1
+            spanId: 0
+            spanLayer: Http
+            startTime: nq 0
+            endTime: nq 0
+            componentId: 67
+            componentName: ''
+            isError: false
+            spanType: Entry
+            peer: ''
+            peerId: 0
+            tags:
+              - {key: url, value: not null}
+              - {key: status_code, value: '404'}
+            logs:
+              - logEvent:
+                  - {key: event, value: error}
+                  - {key: error.kind, value: org.springframework.web.server.ResponseStatusException}
+                  - {key: message, value: not null}
+                  - {key: stack, value: not null}
+            refs:
+              - {parentEndpointId: 0, parentEndpoint: /testcase, networkAddressId: 0, entryEndpointId: 0,
+                 refType: CrossProcess, parentSpanId: 5, parentTraceSegmentId: '${webflux-projectA[0]}',
+                 parentServiceInstanceId: nq 0, networkAddress: not null, entryEndpoint: /testcase, entryServiceInstanceId: nq 0}
   - applicationCode: webflux-projectA
     segmentSize: 1
     segments:
       - segmentId: not null
         spans:
-          - operationName: /testcase
+          - operationName: /testcase/annotation/success
             operationId: 0
             parentSpanId: 0
             spanId: 1
@@ -70,12 +158,12 @@ segmentItems:
             componentName: ''
             isError: false
             spanType: Exit
-            peer: projectB-service:18080
+            peer: not null
             peerId: 0
             tags:
-              - {key: url, value: 'http://projectB-service:18080/testcase'}
+              - {key: url, value: not null}
               - {key: http.method, value: GET}
-          - operationName: /notFound
+          - operationName: /testcase/annotation/error
             operationId: 0
             parentSpanId: 0
             spanId: 2
@@ -86,10 +174,60 @@ segmentItems:
             componentName: ''
             isError: false
             spanType: Exit
-            peer: projectB-service:18080
+            peer: not null
             peerId: 0
             tags:
-              - {key: url, value: 'http://projectB-service:18080/notFound'}
+              - {key: url, value: not null}
+              - {key: http.method, value: GET}
+              - {key: status_code, value: '500'}
+          - operationName: /testcase/route/success
+            operationId: 0
+            parentSpanId: 0
+            spanId: 3
+            spanLayer: Http
+            startTime: nq 0
+            endTime: nq 0
+            componentId: 2
+            componentName: ''
+            isError: false
+            spanType: Exit
+            peer: not null
+            peerId: 0
+            tags:
+              - {key: url, value: not null}
+              - {key: http.method, value: GET}
+          - operationName: /testcase/route/error
+            operationId: 0
+            parentSpanId: 0
+            spanId: 4
+            spanLayer: Http
+            startTime: nq 0
+            endTime: nq 0
+            componentId: 2
+            componentName: ''
+            isError: false
+            spanType: Exit
+            peer: not null
+            peerId: 0
+            tags:
+              - {key: url, value: not null}
+              - {key: http.method, value: GET}
+              - {key: status_code, value: '500'}
+          - operationName: /notFound
+            operationId: 0
+            parentSpanId: 0
+            spanId: 5
+            spanLayer: Http
+            startTime: nq 0
+            endTime: nq 0
+            componentId: 2
+            componentName: ''
+            isError: false
+            spanType: Exit
+            peer: not null
+            peerId: 0
+            tags:
+              - {key: url, value: not null}
               - {key: http.method, value: GET}
               - {key: status_code, value: '404'}
           - operationName: /testcase
@@ -106,5 +244,5 @@ segmentItems:
             peer: ''
             peerId: 0
             tags:
-              - {key: url, value: 'http://localhost:{SERVER_OUTPUT_PORT}/projectA/testcase'}
+              - {key: url, value: not null}
               - {key: http.method, value: GET}

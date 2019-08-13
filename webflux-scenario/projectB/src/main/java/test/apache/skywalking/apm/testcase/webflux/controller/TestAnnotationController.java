@@ -21,10 +21,20 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-public class TestController {
+public class TestAnnotationController {
 
-    @RequestMapping("/testcase")
-    public String testcase() {
+    @RequestMapping("/testcase/annotation/success")
+    public String success() {
+        System.out.println("annotation_success");
+        return "1";
+    }
+
+    @RequestMapping("/testcase/annotation/error")
+    public String error() {
+        System.out.println("annotation_error");
+        if (1 == 1) {
+            throw new RuntimeException("test_error");
+        }
         return "1";
     }
 }
