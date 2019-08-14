@@ -1,0 +1,76 @@
+registryItems:
+  applications:
+    - {gateway-projectB: nq 0}
+    - {gateway-projectA: nq 0}
+  instances:
+    - {gateway-projectB: 1}
+    - {gateway-projectA: 1}
+  operationNames:
+    - gateway-projectB: [/provider/b/testcase]
+    - gateway-projectA: [GATEWAY/provider_route]
+  heartbeat: []
+segmentItems:
+  - applicationCode: gateway-projectB
+    segmentSize: nq 0
+    segments:
+      - segmentId: not null
+        spans:
+          - operationName: /provider/b/testcase
+            operationId: 0
+            parentSpanId: -1
+            spanId: 0
+            spanLayer: Http
+            startTime: nq 0
+            endTime: nq 0
+            componentId: nq 0
+            componentName: ''
+            isError: false
+            spanType: Entry
+            peer: ''
+            peerId: 0
+            tags:
+              - {key: url, value: not null}
+              - {key: http.method, value: GET}
+  - applicationCode: gateway-projectA
+    segmentSize: nq 0
+    segments:
+      - segmentId: not null
+        spans:
+          - operationName: GATEWAY/provider_route
+            operationId: 0
+            parentSpanId: -1
+            spanId: 0
+            spanLayer: Http
+            startTime: nq 0
+            endTime: nq 0
+            componentId: 61
+            componentName: ''
+            isError: false
+            spanType: Exit
+            peer: not null
+            peerId: 0
+            tags:
+              - {key: url, value: not null}
+              - {key: http.method, value: GET}
+            refs:
+              - {parentEndpointId: 0, parentEndpoint: GATEWAY/provider_route, networkAddressId: 0,
+                 entryEndpointId: 0, refType: CrossThread, parentSpanId: 0, parentTraceSegmentId: not null,
+                 parentServiceInstanceId: not null, networkAddress: '', entryEndpoint: GATEWAY/provider_route,
+                 entryServiceInstanceId: not null}
+      - segmentId: not null
+        spans:
+          - operationName: GATEWAY/provider_route
+            operationId: 0
+            parentSpanId: -1
+            spanId: 0
+            spanLayer: Http
+            startTime: nq 0
+            endTime: nq 0
+            componentId: 67
+            componentName: ''
+            isError: false
+            spanType: Entry
+            peer: ''
+            peerId: 0
+            tags:
+              - {key: url, value: not null}
