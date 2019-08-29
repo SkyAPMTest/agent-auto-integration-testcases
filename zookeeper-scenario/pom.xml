@@ -96,6 +96,18 @@
 
     <profiles>
         <profile>
+            <id>zookeeper-scenario-3.5.5</id>
+            <properties>
+                <test.framework.version>3.5.5</test.framework.version>
+            </properties>
+        </profile>
+        <profile>
+            <id>zookeeper-scenario-3.4.14</id>
+            <properties>
+                <test.framework.version>3.4.14</test.framework.version>
+            </properties>
+        </profile>
+        <profile>
             <id>zookeeper-scenario-3.4.13</id>
             <properties>
                 <test.framework.version>3.4.13</test.framework.version>
