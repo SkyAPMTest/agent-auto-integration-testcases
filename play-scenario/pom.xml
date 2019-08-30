@@ -1,0 +1,136 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>org.apache.skywalking</groupId>
+    <artifactId>play-scenario</artifactId>
+    <version>5.0.0</version>
+    <packaging>play2</packaging>
+
+    <name>Play! Framework Scenario</name>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+
+        <play2.version>2.6.0</play2.version>
+        <scala.version>2.12.9</scala.version>
+        <docker.image.version>${play2.version}</docker.image.version>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.scala-lang</groupId>
+            <artifactId>scala-library</artifactId>
+            <version>${scala.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.typesafe.play</groupId>
+            <artifactId>play_2.12</artifactId>
+            <version>${play2.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.typesafe.play</groupId>
+            <artifactId>play-guice_2.12</artifactId>
+            <version>${play2.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.typesafe.play</groupId>
+            <artifactId>play-logback_2.12</artifactId>
+            <version>${play2.version}</version>
+            <scope>runtime</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>com.typesafe.play</groupId>
+            <artifactId>play-akka-http-server_2.12</artifactId>
+            <version>${play2.version}</version>
+            <scope>runtime</scope>
+        </dependency>
+    </dependencies>
+
+    <profiles>
+        <profile>
+            <id>play-scenario-2.6.0</id>
+            <properties>
+                <play2.version>2.6.0</play2.version>
+            </properties>
+        </profile>
+        <profile>
+            <id>play-scenario-2.7.0</id>
+            <properties>
+                <play2.version>2.7.0</play2.version>
+            </properties>
+        </profile>
+    </profiles>
+
+    <build>
+        <finalName>play-scenario</finalName>
+        <sourceDirectory>${project.basedir}/app</sourceDirectory>
+        <testSourceDirectory>${project.basedir}/test</testSourceDirectory>
+        <resources>
+            <resource>
+                <directory>${project.basedir}/conf</directory>
+            </resource>
+        </resources>
+
+        <plugins>
+            <plugin>
+                <groupId>com.google.code.play2-maven-plugin</groupId>
+                <artifactId>play2-maven-plugin</artifactId>
+                <version>1.0.0-rc5</version>
+                <extensions>true</extensions>
+            </plugin>
+
+            <plugin>
+                <groupId>com.google.code.sbt-compiler-maven-plugin</groupId>
+                <artifactId>sbt-compiler-maven-plugin</artifactId>
+                <version>1.0.0</version>
+            </plugin>
+
+            <plugin>
+                <artifactId>maven-dependency-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>copy-dependencies</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>${project.build.directory}/lib</outputDirectory>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <plugin>
+                <groupId>com.spotify</groupId>
+                <artifactId>docker-maven-plugin</artifactId>
+                <version>0.4.13</version>
+                <configuration>
+                    <imageName>skywalking/play-scenario</imageName>
+                    <imageTags>
+                        <imageTag>${docker.image.version}</imageTag>
+                    </imageTags>
+                    <dockerDirectory>${project.basedir}/docker</dockerDirectory>
+                    <resources>
+                        <resource>
+                            <targetPath>/lib</targetPath>
+                            <directory>${project.build.directory}/lib</directory>
+                        </resource>
+                        <resource>
+                            <targetPath>/lib</targetPath>
+                            <directory>${project.build.directory}</directory>
+                            <include>${build.finalName}.jar</include>
+                        </resource>
+                    </resources>
+                </configuration>
+            </plugin>
+
+        </plugins>
+    </build>
+</project>

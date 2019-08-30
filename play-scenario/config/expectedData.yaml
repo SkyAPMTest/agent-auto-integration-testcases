@@ -1,0 +1,29 @@
+registryItems:
+  applications:
+    - {play-scenario: nq 0}
+  instances:
+    - {play-scenario: 1}
+  operationNames:
+    - play-scenario: ["/projects/{projectId}"]
+segmentItems:
+  - applicationCode: play-scenario
+    segmentSize: 1
+    segments:
+      - segmentId: not null
+        spans:
+          - operationName: "/projects/{projectId}"
+            operationId: 0
+            parentSpanId: -1
+            spanId: 0
+            spanLayer: Http
+            startTime: nq 0
+            endTime: nq 0
+            componentId: 68
+            componentName: ''
+            isError: false
+            spanType: Entry
+            peer: ''
+            peerId: 0
+            tags:
+              - {key: url, value: 'localhost:{SERVER_OUTPUT_PORT}/projects/1'}
+              - {key: http.method, value: GET}
