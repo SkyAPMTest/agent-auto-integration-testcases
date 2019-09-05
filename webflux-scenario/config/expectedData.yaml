@@ -7,14 +7,15 @@ registryItems:
     - {webflux-projectA: 1}
   operationNames:
     - webflux-projectB: [test.apache.skywalking.apm.testcase.webflux.controller.TestAnnotationController.error,
+                         test.apache.skywalking.apm.testcase.webflux.controller.TestAnnotationController.hello,
                          RoutingConfiguration.test.apache.skywalking.apm.testcase.webflux.route.TestHandler,
                          WEBFLUX.handle, test.apache.skywalking.apm.testcase.webflux.controller.TestAnnotationController.success]
-    - webflux-projectA: [/testcase/annotation/success, /notFound, /testcase/route/error,
+    - webflux-projectA: [/testcase/annotation/mono/hello, /testcase/annotation/success, /notFound, /testcase/route/error,
                          /testcase/route/success, /testcase, /testcase/annotation/error]
   heartbeat: []
 segmentItems:
   - applicationCode: webflux-projectB
-    segmentSize: 5
+    segmentSize: 6
     segments:
       - segmentId: not null
         spans:
@@ -142,6 +143,28 @@ segmentItems:
               - {parentEndpointId: 0, parentEndpoint: /testcase, networkAddressId: 0, entryEndpointId: 0,
                  refType: CrossProcess, parentSpanId: 5, parentTraceSegmentId: '${webflux-projectA[0]}',
                  parentServiceInstanceId: nq 0, networkAddress: not null, entryEndpoint: /testcase, entryServiceInstanceId: nq 0}
+      - segmentId: not null
+        spans:
+          - operationName: test.apache.skywalking.apm.testcase.webflux.controller.TestAnnotationController.hello
+            operationId: 0
+            parentSpanId: -1
+            spanId: 0
+            spanLayer: Http
+            startTime: nq 0
+            endTime: nq 0
+            componentId: 67
+            componentName: ''
+            isError: false
+            spanType: Entry
+            peer: ''
+            peerId: 0
+            tags:
+              - {key: url, value: not null}
+            refs:
+              - {parentEndpointId: 0, parentEndpoint: /testcase, networkAddressId: 0, entryEndpointId: 0,
+                 refType: CrossProcess, parentSpanId: 6, parentTraceSegmentId: '${webflux-projectA[0]}',
+                 parentServiceInstanceId: nq 0, networkAddress: not null, entryEndpoint: /testcase,
+                 entryServiceInstanceId: nq 0}
   - applicationCode: webflux-projectA
     segmentSize: 1
     segments:
@@ -230,6 +253,22 @@ segmentItems:
               - {key: url, value: not null}
               - {key: http.method, value: GET}
               - {key: status_code, value: '404'}
+          - operationName: /testcase/annotation/mono/hello
+            operationId: 0
+            parentSpanId: 0
+            spanId: 6
+            spanLayer: Http
+            startTime: nq 0
+            endTime: nq 0
+            componentId: 2
+            componentName: ''
+            isError: false
+            spanType: Exit
+            peer: not null
+            peerId: 0
+            tags:
+              - {key: url, not null}
+              - {key: http.method, value: GET}
           - operationName: /testcase
             operationId: 0
             parentSpanId: -1

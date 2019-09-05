@@ -41,6 +41,7 @@ public class TestController {
             visit("http://" + hostBAddress + "/testcase/route/success");
             visit("http://" + hostBAddress + "/testcase/route/error");
             visit("http://" + hostBAddress + "/notFound");
+            visit("http://" + hostBAddress + "/testcase/annotation/mono/hello");
             return "test";
     }
 

@@ -17,8 +17,11 @@
 
 package test.apache.skywalking.apm.testcase.webflux.controller;
 
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import reactor.core.publisher.Mono;
 
 @RestController
 public class TestAnnotationController {
@@ -36,5 +39,10 @@ public class TestAnnotationController {
             throw new RuntimeException("test_error");
         }
         return "1";
+    }
+
+    @GetMapping("/testcase/annotation/mono/hello")
+    public Mono<String> hello(@RequestBody(required = false) String body) {
+        return Mono.just("Hello World");
     }
 }
