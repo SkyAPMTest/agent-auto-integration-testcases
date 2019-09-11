@@ -1,0 +1,36 @@
+registryItems:
+  applications:
+    - {gateway-404-projectA: nq 0}
+  instances:
+    - {gateway-404-projectA: nq 0}
+  operationNames:
+    - gateway-404-projectA: [GATEWAY/provider_route]
+  heartbeat: []
+segmentItems:
+  - applicationCode: gateway-404-projectA
+    segmentSize: nq 0
+    segments:
+      - segmentId: nq 0
+        spans:
+          - operationName: GATEWAY/provider_route
+            operationId: 0
+            parentSpanId: -1
+            spanId: 0
+            spanLayer: Http
+            startTime: nq 0
+            endTime: nq 0
+            componentId: 67
+            componentName: ''
+            isError: false
+            spanType: Entry
+            peer: ''
+            peerId: 0
+            tags:
+              - {key: url, value: not null}
+              - {key: status_code, value: '500'}
+            logs:
+              - logEvent:
+                  - {key: event, value: error}
+                  - {key: error.kind, value: not null}
+                  - {key: message, value: not null}
+                  - {key: stack, value: not null}
