@@ -4,7 +4,7 @@ registryItems:
   instances:
   - {kafka-scenario: nq 0}
   operationNames:
-  - kafka-scenario: [Kafka/test/Producer, Kafka/test/Consumer, /case/kafka-case]
+  - kafka-scenario: [Kafka/test/Producer, /case/kafka-case, Kafka/test/Consumer/testGroup]
 segmentItems:
 - applicationCode: kafka-scenario
   segmentSize: ge 3
@@ -45,24 +45,26 @@ segmentItems:
       - {key: http.method, value: GET}
   - segmentId: not null
     spans:
-    - operationName: Producer/Callback
+    - operationName: Kafka/Producer/Callback
       operationId: 0
       parentSpanId: -1
       spanId: 0
       spanLayer: Unknown
       startTime: nq 0
       endTime: nq 0
-      componentId: 0
+      componentId: 40
       componentName: ''
       isError: false
       spanType: Local
       peer: ''
       peerId: 0
+      tags:
+      - {key: mq.topic, value: test}
       refs:
       - {parentEndpointId: 0, parentEndpoint: /case/kafka-case, networkAddressId: 0, entryEndpointId: 0, refType: CrossThread, parentSpanId: 1, parentTraceSegmentId: '${kafka-scenario[0]}', parentServiceInstanceId: nq 0, networkAddress: '', entryEndpoint: /case/kafka-case, entryServiceInstanceId: nq 0 }
   - segmentId: not null
     spans:
-    - operationName: Kafka/test/Consumer
+    - operationName: Kafka/test/Consumer/testGroup
       operationId: 0
       parentSpanId: -1
       spanId: 0

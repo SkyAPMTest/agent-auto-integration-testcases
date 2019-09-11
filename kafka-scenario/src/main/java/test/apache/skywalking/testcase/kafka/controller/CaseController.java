@@ -69,11 +69,11 @@ public class CaseController {
         producerProperties.put("value.serializer", "org.apache.kafka.common.serialization.StringSerializer");
 
         Producer<String, String> producer = new KafkaProducer<>(producerProperties);
-        ProducerRecord<String, String> record = new ProducerRecord<String, String>(topicName, Integer.toString(1), Integer.toString(1));
+        ProducerRecord<String, String> record = new ProducerRecord<String, String>(topicName, "testKey", Integer.toString(1));
         record.headers().add("TEST", "TEST".getBytes());
         producer.send(record, new Callback() {
             @Override public void onCompletion(RecordMetadata metadata, Exception exception) {
-
+                logger.info("send success metadata={}", metadata);
             }
         });
         producer.close();
@@ -85,7 +85,7 @@ public class CaseController {
         @Override public void run() {
             Properties consumerProperties = new Properties();
             consumerProperties.put("bootstrap.servers", bootstrapServers);
-            consumerProperties.put("group.id", "test");
+            consumerProperties.put("group.id", "testGroup");
             consumerProperties.put("enable.auto.commit", "true");
             consumerProperties.put("auto.commit.interval.ms", "1000");
             consumerProperties.put("auto.offset.reset", "earliest");
