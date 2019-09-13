@@ -1,0 +1,22 @@
+#
+# Test case project define.
+#
+# Note: Test case project must a project that support output service.
+#
+testcase:
+  #
+  # The request url of current test cases.
+  #
+  request_url: http://localhost:{SERVER_OUTPUT_PORT}/cassandra-case/case/cassandra
+  #
+  # The framework name that need tested.
+  #
+  test_framework: Cassandra
+  #
+  # The framework version list of current test case supported
+  #
+  support_versions:
+    - 3.7.2
+#    - 3.7.1
+#    - 3.7.0
+#    - 3.6.0

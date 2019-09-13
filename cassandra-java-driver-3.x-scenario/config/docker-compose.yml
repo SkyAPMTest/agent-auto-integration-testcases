@@ -1,0 +1,44 @@
+version: '2.1'
+services:
+  cassandra-server:
+    image: cassandra:3.11.4
+    expose:
+      - "9042"
+    healthcheck:
+      test: ["CMD", "cqlsh"]
+      interval: 10s
+      timeout: 10s
+      retries: 20
+
+  cassandra-scenario:
+    image:  skywalking/cassandra-scenario:{CASES_IMAGE_VERSION}
+    expose:
+      - "8080"
+    ports:
+      - "{SERVER_OUTPUT_PORT}:8080"
+    environment:
+      - COLLECTOR_SERVER=mock-collector:19876
+      - CASSANDRA_HOST=cassandra-server
+      - CASSANDRA_PORT=9042
+    links:
+      - mock-collector
+      - cassandra-server
+    volumes:
+     - {AGENT_FILE_PATH}:/usr/local/skywalking-cassandra-scenario/agent
+    depends_on:
+      mock-collector:
+        condition: service_healthy
+
+  mock-collector:
+    image: skyapm/mock-collector:{COLLECTOR_IMAGE_VERSION}
+    environment:
+      - GRPC_BIND_HOST=mock-collector
+    expose:
+      - "12800"
+    ports:
+      - "{COLLECTOR_OUTPUT_PORT}:12800"
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://127.0.0.1:12800/receiveData"]
+      interval: 5s
+      timeout: 10s
+      retries: 5

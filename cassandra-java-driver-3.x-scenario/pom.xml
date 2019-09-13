@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>org.apache.skywalking</groupId>
+    <artifactId>cassandra-java-driver-3.x-scenario</artifactId>
+    <version>6.5.0</version>
+
+    <name>skywalking-cassandra-java-driver-3.x-scenario</name>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+
+        <test.framework.version>3.7.2</test.framework.version>
+        <docker.image.version>${test.framework.version}</docker.image.version>
+
+        <spring-boot-starter-web.version>2.1.6.RELEASE</spring-boot-starter-web.version>
+        <spring-boot-maven-plugin.version>2.1.6.RELEASE</spring-boot-maven-plugin.version>
+        <cassandra-driver.version>3.7.2</cassandra-driver.version>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+            <version>${spring-boot-starter-web.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.datastax.cassandra</groupId>
+            <artifactId>cassandra-driver-core</artifactId>
+            <version>${cassandra-driver.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.datastax.cassandra</groupId>
+            <artifactId>cassandra-driver-mapping</artifactId>
+            <version>${cassandra-driver.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.datastax.cassandra</groupId>
+            <artifactId>cassandra-driver-extras</artifactId>
+            <version>${cassandra-driver.version}</version>
+        </dependency>
+    </dependencies>
+
+    <profiles>
+        <profile>
+            <id>cassandra-java-driver-3.x-scenario-3.7.2</id>
+            <properties>
+                <test.framework.version>3.7.2</test.framework.version>
+            </properties>
+        </profile>
+<!--        <profile>-->
+<!--            <id>cassandra-java-driver-3.x-scenario-3.7.1</id>-->
+<!--            <properties>-->
+<!--                <test.framework.version>3.7.1</test.framework.version>-->
+<!--            </properties>-->
+<!--        </profile>-->
+<!--        <profile>-->
+<!--            <id>cassandra-java-driver-3.x-scenario-3.7.0</id>-->
+<!--            <properties>-->
+<!--                <test.framework.version>3.7.0</test.framework.version>-->
+<!--            </properties>-->
+<!--        </profile>-->
+<!--        <profile>-->
+<!--            <id>cassandra-java-driver-3.x-scenario-3.6.0</id>-->
+<!--            <properties>-->
+<!--                <test.framework.version>3.6.0</test.framework.version>-->
+<!--            </properties>-->
+<!--        </profile>-->
+    </profiles>
+
+    <build>
+        <finalName>cassandra-scenario</finalName>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <version>${spring-boot-maven-plugin.version}</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>repackage</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>com.spotify</groupId>
+                <artifactId>docker-maven-plugin</artifactId>
+                <version>1.2.0</version>
+                <configuration>
+                    <skipDocker>false</skipDocker>
+                    <imageName>skywalking/cassandra-scenario</imageName>
+                    <imageTags>
+                        <imageTag>${docker.image.version}</imageTag>
+                    </imageTags>
+                    <dockerDirectory>${project.basedir}/docker</dockerDirectory>
+                    <resources>
+                        <resource>
+                            <targetPath>/</targetPath>
+                            <directory>${project.build.directory}</directory>
+                            <include>${build.finalName}.jar</include>
+                        </resource>
+                    </resources>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>
