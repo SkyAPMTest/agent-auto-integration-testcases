@@ -1,0 +1,25 @@
+#
+# Test case project define.
+#
+# Note: Test case project must a project that support output service.
+#
+testcase:
+  #
+  # The request url of current test cases.
+  #
+  request_url: http://localhost:{SERVER_OUTPUT_PORT}/v1/data
+  #
+  # The framework name that need tested.
+  #
+  test_framework: Light4J
+  #
+  # The framework version list of current test case supported
+  #
+  support_versions:
+    - 1.6.7
+    - 1.6.6
+    - 1.6.5
+    - 1.6.4
+    - 1.6.2
+    - 1.6.1
+    - 1.6.0

@@ -1,0 +1,166 @@
+registryItems:
+  applications:
+    - {light4j-projectA: nq 0}
+  instances:
+    - {light4j-projectA: 1}
+  operationNames:
+    - light4j-projectA: [/v1/data@GET]
+segmentItems:
+  - applicationCode: light4j-projectA
+    segmentSize: nq 0
+    segments:
+      - segmentId: not null
+        spans:
+          - operationName: /v1/data@GET
+            operationId: 0
+            parentSpanId: -1
+            spanId: 0
+            spanLayer: Http
+            startTime: nq 0
+            endTime: nq 0
+            componentId: 71
+            componentName: ''
+            isError: false
+            spanType: Entry
+            peer: ''
+            peerId: 0
+            tags:
+              - {key: url, value: 'http://localhost:{SERVER_OUTPUT_PORT}/v1/data'}
+              - {key: http.method, value: GET}
+      - segmentId: not null
+        spans:
+          - operationName: com.networknt.aa.handler.DataGetHandler.handleRequest
+            operationId: eq 0
+            parentSpanId: 7
+            spanId: 8
+            tags: []
+            logs: []
+            startTime: nq 0
+            endTime: nq 0
+            spanLayer: null
+            isError: false
+            spanType: Local
+            componentId: 71
+            componentName: null
+            peer: ''
+            peerId: eq 0
+          - operationName: com.networknt.openapi.ValidatorHandler.handleRequest
+            operationId: eq 0
+            parentSpanId: 6
+            spanId: 7
+            tags: []
+            logs: []
+            startTime: nq 0
+            endTime: nq 0
+            spanLayer: null
+            isError: false
+            spanType: Local
+            componentId: 71
+            componentName: null
+            peer: ''
+            peerId: eq 0
+          - operationName: com.networknt.sanitizer.SanitizerHandler.handleRequest
+            operationId: eq 0
+            parentSpanId: 5
+            spanId: 6
+            tags: []
+            logs: []
+            startTime: nq 0
+            endTime: nq 0
+            spanLayer: null
+            isError: false
+            spanType: Local
+            componentId: 71
+            componentName: null
+            peer: ''
+            peerId: eq 0
+          - operationName: com.networknt.audit.AuditHandler.handleRequest
+            operationId: eq 0
+            parentSpanId: 4
+            spanId: 5
+            tags: []
+            logs: []
+            startTime: nq 0
+            endTime: nq 0
+            spanLayer: null
+            isError: false
+            spanType: Local
+            componentId: 71
+            componentName: null
+            peer: ''
+            peerId: eq 0
+          - operationName: com.networknt.body.BodyHandler.handleRequest
+            operationId: eq 0
+            parentSpanId: 3
+            spanId: 4
+            tags: []
+            logs: []
+            startTime: nq 0
+            endTime: nq 0
+            spanLayer: null
+            isError: false
+            spanType: Local
+            componentId: 71
+            componentName: null
+            peer: ''
+            peerId: eq 0
+          - operationName: com.networknt.openapi.OpenApiHandler.handleRequest
+            operationId: eq 0
+            parentSpanId: 2
+            spanId: 3
+            tags: []
+            logs: []
+            startTime: nq 0
+            endTime: nq 0
+            spanLayer: null
+            isError: false
+            spanType: Local
+            componentId: 71
+            componentName: null
+            peer: ''
+            peerId: eq 0
+          - operationName: com.networknt.correlation.CorrelationHandler.handleRequest
+            operationId: eq 0
+            parentSpanId: 1
+            spanId: 2
+            tags: []
+            logs: []
+            startTime: nq 0
+            endTime: nq 0
+            spanLayer: null
+            isError: false
+            spanType: Local
+            componentId: 71
+            componentName: null
+            peer: ''
+            peerId: eq 0
+          - operationName: com.networknt.traceability.TraceabilityHandler.handleRequest
+            operationId: eq 0
+            parentSpanId: 0
+            spanId: 1
+            tags: []
+            logs: []
+            startTime: nq 0
+            endTime: nq 0
+            spanLayer: null
+            isError: false
+            spanType: Local
+            componentId: 71
+            componentName: null
+            peer: ''
+            peerId: eq 0
+          - operationName: com.networknt.exception.ExceptionHandler.handleRequest
+            operationId: eq 0
+            parentSpanId: -1
+            spanId: 0
+            tags: []
+            logs: []
+            startTime: nq 0
+            endTime: nq 0
+            spanLayer: null
+            isError: false
+            spanType: Local
+            componentId: 71
+            componentName: null
+            peer: ''
+            peerId: eq 0

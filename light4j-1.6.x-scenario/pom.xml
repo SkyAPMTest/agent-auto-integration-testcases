@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>org.apache.skywalking</groupId>
+    <artifactId>light4j-1.6.x-scenario</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <packaging>pom</packaging>
+    <modules>
+        <module>projectA</module>
+    </modules>
+
+    <properties>
+        <test.framework.version>1.6.7</test.framework.version>
+        <docker.image.version>${test.framework.version}</docker.image.version>
+    </properties>
+
+    <name>skywalking-light4j-1.6.x-scenario</name>
+
+    <profiles>
+        <profile>
+            <id>light4j-1.6.x-scenario-1.6.7</id>
+            <properties>
+                <test.framework.version>1.6.7</test.framework.version>
+            </properties>
+        </profile>
+        <profile>
+            <id>light4j-1.6.x-scenario-1.6.6</id>
+            <properties>
+                <test.framework.version>1.6.6</test.framework.version>
+            </properties>
+        </profile>
+        <profile>
+            <id>light4j-1.6.x-scenario-1.6.5</id>
+            <properties>
+                <test.framework.version>1.6.5</test.framework.version>
+            </properties>
+        </profile>
+        <profile>
+            <id>light4j-1.6.x-scenario-1.6.4</id>
+            <properties>
+                <test.framework.version>1.6.4</test.framework.version>
+            </properties>
+        </profile>
+        <!-- note that there is no version 1.6.3 -->
+        <profile>
+            <id>light4j-1.6.x-scenario-1.6.2</id>
+            <properties>
+                <test.framework.version>1.6.2</test.framework.version>
+            </properties>
+        </profile>
+        <profile>
+            <id>light4j-1.6.x-scenario-1.6.1</id>
+            <properties>
+                <test.framework.version>1.6.1</test.framework.version>
+            </properties>
+        </profile>
+        <profile>
+            <id>light4j-1.6.x-scenario-1.6.0</id>
+            <properties>
+                <test.framework.version>1.6.0</test.framework.version>
+            </properties>
+        </profile>
+    </profiles>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>com.spotify</groupId>
+                <artifactId>docker-maven-plugin</artifactId>
+                <version>0.4.13</version>
+                <configuration>
+                    <skipDocker>true</skipDocker>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+</project>
+
+
+
