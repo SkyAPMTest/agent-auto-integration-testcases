@@ -40,7 +40,6 @@ _arg_scenarios=()
 _arg_target_dir="testcases"
 _arg_agent_dir="workspace/agent"
 _arg_agent_with_optional_dir="workspace/agent-with-optional-plugins"
-_arg_agent_with_bootstrap_dir="workspace/agent-with-bootstrap-plugins"
 _arg_collector_image_version="6.0.0-2018"
 _arg_skip_single_mode="on"
 _arg_skip_build="on"
@@ -54,7 +53,6 @@ print_help()
 	printf '\t%s\n' "-o, --target_dir: The target directory of output, This folder relative to directory of testcase repository. (default: '"testcases"')"
 	printf '\t%s\n' "--agent_dir: The directory of agent, This folder relative to directory of testcase repository. (default: '"workspace/agent"')"
 	printf '\t%s\n' "--agent_with_optional_dir: The directory of agent that it contain the optional plugins, This folder relative to directory of testcase repository. (default: '"workspace/agent-with-optional-plugins"')"
-	printf '\t%s\n' "--agent_with_bootstrap_dir: The directory of agent that it contain the bootstrap plugins, This folder relative to directory of testcase repository. (default: '"workspace/agent-with-bootstrap-plugins"')"
 	printf '\t%s\n' "--collector_image_version: The image version of collector (default: '"6.0.0-2018"')"
 	printf '\t%s\n' "--skip_single_mode: Skip build the scenario with single mode (default: 'on')"
 	printf '\t%s\n' "--skip_build, --no-skip_build: Skip build the scenario project (on by default)"
@@ -95,14 +93,6 @@ parse_commandline()
 				;;
 			--agent_with_optional_dir=*)
 				_arg_agent_with_optional_dir="${_key##--agent_with_optional_dir=}"
-				;;
-		  --agent_with_bootstrap_dir)
-				test $# -lt 2 && die "Missing value for the optional argument '$_key'." 1
-				_arg_agent_with_bootstrap_dir="$2"
-				shift
-				;;
-			--agent_with_bootstrap_dir=*)
-				_arg_agent_with_bootstrap_dir="${_key##--agent_with_bootstrap_dir=}"
 				;;
 			--collector_image_version)
 				test $# -lt 2 && die "Missing value for the optional argument '$_key'." 1
@@ -260,6 +250,13 @@ do
         AGENT_FILE_PATH="${ESCAPE_AGENT_WITH_OPTIONAL_PLUGINS_DIR}"
     elif [ "$RUNNING_MODE" = "WITH_BOOTSTRAP" ]; then
         AGENT_FILE_PATH="${ESCAPE_AGENT_WITH_BOOTSTRAP_PLUGINS_DIR}"
+    elif [[ "$RUNNING_MODE" = "WITH_STANDALONE_OPTIONAL" ]]; then
+
+        AGENT_DIR=`cd ${AGENT_WITH_OPTIONAL_PLUGINS_DIR}/.. >/dev/null; pwd`
+        STANDALONE_OPTIONAL_AGENT_DIR="$AGENT_DIR/${SCENARIO}_AGENT"
+        cp -r $AGENT_WITH_OPTIONAL_PLUGINS_DIR ${STANDALONE_OPTIONAL_AGENT_DIR}
+
+        AGENT_FILE_PATH=$(echo "$STANDALONE_OPTIONAL_AGENT_DIR" |sed -e 's/\//\\\//g' )
     fi
 
     cd ${SCENARIO_HOME}
