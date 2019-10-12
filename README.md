@@ -1,3 +1,6 @@
+# Notice
+This repo doesn't accept any pull request anymore. It is **archived and read-only**. All plugin tests are moving into [Apache main repo](https://github.com/apache/skywalking).
+
 # Agent Test Cases
 This repository includes all javaagent test cases. Each case based on docker and docker-compose tech. 
 The [collector simulator](https://github.com/SkywalkingTest/skywalking-mock-collector) receives the segments，
